@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.python-version
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts that get regenerated from build.py / build_graph.py.
+# Uncomment if you prefer to treat them as artifacts rather than tracked output.
+# Tracking them keeps the diff visible when sources change, which is useful
+# for review. Untracking them avoids merge conflicts on regeneration.
+#
+# delegated_authorization_research.xlsx
+# agent_authz_graph.json
+# agent_authz_graph.html
+
+# Versioned build scripts from the chat-session era; safe to delete if
+# you've migrated to a single build.py committed to git.
+build_v*.py
+
+# Snapshot derivatives that aren't maintained anymore. Keep them around
+# if useful, ignore them if not.
+# IETF_individual_drafts_infographic.html
+# drafting_authority_deck.pptx
