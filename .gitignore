@@ -17,6 +17,9 @@ venv/
 .DS_Store
 Thumbs.db
 
+# command to resume session
+resume
+
 # Build artifacts that get regenerated from build.py / build_graph.py.
 # Uncomment if you prefer to treat them as artifacts rather than tracked output.
 # Tracking them keeps the diff visible when sources change, which is useful

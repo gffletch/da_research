@@ -609,6 +609,12 @@ industry_rows = [
      "Architect blog (Karl McGuinness)",
      "Confirms that the AuthZEN ARAP profile was adopted as a working group draft in May 2026 — material maturity signal. Useful as the 'why' read alongside the ARAP spec itself. Also positions the work against AARM (Autonomous Action Runtime Management, aarm.dev/spec) which intercepts every agent action and resolves to allow/deny/modify/step-up/defer — ARAP standardizes the deny+escalate boundary at the AuthZEN layer."),
 
+    ("Solving the Identity Crisis for AI Agents (Uber Engineering)",
+     "A production engineering post from Uber describing their agent identity architecture: an Agent Registry (workload-to-agent mapping), a SPIRE-backed STS that issues short-lived JWTs with embedded actor chains at P99 below 40ms, an MCP Gateway as policy enforcement point, and an AI Agent Mesh for agent-to-agent communication. A standardized A2A client automates token exchange and chain propagation across agent hops.",
+     "https://www.uber.com/us/en/blog/solving-the-agent-identity-crisis/",
+     "Industry blog (Uber Engineering)",
+     "Published 21 May 2026; six-author post (Mathew, Borole, Huang, Burykin, Goel, Walsh) from Uber's platform engineering team. Architecture aligns with WIMSE workload identity (SPIRE as the credential foundation), RFC 8693 actor-chain propagation, and single-hop short-lived JWTs with audience-scoped claims. One of the few public disclosures of a production-grade agent identity system at hyperscaler scale — a real-world reference point for the corpus's delegation-chain design patterns."),
+
     ("AI Agent Authentication Gets the Hard Part Right. Authorization Is Still Your Problem. (Rock Cyber Musings)",
      "An analyst article arguing the new IETF agent-auth draft solves authentication via SPIFFE+WIMSE+OAuth but leaves authorization and policy enforcement as an unsolved open problem.",
      "https://www.rockcybermusings.com/p/i-agent-authentication-authorization-gap",
@@ -751,8 +757,9 @@ for i, (tab, what, count, action) in enumerate(idx_data, start=5):
         cell.border = BORDER
 
 total_row = 5 + len(idx_data)
+total_count = sum(count for _, _, count, _ in idx_data)
 ws_idx.cell(row=total_row, column=1, value="TOTAL").font = Font(name='Arial', size=10, bold=True)
-ws_idx.cell(row=total_row, column=3, value=f"=SUM(C5:C{total_row-1})").font = Font(name='Arial', size=10, bold=True)
+ws_idx.cell(row=total_row, column=3, value=total_count).font = Font(name='Arial', size=10, bold=True)
 for col in range(1, 5):
     ws_idx.cell(row=total_row, column=col).border = BORDER
 
@@ -763,7 +770,7 @@ ws_idx.column_dimensions['D'].width = 60
 ws_idx.row_dimensions[1].height = 22
 ws_idx.row_dimensions[4].height = 30
 
-wb.save('/home/claude/delegated_authorization_research.xlsx')
+wb.save('/Users/gffletch/Develop/Authorization/da_research/delegated_authorization_research.xlsx')
 print("OK - workbook saved")
 print(f"Tab counts: RFCs={len(rfc_rows)}, Drafts={len(draft_rows)}, OIDF={len(oidf_rows)}, Other={len(other_rows)}, Academic={len(academic_rows)}, Industry={len(industry_rows)}")
 print(f"Total: {len(rfc_rows)+len(draft_rows)+len(oidf_rows)+len(other_rows)+len(academic_rows)+len(industry_rows)}")
