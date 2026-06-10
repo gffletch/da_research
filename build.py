@@ -609,11 +609,23 @@ industry_rows = [
      "Architect blog (Karl McGuinness)",
      "Confirms that the AuthZEN ARAP profile was adopted as a working group draft in May 2026 — material maturity signal. Useful as the 'why' read alongside the ARAP spec itself. Also positions the work against AARM (Autonomous Action Runtime Management, aarm.dev/spec) which intercepts every agent action and resolves to allow/deny/modify/step-up/defer — ARAP standardizes the deny+escalate boundary at the AuthZEN layer."),
 
+    ("Re-Subjecting Is a Mint, Not an Attenuation (McGuinness, 8 Jun 2026)",
+     "Argues that crossing subject namespaces — mapping a user's identity from one application's identifier to another's — is a minting operation, not attenuation. Attenuation can narrow authority already represented by an existing artifact; it cannot authoritatively create a target-local identity binding the original issuer never supplied. Only a trusted IdP or broker can perform that translation. Distinguishes two topologies: caller-pushed (intermediate app returns to the IdP for a new assertion) and resource-pulled (destination resolves user identity through a broker). Separates workload identity (which service is calling) from user context (which person delegated the work) as requiring distinct claims.",
+     "https://notes.karlmcguinness.com/notes/re-subjecting-is-a-mint-not-an-attenuation/",
+     "Architect blog (Karl McGuinness)",
+     "Published 8 Jun 2026; a standalone conceptual post outside the four-part Mission-Bound series but thematically continuous with it. Directly relevant to cross-AS delegation flows in the MVP post (ID-JAG for user-rooted re-subjecting) and to the token-exchange-target-service-discovery I-D. Privacy note: every intermediary-visible artifact should minimize identifiers that enable unauthorized cross-context linking."),
+
     ("Solving the Identity Crisis for AI Agents (Uber Engineering)",
      "A production engineering post from Uber describing their agent identity architecture: an Agent Registry (workload-to-agent mapping), a SPIRE-backed STS that issues short-lived JWTs with embedded actor chains at P99 below 40ms, an MCP Gateway as policy enforcement point, and an AI Agent Mesh for agent-to-agent communication. A standardized A2A client automates token exchange and chain propagation across agent hops.",
      "https://www.uber.com/us/en/blog/solving-the-agent-identity-crisis/",
      "Industry blog (Uber Engineering)",
      "Published 21 May 2026; six-author post (Mathew, Borole, Huang, Burykin, Goel, Walsh) from Uber's platform engineering team. Architecture aligns with WIMSE workload identity (SPIRE as the credential foundation), RFC 8693 actor-chain propagation, and single-hop short-lived JWTs with audience-scoped claims. One of the few public disclosures of a production-grade agent identity system at hyperscaler scale — a real-world reference point for the corpus's delegation-chain design patterns."),
+
+    ("Agents Are Not Just Workloads (Patrick Parker, LinkedIn)",
+     "Argues that classifying AI agents as 'workloads' is a category error that corrupts identity architecture: workloads are a what-runs-where concept, agents are a who-acts-on-whose-authority concept. Identifies five breakdown areas where workload-identity patterns fail for agents: intent captured as static token claims, delegation gaps (no purpose binding or revocation paths), overlooked tool-catalog authorization surface, bearer-credential custody ambiguity under prompt injection, and mutable logs insufficient as tamper-evident authorization evidence.",
+     "https://www.linkedin.com/pulse/agents-just-workloads-patrick-parker-0qxte/",
+     "Industry blog (LinkedIn)",
+     "Published 9 Jun 2026. Proposes signature-based receipts binding relationships, authority, tasks, and bounds; runtime validation of generated task intent; and AuthZEN gateway-based enforcement. A principled counterpoint to the WIMSE-as-sufficient-for-agents framing — pairs well with the Uber Engineering post (which uses SPIRE/WIMSE as the credential foundation but adds actor chains and MCP gateway enforcement on top)."),
 
     ("AI Agent Authentication Gets the Hard Part Right. Authorization Is Still Your Problem. (Rock Cyber Musings)",
      "An analyst article arguing the new IETF agent-auth draft solves authentication via SPIFFE+WIMSE+OAuth but leaves authorization and policy enforcement as an unsolved open problem.",
