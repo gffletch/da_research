@@ -572,6 +572,12 @@ industry_rows = [
      "Open-source (Apache-2.0, Larry Lewis)",
      "Specification implicit in implementation — no separate spec doc. Differentiators: PQ hybrid signatures via FIPS 204 ML-DSA, ZK proofs for trust-level predicates (prove trust ≥ 0.7 without revealing the score), multi-framework adapters as a first-class concern. Acronym near-collides with draft-sharif-attp (Agent Trust Transport Protocol) — same problem space, distinct designs: discrete L0-L4 trust levels there, continuous 0.0-1.0 trust scoring here. Early-stage (1 star, 2 contributors, one of whom is Claude); README ships a real Context7 API key, a 'ship-fast' signal worth noting."),
 
+    ("ADCS — Agent Delegation Chain Standard v1.0.0 (kahalewai)",
+     "A vendor-neutral open specification for managing permissions across multi-agent AI workflows using cryptographic verification at each delegation hop. Core principle: scope can only narrow, never expand (monotonic restriction). Three cumulative conformance levels (core data model → JWT tokens → production infrastructure), a four-phase verification algorithm (structural, cryptographic, temporal, monotonic), seven standardized constraint types, and DID-based signing. Protocol bindings for MCP, A2A, ACP, and HTTP.",
+     "https://github.com/kahalewai/adcs/blob/main/spec/ADCS-Standard-v1.0.0.md",
+     "Open-source spec (Apache-2.0)",
+     "Version 1.0.0 Public Draft for Community Review, dated 2026-04-11. Spec-only repository — no separate reference implementation. Advanced features include chain compaction, CAEP continuous revocation, multi-party quorum, and permission escalation. The monotonic-restriction guarantee is the same invariant as OVID-ME's Cedar-based subset proof and ZeroID's automatic scope attenuation — three independent approaches to the same core security property."),
+
     # ---- LinkedIn-style and analyst articles ----
     ("AI Agents and the Multi-Hop Delegation Problem (WorkOS)",
      "A WorkOS engineering blog post that catalogs the open IETF drafts and RFCs addressing multi-hop AI-agent delegation including identity chaining, attenuating tokens, and actor chains.",
