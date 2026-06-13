@@ -312,6 +312,12 @@ draft_rows = [
      "IETF (individual)",
      "Revision -00, March 2026; complementary to MCP discovery but broader (not MCP-specific). Needs differentiation from OpenAPI/service-description work to gain traction."),
 
+    ("draft-hood-independent-agtp — Agent Transfer Protocol (AGTP)",
+     "An IETF individual draft proposing a dedicated application-layer protocol for AI agent traffic on port 4480 (TCP/TLS and QUIC) with an agtp:// URI scheme, arguing that HTTP is insufficient because agent-generated intent-driven traffic is indistinguishable from human-initiated requests. Defines a Runtime Contract Negotiation Substrate (RCNS) with eighteen methods split into cognitive verbs (QUERY, DISCOVER, DESCRIBE, SUMMARIZE, PLAN, PROPOSE) and mechanics verbs (EXECUTE, DELEGATE, ESCALATE, CONFIRM, SUSPEND, NOTIFY), mandatory agent identity headers, and protocol-level authority scope declaration.",
+     "https://datatracker.ietf.org/doc/draft-hood-independent-agtp/",
+     "IETF (individual)",
+     "Revision -08 (26 May 2026); supersedes draft-hood-independent-atp. Companion specs in the same family: AGTP-API, AGTP-CERT, AGTP-MERCHANT, AGTP-IDENTIFIERS, AGTP-TRUST. Mandatory TLS 1.3+. Ambitious scope — a new transport layer rather than an HTTP profile. The cognitive/mechanics verb split is a distinctive design choice; contrasts with draft-sharif-agent-transport-protocol which layers async store-and-forward on top of existing transports rather than replacing them."),
+
     # ---- Individual drafts: Security Requirements / Frameworks cluster ----
     ("draft-ni-a2a-ai-agent-security-requirements — Security Requirements for AI Agents",
      "An IETF individual draft enumerating security requirements for AI agents, covering identity, authorization chaining across domains, and integration points with WIMSE, OAuth identity chaining, and the A2A OAuth profile.",
