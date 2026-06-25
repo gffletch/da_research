@@ -584,6 +584,12 @@ industry_rows = [
      "Open-source spec (Apache-2.0)",
      "Version 1.0.0 Public Draft for Community Review, dated 2026-04-11. Spec-only repository — no separate reference implementation. Advanced features include chain compaction, CAEP continuous revocation, multi-party quorum, and permission escalation. The monotonic-restriction guarantee is the same invariant as OVID-ME's Cedar-based subset proof and ZeroID's automatic scope attenuation — three independent approaches to the same core security property."),
 
+    ("x401: HTTP Proof Requirement Protocol (Proof / Circle)",
+     "A community specification defining an HTTP-native wrapper for credential-based proof requirements, using three dedicated headers — PROOF-REQUIRED, PROOF-PRESENTATION, and PROOF-RESPONSE — to gate access to protected resources. The verifier encodes a W3C Digital Credentials API / OpenID4VP / DCQL request in PROOF-REQUIRED; the agent acquires and presents a verifiable presentation; an optional fourth leg exchanges the VP for a reusable OAuth 2.0 token. Designed to be stateless at the verifier, transport-agnostic, and composable with existing credential protocols rather than replacing them.",
+     "https://x401.proof.com/spec/latest",
+     "Community spec (Proof / Circle)",
+     "Version 0.2.0, Draft. Editors: Daniel Buchner (Proof), Bhushit Agarwal (Circle); contributors from Google, Okta, OpenAI, MATTR. Explicitly does not replace OpenID4VP or the W3C Digital Credentials API — fills the HTTP-layer gap between those protocols and application-level authorization. Analogous positioning to how RFC 9728 (OAuth Protected Resource Metadata) provides the HTTP-layer discovery wrapper for OAuth; x401 provides the HTTP-layer challenge wrapper for VC presentations. Agent authentication and binding are composable add-ons, not mandatory."),
+
     # ---- LinkedIn-style and analyst articles ----
     ("AI Agents and the Multi-Hop Delegation Problem (WorkOS)",
      "A WorkOS engineering blog post that catalogs the open IETF drafts and RFCs addressing multi-hop AI-agent delegation including identity chaining, attenuating tokens, and actor chains.",
