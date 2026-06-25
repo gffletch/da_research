@@ -373,6 +373,12 @@ draft_rows = [
      "IETF (individual)",
      "Revision -02 was submitted August 2025; likely due for -03 refresh. Builds naturally on RFC 6749 + RFC 8693 + RFC 7636 PKCE — one of the most 'IETF-ready' delegation drafts and a strong WG-adoption candidate after the OAuth recharter."),
 
+    ("draft-rosomakho-oauth-txn-challenge — OAuth Transaction Authorization Challenge",
+     "An OAuth mechanism enabling protected resources to demand transaction-specific authorization through challenges. When a request involves an agent or automated workflow, the RS returns a challenge to the client; the client presents it to the AS, which validates it, obtains human approval, and issues an access token with RFC 9396 authorization_details describing the approved operation. Positions as complementary to RFC 9470 (Step-Up Authentication) — that spec handles authentication freshness; this one handles authorization specificity.",
+     "https://datatracker.ietf.org/doc/draft-rosomakho-oauth-txn-challenge/",
+     "IETF (individual)",
+     "Revision -00, submitted 25 June 2026. Authors: Yaroslav Rosomakho (Zscaler), Brian Campbell (Ping Identity), Karl McGuinness (Independent), Pieter Kasselman (Defakto). Strong author lineup — Campbell is a prolific OAuth WG contributor, Kasselman co-authored Transaction Tokens and First-Party Apps, McGuinness brings the Mission-Bound OAuth context. The RS-initiated challenge model is distinct from ARAP (which operates at the PDP/PEP layer via AuthZEN) but addresses the same 'denial is not the end' problem — here at the OAuth RS/AS layer rather than the AuthZEN layer."),
+
     ("draft-hardt-aauth-protocol — AAuth Protocol",
      "A new clean-sheet authorization protocol from Dick Hardt (original OAuth author) defining proof-of-possession by default, resource-signed challenges, agent identity without pre-registration, deferred 202 responses, and AS-to-AS federation for the agent ecosystem.",
      "https://datatracker.ietf.org/doc/draft-hardt-aauth-protocol/",
