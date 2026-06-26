@@ -953,6 +953,12 @@ industry_rows = [
      "https://curity.io/resources/learn/authzen/",
      "Vendor blog (Curity)",
      "Curity is a member of the AuthZEN WG; positions AuthZEN as 'OpenID Connect for authorization' which has become the common framing."),
+
+    ("ACLX — AI Output Governance (Proprietary)",
+     "A proprietary enforcement layer that intercepts AI-generated content between inference and delivery, evaluating it against OPA/Cedar policies, identity context, and a three-phase sensitivity detection stack: deterministic regex rules → ontology-based compilation-risk scoring → semantic LLM evaluation for novel synthesis. Four enforcement outcomes: ALLOW, REDACT, BLOCK, or ESCALATE to human review. Treats agents as first-class principals evaluated at the output boundary regardless of whether a session or IDP exists.",
+     "https://aclx.ai/",
+     "Proprietary product",
+     "No published specification. Identifies a gap the corpus standards map does not yet cover: identity (OIDC/SCIM/SPIFFE), signals (CAEP/SSF), policy (OAuth/AuthZEN/OPA), and enforcement (ZTA/RATS/SCITT) all have standards, but output evaluation — governing what the AI synthesizes rather than what the user was authorized to ask — has none. The synthesis-detection layer (AI compiling across individually-authorized sources to produce content crossing a higher sensitivity boundary) is a novel problem the corpus's existing standards do not address."),
 ]
 make_sheet("Industry & Implementations", COLORS['Industry'], industry_rows)
 
