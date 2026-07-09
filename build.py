@@ -918,6 +918,12 @@ industry_rows = [
      "Community whitepaper",
      "No publication date in the document; primary use case is healthcare (NIST IAL2/AAL2). Draws on Kantara's Distribute Assurance Specification for identity assurance levels and references OpenID Connect id_token as the closest existing message shape. The Consent to Create Binding message adds purpose of use, device statement, and lifecycle termination semantics that id_token lacks. Companion doc 'Digital Contracts Made Legally Valid' (separate Google Doc) covers giving the binding legal status. Relationship-governance argument is thematically aligned with Parker's 'Agents Are Not Just Workloads' — both argue that accountability chains and mutual obligations are the right governance primitive for agentic systems."),
 
+    ("Intent Agent Native Authorization for Agentic Profiles (IANA-AP) (Martin Besozzi, Jul 2026)",
+     "Proposes a four-phase runtime authorization lifecycle for AI agents: discovery (agent capabilities + API authorization mappings), intent computation (agent generates planned operations), review/approval (user provides explicit phishing-resistant consent via WebAuthn/FIDO2 passkeys before execution), and enforcement (every runtime invocation validated against the approved authorization artifact). Composes RFC 9396 RAR, OAuth FiPA, OpenID AuthZEN, MCP, SPIFFE JWT-SVIDs, and CEL policy mappings into a single coherent framework.",
+     "https://embesozzi.github.io/posts/martin-besozzi/intent-agent-native-authorization-agentic-profiles/",
+     "Architect blog (Martin Besozzi)",
+     "Updated July 2026; includes open specification and reference implementation on GitHub. The SARC (Subject, Action, Resource, Context) model and 'x-authz-mapping' Agentic Profile extension are novel additions. The four-phase pre-execution approval requirement directly parallels draft-nelson-agent-delegation-receipts and draft-sato-soos-idp — but grounds it in existing OAuth standards rather than new protocol primitives. One of the few practitioner-level posts that explicitly composes AuthZEN, RAR, and FiPA into a working agent authorization flow."),
+
     ("AI Agent Authentication Gets the Hard Part Right. Authorization Is Still Your Problem. (Rock Cyber Musings)",
      "An analyst article arguing the new IETF agent-auth draft solves authentication via SPIFFE+WIMSE+OAuth but leaves authorization and policy enforcement as an unsolved open problem.",
      "https://www.rockcybermusings.com/p/i-agent-authentication-authorization-gap",
