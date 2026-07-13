@@ -140,13 +140,13 @@ draft_rows = [
      "An IETF WG draft defining an Authorization Challenge Endpoint that lets first-party native apps drive a browserless OAuth flow while still supporting step-up authentication via RFC 9470.",
      "https://datatracker.ietf.org/doc/draft-ietf-oauth-first-party-apps/",
      "IETF (OAuth WG)",
-     "Revision -03, published 28 Feb 2026; explicitly excluded for third-party use because it requires high AS↔client trust."),
+     "Revision -04, published 1 Jul 2026; explicitly excluded for third-party use because it requires high AS↔client trust."),
 
     ("draft-ietf-oauth-attestation-based-client-auth — OAuth 2.0 Attestation-Based Client Authentication",
      "An IETF WG draft (Looker/Bastian/Bormann) introducing two JWTs — a Client Attestation issued by a Client Attester and a Client Attestation PoP signed by the client instance — that travel in HTTP headers to let traditionally-public clients authenticate to the AS without a shared secret.",
      "https://datatracker.ietf.org/doc/draft-ietf-oauth-attestation-based-client-auth/",
      "IETF (OAuth WG)",
-     "Revision -08, March 2026; relates to the RATS Passport Model per RFC 9334, but RATS attestation procedures themselves are deliberately out of scope. The 'client instance' framing pairs naturally with the McGuinness Client Instance Assertion draft."),
+     "Revision -10, Jul 2026 (was -08 Mar 2026). -10 added a 'client_attestation_pop_methods_supported' metadata parameter, created a new 'OAuth Client Attestation Proof-of-Possession Methods' registry, clarified that PoP mechanisms from other specs are permitted, and refined DPoP combined-mode handling. Relates to the RATS Passport Model per RFC 9334; RATS attestation procedures themselves are deliberately out of scope. The 'client instance' framing pairs naturally with the McGuinness Client Instance Assertion and AI Agent Instance drafts."),
 
     ("draft-ietf-oauth-spiffe-client-auth — OAuth SPIFFE Client Authentication",
      "An IETF WG draft (Schwenkschuster/Kasselman/Rose-NIST/Thorgersen-IBM) profiling RFC 7521, RFC 7523, and OAuth attestation-based client auth so that SPIFFE-enabled workloads can authenticate to OAuth ASes using JWT-SVID, WIT-SVID, or X.509-SVID credentials instead of shared client secrets.",
@@ -218,13 +218,37 @@ draft_rows = [
      "Introduces the 'actor_proofs' claim — a signed per-hop proof chain where each actor signs its own participation and the target binding it authorized for that hop; proofs are hash-chained and validated using actor verification keys from trusted sources, with optional references to sibling actor receipts.",
      "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-actor-proofs/",
      "IETF (individual)",
-     "Revision -00, 4 Jul 2026; McGuinness's 7th individual I-D on IETF Datatracker. Completes the actor triad with actor-profile (chain structure) and actor-receipts (provenance) — actor-proofs closes the cryptographic accountability gap. Was not previously on the Pending Watch List; a new design direction beyond the original Mission-Bound OAuth blog series."),
+     "Revision -00, 4 Jul 2026. Completes the actor triad with actor-profile (chain structure) and actor-receipts (provenance) — actor-proofs closes the cryptographic accountability gap. Filed the same day as ai-agent-instance, id-assertion-framework, and domain-authorized-issuer — McGuinness submitted four new I-Ds on Jul 4-6, bringing his total to 11 individual I-Ds on Datatracker."),
 
     ("draft-mcguinness-oauth-insufficient-claims — OAuth 2.0 Insufficient Claims Challenge",
      "A McGuinness individual draft defining an insufficient_claims error code and required_claims parameter enabling authorization servers and protected resources to signal precisely which claims are missing from a presented credential. Allows resource servers to request enriched credentials carrying specific missing attributes rather than returning a generic 401.",
      "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-insufficient-claims/",
      "IETF (individual)",
      "Revision -00, 27 May 2026. Enables just-in-time claim negotiation in multi-agent delegation chains where the acting party must assemble claims from multiple sources. Natural companion to the Actor Profile and Client Instance Assertion — those drafts define the identity structure; this one provides the feedback loop when that structure is incomplete at the RS."),
+
+    ("draft-mcguinness-oauth-ai-agent-instance — OAuth 2.0 AI Agent Instance Profile",
+     "Profiles OAuth 2.0 for deployments where a single client ID represents an agent platform running many concurrent agent instances; defines claims conveying attested agent instance identity and provenance from an agent attester to the AS, with delegation-chain semantics for sub-agents. Claims are carrier-independent, compatible with both Client Instance Assertions and Client Attestation JWT.",
+     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-ai-agent-instance/",
+     "IETF (individual)",
+     "Revision -00, 4 Jul 2026. Fills the gap between a registered OAuth client ID (platform-level) and a running agent instance (runtime-level) — the level at which delegation chains, attestation, and revocation actually operate. Companion to draft-mcguinness-oauth-client-instance-assertion (general instance framing) and draft-mcguinness-oauth-actor-profile (chain representation)."),
+
+    ("draft-mcguinness-oauth-id-assertion-framework — OAuth Identity Assertion Trust Framework",
+     "Addresses the gap where issuer authentication alone does not prove AS authority over subject namespaces; defines an Authority Delegation Model with independent trust-evaluation categories and an Identity Assertion Issuer Trust Policy (JSON document declaring required trust methods) that Resource ASes evaluate before accepting identity assertions.",
+     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-id-assertion-framework/",
+     "IETF (individual)",
+     "Revision -00, 4 Jul 2026. Directly motivates and companions draft-mcguinness-oauth-domain-authorized-issuer (below) which provides a DNS-based trust method. Addresses the 'who is allowed to assert identities in this namespace?' question that ID-JAG and the identity-chaining WG draft assume resolved but do not specify."),
+
+    ("draft-mcguinness-oauth-domain-authorized-issuer — OAuth Domain-Authorized Issuer Trust Method",
+     "DNS domain owners publish a policy (DNS TXT record at _oauth-issuer-policy.{domain} or HTTPS well-known fallback) listing the OAuth ASes authorized to assert identities in that namespace; Resource ASes use this to validate assertion issuers before accepting identity assertions or chaining tokens. Pattern echoes CAA/SPF/DKIM. Non-transitive — flat authorization, no delegation chains.",
+     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-domain-authorized-issuer/",
+     "IETF (individual)",
+     "Revision -00, 4 Jul 2026. Implements one trust method for draft-mcguinness-oauth-id-assertion-framework. DNS-based approach is lightweight and operationally familiar; the non-transitive design avoids the amplification risks of transitive trust chains. Closes the 'how do you know the AS is allowed to speak for this domain?' gap that cross-domain identity chaining has always assumed away."),
+
+    ("draft-mcguinness-oauth-mission — Mission-Bound Authorization for OAuth 2.0",
+     "Introduces 'Mission' — a durable, integrity-bound artifact stored at the AS representing an approved task; clients submit Mission Intent via PAR, ASes derive concrete permissions, and approvers grant consent via integrity anchors. Access tokens carry a 'mission' claim; issuance is gated by the Mission's lifecycle state, enabling revocation governance and audit trails for multi-step agent operations.",
+     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-mission/",
+     "IETF (individual)",
+     "Revision -00, 6 Jul 2026. This is the formal I-D target for the 'Mission-Bound OAuth MVP' blog post (May 2026, Industry tab) — the five-wire-addition protocol that makes the user-approved task a first-class OAuth object. Paired with the runtime enforcement profile (still not on Datatracker as of Jul 10). The Mission lifecycle (pending_approval → active → suspended → revoked → expired → completed → rejected) and the proposal_hash/consent_rendering_hash binding anchor what was approved versus what the user saw."),
 
     ("draft-mishra-oauth-agent-grants — Delegated Agent Authorization Protocol (DAAP)",
      "An IETF individual draft addressing runtime agent identity for dynamically-spawned agents, multi-agent sub-delegation with depth-limiting, and cascade revocation of an entire delegation subtree when any ancestor is revoked.",
@@ -322,6 +346,18 @@ draft_rows = [
      "https://datatracker.ietf.org/doc/draft-jiang-oauth-intent-admission/",
      "IETF (individual)",
      "Revision -00, 23 Jun 2026; authors: Yuning Jiang, Lun Li, Yurong Song, Faye Liu (Huawei). The required_consent path maps directly to the HITL pattern central to the corpus. Companion to draft-jiang-intent-security (threat model) from the same Huawei group."),
+
+    ("draft-ni-oauth-batch-authorization-delegation — Batch Authorization Delegation",
+     "Defines a mechanism for delegating a batch of fine-grained, actor-bound permissions in a single request across multiple collaborating actors; uses RFC 9396 RAR to carry per-actor authorization_details and RFC 8693 Token Exchange for sub-agent delegation, targeting multi-agent orchestration where a leader-agent receives batch permissions and delegates subsets to sub-agents.",
+     "https://datatracker.ietf.org/doc/draft-ni-oauth-batch-authorization-delegation/",
+     "IETF (individual)",
+     "Revision -00, 3 Jul 2026; authors: Ni Yuan, Peter Chunchi Liu (Huawei). Addresses the round-trip overhead problem in large-scale multi-agent orchestration — individual delegation exchanges per sub-agent don't scale. Complements draft-song-oauth-ai-agent-collaborate-authz (same Huawei group, coordination focus) and draft-niyikiza-oauth-attenuating-agent-tokens (attenuation semantics). The RAR-based batch approach aligns well with the OAuth WG's RAR investment."),
+
+    ("draft-liu-oauth-a2a-profile — Agent-to-Agent (A2A) Profile for OAuth Transaction Tokens",
+     "Defines a profile for using OAuth Transaction Tokens in distributed agent-to-agent communication scenarios; specifies mechanisms for embedding call-chain context within tokens to preserve agent identity, authorization information, and operational flow across agent workloads in trusted environments.",
+     "https://datatracker.ietf.org/doc/draft-liu-oauth-a2a-profile/",
+     "IETF (individual)",
+     "EXPIRED. Revision -00, Oct 2025; authors: Peter Chunchi Liu, Ni Yuan (Huawei) — same author pair as draft-ni-oauth-batch-authorization-delegation. Directly profiles draft-ietf-oauth-transaction-tokens for A2A use; overlaps significantly with draft-araut-oauth-transaction-tokens-for-agents. Never revised; likely deferred rather than abandoned given both authors remain active in the corpus through Jul 2026."),
 
     ("draft-song-oauth-ai-agent-collaborate-authz — OAuth 2.0 Extension for Multi-AI Agent Collaboration",
      "Extends OAuth 2.0 for coordinated multi-agent task groups: defines a collaborative authorization flow allowing a lead agent to obtain delegation tokens for sub-agents, with shared task context, coordinated scope attenuation, and cross-agent session binding.",
@@ -583,7 +619,7 @@ draft_rows = [
      "Defines GAR, an audit framework with five audit types, a Session Audit Record, and an Audit Alert mechanism; collects, signs, and makes governance events from IDP, HEM, and associated SOOS primitives available for regulatory inspection via an append-only, non-suppressible SCITT-anchored audit stream with Authority Lifecycle Events covering the complete revocation-recovery cycle.",
      "https://datatracker.ietf.org/doc/draft-sato-soos-gar/",
      "IETF (individual)",
-     "Revision -02, 10 Jun 2026; author: Tom Sato (MyAuberge K.K.). The integrator for the SOOS family, analogous to how draft-kuehlewind-audit-architecture (in corpus) integrates the broader IETF agent draft landscape. SCITT-anchored audit stream is a concrete architectural choice distinguishing it from the Kuehlewind approach."),
+     "Revision -03, 28 Jun 2026 (was -02 Jun 10). -03 added OpenTelemetry attribute namespace for governance observability, a GAR Processor spec for converting OTel signals to audit records with integrity verification, four new Authority Lifecycle Event categories (policy conflict scenarios, statutory interpretation changes), and mandatory provenance fields for policy evaluation records. The integrator for the SOOS family, analogous to how draft-kuehlewind-audit-architecture integrates the broader IETF agent draft landscape."),
 
     # ---- Individual drafts: Security analysis / intent / adjacent protocols cluster ----
     ("draft-jiang-intent-security — Security Considerations and Requirements for Intent-Based Requests in Agentic Systems",
@@ -640,11 +676,11 @@ draft_rows = [
      "IETF (individual)",
      "Revision -02, Jun 2026; provides the implementation evidence required to advance both WG drafts toward IESG submission. Informational companion to the two WG drafts — not a protocol spec but tracking their standardization progress."),
 
-    ("draft-hardt-aauth-protocol — AAuth Protocol",
+    ("draft-hardt-oauth-aauth-protocol — AAuth Protocol",
      "A new clean-sheet authorization protocol from Dick Hardt (original OAuth author) defining proof-of-possession by default, resource-signed challenges, agent identity without pre-registration, deferred 202 responses, and AS-to-AS federation for the agent ecosystem.",
-     "https://datatracker.ietf.org/doc/draft-hardt-aauth-protocol/",
+     "https://datatracker.ietf.org/doc/draft-hardt-oauth-aauth-protocol/",
      "IETF (individual)",
-     "Revision -00, April 2026; the design rationale section explicitly explains why AAuth is not GNAP, not OAuth, not DPoP and not mTLS — important read for anyone planning a new agent-auth stack."),
+     "Revision -09, Jul 4 2026; slug gained 'oauth' infix at this revision (was draft-hardt-aauth-protocol). Now formally adds four resource access modes including agent governance. The design rationale section explicitly explains why AAuth is not GNAP, not OAuth, not DPoP and not mTLS — important read for anyone planning a new agent-auth stack. OUTLIER: zero OAuth dependencies."),
 
     ("draft-chen-oauth-roadmap — Comprehensive Roadmap for OAuth 2.0 Standards and Drafts",
      "An IETF informational draft that maps the entire OAuth 2.0 ecosystem of RFCs, BCPs, and active drafts into functional layers from core to extensions to industry profiles.",
