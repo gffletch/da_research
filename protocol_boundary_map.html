@@ -318,6 +318,9 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
+.tension-grid .tension:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
 @media (max-width: 520px) { .tension-grid { grid-template-columns: 1fr; } }
 
 .tension {
@@ -379,7 +382,7 @@ body {
 
   <div class="page-header">
     <button class="theme-toggle" onclick="toggleTheme()">◐ THEME</button>
-    <div class="eyebrow">IETF Agent Authorization Landscape · 177 sources · July 2026</div>
+    <div class="eyebrow">IETF Agent Authorization Landscape · 191 sources · July 2026</div>
     <h1>One Proposal for a Protocol Boundary Map</h1>
     <p class="lead">Six protocol families, six distinct layers of the agent interaction stack. Each owns a problem space and hands off to adjacent layers. Click any layer to expand scope and handoffs.</p>
   </div>
@@ -463,6 +466,7 @@ body {
               <span class="chip">hood-agtp-trust</span>
               <span class="chip">hood-agtp-agent-cert</span>
               <span class="chip">fane-opena2a-aap</span>
+              <span class="chip">bu-agentproto-security-principal-binding</span>
             </div>
           </div>
         </div>
@@ -592,6 +596,7 @@ body {
             <div class="draft-chips">
               <span class="chip">ietf-wimse-arch</span>
               <span class="chip">ietf-wimse-identifier</span>
+              <span class="chip">ietf-wimse-workload-creds</span>
               <span class="chip">ietf-oauth-spiffe-client-auth</span>
               <span class="chip">ni-wimse-ai-agent-identity</span>
               <span class="chip">schwenkschuster-wimse-trust</span>
@@ -677,9 +682,9 @@ body {
     <div class="tension">
       <div class="tension-tag">Tension 03 · Authority Declaration</div>
       <h3>OAuth scope vs. AGTP Agent-Authority-Scope header</h3>
-      <p>AGTP mandates an Agent-Authority-Scope header declaring the agent's authority at the protocol level — but OAuth access tokens carry the same information in scope or authorization_details claims. AGTP-composition specifies AGTP headers take precedence over adjacent-layer fields, but OAuth-native resource servers don't speak AGTP. No spec resolves precedence when they diverge.</p>
+      <p>AGTP mandates an Agent-Authority-Scope header declaring the agent's authority at the protocol level — but OAuth access tokens carry the same information in scope or authorization_details claims. AGTP-composition specifies AGTP headers take precedence, but OAuth-native resource servers don't speak AGTP. draft-bu-agentproto-security-principal-binding (Jul 2026) is the first draft to directly address how agent protocol claims with different verifiers, freshness requirements, and failure modes should be explicitly separated rather than collapsed — active work on this tension.</p>
       <div class="tension-parties">
-        <span class="party">OAuth token claims</span><span class="party">AGTP header</span><span class="party">hood-agtp-composition</span>
+        <span class="party">OAuth token claims</span><span class="party">AGTP header</span><span class="party">hood-agtp-composition</span><span class="party">bu-agentproto-security-principal-binding</span>
       </div>
     </div>
 
@@ -692,7 +697,21 @@ body {
       </div>
     </div>
 
+    <div class="tension">
+      <div class="tension-tag">Tension 05 · Authorization Evidence</div>
+      <h3>Cross-layer evidence records without a layer home</h3>
+      <p>The EMILIA Protocol (5 schrock-ep-* drafts, rev -06) and the Attested Inference Receipt (tsyrulnikov-rats-attested-inference-receipt) produce signed artifacts that compose evidence from every layer in this stack — workload credentials, delegation tokens, transaction tokens, RATS attestation results, and authorization receipts — into a single verifiable record. No layer in this map owns these cross-layer artifacts. The kuehlewind-audit-architecture HUB composes them, but audit infrastructure is absent from the stack as defined. Whether authorization evidence belongs below OAuth, above it, or as a parallel concern is unresolved.</p>
+      <div class="tension-parties">
+        <span class="party">schrock-ep-authorization-receipts</span><span class="party">tsyrulnikov-rats-attested-inference-receipt</span><span class="party">kuehlewind-audit-architecture</span>
+      </div>
+    </div>
+
   </div><!-- /tension-grid -->
+
+  <div style="margin-top:36px; padding-top:16px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+    <span style="font-family:var(--mono); font-size:10px; color:var(--t3); letter-spacing:.08em;">191 sources · 131 Active IETF Drafts · Updated July 15 2026</span>
+    <a href="ietf_cluster_analysis.html" style="font-family:var(--mono); font-size:10px; color:var(--t3); letter-spacing:.08em; text-decoration:none; border:1px solid var(--border); padding:4px 10px; border-radius:4px;">Cluster Analysis →</a>
+  </div>
 
 </div><!-- /wrap -->
 
