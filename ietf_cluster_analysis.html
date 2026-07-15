@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IETF Agent Authorization — Cluster Map</title>
+<style>
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --ground:      #EEF1F6;
+  --surface:     #FFFFFF;
+  --surface-2:   #F4F7FB;
+  --border:      #D4DCE8;
+  --text-1:      #0D1928;
+  --text-2:      #48606E;
+  --text-3:      #8895A4;
+  --green:       #18A860;
+  --green-bg:    #EBF8F2;
+  --amber:       #D4880A;
+  --amber-bg:    #FEF5E6;
+  --red:         #D02040;
+  --red-bg:      #FDEEF1;
+  --violet:      #7055E8;
+  --violet-bg:   #EEE9FD;
+  --slug-bg:     #EEF1F6;
+  --shadow:      0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground:    #080E1A;
+    --surface:   #0D1928;
+    --surface-2: #112034;
+    --border:    #1C2E45;
+    --text-1:    #CDD8E5;
+    --text-2:    #6C83A0;
+    --text-3:    #3C5270;
+    --green:     #23C97A;
+    --green-bg:  #0C2A1C;
+    --amber:     #F4A020;
+    --amber-bg:  #261B08;
+    --red:       #E63A52;
+    --red-bg:    #28090E;
+    --violet:    #9984FF;
+    --violet-bg: #1A1440;
+    --slug-bg:   #0F1B2E;
+    --shadow:    0 1px 3px rgba(0,0,0,.3), 0 4px 12px rgba(0,0,0,.2);
+  }
+}
+:root[data-theme="dark"] {
+  --ground:    #080E1A;
+  --surface:   #0D1928;
+  --surface-2: #112034;
+  --border:    #1C2E45;
+  --text-1:    #CDD8E5;
+  --text-2:    #6C83A0;
+  --text-3:    #3C5270;
+  --green:     #23C97A;
+  --green-bg:  #0C2A1C;
+  --amber:     #F4A020;
+  --amber-bg:  #261B08;
+  --red:       #E63A52;
+  --red-bg:    #28090E;
+  --violet:    #9984FF;
+  --violet-bg: #1A1440;
+  --slug-bg:   #0F1B2E;
+  --shadow:    0 1px 3px rgba(0,0,0,.3), 0 4px 12px rgba(0,0,0,.2);
+}
+:root[data-theme="light"] {
+  --ground:      #EEF1F6;
+  --surface:     #FFFFFF;
+  --surface-2:   #F4F7FB;
+  --border:      #D4DCE8;
+  --text-1:      #0D1928;
+  --text-2:      #48606E;
+  --text-3:      #8895A4;
+  --green:       #18A860;
+  --green-bg:    #EBF8F2;
+  --amber:       #D4880A;
+  --amber-bg:    #FEF5E6;
+  --red:         #D02040;
+  --red-bg:      #FDEEF1;
+  --violet:      #7055E8;
+  --violet-bg:   #EEE9FD;
+  --slug-bg:     #EEF1F6;
+  --shadow:      0 1px 3px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04);
+}
+
+/* ── Reset & base ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--ground);
+  color: var(--text-1);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+a { color: var(--violet); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Layout shell ───────────────────────────────────────── */
+.page { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ── Header ─────────────────────────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.header-left { flex: 1; min-width: 200px; }
+.eyebrow {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: .4rem;
+}
+h1 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  color: var(--text-1);
+  text-wrap: balance;
+}
+.subtitle {
+  margin-top: .4rem;
+  color: var(--text-2);
+  font-size: .9rem;
+}
+.header-controls { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
+.theme-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  padding: .35rem .75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .8rem;
+  font-family: inherit;
+  transition: background .15s, color .15s;
+}
+.theme-btn:hover { background: var(--surface-2); color: var(--text-1); }
+
+/* ── Summary stats ──────────────────────────────────────── */
+.stats-bar {
+  display: flex;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.stat {
+  flex: 1;
+  background: var(--surface);
+  padding: .9rem 1.1rem;
+  min-width: 0;
+}
+.stat-value {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text-1);
+  font-variant-numeric: tabular-nums;
+}
+.stat-label { font-size: .72rem; color: var(--text-2); margin-top: .3rem; text-transform: uppercase; letter-spacing: .06em; }
+.stat.green .stat-value { color: var(--green); }
+.stat.amber .stat-value { color: var(--amber); }
+.stat.red   .stat-value { color: var(--red); }
+.stat.violet .stat-value { color: var(--violet); }
+
+/* ── Legend ─────────────────────────────────────────────── */
+.legend {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
+  align-items: center;
+}
+.legend-label { font-size: .75rem; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin-right: .25rem; }
+.legend-item { display: flex; align-items: center; gap: .4rem; font-size: .78rem; color: var(--text-2); }
+.legend-swatch {
+  width: 10px; height: 20px; border-radius: 2px; flex-shrink: 0;
+}
+.swatch-green  { background: var(--green); }
+.swatch-amber  { background: var(--amber); }
+.swatch-red    { background: var(--red); }
+.swatch-violet { background: var(--violet); }
+
+/* ── Callout ─────────────────────────────────────────────── */
+.callout {
+  background: var(--violet-bg);
+  border: 1px solid var(--violet);
+  border-radius: 8px;
+  padding: .85rem 1.1rem;
+  margin-bottom: 1.75rem;
+  font-size: .82rem;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+.callout strong { color: var(--violet); }
+
+/* ── Grid ───────────────────────────────────────────────── */
+.cluster-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+
+/* ── Card ───────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 10px 0 0 10px;
+}
+.card[data-status="wg"]      ::before { display: none; }
+.card[data-status="wg"]::before       { background: var(--green); }
+.card[data-status="no-anchor"]::before { background: var(--amber); }
+.card[data-status="blocking"]::before  { background: var(--red); }
+.card[data-status="emerging"]::before  { background: var(--violet); }
+
+.card-top {
+  padding: 1.1rem 1.1rem 0 1.3rem;
+  display: flex;
+  gap: .8rem;
+  align-items: flex-start;
+}
+.cluster-letter {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 2.8rem;
+  text-align: center;
+}
+.card[data-status="wg"]        .cluster-letter { color: var(--green); }
+.card[data-status="no-anchor"] .cluster-letter { color: var(--amber); }
+.card[data-status="blocking"]  .cluster-letter { color: var(--red); }
+.card[data-status="emerging"]  .cluster-letter { color: var(--violet); }
+
+.card-meta { flex: 1; min-width: 0; }
+.cluster-name {
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-1);
+  text-wrap: balance;
+  margin-bottom: .4rem;
+}
+.badges { display: flex; gap: .35rem; flex-wrap: wrap; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: .68rem;
+  font-weight: 700;
+  padding: .18rem .5rem;
+  border-radius: 4px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: 'Courier New', Courier, monospace;
+}
+.badge-wg      { background: var(--green-bg);  color: var(--green); }
+.badge-anchor0 { background: var(--amber-bg);  color: var(--amber); }
+.badge-block   { background: var(--red-bg);    color: var(--red); }
+.badge-emerging{ background: var(--violet-bg); color: var(--violet); }
+.badge-count   { background: var(--surface-2); color: var(--text-2); }
+.badge-new     { background: var(--violet-bg); color: var(--violet); }
+
+.card-body {
+  padding: .85rem 1.1rem .85rem 1.3rem;
+  flex: 1;
+}
+.cluster-summary {
+  font-size: .82rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin-bottom: .85rem;
+}
+
+/* ── Draft list ─────────────────────────────────────────── */
+.drafts-preview { display: flex; flex-direction: column; gap: .3rem; }
+.draft-item {
+  display: flex;
+  align-items: flex-start;
+  gap: .4rem;
+  font-size: .76rem;
+}
+.draft-slug {
+  font-family: 'Courier New', Courier, monospace;
+  background: var(--slug-bg);
+  color: var(--text-2);
+  padding: .15rem .4rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-size: .73rem;
+}
+.draft-note { color: var(--text-3); font-size: .72rem; margin-top: .1rem; }
+.draft-tag {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .63rem;
+  padding: .1rem .35rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+  align-self: center;
+}
+.tag-wg       { background: var(--green-bg); color: var(--green); }
+.tag-wglc     { background: var(--green-bg); color: var(--green); }
+.tag-expired  { background: var(--red-bg);   color: var(--red); }
+.tag-new      { background: var(--violet-bg); color: var(--violet); }
+.tag-emilia   { background: var(--violet-bg); color: var(--violet); }
+
+.drafts-expanded {
+  display: none;
+  margin-top: .5rem;
+  border-top: 1px solid var(--border);
+  padding-top: .65rem;
+}
+.drafts-expanded.open { display: block; }
+
+/* ── Expand button ──────────────────────────────────────── */
+.card-footer {
+  padding: .6rem 1.1rem .8rem 1.3rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.expand-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .72rem;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  padding: 0;
+  transition: color .15s;
+}
+.expand-btn:hover { color: var(--text-2); }
+.expand-btn .arrow { display: inline-block; transition: transform .2s; }
+.expand-btn.open .arrow { transform: rotate(180deg); }
+
+/* ── Section header ─────────────────────────────────────── */
+.section-label {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-3);
+  margin-bottom: .4rem;
+  margin-top: .65rem;
+}
+.section-label:first-child { margin-top: 0; }
+
+/* ── Footer ─────────────────────────────────────────────── */
+.page-footer {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  font-size: .76rem;
+  color: var(--text-3);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 540px) {
+  h1 { font-size: 1.25rem; }
+  .stats-bar { flex-wrap: wrap; }
+  .stat { min-width: 45%; }
+  .cluster-letter { font-size: 2.2rem; width: 2.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow { transition: none; }
+  .expand-btn .arrow { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <div class="eyebrow">Research Corpus · July 2026</div>
+      <h1>IETF Agent Authorization<br>Cluster Map</h1>
+      <p class="subtitle">Nine thematic clusters across 131 Active IETF Drafts, mapped by consolidation pressure and WG adoption status</p>
+    </div>
+    <div class="header-controls">
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">◐ Theme</button>
+    </div>
+  </header>
+
+  <!-- Stats bar -->
+  <div class="stats-bar" role="region" aria-label="Corpus summary">
+    <div class="stat">
+      <div class="stat-value">191</div>
+      <div class="stat-label">Total sources</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">131</div>
+      <div class="stat-label">Active IETF drafts</div>
+    </div>
+    <div class="stat green">
+      <div class="stat-value">4</div>
+      <div class="stat-label">Clusters with WG anchor</div>
+    </div>
+    <div class="stat amber">
+      <div class="stat-value">4</div>
+      <div class="stat-label">Need consolidation</div>
+    </div>
+    <div class="stat red">
+      <div class="stat-value">1</div>
+      <div class="stat-label">Blocking (name collision)</div>
+    </div>
+    <div class="stat violet">
+      <div class="stat-value">14</div>
+      <div class="stat-label">Added Jul 15 2026</div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="legend-label">Status</span>
+    <div class="legend-item"><div class="legend-swatch swatch-green"></div> WG anchor present — consolidation underway</div>
+    <div class="legend-item"><div class="legend-swatch swatch-amber"></div> No WG anchor — consolidation needed</div>
+    <div class="legend-item"><div class="legend-swatch swatch-red"></div> Blocking — must resolve before adoption</div>
+    <div class="legend-item"><div class="legend-swatch swatch-violet"></div> Emerging family — strong anchor candidate</div>
+  </div>
+
+  <!-- Callout -->
+  <div class="callout">
+    <strong>Jul 15 update:</strong> 14 new drafts added from a standards-tracker scan. Most significant: the <strong>EMILIA Protocol family</strong> (5 schrock-ep-* drafts, rev -06) materially strengthens Cluster F, which now has the most coherent unanchored family in the corpus. Cluster I gained a third WIMSE WG draft (<code>ietf-wimse-workload-creds</code>). Cluster H added a fourth AIP name collision.
+  </div>
+
+  <!-- Grid -->
+  <div class="cluster-grid">
+
+    <!-- ── A ── -->
+    <div class="card" data-status="wg">
+      <div class="card-top">
+        <div class="cluster-letter">A</div>
+        <div class="card-meta">
+          <div class="cluster-name">TxnToken Extensions</div>
+          <div class="badges">
+            <span class="badge badge-wg">1 WG anchor</span>
+            <span class="badge badge-count">6 drafts</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">Profiles and extensions for OAuth Transaction Tokens in multi-agent scenarios. The WG draft is in WGLC with an IESG milestone of Dec 2026; independent submissions extend it for A2A, cross-domain chaining, and specific agent use cases.</p>
+        <div class="drafts-preview">
+          <div class="section-label">WG anchor</div>
+          <div class="draft-item">
+            <span class="draft-slug">ietf-oauth-transaction-tokens</span>
+            <span class="draft-tag tag-wglc">WGLC</span>
+          </div>
+          <div class="section-label">Key individual submissions</div>
+          <div class="draft-item"><span class="draft-slug">fletcher-transaction-token-chaining-profile</span><span class="draft-tag">-02</span></div>
+          <div class="draft-item"><span class="draft-slug">araut-oauth-transaction-tokens-for-agents</span></div>
+          <div class="draft-item"><span class="draft-slug">liu-oauth-a2a-profile</span><span class="draft-tag tag-expired">EXPIRED</span></div>
+        </div>
+        <div class="drafts-expanded" id="expand-a">
+          <div class="section-label">All drafts</div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-transaction-tokens</span><span class="draft-tag tag-wglc">WGLC -09</span></div>
+          <div class="draft-item"><span class="draft-slug">fletcher-transaction-token-chaining-profile</span><span class="draft-tag">-02</span></div>
+          <div class="draft-item"><span class="draft-slug">araut-oauth-transaction-tokens-for-agents</span></div>
+          <div class="draft-item"><span class="draft-slug">liu-oauth-chain-delegation</span></div>
+          <div class="draft-item"><span class="draft-slug">chen-oauth-agent-authz-use-cases</span></div>
+          <div class="draft-item"><span class="draft-slug">liu-oauth-a2a-profile</span><span class="draft-tag tag-expired">EXPIRED</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="expand-btn" onclick="toggle('expand-a', this)">
+          <span class="arrow">▾</span> Show all 6 drafts
+        </button>
+      </div>
+    </div>
+
+    <!-- ── B ── -->
+    <div class="card" data-status="wg">
+      <div class="card-top">
+        <div class="cluster-letter">B</div>
+        <div class="card-meta">
+          <div class="cluster-name">Cross-Domain Identity</div>
+          <div class="badges">
+            <span class="badge badge-wg">1 WG anchor</span>
+            <span class="badge badge-count">7 drafts</span>
+            <span class="badge badge-new">+1 Jul 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">Propagating identity assertions and delegation chains across administrative boundaries. The WG draft is closed and blocked at the RFC Editor (SECDIR + OPSDIR flags). Independent work continues filling the cross-domain gap.</p>
+        <div class="drafts-preview">
+          <div class="section-label">WG anchor</div>
+          <div class="draft-item">
+            <span class="draft-slug">ietf-oauth-identity-chaining</span>
+            <span class="draft-tag tag-expired">RFC Editor</span>
+          </div>
+          <div class="section-label">Key individual submissions</div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-identity-assertion-authz-grant</span><span class="draft-tag tag-wg">WG</span></div>
+          <div class="draft-item"><span class="draft-slug">reece-wimse-cross-org-delegation</span></div>
+          <div class="draft-item"><span class="draft-slug">rampalli-cross-org-delegation-mapping</span><span class="draft-tag tag-new">NEW</span></div>
+        </div>
+        <div class="drafts-expanded" id="expand-b">
+          <div class="section-label">All drafts</div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-identity-chaining</span><span class="draft-tag tag-expired">RFC Editor</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-identity-assertion-authz-grant</span><span class="draft-tag tag-wg">WG</span></div>
+          <div class="draft-item"><span class="draft-slug">reece-wimse-cross-org-delegation</span></div>
+          <div class="draft-item"><span class="draft-slug">song-oauth-ai-agent-collaborate-authz</span></div>
+          <div class="draft-item"><span class="draft-slug">ni-oauth-batch-authorization-delegation</span></div>
+          <div class="draft-item"><span class="draft-slug">zhu-oauth-async-delegation</span></div>
+          <div class="draft-item"><span class="draft-slug">rampalli-cross-org-delegation-mapping</span><span class="draft-tag tag-new">NEW -05</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="expand-btn" onclick="toggle('expand-b', this)">
+          <span class="arrow">▾</span> Show all 7 drafts
+        </button>
+      </div>
+    </div>
+
+    <!-- ── C ── -->
+    <div class="card" data-status="wg">
+      <div class="card-top">
+        <div class="cluster-letter">C</div>
+        <div class="card-meta">
+          <div class="cluster-name">Client / Instance Auth</div>
+          <div class="badges">
+            <span class="badge badge-wg">2 WG anchors</span>
+            <span class="badge badge-count">8 drafts</span>
+            <span class="badge badge-new">+1 Jul 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">How individual running agent instances authenticate to authorization servers — beyond static client registration. A second WG draft was adopted Jul 2026 (client-id-metadata-document), strengthening this cluster's anchor.</p>
+        <div class="drafts-preview">
+          <div class="section-label">WG anchors</div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-attestation-based-client-auth</span><span class="draft-tag tag-wg">WG -10</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-client-id-metadata-document</span><span class="draft-tag tag-new">NEW WG</span></div>
+          <div class="section-label">Key individual submissions</div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-client-instance-assertion</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-ai-agent-instance</span></div>
+          <div class="draft-item"><span class="draft-slug">pidlisnyi-aps</span></div>
+        </div>
+        <div class="drafts-expanded" id="expand-c">
+          <div class="section-label">All drafts</div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-attestation-based-client-auth</span><span class="draft-tag tag-wg">WG -10</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-client-id-metadata-document</span><span class="draft-tag tag-new">NEW WG -02</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-client-instance-assertion</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-ai-agent-instance</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-actor-proofs</span></div>
+          <div class="draft-item"><span class="draft-slug">goswami-agentic-jwt</span></div>
+          <div class="draft-item"><span class="draft-slug">pidlisnyi-aps</span></div>
+          <div class="draft-item"><span class="draft-slug">kroehl-agentic-trust-aae</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="expand-btn" onclick="toggle('expand-c', this)">
+          <span class="arrow">▾</span> Show all 8 drafts
+        </button>
+      </div>
+    </div>
+
+    <!-- ── D ── -->
+    <div class="card" data-status="no-anchor">
+      <div class="card-top">
+        <div class="cluster-letter">D</div>
+        <div class="card-meta">
+          <div class="cluster-name">Actor Chain Representation</div>
+          <div class="badges">
+            <span class="badge badge-anchor0">0 WG anchors</span>
+            <span class="badge badge-count">6 drafts</span>
+            <span class="badge badge-new">+1 Jul 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">How the chain of acting principals — who delegated to whom — is encoded inside OAuth tokens. Two competing approaches: McGuinness Actor Profile (RFC 8693 act claim extension) and mw-oauth-actor-chain (cryptographically verifiable per-hop binding). The Intent Provenance Protocol (haberkamp-ipp, new) adds intent-carrying to the chain model.</p>
+        <div class="drafts-preview">
+          <div class="section-label">Leading candidates</div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-actor-profile</span></div>
+          <div class="draft-item"><span class="draft-slug">mw-oauth-actor-chain</span></div>
+          <div class="draft-item"><span class="draft-slug">haberkamp-ipp</span><span class="draft-tag tag-new">NEW</span></div>
+        </div>
+        <div class="drafts-expanded" id="expand-d">
+          <div class="section-label">All drafts</div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-actor-profile</span><span class="draft-tag">-00</span></div>
+          <div class="draft-item"><span class="draft-slug">mw-oauth-actor-chain</span><span class="draft-tag">-01</span></div>
+          <div class="draft-item"><span class="draft-slug">mishra-oauth-agent-grants</span></div>
+          <div class="draft-item"><span class="draft-slug">li-oauth-delegated-authorization</span></div>
+          <div class="draft-item"><span class="draft-slug">jiang-wimse-heterogeneous-credential</span></div>
+          <div class="draft-item"><span class="draft-slug">haberkamp-ipp</span><span class="draft-tag tag-new">NEW -01</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="expand-btn" onclick="toggle('expand-d', this)">
+          <span class="arrow">▾</span> Show all 6 drafts
+        </button>
+      </div>
+    </div>
+
+    <!-- ── E ── -->
+    <div class="card" data-status="no-anchor">
+      <div class="card-top">
+        <div class="cluster-letter">E</div>
+        <div class="card-meta">
+          <div class="cluster-name">Token Attenuation</div>
+          <div class="badges">
+            <span class="badge badge-anchor0">0 WG anchors</span>
+            <span class="badge badge-count">7 drafts</span>
+            <span class="badge badge-new">+2 Jul 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">Narrowing token scope as it propagates through delegation chains — the "least privilege for agents" problem. The McGuinness Mission-Bound OAuth blog series frames this as the central unsolved problem in agent authorization. Two new additions Jul 15: a WG baseline spec for refresh token expiration and a novel user-mediated delivery primitive.</p>
+        <div class="drafts-preview">
+          <div class="section-label">Key drafts</div>
+          <div class="draft-item"><span class="draft-slug">niyikiza-oauth-attenuating-agent-tokens</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-mission</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-refresh-token-expiration</span><span class="draft-tag tag-new">NEW WG</span></div>
+          <div class="draft-item"><span class="draft-slug">emerson-oauth-user-mediated-delivery</span><span class="draft-tag tag-new">NEW</span></div>
+        </div>
+        <div class="drafts-expanded" id="expand-e">
+          <div class="section-label">All drafts</div>
+          <div class="draft-item"><span class="draft-slug">niyikiza-oauth-attenuating-agent-tokens</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-resource-token-resp</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-mission</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-insufficient-claims</span></div>
+          <div class="draft-item"><span class="draft-slug">vauban-x402-delegation-binding</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-refresh-token-expiration</span><span class="draft-tag tag-new">NEW WG -03</span></div>
+          <div class="draft-item"><span class="draft-slug">emerson-oauth-user-mediated-delivery</span><span class="draft-tag tag-new">NEW -00</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="expand-btn" onclick="toggle('expand-e', this)">
+          <span class="arrow">▾</span> Show all 7 drafts
+        </button>
+      </div>
+    </div>
+
+    <!-- ── F ── -->
+    <div class="card" data-status="emerging">
+      <div class="card-top">
+        <div class="cluster-letter">F</div>
+        <div class="card-meta">
+          <div class="cluster-name">Pre-action Permits &amp; Authorization Evidence</div>
+          <div class="badges">
+            <span class="badge badge-emerging">Emerging family</span>
+            <span class="badge badge-count">10 drafts</span>
+            <span class="badge badge-new">+5 Jul 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">Pre-action human authorization and post-action evidence for high-risk agent actions. The EMILIA Protocol family (5 schrock-ep-* drafts, rev -06) arrived Jul 15 and is now the most coherent unanchored family in the corpus — covering receipts, evidence chains, action evidence graphs, quorum authorization, and long-term record preservation under DORA/HIPAA/SEC mandates.</p>
+        <div class="drafts-preview">
+          <div class="section-label">EMILIA Protocol family (new Jul 15)</div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-authorization-receipts</span><span class="draft-tag tag-emilia">EP -06</span></div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-action-evidence-graph</span><span class="draft-tag tag-emilia">EP</span></div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-authorization-evidence-chain</span><span class="draft-tag tag-emilia">EP</span></div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-quorum</span><span class="draft-tag tag-emilia">EP</span></div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-evidence-record</span><span class="draft-tag tag-emilia">EP</span></div>
+        </div>
+        <div class="drafts-expanded" id="expand-f">
+          <div class="section-label">EMILIA Protocol family</div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-authorization-receipts</span><span class="draft-tag tag-emilia">NEW -06</span></div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-action-evidence-graph</span><span class="draft-tag tag-emilia">NEW -00</span></div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-authorization-evidence-chain</span><span class="draft-tag tag-emilia">NEW -02</span></div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-quorum</span><span class="draft-tag tag-emilia">NEW -02</span></div>
+          <div class="draft-item"><span class="draft-slug">schrock-ep-evidence-record</span><span class="draft-tag tag-emilia">NEW -01</span></div>
+          <div class="section-label">Other pre-action / permit drafts</div>
+          <div class="draft-item"><span class="draft-slug">munoz-scitt-permit-profile</span></div>
+          <div class="draft-item"><span class="draft-slug">lee-orprg-permit-receipts</span></div>
+          <div class="draft-item"><span class="draft-slug">mcgraw-httpapi-agent-budget</span></div>
+          <div class="draft-item"><span class="draft-slug">pereira-licet-human-intent</span></div>
+          <div class="draft-item"><span class="draft-slug">nelson-agent-delegation-receipts</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="expand-btn" onclick="toggle('expand-f', this)">
+          <span class="arrow">▾</span> Show all 10 drafts
+        </button>
+      </div>
+    </div>
+
+    <!-- ── G ── -->
+    <div class="card" data-status="no-anchor">
+      <div class="card-top">
+        <div class="cluster-letter">G</div>
+        <div class="card-meta">
+          <div class="cluster-name">HTTP Challenge Signals</div>
+          <div class="badges">
+            <span class="badge badge-anchor0">0 WG anchors</span>
+            <span class="badge badge-count">4 drafts</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">Mid-flow challenge mechanisms for servers to request additional authorization material from clients without restarting the OAuth flow. The smallest cluster; kahrer-oauth-client-challenge-protocol is the most likely consolidation point and already cites downstream WG interest.</p>
+        <div class="drafts-preview">
+          <div class="section-label">Key drafts</div>
+          <div class="draft-item"><span class="draft-slug">kahrer-oauth-client-challenge-protocol</span></div>
+          <div class="draft-item"><span class="draft-slug">rosomakho-oauth-txn-challenge</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-rfc9728bis</span></div>
+          <div class="draft-item"><span class="draft-slug">mcguinness-oauth-insufficient-claims</span></div>
+        </div>
+      </div>
+      <div class="card-footer" style="border-top: none; background: transparent;">
+        <span style="font-family: 'Courier New', monospace; font-size: .72rem; color: var(--text-3);">Smallest cluster — likely consolidation point: kahrer</span>
+      </div>
+    </div>
+
+    <!-- ── H ── -->
+    <div class="card" data-status="blocking">
+      <div class="card-top">
+        <div class="cluster-letter">H</div>
+        <div class="card-meta">
+          <div class="cluster-name">AIP Name Collision</div>
+          <div class="badges">
+            <span class="badge badge-block">BLOCKING</span>
+            <span class="badge badge-count">4 drafts</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">Four incompatible drafts use identical or near-identical names and acronyms — "AIP" (Agent Identity Protocol) — creating a namespace collision that must be resolved before the IETF can make progress on agent identity standardization. A fourth collision (fane-opena2a-aip) arrived in Jul 2026.</p>
+        <div class="drafts-preview">
+          <div class="section-label">Colliding drafts</div>
+          <div class="draft-item"><span class="draft-slug">singla-agent-identity-protocol</span><span class="draft-note">— uses "AIP"</span></div>
+          <div class="draft-item"><span class="draft-slug">prakash-aip</span><span class="draft-note">— uses "AIP"</span></div>
+          <div class="draft-item"><span class="draft-slug">aip-agent-identity-protocol</span><span class="draft-note">— uses "AIP"</span></div>
+          <div class="draft-item"><span class="draft-slug">fane-opena2a-aip</span><span class="draft-note">— 4th collision (Jul 2026)</span></div>
+        </div>
+      </div>
+      <div class="card-footer" style="border-top: none; background: transparent;">
+        <span style="font-family: 'Courier New', monospace; font-size: .72rem; color: var(--red);">Resolution required before any WG adoption of agent identity work</span>
+      </div>
+    </div>
+
+    <!-- ── I ── -->
+    <div class="card" data-status="wg">
+      <div class="card-top">
+        <div class="cluster-letter">I</div>
+        <div class="card-meta">
+          <div class="cluster-name">WIMSE Agent Extensions</div>
+          <div class="badges">
+            <span class="badge badge-wg">4 WG anchors</span>
+            <span class="badge badge-count">11 drafts</span>
+            <span class="badge badge-new">+3 Jul 15</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="cluster-summary">Cryptographic workload identity for AI agents, anchored by the WIMSE WG. The most institutionally mature cluster: four WG-adopted drafts (arch, identifier, workload-creds new Jul 15, and oauth-spiffe-client-auth). A growing set of individual submissions extend the WIMSE substrate for agents, cross-org delegation, and heterogeneous credentials.</p>
+        <div class="drafts-preview">
+          <div class="section-label">WG anchors</div>
+          <div class="draft-item"><span class="draft-slug">ietf-wimse-arch</span><span class="draft-tag tag-wg">WG -08</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-wimse-identifier</span><span class="draft-tag tag-wg">WG -03</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-wimse-workload-creds</span><span class="draft-tag tag-new">NEW WG</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-spiffe-client-auth</span><span class="draft-tag tag-wg">WG -01</span></div>
+        </div>
+        <div class="drafts-expanded" id="expand-i">
+          <div class="section-label">WG anchors</div>
+          <div class="draft-item"><span class="draft-slug">ietf-wimse-arch</span><span class="draft-tag tag-wg">WG -08</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-wimse-identifier</span><span class="draft-tag tag-wg">WG -03</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-wimse-workload-creds</span><span class="draft-tag tag-new">NEW WG -02</span></div>
+          <div class="draft-item"><span class="draft-slug">ietf-oauth-spiffe-client-auth</span><span class="draft-tag tag-wg">WG -01</span></div>
+          <div class="section-label">Individual extensions</div>
+          <div class="draft-item"><span class="draft-slug">ni-wimse-ai-agent-identity</span></div>
+          <div class="draft-item"><span class="draft-slug">reece-wimse-cross-org-delegation</span></div>
+          <div class="draft-item"><span class="draft-slug">schwenkschuster-wimse-trust-domain-discovery</span></div>
+          <div class="draft-item"><span class="draft-slug">winmagic-wimse-condition-bounded-credentials</span></div>
+          <div class="draft-item"><span class="draft-slug">munoz-wimse-authorization-evidence</span></div>
+          <div class="draft-item"><span class="draft-slug">tsyrulnikov-rats-attested-inference-receipt</span><span class="draft-tag tag-new">NEW adjacent</span></div>
+          <div class="draft-item"><span class="draft-slug">bu-agentproto-security-principal-binding</span><span class="draft-tag tag-new">NEW adjacent</span></div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="expand-btn" onclick="toggle('expand-i', this)">
+          <span class="arrow">▾</span> Show all 11 drafts
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /cluster-grid -->
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <span>Corpus: 191 sources · 131 Active IETF Drafts · Updated July 15 2026</span>
+    <span>Maintainer: George Fletcher · <a href="protocol_boundary_map.html">Protocol Boundary Map →</a></span>
+  </footer>
+
+</div><!-- /page -->
+
+<script>
+function toggle(id, btn) {
+  const el = document.getElementById(id);
+  const open = el.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  const count = btn.textContent.match(/\d+/)?.[0];
+  btn.innerHTML = `<span class="arrow">${open ? '▴' : '▾'}</span> ${open ? 'Hide' : 'Show all ' + (count || '') + ' drafts'}`;
+}
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme');
+  const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (!current) {
+    root.setAttribute('data-theme', sysDark ? 'light' : 'dark');
+  } else if (current === 'dark') {
+    root.setAttribute('data-theme', 'light');
+  } else {
+    root.setAttribute('data-theme', 'dark');
+  }
+}
+</script>
+</body>
+</html>
