@@ -1,0 +1,714 @@
+<title>One Proposal for a Protocol Boundary Map — IETF Agent Authorization</title>
+<style>
+/* ── TOKENS (dark default) ─────────────────────────────────────── */
+:root {
+  --bg:           #0C1120;
+  --bg-2:         #111827;
+  --layer-bg:     rgba(255,255,255,0.035);
+  --layer-hover:  rgba(255,255,255,0.065);
+  --conn-bg:      rgba(255,255,255,0.015);
+  --tension-bg:   rgba(255,255,255,0.04);
+  --t1:           #E2E8F4;
+  --t2:           #8A9BB8;
+  --t3:           #4E5F7A;
+  --border:       rgba(255,255,255,0.07);
+  --border-hi:    rgba(255,255,255,0.20);
+
+  --c-dmsc:   #38BDF8;
+  --c-agent:  #2DD4BF;
+  --c-dawn:   #4ADE80;
+  --c-webbot: #C084FC;
+  --c-wimse:  #60A5FA;
+  --c-oauth:  #FB923C;
+
+  --mono: 'Menlo','Monaco','Consolas','Courier New',monospace;
+  --sans: -apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --max: 860px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:           #EEF2F9;
+    --bg-2:         #FFFFFF;
+    --layer-bg:     rgba(255,255,255,0.75);
+    --layer-hover:  #FFFFFF;
+    --conn-bg:      rgba(0,0,0,0.025);
+    --tension-bg:   rgba(255,255,255,0.8);
+    --t1:           #0F172A;
+    --t2:           #475569;
+    --t3:           #94A3B8;
+    --border:       rgba(0,0,0,0.08);
+    --border-hi:    rgba(0,0,0,0.22);
+
+    --c-dmsc:   #0284C7;
+    --c-agent:  #0D9488;
+    --c-dawn:   #16A34A;
+    --c-webbot: #9333EA;
+    --c-wimse:  #2563EB;
+    --c-oauth:  #EA580C;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg:#0C1120;--bg-2:#111827;--layer-bg:rgba(255,255,255,0.035);
+  --layer-hover:rgba(255,255,255,0.065);--conn-bg:rgba(255,255,255,0.015);
+  --tension-bg:rgba(255,255,255,0.04);--t1:#E2E8F4;--t2:#8A9BB8;--t3:#4E5F7A;
+  --border:rgba(255,255,255,0.07);--border-hi:rgba(255,255,255,0.20);
+  --c-dmsc:#38BDF8;--c-agent:#2DD4BF;--c-dawn:#4ADE80;
+  --c-webbot:#C084FC;--c-wimse:#60A5FA;--c-oauth:#FB923C;
+}
+:root[data-theme="light"] {
+  --bg:#EEF2F9;--bg-2:#FFFFFF;--layer-bg:rgba(255,255,255,0.75);
+  --layer-hover:#FFFFFF;--conn-bg:rgba(0,0,0,0.025);
+  --tension-bg:rgba(255,255,255,0.8);--t1:#0F172A;--t2:#475569;--t3:#94A3B8;
+  --border:rgba(0,0,0,0.08);--border-hi:rgba(0,0,0,0.22);
+  --c-dmsc:#0284C7;--c-agent:#0D9488;--c-dawn:#16A34A;
+  --c-webbot:#9333EA;--c-wimse:#2563EB;--c-oauth:#EA580C;
+}
+
+/* ── RESET & BASE ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 48px 20px 80px;
+  transition: background .2s, color .2s;
+}
+
+/* ── LAYOUT ────────────────────────────────────────────────────── */
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+/* ── HEADER ────────────────────────────────────────────────────── */
+.page-header {
+  margin-bottom: 48px;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--t3);
+  margin-bottom: 12px;
+}
+.page-header h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  color: var(--t1);
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+.page-header .lead {
+  font-size: 15px;
+  color: var(--t2);
+  max-width: 580px;
+  line-height: 1.65;
+}
+
+/* ── THEME TOGGLE ──────────────────────────────────────────────── */
+.theme-toggle {
+  float: right;
+  margin-top: 4px;
+  background: var(--layer-bg);
+  border: 1px solid var(--border);
+  color: var(--t3);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color .15s, border-color .15s;
+}
+.theme-toggle:hover { color: var(--t2); border-color: var(--border-hi); }
+
+/* ── STACK ─────────────────────────────────────────────────────── */
+.stack { display: flex; flex-direction: column; gap: 0; }
+
+/* ── LAYER CARD ────────────────────────────────────────────────── */
+.layer {
+  background: var(--layer-bg);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--accent);
+  border-radius: 6px;
+  padding: 18px 20px 18px 22px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, box-shadow .15s;
+  position: relative;
+}
+.layer:hover, .layer.open {
+  background: var(--layer-hover);
+  border-color: var(--border-hi);
+  box-shadow: 0 0 0 1px var(--accent), inset 0 0 40px rgba(0,0,0,.05);
+}
+
+.layer-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.layer-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: .75;
+  white-space: nowrap;
+}
+.layer-name {
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: -.01em;
+}
+.layer-owns {
+  font-size: 13px;
+  color: var(--t2);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* expand toggle hint */
+.layer::after {
+  content: '+';
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--t3);
+  transition: transform .2s, color .15s;
+  pointer-events: none;
+}
+.layer.open::after { content: '−'; color: var(--accent); }
+
+/* ── LAYER DETAIL (collapsed by default) ────────────────────────── */
+.layer-detail {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .25s ease;
+  overflow: hidden;
+}
+.layer.open .layer-detail { grid-template-rows: 1fr; }
+.layer-detail-inner {
+  overflow: hidden;
+  padding-top: 0;
+  transition: padding-top .25s ease;
+}
+.layer.open .layer-detail-inner { padding-top: 14px; }
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 560px) { .detail-grid { grid-template-columns: 1fr; } }
+
+.detail-section {}
+.detail-section h4 {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--t3);
+  margin-bottom: 6px;
+}
+.detail-section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.detail-section li {
+  font-size: 12.5px;
+  color: var(--t2);
+  padding-left: 12px;
+  position: relative;
+}
+.detail-section li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  opacity: .6;
+}
+
+.draft-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+.chip {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 3px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
+/* ── CONNECTOR ─────────────────────────────────────────────────── */
+.connector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 22px;
+  height: 36px;
+  background: var(--conn-bg);
+  border-left: 1px dashed var(--border);
+  border-right: 1px dashed var(--border);
+  margin: 0 5px;
+}
+.conn-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.conn-label {
+  font-size: 11px;
+  color: var(--t3);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-style: italic;
+}
+.conn-arrow {
+  font-size: 12px;
+  color: var(--t3);
+  line-height: 1;
+}
+
+/* ── SECTION LABEL ─────────────────────────────────────────────── */
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--t3);
+  margin: 44px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── TENSIONS ──────────────────────────────────────────────────── */
+.tension-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 520px) { .tension-grid { grid-template-columns: 1fr; } }
+
+.tension {
+  background: var(--tension-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+}
+.tension-tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--t3);
+  margin-bottom: 7px;
+}
+.tension h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t1);
+  margin-bottom: 6px;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+.tension p {
+  font-size: 12px;
+  color: var(--t2);
+  line-height: 1.55;
+}
+.tension-parties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+.party {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  color: var(--t3);
+}
+
+/* ── STACK LAYER ACCENT VARS ───────────────────────────────────── */
+.l-dmsc   { --accent: var(--c-dmsc); }
+.l-agent  { --accent: var(--c-agent); }
+.l-dawn   { --accent: var(--c-dawn); }
+.l-webbot { --accent: var(--c-webbot); }
+.l-wimse  { --accent: var(--c-wimse); }
+.l-oauth  { --accent: var(--c-oauth); }
+
+@media (prefers-reduced-motion: reduce) {
+  .layer, .layer-detail, .layer-detail-inner { transition: none; }
+}
+</style>
+
+<div class="wrap">
+
+  <div class="page-header">
+    <button class="theme-toggle" onclick="toggleTheme()">◐ THEME</button>
+    <div class="eyebrow">IETF Agent Authorization Landscape · 177 sources · July 2026</div>
+    <h1>One Proposal for a Protocol Boundary Map</h1>
+    <p class="lead">Six protocol families, six distinct layers of the agent interaction stack. Each owns a problem space and hands off to adjacent layers. Click any layer to expand scope and handoffs.</p>
+  </div>
+
+  <div class="stack">
+
+    <!-- ── DMSC ───────────────────────────────────────────────── -->
+    <div class="layer l-dmsc" onclick="toggle(this)">
+      <div class="layer-head">
+        <span class="layer-label">Coordination Layer</span>
+        <span class="layer-name">DMSC</span>
+      </div>
+      <div class="layer-owns">Cross-organizational team assembly · gateway orchestration · cross-domain governance policy</div>
+      <div class="layer-detail"><div class="layer-detail-inner">
+        <div class="detail-grid">
+          <div class="detail-section">
+            <h4>Owns</h4>
+            <ul>
+              <li>Multi-agent team assembly and task delegation across admin domains</li>
+              <li>Gateway-mediated capability negotiation and semantic intent routing</li>
+              <li>Governance policy enforcement for regulated environments (financial, telco)</li>
+              <li>Provenance receipts and session audit records</li>
+            </ul>
+          </div>
+          <div class="detail-section">
+            <h4>Hands off to</h4>
+            <ul>
+              <li>Transport layer (HTTP, AGTP) for actual message delivery</li>
+              <li>OAuth for token-level authorization within delegated tasks</li>
+              <li>DAWN for discovering agents before gateway routing</li>
+            </ul>
+            <h4 style="margin-top:12px">Key drafts</h4>
+            <div class="draft-chips">
+              <span class="chip">li-dmsc-macp</span>
+              <span class="chip">li-dmsc-inf-architecture</span>
+              <span class="chip">sz-dmsc-iaip</span>
+              <span class="chip">dunbar-dmsc-gw-scenarios</span>
+              <span class="chip">somoza-dmsc-atn</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="connector">
+      <div class="conn-line"></div>
+      <span class="conn-arrow">↕</span>
+      <span class="conn-label">task delegation uses existing transports; OAuth tokens for sub-agent authorization</span>
+      <div class="conn-line"></div>
+    </div>
+
+    <!-- ── AgentProtocol ─────────────────────────────────────── -->
+    <div class="layer l-agent" onclick="toggle(this)">
+      <div class="layer-head">
+        <span class="layer-label">Transport &amp; Session Layer</span>
+        <span class="layer-name">AgentProtocol / A2A</span>
+      </div>
+      <div class="layer-owns">Agent-to-agent and agent-to-resource communication · session lifecycle · method vocabulary</div>
+      <div class="layer-detail"><div class="layer-detail-inner">
+        <div class="detail-grid">
+          <div class="detail-section">
+            <h4>Owns</h4>
+            <ul>
+              <li>Two competing designs: AGTP (new protocol, port 4480, 18-method vocabulary) and A2A (HTTP-based, no IETF-filed normative docs from Google)</li>
+              <li>Session establishment and lifecycle</li>
+              <li>Protocol-level authority scope declaration (AGTP Agent-Authority-Scope header)</li>
+              <li>Agent identity binding to TLS via X.509 extension (AGTP-CERT)</li>
+            </ul>
+          </div>
+          <div class="detail-section">
+            <h4>Hands off to</h4>
+            <ul>
+              <li>DAWN to discover endpoints before connecting</li>
+              <li>WIMSE or WebBotAuth for cryptographic identity binding</li>
+              <li>OAuth for the authorization tokens carried in the session</li>
+            </ul>
+            <h4 style="margin-top:12px">Key drafts</h4>
+            <div class="draft-chips">
+              <span class="chip">hood-independent-agtp</span>
+              <span class="chip">hood-agtp-api</span>
+              <span class="chip">hood-agtp-trust</span>
+              <span class="chip">hood-agtp-agent-cert</span>
+              <span class="chip">fane-opena2a-aap</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="connector">
+      <div class="conn-line"></div>
+      <span class="conn-arrow">↕</span>
+      <span class="conn-label">discovered endpoint becomes connection target; no auth yet</span>
+      <div class="conn-line"></div>
+    </div>
+
+    <!-- ── DAWN ──────────────────────────────────────────────── -->
+    <div class="layer l-dawn" onclick="toggle(this)">
+      <div class="layer-head">
+        <span class="layer-label">Discovery Layer</span>
+        <span class="layer-name">DAWN</span>
+      </div>
+      <div class="layer-owns">Finding agents, workloads, and services before any connection or authentication begins</div>
+      <div class="layer-detail"><div class="layer-detail-inner">
+        <div class="detail-grid">
+          <div class="detail-section">
+            <h4>Owns</h4>
+            <ul>
+              <li>Protocol-neutral discovery of agents, workloads, and named entities across admin boundaries</li>
+              <li>Capability advertisement and search</li>
+              <li>Authentication and authorization of discovered entities are explicitly <em>out of scope</em></li>
+              <li>IETF 126 (Bangkok) has DAWN BoF time — WG formation imminent</li>
+            </ul>
+          </div>
+          <div class="detail-section">
+            <h4>Hands off to</h4>
+            <ul>
+              <li>AgentProtocol (AGTP, A2A, HTTP) for the actual connection</li>
+              <li>WIMSE or WebBotAuth to authenticate the discovered entity</li>
+              <li>OAuth for authorization of the request to the discovered entity</li>
+            </ul>
+            <h4 style="margin-top:12px">Key drafts</h4>
+            <div class="draft-chips">
+              <span class="chip">king-dawn-requirements</span>
+              <span class="chip">farrel-dawn-terminology</span>
+              <span class="chip">akhavain-moussa-dawn-ps</span>
+              <span class="chip">moussa-dawn-gap-analysis</span>
+              <span class="chip">jimenez-dawn-landscape</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="connector">
+      <div class="conn-line"></div>
+      <span class="conn-arrow">↕</span>
+      <span class="conn-label">discovered entity crosses into authentication — external web or internal service mesh</span>
+      <div class="conn-line"></div>
+    </div>
+
+    <!-- ── WebBotAuth ────────────────────────────────────────── -->
+    <div class="layer l-webbot" onclick="toggle(this)">
+      <div class="layer-head">
+        <span class="layer-label">Web-Facing Auth Layer</span>
+        <span class="layer-name">WebBotAuth</span>
+      </div>
+      <div class="layer-owns">Authenticating bots and AI agents to public web origin servers — replacing IP allowlisting</div>
+      <div class="layer-detail"><div class="layer-detail-inner">
+        <div class="detail-grid">
+          <div class="detail-section">
+            <h4>Owns</h4>
+            <ul>
+              <li>Bot/agent authentication to websites built for human users</li>
+              <li>Signature Agent Card: JSON identity document with public keys and capabilities</li>
+              <li>HTTP Message Signatures over the agent's requests</li>
+              <li>Anonymous path (Privacy Pass) as the privacy-preserving alternative</li>
+            </ul>
+          </div>
+          <div class="detail-section">
+            <h4>Hands off to</h4>
+            <ul>
+              <li>OAuth for resource-level access decisions after authentication</li>
+              <li>WIMSE for internal service mesh identity (different trust perimeter)</li>
+            </ul>
+            <h4 style="margin-top:12px">Key drafts</h4>
+            <div class="draft-chips">
+              <span class="chip">webbotauth-registry</span>
+              <span class="chip">webbotauth-httpsig-protocol</span>
+              <span class="chip">webbotauth-httpsig-directory</span>
+              <span class="chip">rescorla-anonymous-webbotauth</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="connector">
+      <div class="conn-line"></div>
+      <span class="conn-arrow">↕</span>
+      <span class="conn-label">external web perimeter ↔ internal service mesh — same agent, two identity systems</span>
+      <div class="conn-line"></div>
+    </div>
+
+    <!-- ── WIMSE ─────────────────────────────────────────────── -->
+    <div class="layer l-wimse" onclick="toggle(this)">
+      <div class="layer-head">
+        <span class="layer-label">Workload Identity Layer</span>
+        <span class="layer-name">WIMSE</span>
+      </div>
+      <div class="layer-owns">Cryptographic identity for running agent processes within and across service mesh boundaries</div>
+      <div class="layer-detail"><div class="layer-detail-inner">
+        <div class="detail-grid">
+          <div class="detail-section">
+            <h4>Owns</h4>
+            <ul>
+              <li>SPIFFE SVIDs and workload identity credentials for the running process</li>
+              <li>Mutual TLS between services using workload certificates</li>
+              <li>Cross-domain credential verification and trust domain discovery</li>
+              <li>Condition-bounded credentials (posture-gated, not time-bounded)</li>
+            </ul>
+          </div>
+          <div class="detail-section">
+            <h4>Hands off to</h4>
+            <ul>
+              <li>OAuth via draft-ietf-oauth-spiffe-client-auth (WG-adopted): WIMSE identity → OAuth client assertion → authorization token</li>
+              <li>WebBotAuth for external web-origin authentication (different perimeter)</li>
+            </ul>
+            <h4 style="margin-top:12px">Key drafts</h4>
+            <div class="draft-chips">
+              <span class="chip">ietf-wimse-arch</span>
+              <span class="chip">ietf-wimse-identifier</span>
+              <span class="chip">ietf-oauth-spiffe-client-auth</span>
+              <span class="chip">ni-wimse-ai-agent-identity</span>
+              <span class="chip">schwenkschuster-wimse-trust</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="connector">
+      <div class="conn-line"></div>
+      <span class="conn-arrow">↕</span>
+      <span class="conn-label">workload identity credential → OAuth client assertion → authorization token</span>
+      <div class="conn-line"></div>
+    </div>
+
+    <!-- ── OAuth ─────────────────────────────────────────────── -->
+    <div class="layer l-oauth" onclick="toggle(this)">
+      <div class="layer-head">
+        <span class="layer-label">Authorization Layer</span>
+        <span class="layer-name">OAuth</span>
+      </div>
+      <div class="layer-owns">Token issuance · delegation chains · scope attenuation · revocation · resource access control</div>
+      <div class="layer-detail"><div class="layer-detail-inner">
+        <div class="detail-grid">
+          <div class="detail-section">
+            <h4>Owns</h4>
+            <ul>
+              <li>The complete authorization lifecycle — every layer above hands authorization decisions here</li>
+              <li>Token exchange and delegation chains (RFC 8693)</li>
+              <li>Rich authorization requests and scope attenuation (RFC 9396 RAR)</li>
+              <li>Transaction tokens for intra-service request tracing (draft-ietf-oauth-transaction-tokens)</li>
+              <li>Cross-domain identity propagation (draft-ietf-oauth-identity-chaining)</li>
+            </ul>
+          </div>
+          <div class="detail-section">
+            <h4>Receives from other layers</h4>
+            <ul>
+              <li>WIMSE identity credential → client assertion for token request</li>
+              <li>WebBotAuth bot identity → precondition for authorization decisions</li>
+              <li>DAWN discovery → client knows which AS to request tokens from</li>
+              <li>DMSC task context → informs scope and delegation depth</li>
+            </ul>
+            <h4 style="margin-top:12px">Foundation drafts</h4>
+            <div class="draft-chips">
+              <span class="chip">RFC 6749</span>
+              <span class="chip">RFC 8693</span>
+              <span class="chip">RFC 9396</span>
+              <span class="chip">ietf-oauth-transaction-tokens</span>
+              <span class="chip">ietf-oauth-identity-chaining</span>
+              <span class="chip">ietf-oauth-identity-assertion-authz-grant</span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div><!-- /stack -->
+
+  <!-- ── TENSIONS ──────────────────────────────────────────────── -->
+  <div class="section-label">Open Boundary Tensions</div>
+
+  <div class="tension-grid">
+
+    <div class="tension">
+      <div class="tension-tag">Tension 01 · Discovery</div>
+      <h3>DAWN vs. DMSC gateway vs. AGTP DISCOVER</h3>
+      <p>Three families claim the discovery slot. DAWN is a standalone federated protocol layer. DMSC embeds discovery inside the gateway's semantic intent router. AGTP defines a DISCOVER method. These are architecturally incompatible at scale — a global standard can have only one answer.</p>
+      <div class="tension-parties">
+        <span class="party">DAWN</span><span class="party">DMSC / sz-dmsc-iaip</span><span class="party">AGTP / hood-agtp-discovery</span>
+      </div>
+    </div>
+
+    <div class="tension">
+      <div class="tension-tag">Tension 02 · Identity Perimeter</div>
+      <h3>WebBotAuth httpsig vs. WIMSE mTLS for the same agent</h3>
+      <p>An agent crawling the public web uses WebBotAuth (HTTP message signatures). The same agent calling internal services uses WIMSE mTLS. Both rely on RFC 9421 HTTP Message Signatures as a common substrate, but the two WGs have not specified how credentials compose or translate across the perimeter.</p>
+      <div class="tension-parties">
+        <span class="party">WebBotAuth WG</span><span class="party">WIMSE WG</span><span class="party">RFC 9421</span>
+      </div>
+    </div>
+
+    <div class="tension">
+      <div class="tension-tag">Tension 03 · Authority Declaration</div>
+      <h3>OAuth scope vs. AGTP Agent-Authority-Scope header</h3>
+      <p>AGTP mandates an Agent-Authority-Scope header declaring the agent's authority at the protocol level — but OAuth access tokens carry the same information in scope or authorization_details claims. AGTP-composition specifies AGTP headers take precedence over adjacent-layer fields, but OAuth-native resource servers don't speak AGTP. No spec resolves precedence when they diverge.</p>
+      <div class="tension-parties">
+        <span class="party">OAuth token claims</span><span class="party">AGTP header</span><span class="party">hood-agtp-composition</span>
+      </div>
+    </div>
+
+    <div class="tension">
+      <div class="tension-tag">Tension 04 · Governance</div>
+      <h3>DMSC cross-org governance vs. OAuth authorization scope</h3>
+      <p>The dunbar-dmsc-gw-scenarios analysis explicitly names MCP and A2A as insufficient for regulated cross-organizational environments. OAuth also doesn't own cross-org governance orchestration. DMSC fills this gap with its mediation layer — but DMSC and OAuth have no explicit composition profile. Whether OAuth's Complex Delegation recharter covers this space is unresolved.</p>
+      <div class="tension-parties">
+        <span class="party">DMSC gateway</span><span class="party">OAuth WG recharter</span><span class="party">dunbar-dmsc-gw-scenarios</span>
+      </div>
+    </div>
+
+  </div><!-- /tension-grid -->
+
+</div><!-- /wrap -->
+
+<script>
+function toggle(el) {
+  el.classList.toggle('open');
+}
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme');
+  if (!current) {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  } else {
+    root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+  }
+}
+</script>

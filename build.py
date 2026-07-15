@@ -99,6 +99,36 @@ draft_rows = [
      "IETF (WebBotAuth WG charter)",
      "Approved Oct 2025; complements but does not duplicate OAuth delegation work — authenticates the bot/agent itself, not the end user. Liaises with AIPREF, HTTPBIS, OAuth, TLS, and WIMSE."),
 
+    ("draft-nottingham-webbotauth-use-cases — Use Cases for Authentication of Web Bots",
+     "Frames the key questions for WebBotAuth WG scope: what sites need (mitigating bot abuse, access control for human-gated content), what bot operators need (IP mobility, non-IP-based identity), and the tension between them when a bot operator wants to be recognized but not tracked.",
+     "https://datatracker.ietf.org/doc/draft-nottingham-webbotauth-use-cases/",
+     "IETF (WebBotAuth WG)",
+     "Revision -02, Apr 2026; author: Mark Nottingham (Melbourne). The foundational use-case framing for the WG; scopes out the design space that the registry, httpsig-protocol, and anonymous-auth drafts are responding to."),
+
+    ("draft-meunier-webbotauth-registry — Registry and Signature Agent Card for Web Bot Auth",
+     "Defines the 'Signature Agent Card,' a JSON metadata document enabling bots to publish their identity, capabilities, and public keys; establishes a IANA registry drawing from OAuth client metadata extended with bot-specific fields including crawl-rate declarations and data-use purpose.",
+     "https://datatracker.ietf.org/doc/draft-meunier-webbotauth-registry/",
+     "IETF (WebBotAuth WG)",
+     "Revision -03, Jun 26 2026 (most mature WG document); authors: Maxime Guerreiro, Thibault Meunier (Cloudflare), Ulas Kirazci (Amazon). The Agent Card is the identity artifact that the httpsig-protocol references; together they form the core WebBotAuth authentication architecture."),
+
+    ("draft-meunier-webbotauth-httpsig-protocol — HTTP Message Signatures for Automated Traffic",
+     "Defines the core WebBotAuth authentication architecture: automated agents sign HTTP requests with private keys bound to their Agent Card; origin servers verify agent identity through public key discovery via the registry. Intended to replace IP allowlisting and User-Agent string matching as the primary bot identification mechanism.",
+     "https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/",
+     "IETF (WebBotAuth WG)",
+     "Revision -00, Jun 26 2026; authors: Thibault Meunier (Cloudflare), Sandor Major (Google). Replaces draft-meunier-web-bot-auth-architecture. Pairs with draft-meunier-webbotauth-httpsig-directory for key discovery."),
+
+    ("draft-meunier-webbotauth-httpsig-directory — HTTP Message Signatures Directory",
+     "Defines a JWKS-based key directory, a well-known URI for key discovery (/.well-known/bot-auth-directory), and a new HTTP header field for in-band signing-key location communication, enabling origin servers to resolve a bot's signing key without prior configuration.",
+     "https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-directory/",
+     "IETF (WebBotAuth WG)",
+     "Revision -00, Jun 26 2026; authors: Thibault Meunier (Cloudflare), Sandor Major (Google). Replaces draft-meunier-http-message-signatures-directory. The key-discovery complement to httpsig-protocol."),
+
+    ("draft-rescorla-anonymous-webbotauth — Anonymous Bot Authentication: Authorization and Rate Limiting for Web Agents",
+     "Proposes Anonymous Bot Authentication (ABA) using Privacy Pass tokens and Anonymous Rate-Limited Credentials, enabling sites to enforce rate limits and access controls on bots without identifying individual operators. Decouples 'is this a legitimate bot' from 'which bot is this,' preserving privacy while preventing abuse.",
+     "https://datatracker.ietf.org/doc/draft-rescorla-anonymous-webbotauth/",
+     "IETF (WebBotAuth WG)",
+     "Revision -00, Apr 7 2026; authors: Eric Rescorla (Independent), Richard L. Barnes (Cisco). Proposes the privacy-preserving counterpart to the httpsig identity approach — the WG will need to decide where the identity/anonymity balance lies."),
+
     ("Charter: AI Preferences WG (charter-ietf-aipref-01)",
      "The formal IETF charter for the AIPREF WG, standardizing vocabulary and protocol mechanisms (e.g., extending the Robots Exclusion Protocol and HTTP headers) for content owners to express preferences about AI training, deployment, and use of their content.",
      "https://datatracker.ietf.org/doc/charter-ietf-aipref/01/",
@@ -110,6 +140,30 @@ draft_rows = [
      "https://datatracker.ietf.org/doc/draft-king-dawn-requirements/01/",
      "IETF (individual)",
      "Revision -01, April 2026; intentionally NOT a protocol — sits one layer below auth. Authentication and authorization of discovered entities are out of scope, but DAWN discovery happens *before* auth/authz can begin."),
+
+    ("draft-farrel-dawn-terminology — Terminology for the Discovery of Agents, Workloads, and Named Entities (DAWN)",
+     "Establishes standardized vocabulary across DAWN specifications: agents, workloads, named entities, capabilities, discovery processes, and registration functions. Defines the entities-to-be-discovered and the properties discovery must convey, without specifying protocol mechanics.",
+     "https://datatracker.ietf.org/doc/draft-farrel-dawn-terminology/",
+     "IETF (individual)",
+     "Revision -03, Jul 5 2026; authors: Adrian Farrel (Old Dog Consulting), Kehan Yao (China Mobile), Roland Schott (Deutsche Telekom), Nic Williams (Infoblox). At rev 03 the most mature DAWN document after the requirements draft; Farrel/Williams authorship signals serious WG momentum. IETF 126 (Bangkok, Jul 2026) has DAWN BoF time."),
+
+    ("draft-akhavain-moussa-dawn-problem-statement — Problem Statement for the Discovery of Agents, Workloads, and Named Entities (DAWN)",
+     "Articulates cross-domain discovery challenges for the DAWN problem space: scalability across administrative boundaries, trust in discovered information, and the absence of a unified discovery model for heterogeneous AI agents and workloads. Establishes functional requirements that protocol proposals must satisfy.",
+     "https://datatracker.ietf.org/doc/draft-akhavain-moussa-dawn-problem-statement/",
+     "IETF (individual)",
+     "Revision -04, Jun 12 2026; authors: Arashmid Akhavain, Hesham Moussa (Huawei Canada), Daniel King (Old Dog Consulting). King co-authorship ties this to draft-king-dawn-requirements already in corpus; together they are the two foundational DAWN framing documents."),
+
+    ("draft-moussa-dawn-gap-analysis — Gap Analysis and Applicability Statement for Discovery Protocols of DAWN",
+     "Evaluates DNS, mDNS/DNS-SD, SSDP/UPnP, and other existing discovery protocols against DAWN requirements, identifying security gaps (no agent-specific trust model), privacy gaps (broadcast exposure), and applicability limits (local-scope vs. global cross-domain scenarios); proposes hybrid patterns and mitigations.",
+     "https://datatracker.ietf.org/doc/draft-moussa-dawn-gap-analysis/",
+     "IETF (individual)",
+     "Revision -01, Jun 12 2026; authors: Hesham Moussa, Arashmid Akhavain (Huawei Canada). Directly informs which existing protocol building blocks DAWN can reuse vs. what must be specified fresh. Key input for understanding why a new WG is needed rather than profiling DNS or mDNS."),
+
+    ("draft-jimenez-dawn-discovery-landscape — A Survey of AI Agent Discovery Mechanisms",
+     "Surveys discovery mechanisms across standardization bodies and open-source projects (MCP, A2A, robots.txt, Well-Known URIs, registry services), comparing approaches by model, scope, and semantic capability, and identifying remaining standardization gaps that DAWN must address.",
+     "https://datatracker.ietf.org/doc/draft-jimenez-dawn-discovery-landscape/",
+     "IETF (individual)",
+     "Revision -00, Jul 3 2026; authors: Jaime Jimenez, Jim Feng, Jari Arkko, Mirja Kühlewind, Rajat Kandoi (all Ericsson). Kühlewind co-authorship (same as kuehlewind-audit-architecture in corpus) is notable — the audit architecture team is tracking the discovery space. Useful as the landscape reference for the boundaries analysis."),
 
     # ---- WG drafts (more weight, closer to standardization) ----
     ("draft-ietf-oauth-v2-1 — The OAuth 2.1 Authorization Framework",
@@ -420,6 +474,24 @@ draft_rows = [
      "IETF (individual)",
      "Revision -00, 18 Jun 2026; author: Chris Hood (Nomotic). Extends the AGTP family (draft-hood-independent-agtp in corpus). The trustManifest identity alignment is the piece relevant to the agent identity thread; the rest is transport-layer plumbing for AGTP deployments."),
 
+    ("draft-hood-agtp-api — AGTP-API: Verbs, Paths, Endpoints, and Synthesis",
+     "Establishes the full application-layer contract for AGTP agent–server interactions: approved method catalog, path grammar, endpoint primitives, semantic metadata blocks, server manifests, and runtime contract negotiation substrate. Defines how agents and servers negotiate capabilities and authority before action methods are invoked.",
+     "https://datatracker.ietf.org/doc/draft-hood-agtp-api/",
+     "IETF (individual)",
+     "Revision -01, May 26 2026; author: Chris Hood (Nomotic). The normative protocol contract layer for AGTP, complementing draft-hood-independent-agtp (transport) and draft-hood-agtp-trust (trust model). The AGTP family now spans 18 drafts; this is the API-layer anchor."),
+
+    ("draft-hood-agtp-trust — AGTP Trust and Verification Specification",
+     "Defines AGTP's three-tier trust model (Tier 1 Verified / Tier 2 Org-Asserted / Tier 3 Experimental) and a continuous behavioral trust score (0.0–1.0) used by infrastructure components for runtime trust-aware routing. Standardizes the evidence substrate, score format, freshness requirements, and consumer-side evaluation rules without mandating the scoring algorithm.",
+     "https://datatracker.ietf.org/doc/draft-hood-agtp-trust/",
+     "IETF (individual)",
+     "Revision -02, Jun 28 2026; author: Chris Hood (Nomotic). The continuous 0.0–1.0 trust score model contrasts with draft-sharif-attp's discrete L0–L4 levels and Larry Lewis's atp-core continuous scoring — three independent designs in the same design space."),
+
+    ("draft-hood-agtp-agent-cert — AGTP Agent Certificate Extension",
+     "Specifies an X.509 v3 extension that cryptographically binds AGTP agent identity headers to TLS mutual authentication, enabling infrastructure components (Scope-Enforcement Points, load balancers, governance gateways) to verify agent identity at the network layer without application-layer access. Includes session-level revocation via AGTP NOTIFY broadcast.",
+     "https://datatracker.ietf.org/doc/draft-hood-agtp-agent-cert/",
+     "IETF (individual)",
+     "Revision -03, Jun 28 2026; author: Chris Hood (Nomotic). The PKI-binding companion to the AGTP identity model; positions AGTP agent identity within existing X.509 / TLS infrastructure. Relevant to WebBotAuth comparison — both use PKI for bot/agent identity but at different layers."),
+
     ("draft-jernalczyk-intentweb-agent-manifest — IntentWeb AgentManifest",
      "Defines a JSON document that websites publish to describe identity, trusted knowledge, agent-facing capabilities, structured bindings, risk levels, consent requirements, authentication expectations, audit rules, and policies — enabling AI agents to comprehend website functionality and safely perform actions without scraping or fragile UI automation.",
      "https://datatracker.ietf.org/doc/draft-jernalczyk-intentweb-agent-manifest/",
@@ -427,6 +499,12 @@ draft_rows = [
      "Revision -00, 6 Jul 2026; author: Mariusz Jernalczyk (IntentWeb). Website-side complement to agent identity drafts; sits in the Discovery & Transport cluster alongside draft-hood-agtp-ard and the DAWN/.well-known discovery thread. Single author, no-affiliation submission — early stage but addresses a real discovery gap."),
 
     # ---- Individual drafts: Security Requirements / Frameworks cluster ----
+    ("draft-fane-opena2a-aap — OpenA2A Agent Authorization Protocol (AAP)",
+     "Establishes authorization mechanisms for AI agent systems through cryptographic identity assertions and scoped capability grants. Introduces a broker layer that separates credentials from the agent's reasoning context, specifically to prevent prompt injection attacks from leaking authorization state while enabling cross-agent delegation.",
+     "https://datatracker.ietf.org/doc/draft-fane-opena2a-aap/",
+     "IETF (individual)",
+     "Revision -00, Jul 6 2026; author: Abdel Fane (OpenA2A). Filed Jul 6 alongside a companion draft-fane-opena2a-aip which adds a fourth 'AIP' name collision to the existing Singla/Prakash/aip-agent-identity-protocol triple. The AAP authorization layer is the piece most relevant to OAuth boundary analysis."),
+
     ("draft-ni-a2a-ai-agent-security-requirements — Security Requirements for AI Agents",
      "An IETF individual draft enumerating security requirements for AI agents, covering identity, authorization chaining across domains, and integration points with WIMSE, OAuth identity chaining, and the A2A OAuth profile.",
      "https://datatracker.ietf.org/doc/draft-ni-a2a-ai-agent-security-requirements/",
@@ -627,6 +705,36 @@ draft_rows = [
      "https://datatracker.ietf.org/doc/draft-jiang-intent-security/",
      "IETF (individual)",
      "Revision -03, 22 Jun 2026; authors: Yuning Jiang, Lun Li, Yurong Song, Faye Liu (Huawei). The threat-model companion to draft-jiang-oauth-intent-admission from the same group; likely intended to inform the broader IETF agentic AI security discussion."),
+
+    ("draft-li-dmsc-macp — Multi-agent Collaboration Protocol Suites Architecture",
+     "Defines a protocol suite and architectural framework for secure, scalable multi-agent collaboration covering trusted agent onboarding, capability-based discovery, distributed capability synchronization, and secure agent-to-agent interaction. Specifies a gateway-centric architecture where an Agent Gateway mediates capability negotiation and trust establishment between collaborating agents.",
+     "https://datatracker.ietf.org/doc/draft-li-dmsc-macp/",
+     "IETF (individual)",
+     "Revision -05, 26 May 2026; active (expires Nov 2026); authors: Xueting Li (China Telecom), Bing Liu (Huawei), Jun Liu (Beijing U of Posts & Telecom), Chenguang Du (Tsinghua), Lianhua Zhang (AsiaInfo). Replaces draft-li-dmsc-mcps-agw. Anchors a DMSC family of companion drafts covering intent-based interconnection, task protocol, gateway directory sync, semantic interaction, and gateway requirements. No explicit OAuth or WIMSE dependencies — operates at the agent coordination layer above transport, below authorization."),
+
+    ("draft-li-dmsc-inf-architecture — Dynamic Multi-agent Secured Collaboration Infrastructure Architecture",
+     "Approaches DMSC from the network-infrastructure perspective: proposes capability-based forwarding and semantic routing at the network layer, where agent capability metadata influences packet-forwarding decisions rather than routing based solely on addresses. The most mature DMSC document at rev 07; predates and informs the MACP architecture draft.",
+     "https://datatracker.ietf.org/doc/draft-li-dmsc-inf-architecture/",
+     "IETF (individual)",
+     "Revision -07, May 22 2026; authors: Xueting Li (China Telecom), Aijun Wang (China Telecom), Bing Liu (Huawei), Changwang Lin (New H3C). Infrastructure-layer complement to draft-li-dmsc-macp (protocol suite). The DMSC family now has 14+ companion drafts from Chinese telecom/academic groups — this is the architectural anchor."),
+
+    ("draft-sz-dmsc-iaip — Intent-based Agent Interconnection Protocol at Agent Gateway",
+     "Defines semantic capability advertisement and intent-driven routing at DMSC agent gateways: agents publish capability profiles in a structured format and the gateway matches incoming task intents to available agents, replacing fixed-address routing with dynamic semantic matching. The core routing-layer protocol for DMSC inter-agent communication.",
+     "https://datatracker.ietf.org/doc/draft-sz-dmsc-iaip/",
+     "IETF (individual)",
+     "Revision -02, May 2026; authors: Sheng Sun, Xinyi Zhang (CAS/CNIC), Qiangzhou Gao (Huawei), Min Liu, Yuwei Wang (ICT, CAS). The intent-based routing mechanism that distinguishes DMSC from address-based protocols; relevant to the DAWN boundary question — DMSC embeds discovery in the gateway routing layer rather than treating it as a separate protocol."),
+
+    ("draft-yang-dmsc-ioa-task-protocol — Internet of Agents Task Protocol for Heterogeneous Agent Collaboration",
+     "Establishes a session and task coordination layer with finite-state-machine-based dialogue management, dynamic team assembly, and nested team hierarchies for distributed heterogeneous agent collaboration. Addresses the multi-agent task lifecycle from assignment through completion and audit across heterogeneous agent implementations.",
+     "https://datatracker.ietf.org/doc/draft-yang-dmsc-ioa-task-protocol/",
+     "IETF (individual)",
+     "Revision -03, Apr 21 2026; authors: Cheng Yang (BUPT), Zhiyuan Liu (Tsinghua), Aijun Wang (China Telecom). The task-coordination layer above the DMSC gateway routing; covers multi-domain and 6G/ITS scenarios. Distinct from OAuth-layer delegation in that it orchestrates task state rather than token issuance."),
+
+    ("draft-dunbar-dmsc-gw-scenarios-gap-analysis — Deployment Scenarios and Gap Analysis for AI Agent Gateway",
+     "Surveys single-domain to multi-domain deployment scenarios for AI Agent Gateways and identifies concrete gaps where existing protocols (specifically MCP and Google's A2A) cannot satisfy governance, policy enforcement, and cross-organizational trust requirements — particularly in regulated financial services and telecom environments.",
+     "https://datatracker.ietf.org/doc/draft-dunbar-dmsc-gw-scenarios-gap-analysis/",
+     "IETF (individual)",
+     "Revision -02, Jul 2 2026; authors: Linda Dunbar (Futurewei), YiFei Wang (China Telecom), Bing Liu (Huawei). The most directly useful DMSC document for the boundary analysis: explicitly names MCP and A2A as insufficient and articulates where the DMSC gateway fills the gap. The regulated-environment focus (financial services, telco) distinguishes DMSC's use-case target from OAuth-centric approaches."),
 
     ("draft-somoza-dmsc-atn-agent-trust-negotiation — Agent Trust Negotiation: Capability, Delegation, and Provenance Binding",
      "Specifies the Agent Trust Negotiation (ATN) protocol, which binds four artifacts — capability manifests, delegation chains, provenance attestations, and session receipts — to agent identities via a handshake state machine producing mutually verified, scope-bounded sessions with SCITT-suitable audit records.",
