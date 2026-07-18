@@ -13,7 +13,7 @@ A living bibliography and knowledge graph tracking IETF, OIDF, academic, and ind
 |------|-------------|
 | [IETF Cluster Analysis](https://gffletch.github.io/da_research/ietf_cluster_analysis.html) | Interactive map of 9 consolidation clusters across 131 Active IETF Drafts — color-coded by WG status, expandable per-cluster draft lists |
 | [Protocol Boundary Map](https://gffletch.github.io/da_research/protocol_boundary_map.html) | One proposal for clean boundaries between DMSC, AgentProtocol, DAWN, WIMSE, OAuth, and WebBotAuth — click-to-expand layers, light/dark theme |
-| [Knowledge Graph](https://gffletch.github.io/da_research/agent_authz_graph.html) | D3 force-directed graph of 74 nodes and 116 edges across the corpus (note: graph lags the workbook — see below) |
+| [Knowledge Graph](https://gffletch.github.io/da_research/agent_authz_graph.html) | Outdated: D3 force-directed graph of 74 nodes and 116 edges across the corpus (note: graph lags the workbook — see below) |
 
 ---
 
