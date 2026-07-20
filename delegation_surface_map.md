@@ -1,4 +1,4 @@
-Delegation Surface Map: Where "Delegation" Is Being Defined Across the Corpus
+# Delegation Surface Map: Where "Delegation" Is Being Defined Across the Corpus
 
 **Date:** 2026-07-20
 **Corpus:** 191 sources; 131 Active IETF Drafts
