@@ -30,7 +30,7 @@ The corpus covers six overlapping protocol families currently active in the IETF
 
 The bibliography also covers Published RFCs, OpenID Foundation specs (AuthZEN, FAPI, CAEP/SSF), Other Standards & Government (Kantara, W3C, NIST, EU AI Act), Academic Papers, and Industry & Implementations.
 
-The [protocol boundaries analysis](protocol_boundaries_analysis.md) proposes clean ownership boundaries for each layer and documents the four open boundary tensions: discovery (DAWN vs. DMSC gateway vs. AGTP DISCOVER), web-facing identity (WebBotAuth vs. WIMSE mTLS), OAuth scope vs. AGTP authority scope, and DMSC governance vs. OAuth authorization.
+The [protocol boundaries analysis](protocol_boundaries_analysis.md) proposes clean ownership boundaries for each layer and documents the four open boundary tensions: discovery (DAWN vs. DMSC gateway vs. AGTP DISCOVER), web-facing identity (WebBotAuth vs. WIMSE mTLS), OAuth scope vs. AGTP authority scope, and DMSC governance vs. OAuth authorization. The companion [delegation surface map](delegation_surface_map.md) cuts across all six layers to enumerate the 15 distinct semantic models of "delegation" currently in flight across the corpus, how they compose (or conflict), and where the AUDIT BoF charter risks inadvertently becoming a 16th.
 
 ---
 
@@ -59,6 +59,7 @@ The [protocol boundaries analysis](protocol_boundaries_analysis.md) proposes cle
 |------|-------------|
 | `consolidation_analysis.md` | Full 9-cluster analysis: which drafts overlap, what the consolidation pressure looks like per cluster. |
 | `protocol_boundaries_analysis.md` | Proposed layer boundaries for the six protocol families; 4 open boundary tensions documented. |
+| `delegation_surface_map.md` | Cross-cutting analysis of how "delegation" is being defined across the corpus — 15 distinct semantic models across 4 categories (OAuth mechanics, OAuth semantics, non-OAuth surfaces, cross-cutting concerns), composition patterns, and a detailed AUDIT BoF charter analysis flagging where observer-vs-arbiter posture drift could create a 16th definitional surface. Companion to `protocol_boundaries_analysis.md`. |
 
 ### Build scripts
 
