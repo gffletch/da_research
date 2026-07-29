@@ -145,13 +145,13 @@ draft_rows = [
      "Establishes standardized vocabulary across DAWN specifications: agents, workloads, named entities, capabilities, discovery processes, and registration functions. Defines the entities-to-be-discovered and the properties discovery must convey, without specifying protocol mechanics.",
      "https://datatracker.ietf.org/doc/draft-farrel-dawn-terminology/",
      "IETF (individual)",
-     "Revision -03, Jul 5 2026; authors: Adrian Farrel (Old Dog Consulting), Kehan Yao (China Mobile), Roland Schott (Deutsche Telekom), Nic Williams (Infoblox). At rev 03 the most mature DAWN document after the requirements draft; Farrel/Williams authorship signals serious WG momentum. IETF 126 (Bangkok, Jul 2026) has DAWN BoF time."),
+     "Revision -04, Jul 26 2026; authors: Adrian Farrel (Old Dog Consulting), Kehan Yao (China Mobile), Roland Schott (Deutsche Telekom), Nic Williams (Infoblox). Updated immediately ahead of IETF 126 DAWN BoF. At rev 04 the most mature DAWN document after the requirements draft; Farrel/Williams authorship signals serious WG momentum."),
 
     ("draft-akhavain-moussa-dawn-problem-statement — Problem Statement for the Discovery of Agents, Workloads, and Named Entities (DAWN)",
      "Articulates cross-domain discovery challenges for the DAWN problem space: scalability across administrative boundaries, trust in discovered information, and the absence of a unified discovery model for heterogeneous AI agents and workloads. Establishes functional requirements that protocol proposals must satisfy.",
      "https://datatracker.ietf.org/doc/draft-akhavain-moussa-dawn-problem-statement/",
      "IETF (individual)",
-     "Revision -04, Jun 12 2026; authors: Arashmid Akhavain, Hesham Moussa (Huawei Canada), Daniel King (Old Dog Consulting). King co-authorship ties this to draft-king-dawn-requirements already in corpus; together they are the two foundational DAWN framing documents."),
+     "Revision -05, Jul 19 2026; authors: Arashmid Akhavain, Hesham Moussa (Huawei Canada), Daniel King (Old Dog Consulting). King co-authorship ties this to draft-king-dawn-requirements already in corpus; together they are the two foundational DAWN framing documents. Updated ahead of IETF 126 DAWN BoF."),
 
     ("draft-moussa-dawn-gap-analysis — Gap Analysis and Applicability Statement for Discovery Protocols of DAWN",
      "Evaluates DNS, mDNS/DNS-SD, SSDP/UPnP, and other existing discovery protocols against DAWN requirements, identifying security gaps (no agent-specific trust model), privacy gaps (broadcast exposure), and applicability limits (local-scope vs. global cross-domain scenarios); proposes hybrid patterns and mitigations.",
@@ -176,13 +176,19 @@ draft_rows = [
      "An IETF WG draft that defines how to preserve identity and authorization context across trust domains by combining RFC 8693 token exchange with RFC 7521/7523 JWT assertions.",
      "https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-chaining/",
      "IETF (OAuth WG)",
-     "IESG-approved; currently in RFC Editor queue (status: Waiting on Authors — outstanding SECDIR 'Has issues' and OPSDIR 'Not ready' flags unresolved; no RFC number assigned yet as of Jul 2026). The canonical multi-domain delegation pattern referenced by most agent and zero-trust drafts."),
+     "Revision -17, Jul 22 2026 — rapid iteration signal heading into IETF 126. Previously IESG-approved and in RFC Editor queue; no RFC number assigned yet as of Jul 2026. The canonical multi-domain delegation pattern referenced by most agent and zero-trust drafts."),
 
     ("draft-ietf-oauth-identity-assertion-authz-grant — Identity Assertion JWT Authorization Grant (ID-JAG)",
      "An IETF WG draft (Parecki/McGuinness/Campbell) defining how an app uses an identity assertion to obtain an access token for a third-party API by coordinating through a shared enterprise IdP.",
      "https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-assertion-authz-grant/",
      "IETF (OAuth WG)",
      "Revision -03, April 2026; the cross-IdP SSO-to-API bridge that the McGuinness Actor Profile draft layers on top of, and that WorkOS's auth.md uses as one of its three discovery flows."),
+
+    ("draft-sharma-oauth-identity-propagation-context — Identity Propagation Context for Multi-Hop Delegation in OAuth 2.0",
+     "Defines a signed JSON Identity Propagation Context (IPC) that carries per-hop cryptographic re-signing of delegation chain metadata at trust boundaries, complementing RFC 8693 Token Exchange by enabling identity propagation through multi-service chains without requiring a Security Token Service interaction at every hop.",
+     "https://datatracker.ietf.org/doc/draft-sharma-oauth-identity-propagation-context/",
+     "IETF (individual)",
+     "Revision -01, Jul 23 2026 (first filed -00 Jul 23 2026); author: Sharma. Cluster B (cross-domain identity chaining) companion to draft-ietf-oauth-identity-chaining. HTTP, gRPC, and Kafka protocol bindings specified — the first explicit event-streaming protocol binding in this family. The per-hop re-signing model is a structural alternative to token-based chains, trading token bloat for per-hop cryptographic commitment."),
 
     ("draft-ietf-oauth-transaction-tokens — Transaction Tokens (Txn-Tokens)",
      "An IETF WG draft defining short-lived signed JWTs that propagate immutable user identity and authorization context through internal call chains within a trust domain.",
@@ -377,6 +383,12 @@ draft_rows = [
      "IETF (individual)",
      "Revision -00, 6 April 2026; more gap-analysis than protocol spec. Useful as problem statement. Five-layer model is a reasonable decomposition but insufficient as a standalone contribution. Part of the Sharif cluster (with -agent-audit-trail, -attp, etc.)."),
 
+    ("draft-sharif-x509-agent-identity-profile — X.509 Certificate Profile for Autonomous AI Agent Identity",
+     "Defines a new X.509v3 AgentIdentity extension encoding graduated trust levels (0–4), operational capabilities, delegation constraints, and revocation endpoints for autonomous AI agent certificates. Maintains backward compatibility with standard X.509v3 parsers (extension marked non-critical) and integrates with SPIFFE workload identity frameworks.",
+     "https://datatracker.ietf.org/doc/draft-sharif-x509-agent-identity-profile/",
+     "IETF (individual)",
+     "Revision -02, Jul 26 2026 (first filed Jul 20 2026); part of the Sharif cluster. Fills the PKI-layer identity gap that draft-ietf-wimse-workload-creds left open — workload-creds specifies credential issuance, this profiles X.509v3 for the agent-specific certificate case. Graduated trust taxonomy (0–4) and kill-switch revocation are referenced by draft-sweeney-wimse-credential-delegation."),
+
     ("draft-aip-agent-identity-protocol — AIP: Agentic Authentication and Authorized Policy Enforcement",
      "An IETF individual draft defining an AIP Token signed per tool call (agent ID, tool, nonce, timestamp, signature), an AgentPolicy YAML format for per-tool argument constraints and DLP rules, and a Human-in-the-Loop proxy enforcement model.",
      "https://datatracker.ietf.org/doc/draft-aip-agent-identity-protocol/",
@@ -399,13 +411,19 @@ draft_rows = [
      "Introduces a Delegation Handle — a sender-constrained, audience-locked JWT issued by authorization servers — enabling acting clients to refresh chained access tokens without re-prompting an offline end user while maintaining strict policy bounds and identity chains.",
      "https://datatracker.ietf.org/doc/draft-zhu-oauth-async-delegation/",
      "IETF (individual)",
-     "Revision -00, 22 May 2026; authors: Larry Zhu, Sam Currie (Atlassian). Addresses a concrete gap in agent delegation: what happens when the delegating human is not present to re-authorize. Directly relevant to long-running agentic workflows using draft-ietf-oauth-identity-chaining."),
+     "Revision -04, Jul 23 2026 (first filed -00, 22 May 2026); authors: Larry Zhu, Sam Currie (Atlassian). Addresses a concrete gap in agent delegation: what happens when the delegating human is not present to re-authorize. Directly relevant to long-running agentic workflows using draft-ietf-oauth-identity-chaining. Active revision pace — -04 within ~2 months of initial filing."),
 
     ("draft-emerson-oauth-user-mediated-delivery — User-Mediated Credential Delivery for AI Agents",
      "Proposes user-mediated credential delivery as a complementary OAuth authorization primitive for AI agent frameworks: rather than delivering credentials through automated channels controlled by the agent or its platform, places the authorization decision and credential delivery step in the user's hands even when the agent is autonomous.",
      "https://datatracker.ietf.org/doc/draft-emerson-oauth-user-mediated-delivery/",
      "IETF (individual)",
      "Revision -00, Jul 2026; author: Matt Emerson. Novel complement to draft-zhu-oauth-async-delegation — where Zhu handles the case of offline delegation continuation, Emerson argues some credential deliveries should always route through the user even in automated pipelines. Addresses prompt-injection and social-engineering risks in agent credential chains."),
+
+    ("draft-gerber-oauth-deferred-token-response — Deferred Token Response",
+     "Defines an OAuth 2.1 extension enabling authorization servers to defer access-token issuance by returning a deferral code the client polls or receives via callback; designed for use cases including fraud review, identity verification, autonomous agent approvals, and enterprise governance workflows where immediate token issuance is not appropriate.",
+     "https://datatracker.ietf.org/doc/draft-gerber-oauth-deferred-token-response/",
+     "IETF (individual)",
+     "Revision -00, Jun 23 2026; presented at IETF 126 OAuth WG. May be the closest current Datatracker analog to the still-pending draft-mcguinness-oauth-deferred-code-processing — note in comments if the McGuinness variant eventually files, as the two may need consolidation. The async issuance pattern directly enables human-approval workflows in agentic pipelines without requiring the agent to remain connected while awaiting the authorization decision."),
 
     ("draft-chen-oauth-agent-revocation — OAuth 2.0 Agent Authorization Explicit Revocation",
      "Extends RFC 7009 token revocation for agent-based scenarios: introduces batch revocation by agent ID, cascading revocation across delegation chains, conditional revocation options, and verifiable audit trails.",
@@ -527,13 +545,19 @@ draft_rows = [
      "Establishes authorization mechanisms for AI agent systems through cryptographic identity assertions and scoped capability grants. Introduces a broker layer that separates credentials from the agent's reasoning context, specifically to prevent prompt injection attacks from leaking authorization state while enabling cross-agent delegation.",
      "https://datatracker.ietf.org/doc/draft-fane-opena2a-aap/",
      "IETF (individual)",
-     "Revision -00, Jul 6 2026; author: Abdel Fane (OpenA2A). Filed Jul 6 alongside a companion draft-fane-opena2a-aip which adds a fourth 'AIP' name collision to the existing Singla/Prakash/aip-agent-identity-protocol triple. The AAP authorization layer is the piece most relevant to OAuth boundary analysis."),
+     "Revision -01, Jul 22 2026 (first filed -00 Jul 6 2026); author: Abdel Fane (OpenA2A). Companion draft-fane-opena2a-aip also updated to -01 Jul 22, adding a fourth 'AIP' name collision to the existing Singla/Prakash/aip-agent-identity-protocol triple. The AAP authorization layer is the piece most relevant to OAuth boundary analysis."),
 
     ("draft-ni-a2a-ai-agent-security-requirements — Security Requirements for AI Agents",
      "An IETF individual draft enumerating security requirements for AI agents, covering identity, authorization chaining across domains, and integration points with WIMSE, OAuth identity chaining, and the A2A OAuth profile.",
      "https://datatracker.ietf.org/doc/draft-ni-a2a-ai-agent-security-requirements/",
      "IETF (individual)",
      "Revision -01, February 2026; essential scaffolding for an eventual AI-agent WG. Well-connected to existing IETF work and authored by Ni and Liu, who also lead the WIMSE AI-agent identity draft."),
+
+    ("draft-chapman-a2a-mls — End-to-End Encryption and Purpose-Bound Governance for Agent-to-Agent Messaging",
+     "Extends the Agent2Agent (A2A) protocol with message-level E2E confidentiality using MLS (Messaging Layer Security); defines a Governed Object signed message envelope carrying semantic type, payload, purpose declaration, and expiry; mandates receiver-side processing rules enforcing declared purposes and rejecting expired or replayed messages.",
+     "https://datatracker.ietf.org/doc/draft-chapman-a2a-mls/",
+     "IETF (individual)",
+     "Revision -00, Jul 28 2026; author: Chapman. Adds the transport-security and semantic-governance layer the A2A protocol family was missing. MLS binding anchors agent identity to Ed25519 did:key DIDs. The Governed Object envelope's purpose-declaration mechanism directly addresses the intent-drift threat identified in draft-jiang-intent-security (corpus). Likely to be referenced by other A2A family drafts as the baseline confidentiality profile."),
 
     ("draft-rosenberg-aiproto-framework — Framework, Use Cases and Requirements for AI Agent Protocols",
      "An IETF individual draft providing a comprehensive AI-agent communications framework that covers user↔agent, agent↔API, and agent↔agent interactions; surveys MCP, A2A, and Agntcy; and sets the stage for IETF standards activity.",
@@ -645,6 +669,18 @@ draft_rows = [
      "IETF (individual)",
      "Revision -01, 6 Jul 2026; author: WinMagic. Extends the WIMSE credential model with posture-conditioned validity — distinct from time-bounded credentials in that security policy changes at the hardware/attestation layer instantly invalidate the credential. Bridges the RATS attestation thread and the WIMSE identity thread in the corpus."),
 
+    ("draft-rampalli-pedigree — PEDIGREE: Per-Hop Cryptographic Delegation for Workload and AI Agent Identity",
+     "Extends SPIFFE workload identity with cryptographic per-hop delegation using monotonic scope attenuation enforced at mint and verify; uses Cedar-policy mandates with static-analysis proofs and parent-token re-verification to detect parent-swap attacks. Defines an Operator Ceiling binding all sub-agent authority to the parent's declared mandate.",
+     "https://datatracker.ietf.org/doc/draft-rampalli-pedigree/",
+     "IETF (individual)",
+     "Revision -00, Apr 25 2026; author: Karthik Rampalli (Glyphzero, Inc.) — same author as draft-rampalli-cross-org-delegation-mapping and draft-rampalli-scitt-capsule-provenance-binding (both in corpus). Presented at WIMSE WG as proposed new work at IETF 126 (Bangkok, Jul 2026). Cedar-policy static-analysis attenuation proofs are a unique contribution relative to other delegation-chain drafts. Note: draft-rampalli-cross-org-delegation-mapping (corpus) references the 'PEDIGREE model' — this is the normative definition."),
+
+    ("draft-sweeney-wimse-credential-delegation — Credential Delegation Protocol for AI Agents in Multi-System Environments",
+     "Composes RFC 8693 Token Exchange, RFC 9449 DPoP, RFC 9396 Rich Authorization Requests, and OpenID Connect CIBA into a unified delegation flow for autonomous AI agents accessing protected resources across providers; introduces ephemeral agent identities via did:key, capability-shaped attenuated delegation tokens, credential wrapping preventing raw OAuth tokens from reaching agents, synchronous revocation cascading, and tamper-evident audit chains.",
+     "https://datatracker.ietf.org/doc/draft-sweeney-wimse-credential-delegation/",
+     "IETF (individual)",
+     "Revision -00, Jul 28 2026; author: Sweeney. Explicitly designed as a WIMSE companion, citing draft-klrc-aiagent-auth as its target framework. The widest synthesis of OAuth primitives in the WIMSE extension cluster — DPoP + RAR + CIBA + Token Exchange in one flow. The credential-wrapping model (raw tokens never reach the agent) directly addresses the secret-exposure threat formalized in arXiv:2604.24920 (SUDP paper, now in corpus)."),
+
     # ---- Individual drafts: SCITT / Audit profiles cluster ----
     ("draft-munoz-scitt-permit-profile — A SCITT Profile for Pre-Execution AI Action Authorization Records",
      "SCITT profile for the Pre-Execution Authorization Record (Permit), documenting policy-evaluated decisions before AI agent action dispatch with cryptographic binding proving 'authorized request equals dispatched request.' Composes with adjacent profiles for human-authority binding, post-execution evidence, and content-refusal events via referencing mechanisms.",
@@ -709,7 +745,7 @@ draft_rows = [
      "Defines the EMILIA Protocol (EP) authorization receipt — a COSE_Sign1 artifact that cryptographically binds a named human principal to a specific high-risk agent action before execution, providing auditors and counterparties a tamper-evident record that a real human authorized the consequential step.",
      "https://datatracker.ietf.org/doc/draft-schrock-ep-authorization-receipts/",
      "IETF (individual)",
-     "Revision -06, Jul 2026. The base artifact for the EMILIA Protocol family; companion drafts draft-schrock-ep-authorization-evidence-chain, draft-schrock-ep-action-evidence-graph, draft-schrock-ep-quorum, and draft-schrock-ep-evidence-record all build on or reference this receipt format. Rev-06 indicates active iteration. Draft-rampalli-cross-org-delegation-mapping (corpus) formally maps EMILIA Protocol receipts against the nine reece-wimse-cross-org-delegation requirements."),
+     "Revision -08, Jul 21 2026. The base artifact for the EMILIA Protocol family; companion drafts draft-schrock-ep-authorization-evidence-chain, draft-schrock-ep-action-evidence-graph, draft-schrock-ep-quorum, and draft-schrock-ep-evidence-record all build on or reference this receipt format. Active iteration pace — -08 by late Jul 2026. Draft-rampalli-cross-org-delegation-mapping (corpus) formally maps EMILIA Protocol receipts against the nine reece-wimse-cross-org-delegation requirements."),
 
     ("draft-schrock-ep-action-evidence-graph — Action Evidence Graphs and Evidence Policy Replay for High-Risk Agent Actions (EP-AEG)",
      "Composes the full set of signed artifacts about an AI agent action — workload identity credentials, delegation tokens, transaction tokens, runtime attestation results, pre-execution policy permits, and EMILIA Protocol authorization receipts — into a single verifiable action evidence graph; defines evidence policy replay for auditing past actions against policy versions current at the time.",
@@ -734,6 +770,18 @@ draft_rows = [
      "https://datatracker.ietf.org/doc/draft-schrock-ep-evidence-record/",
      "IETF (individual)",
      "Revision -01, Jul 2026. The regulatory compliance layer for EMILIA Protocol; directly connects to the kuehlewind-audit-architecture HUB (corpus) requirement for audit evidence that survives algorithm sunset. The DORA/HIPAA/SEC citation grounds the spec in concrete regulatory obligations."),
+
+    ("draft-kumaresan-counter-sign — counter-sign: An Open Protocol for Agent-to-Human Authorization",
+     "Defines a protocol where agents sign intent objects for consequential actions and humans return cryptographic countersignatures (approve/reject); includes an Enrollment Registry binding actors to signing keys, quorum models for multi-approver scenarios, and tamper-evident receipt logs. Explicitly out of scope for agent-to-service auth — addresses the 'human approval cannot be forged after the fact' problem.",
+     "https://datatracker.ietf.org/doc/draft-kumaresan-counter-sign/",
+     "IETF (individual)",
+     "Revision -00, Jul 21 2026; author: Kumaresan. Human-countersignature model makes it a direct complement to the EMILIA Protocol family (schrock-ep-*) and to draft-sato-soos-hem (HEM) — EMILIA and HEM handle the pre-execution authorization decision, counter-sign handles the cryptographic non-repudiation that the human approval actually happened. The Enrollment Registry is analogous to WebBotAuth's Signature Agent Card registry but for human approvers."),
+
+    ("draft-thallapelly-oasnt — OASNT: Attested Action Authorization Tokens",
+     "Defines a JWS-based single-use, short-lived token binding a specific human-approved action to the exact rendered disclosure text the approver saw — 'What You See Is What You Sign' (WYSIWYG) — with optional binding to a concrete HTTP request. Requires hardware-resident secure element signature and device runtime integrity assessment.",
+     "https://datatracker.ietf.org/doc/draft-thallapelly-oasnt/",
+     "IETF (individual)",
+     "Revision -01, Jul 24 2026 (first filed Jul 21 2026); author: Thallapelly. Hardware-bound, WYSIWYG authorization token — distinct from software-only pre-action permit approaches such as draft-kumaresan-counter-sign (above) and the EMILIA Protocol family. The WYSIWYG disclosure binding addresses UI redress attacks where an agent's rendered action description differs from the actual HTTP request being authorized. Hardware PoP requirement makes this the highest-assurance pre-action permit in the current wave."),
 
     ("draft-tsyrulnikov-rats-attested-inference-receipt — Attested Inference Receipt (AIR): A COSE/CWT Profile for Confidential AI Inference",
      "Defines the Attested Inference Receipt (AIR), a COSE_Sign1 envelope carrying CWT claims profiled per the Entity Attestation Token (EAT) framework; an AIR receipt cryptographically binds model identity, input/output hashes, TEE attestation evidence, and operational telemetry into a single signed artifact verifiable by parties not present at inference time.",
@@ -793,7 +841,7 @@ draft_rows = [
      "Defines a protocol suite and architectural framework for secure, scalable multi-agent collaboration covering trusted agent onboarding, capability-based discovery, distributed capability synchronization, and secure agent-to-agent interaction. Specifies a gateway-centric architecture where an Agent Gateway mediates capability negotiation and trust establishment between collaborating agents.",
      "https://datatracker.ietf.org/doc/draft-li-dmsc-macp/",
      "IETF (individual)",
-     "Revision -05, 26 May 2026; active (expires Nov 2026); authors: Xueting Li (China Telecom), Bing Liu (Huawei), Jun Liu (Beijing U of Posts & Telecom), Chenguang Du (Tsinghua), Lianhua Zhang (AsiaInfo). Replaces draft-li-dmsc-mcps-agw. Anchors a DMSC family of companion drafts covering intent-based interconnection, task protocol, gateway directory sync, semantic interaction, and gateway requirements. No explicit OAuth or WIMSE dependencies — operates at the agent coordination layer above transport, below authorization."),
+     "Revision -06, Jul 20 2026; active; authors: Xueting Li (China Telecom), Bing Liu (Huawei), Jun Liu (Beijing U of Posts & Telecom), Chenguang Du (Tsinghua), Lianhua Zhang (AsiaInfo). Replaces draft-li-dmsc-mcps-agw. Anchors a DMSC family of companion drafts covering intent-based interconnection, task protocol, gateway directory sync, semantic interaction, and gateway requirements. No explicit OAuth or WIMSE dependencies — operates at the agent coordination layer above transport, below authorization."),
 
     ("draft-li-dmsc-inf-architecture — Dynamic Multi-agent Secured Collaboration Infrastructure Architecture",
      "Approaches DMSC from the network-infrastructure perspective: proposes capability-based forwarding and semantic routing at the network layer, where agent capability metadata influences packet-forwarding decisions rather than routing based solely on addresses. The most mature DMSC document at rev 07; predates and informs the MACP architecture draft.",
@@ -993,11 +1041,17 @@ other_rows = [
      "W3C",
      "Confidence Method and Rendering Methods exclusion periods ended 29 March 2026 — these are the v2.1 sibling specs to watch."),
 
-    ("NIST AI Agent Standards Initiative — Center for AI Standards and Innovation",
-     "A NIST initiative within the Center for AI Standards and Innovation aimed at accelerating adoption of software and AI-agent identity and authorization standards.",
-     "https://www.nist.gov/ai",
+    ("NIST NCCoE Concept Paper — Accelerating the Adoption of Software and AI Agent Identity and Authorization",
+     "US government concept paper proposing a National Cybersecurity Center of Excellence demonstration project for AI agent identity and authorization using OAuth 2.0, SPIFFE/SPIRE, and MCP; explicitly asks whether existing identity standards can serve AI agents without new standards and invites industry collaboration.",
+     "https://csrc.nist.gov/pubs/other/2026/02/05/accelerating-the-adoption-of-software-and-ai-agent/ipd",
      "NIST (US government)",
-     "February 2026 NCCoE concept paper on 'Accelerating the Adoption of Software and AI Agent Identity and Authorization' is the key entry point."),
+     "Published Feb 5 2026; public comment closed Mar 9 2026. First US government program explicitly addressing interoperability and security standards for agentic AI. Directly references OAuth 2.0, SPIFFE/SPIRE, and MCP — the same stack the IETF corpus is standardizing — as the candidate technology foundation."),
+
+    ("NSA Cybersecurity Information Sheet — MCP Security Design Considerations for AI-Driven Automation",
+     "17-page US government guidance on Model Context Protocol security risks and mitigations; identifies uncontrolled automated action escalation, lack of input screening, and overload attack susceptibility as primary risks; recommends filtering proxies and tight resource URL pinning beyond MCP's own documentation.",
+     "https://www.nsa.gov/Portals/75/documents/Cybersecurity/CSI_MCP_SECURITY.pdf",
+     "NSA (US government)",
+     "Published May 20 2026. NSA-tier imprimatur on MCP security; first US government guidance specifically on MCP. The risk categories (escalation, input screening gaps, overload) complement the IETF WebBotAuth and OAuth WG work that addresses the same attack surface from the standards side."),
 
     ("EU AI Act broader enforcement (high-risk AI systems audit trails, August 2026)",
      "EU regulation requiring auditable trails for high-risk AI systems, which in practice mandates the kind of cryptographic delegation chains being standardized in IETF agent drafts.",
@@ -1040,6 +1094,48 @@ academic_rows = [
      "https://doi.ieeecomputersociety.org/10.1109/CSF61375.2024.00002",
      "IEEE CSF (Academic conference)",
      "The proof underpinning FAPI 2.0's claim of being formally verified; the same authors now drive the OAuth Security Topics Update draft."),
+
+    ("Authorization Propagation in Multi-Agent AI Systems: Identity Governance as Infrastructure (Tallam, arXiv:2605.05440)",
+     "Formalizes 'authorization propagation' as a distinct multi-agent security problem irreducible to prompt injection or classical RBAC/ABAC/ReBAC; identifies transitive delegation, aggregation inference, and temporal validity as three distinct sub-problems; derives seven structural requirements for multi-agent authorization architectures.",
+     "https://arxiv.org/abs/2605.05440",
+     "arXiv",
+     "Published May 6 2026; author: Krti Tallam. The formal treatment maps directly onto the delegation-chain and audit-architecture cluster in the corpus. Introduces 'authorization propagation' as a term of art for the multi-hop delegation security problem that RFC 8693 and the Transaction Token family address at the protocol layer."),
+
+    ("Overlaying Governance: A Compositional Authorization Framework for Delegation and Scope in Agentic AI (Ibrahim & Li, arXiv:2606.03518)",
+     "Introduces a compositional operator that overlays agentic authorization semantics — recursive delegation chains, time-limited authority, resource scope attenuation — onto existing relational policies without rewriting them; treats scope attenuation as a first-class primitive bounding an agent's access envelope.",
+     "https://arxiv.org/abs/2606.03518",
+     "arXiv",
+     "Published Jun 2 2026; authors: Amjad Ibrahim, Yong Li. 'Resource scope attenuation' is the formal complement to what RAR-for-agents (draft-ietf-oauth-transaction-tokens) and the Mission-Bound OAuth series address at the protocol level. Provides the mathematical framing the IETF drafts reference but do not state."),
+
+    ("SkillScope: Toward Fine-Grained Least-Privilege Enforcement for Agent Skills (Wu et al., arXiv:2605.05868)",
+     "Uses graph-based static analysis to identify and constrain over-privileged agent skills (capability bundles packaging instructions and executable resources); validates against 68,312 real-world skills and finds 7,039 over-privileged; constrains over-privilege action instances by 88.56% while preserving task completion.",
+     "https://arxiv.org/abs/2605.05868",
+     "arXiv",
+     "Published May 7 2026; authors: Jiangrong Wu, Yuhong Nan, Yixi Lin, et al. Empirical least-privilege measurement at production scale — the quantitative evidence base the protocol-layer corpus is missing. Graph-static-analysis approach complements the token-attenuation drafts (niyikiza-oauth-attenuating-agent-tokens, rampalli-pedigree) which enforce attenuation at runtime; SkillScope enforces it pre-deployment."),
+
+    ("SUDP: Secret-Use Delegation Protocol for Agentic Systems (Yu et al., arXiv:2604.24920)",
+     "Formalizes the 'Agent Secret Use' problem — agents must cause user-authorized secret-backed operations without retaining reusable authority over those secrets — and proposes a three-role protocol (Requester, Authorizer, Custodian) with seven security properties covering authorization integrity and secret confidentiality.",
+     "https://arxiv.org/abs/2604.24920",
+     "arXiv",
+     "Published Apr 27 2026 (v3 May 22 2026); author: Xiaohang Yu et al. Directly formalizes the problem that draft-sweeney-wimse-credential-delegation's credential-wrapping mechanism (raw tokens never reach the agent) addresses at the protocol layer. SUDP is the formal proof that credential-wrapping is necessary; sweeney is a concrete protocol instantiation."),
+
+    ("Before the Tool Call: Deterministic Pre-Action Authorization for Autonomous AI Agents (arXiv:2603.20953)",
+     "Proposes Open Agent Passport (OAP), an open specification that intercepts tool calls synchronously before execution, evaluates them against a declarative policy, and produces cryptographically signed audit records; enforces authorization decisions at 53ms median latency.",
+     "https://arxiv.org/abs/2603.20953",
+     "arXiv",
+     "Published Mar 21 2026. Addresses the enforcement gap between token issuance and actual tool execution that OAuth alone cannot close — the protocol-layer corpus focuses on issuance-side mechanisms; OAP is the first empirically validated enforcement-side proposal with latency numbers. Complements draft-munoz-scitt-permit-profile (pre-execution permit) and the EMILIA Protocol family (post-execution receipts)."),
+
+    ("Open Challenges in Multi-Agent Security (de Witt et al., arXiv:2505.02077)",
+     "Introduces 'multi-agent security' as a new field distinct from AI safety and traditional cybersecurity; covers threats emerging from agent-to-agent interaction — secret collusion, coordinated swarm attacks, disinformation cascades, and evasion via dispersion; derives a unified research agenda across AI security, multi-agent learning, distributed systems, and governance.",
+     "https://arxiv.org/abs/2505.02077",
+     "arXiv",
+     "Published May 5 2025 (latest version Apr 29 2026); authors: Christian Schroeder de Witt + 23 co-authors (Oxford, DeepMind, MIT, others). 24-author collaboration is a strong legitimacy signal. The inter-agent trust threat model is directly relevant to the audit-architecture and delegation-chain clusters; provides the threat landscape that the IETF drafts respond to."),
+
+    ("Governing Dynamic Capabilities: Cryptographic Binding and Reproducibility Verification for AI Agent Tool Use (Zhou, arXiv:2603.14332)",
+     "Identifies the 'capability-identity gap' — agents acquire capabilities at runtime via MCP and A2A post-authorization, enabling silent capability escalation; proposes capability-bound agent certificates (X.509 v3 extensions with skills manifest hash), reproducibility commitments using LLM near-determinism, and a hash-linked verifiable interaction ledger.",
+     "https://arxiv.org/abs/2603.14332",
+     "arXiv",
+     "Published Mar 2026; author: Ziling Zhou (Genupixel Technology). The capability-identity gap concept is distinct from what the current corpus addresses — token-attenuation drafts bound authority at issuance, but this gap occurs post-issuance as agents dynamically load new tools. Thematically adjacent to draft-sharif-x509-agent-identity-profile which also uses X.509v3 extensions for agent capability binding."),
 ]
 make_sheet("Academic Papers", COLORS['Academic'], academic_rows)
 
@@ -1132,6 +1228,54 @@ industry_rows = [
      "https://notes.karlmcguinness.com/notes/re-subjecting-is-a-mint-not-an-attenuation/",
      "Architect blog (Karl McGuinness)",
      "Published 8 Jun 2026; a standalone conceptual post outside the four-part Mission-Bound series but thematically continuous with it. Directly relevant to cross-AS delegation flows in the MVP post (ID-JAG for user-rooted re-subjecting) and to the token-exchange-target-service-discovery I-D. Privacy note: every intermediary-visible artifact should minimize identifiers that enable unauthorized cross-context linking."),
+
+    ("Mission Architecture on AAuth (McGuinness, 15 Mar 2026)",
+     "Engages directly with Dick Hardt's AAuth protocol, examining whether AAuth's conversational flow and native agent identity could host Mission governance better than OAuth; concludes both architectures require an explicit, durable Mission object for lifecycle governance, approval evidence, and actor continuity — AAuth's strengths are transport-level, not governance-level.",
+     "https://notes.karlmcguinness.com/notes/mission-architecture-on-aauth/",
+     "Architect blog (Karl McGuinness)",
+     "Published Mar 15 2026; the fifth McGuinness blog entry in the corpus (the four-part Mission-Bound series above plus this standalone analysis). Significant because it directly engages draft-hardt-oauth-aauth-protocol (the corpus OUTLIER — zero OAuth dependencies), bridging the two most architecturally influential individual contributors in the corpus. McGuinness argues Mission governance requires a durable object regardless of transport; Hardt argues PoP-by-default and AS-to-AS federation require architectural replacement. These positions are complementary at different layers."),
+
+    ("Enterprise-Managed Authorization for MCP (Paul Carleton, Anthropic MCP Blog, 18 Jun 2026)",
+     "Announces Enterprise-Managed Authorization (EMA) extension enabling SSO-based MCP server provisioning through enterprise identity providers, eliminating per-app OAuth friction; explicitly uses the Identity Assertion JWT Authorization Grant (ID-JAG) as the underlying token exchange mechanism. Early adopters include Okta, Claude, VS Code, Asana, Atlassian, Figma, and Supabase.",
+     "https://blog.modelcontextprotocol.io/posts/enterprise-managed-auth/",
+     "Vendor blog (Anthropic / MCP)",
+     "Published Jun 18 2026; author: Paul Carleton (MCP Core Maintainer). One of the first production deployments of draft-ietf-oauth-identity-assertion-authz-grant (ID-JAG, corpus WG draft) at enterprise scale. Multi-vendor adoption (8 platforms at launch) signals ID-JAG is de-facto production-ready even before RFC publication. Cross-App Access from Okta is the identity provider backbone."),
+
+    ("Workload Identity: Key Takeaways from IETF 122 (Kasselman, Defakto Security, 26 Mar 2025)",
+     "Reports on WIMSE WG's adoption of three working-group drafts at IETF 122: WIMSE Architecture, Service-to-Service Authentication, and Workload Identity Practices; addresses AI agent identity requirements — credentialing every AI workload, least-privilege scope, and permission escalation mechanisms — within the WIMSE framework.",
+     "https://www.defakto.security/blog/workload-identity-key-takeaways-from-ietf-122/",
+     "Practitioner blog (Defakto Security)",
+     "Published Mar 26 2025; author: Pieter Kasselman (VP Open Standards, Defakto Security) — co-author of draft-klrc-aiagent-auth, draft-fletcher-transaction-token-chaining-profile, and draft-ietf-oauth-first-party-apps (all in corpus). Documents the WIMSE WG milestone that provides the workload-identity substrate for the AI agent extension family; useful primary-source account of the IETF milestone from the author who subsequently filed klrc-aiagent-auth."),
+
+    ("Whither User-Managed Access in the AI Agent Era? (Eve Maler, Venn Factory, 10 Jul 2025)",
+     "Examines whether UMA 2.0 remains relevant for AI agent delegation, distinguishing whether agents function as OAuth client apps or as requesting parties with their own legal standing; argues UMA 'basically exists for this' but identifies gaps: dynamic resource discovery, multi-level delegation tracking, and the need for standardized infrastructure analogous to Microsoft's On-Behalf-Of flow.",
+     "https://workshop.vennfactory.com/p/whither-user-managed-access-in-the",
+     "Practitioner blog (Venn Factory)",
+     "Published Jul 10 2025; author: Eve Maler (primary author of UMA 2.0, former VP Innovation at ForgeRock, W3C TAG). The UMA specification is in the Other Standards & Govt tab; this is the spec author's own analysis of its applicability to AI agents. Identifies the same gaps (dynamic resource discovery, multi-level delegation) that the DAWN and identity-chaining IETF work addresses — useful bridge between the Kantara UMA entry and the active IETF corpus."),
+
+    ("Tangled Tokens and Authorized Agents (Justin Richer, 15 May 2025)",
+     "Examines how MCP's proxy model creates two distinct authorization contexts (agent-to-MCP-server and server-to-upstream-resource) that OAuth's pre-registration assumptions don't accommodate cleanly; argues for credential-mapping strategies adapted from email IMAP patterns and identifies unresolved tensions around static OAuth registration and MCP server allowlisting.",
+     "https://justinsecurity.medium.com/tangled-tokens-and-authorized-agents-331e4db02fb4",
+     "Practitioner blog (Justin Richer)",
+     "Published May 15 2025; author: Justin Richer (independent OAuth expert, co-author of OAuth 2.0 in Action, former GNAP WG co-chair). The IMAP credential-mapping analogy is the most concrete prior-art framing for the MCP authorization problem. Complements the Dan Moore Stack Overflow Blog post (below) which covers the MCP OAuth 2.1 spec detail; this post covers the architectural gap the spec doesn't resolve."),
+
+    ("Is That Allowed? Authentication and Authorization in Model Context Protocol (Dan Moore, Stack Overflow Blog, 21 Jan 2026)",
+     "Technical walkthrough of MCP's OAuth 2.1 implementation: Authorization Code grant with mandatory PKCE, RFC 9728 protected resource metadata for server discovery, and the RFC 8707 resource parameter; explicitly names the gap that MCP spec does not mandate how servers authenticate with backend services.",
+     "https://stackoverflow.blog/2026/01/21/is-that-allowed-authentication-and-authorization-in-model-context-protocol/",
+     "Practitioner blog (Stack Overflow Blog)",
+     "Published Jan 21 2026; author: Dan Moore (Head of Developer Relations, FusionAuth). Directly references RFC 8414 (OAuth Server Metadata), RFC 8707 (Resource Indicators), RFC 9728 (Protected Resource Metadata) — all IETF corpus entries. Stack Overflow Blog platform gives this mainstream engineering reach. The gap identified (server-to-backend auth unspecified by MCP) is the same gap that draft-ietf-oauth-identity-assertion-authz-grant and klrc-aiagent-auth address."),
+
+    ("AI Agent Authentication Gets the Hard Part Right. Authorization Is Still Your Problem. (Rock Lambros, RockCyber Musings, 17 Mar 2026)",
+     "Analyzes draft-klrc-aiagent-auth-00 in depth, praising its identity layer (WIMSE + SPIFFE composition) but flagging that the Security Considerations section contains only 'TODO Security'; recommends layering OPA or Cedar policy engines for actual authorization and names AuthZEN as a candidate gap-filler.",
+     "https://www.rockcybermusings.com/p/i-agent-authentication-authorization-gap",
+     "Practitioner blog (RockCyber Musings)",
+     "Published Mar 17 2026; author: Rock Lambros. One of the few practitioner posts that analyzes a specific IETF draft (draft-klrc-aiagent-auth, corpus) in depth and names the authorization gap that authentication alone doesn't close. The 'TODO Security' observation is accurate as of the -00 filing; check subsequent revisions for resolution."),
+
+    ("Least Privilege for AI Agents: Identity, Access, and Tool Binding (Microsoft Security Blog, 16 Jul 2026)",
+     "Microsoft's blueprint for applying least-privilege to agentic workloads: unique dedicated agent principals with named owners and explicit purpose statements, task-based roles scoped to specific resources, controlled tool access allowlists, and end-to-end auditability requirements; positions agent identity as a first-class security principal requiring the same governance as human identities.",
+     "https://www.microsoft.com/en-us/security/blog/2026/07/16/least-privilege-for-ai-agents-identity-access-and-tool-binding/",
+     "Vendor blog (Microsoft Security)",
+     "Published Jul 16 2026. Microsoft's most recent major position on least-privilege for agents; extends the earlier Azure and Microsoft Entra entries in the corpus with specific tool-binding guidance. The named-owner and explicit-purpose-statement requirements align directly with Mission-Bound OAuth's proposal_hash and consent_rendering_hash binding. First Microsoft Security Blog entry to use 'tool binding' as a security term of art."),
 
     ("Solving the Identity Crisis for AI Agents (Uber Engineering)",
      "A production engineering post from Uber describing their agent identity architecture: an Agent Registry (workload-to-agent mapping), a SPIRE-backed STS that issues short-lived JWTs with embedded actor chains at P99 below 40ms, an MCP Gateway as policy enforcement point, and an AI Agent Mesh for agent-to-agent communication. A standardized A2A client automates token exchange and chain propagation across agent hops.",
