@@ -3,7 +3,7 @@
 A living bibliography and knowledge graph tracking IETF, OIDF, academic, and industry work on how authority delegates from humans to AI agents.
 
 **Maintainer:** George Fletcher (george@practicalidentity.com) — IAM / delegated-authorization practitioner  
-**Corpus as of Jul 2026:** 191 sources across 6 tabs; 131 Active IETF Drafts
+**Corpus as of Aug 2026:** 366 sources across 6 tabs; 251 Active IETF Drafts
 
 ---
 
@@ -11,9 +11,9 @@ A living bibliography and knowledge graph tracking IETF, OIDF, academic, and ind
 
 | Page | Description |
 |------|-------------|
-| [IETF Cluster Analysis](https://gffletch.github.io/da_research/ietf_cluster_analysis.html) | Interactive map of 9 consolidation clusters across 131 Active IETF Drafts — color-coded by WG status, expandable per-cluster draft lists |
+| [IETF Cluster Analysis](https://gffletch.github.io/da_research/ietf_cluster_analysis.html) | Interactive map of 9 consolidation clusters (built against the 131-draft snapshot; predates the Aug 2026 sweep) — color-coded by WG status, expandable per-cluster draft lists |
 | [Protocol Boundary Map](https://gffletch.github.io/da_research/protocol_boundary_map.html) | One proposal for clean boundaries between DMSC, AgentProtocol, DAWN, WIMSE, OAuth, and WebBotAuth — click-to-expand layers, light/dark theme |
-| [Knowledge Graph](https://gffletch.github.io/da_research/agent_authz_graph.html) | Outdated: D3 force-directed graph of 74 nodes and 116 edges across the corpus (note: graph lags the workbook — see below) |
+| [Knowledge Graph](https://gffletch.github.io/da_research/agent_authz_graph.html) | D3 force-directed graph of 396 nodes and 644 edges — in sync with the workbook as of 11 Aug 2026. Filter by node type (incl. pre-publication, academic, blog) and draft category (incl. Mission-Bound, Payments). |
 
 ---
 
@@ -40,15 +40,15 @@ The [protocol boundaries analysis](protocol_boundaries_analysis.md) proposes cle
 
 | File | Description |
 |------|-------------|
-| `build.py` | Bibliography builder — all 191 sources inline as 5-tuples `(title, summary, url, standards_org, comments)`. Run `python build.py` to regenerate the workbook. |
-| `agent_authz_graph.json` | RAG-ready knowledge graph: 74 nodes, 116 edges. Self-describing (node_types, edge_types, categories, RAG guidance embedded). Currently lags the workbook (last synced at 92-source mark). |
+| `build.py` | Bibliography builder — all 366 sources inline as 5-tuples `(title, summary, url, standards_org, comments)`. Run `python build.py` to regenerate the workbook. |
+| `agent_authz_graph.json` | RAG-ready knowledge graph: 396 nodes, 644 edges. Self-describing (node_types, edge_types, categories, RAG guidance embedded). **Generated** — rebuild with `python build_graph.py`; do not hand-edit. |
 
 ### Generated outputs (tracked in git for diff visibility)
 
 | File | Description |
 |------|-------------|
 | `delegated_authorization_research.xlsx` | The bibliography workbook — 6 content tabs plus an Index. Source of truth for counts. |
-| `agent_authz_graph.html` | Interactive D3 force-directed visualization of the knowledge graph (~391 KB, D3 inlined for offline use). |
+| `agent_authz_graph.html` | Interactive D3 force-directed visualization (~977 KB, D3 inlined for offline use). The graph JSON is spliced in by `build_graph.py`; the surrounding shell is hand-maintained. |
 | `ietf_cluster_analysis.html` | Interactive cluster map — 9 consolidation clusters, color-coded WG status, expandable draft lists. |
 | `protocol_boundary_map.html` | Interactive infographic — 6-layer protocol stack with click-to-expand detail and open boundary tensions. |
 | `ietf_consolidation_analysis.pptx` | 12-slide informational deck covering the 9 clusters (no recommendations; survey/landscape tone). |
@@ -66,7 +66,7 @@ The [protocol boundaries analysis](protocol_boundaries_analysis.md) proposes cle
 | File | Description |
 |------|-------------|
 | `validate.py` | Sanity check — loads the workbook, prints tab counts, confirms Index total, lists unparseable rows, checks URLs. Run after every edit. |
-| `build_graph.py` | Knowledge graph builder (stale relative to the workbook; run manually when a graph rebuild is requested). |
+| `build_graph.py` | Knowledge graph builder. Derives nodes/edges from the workbook, preserves a curated analysis overlay, and re-splices the JSON into the HTML. Idempotent — safe to re-run. |
 | `build_consolidation_deck.py` | PowerPoint deck builder for `ietf_consolidation_analysis.pptx`. |
 
 ---
@@ -77,11 +77,11 @@ The [protocol boundaries analysis](protocol_boundaries_analysis.md) proposes cle
 |-----|-------|-------|
 | Index | cover | Auto-summed |
 | Published RFCs | 4 | Foundation primitives (RFC 6749, 7009, 8693, 9396) |
-| Active IETF Drafts | 131 | Where the action is — WG + individual drafts across all six protocol families |
+| Active IETF Drafts | 251 | Where the action is — WG + individual drafts across all six protocol families, plus the 34-draft Mission-Bound Authorization family |
 | OpenID Foundation | 11 | AuthZEN 1.0, ARAP, FAPI, CAEP/SSF, HEART |
-| Other Standards & Govt | 6 | Kantara, W3C VC, NIST AI RMF, EU AI Act |
-| Academic Papers | 5 | arXiv + IEEE |
-| Industry & Implementations | 34 | Vendor blogs, reference implementations, the McGuinness Mission-Bound series |
+| Other Standards & Govt | 7 | Kantara, W3C VC, NIST AI RMF, EU AI Act, NSA MCP CSI |
+| Academic Papers | 12 | arXiv + IEEE |
+| Industry & Implementations | 81 | Vendor blogs, reference implementations, the full Control Plane blog (47 posts) |
 
 ---
 
@@ -91,7 +91,7 @@ The [protocol boundaries analysis](protocol_boundaries_analysis.md) proposes cle
 2. Run `python build.py` to regenerate the workbook.
 3. Run `python validate.py` to confirm counts and URL integrity.
 4. Commit — git history is the version trail.
-5. Graph rebuild is deliberate and batched, not automatic. Update `build_graph.py` and rerun only when structurally significant changes warrant it.
+5. Rebuild the graph with `python build_graph.py` — it now derives from the workbook, so no code edit is needed for ordinary additions.
 
 See `CLAUDE.md` for placement rules, narration style conventions, and the full pending watch list.
 
@@ -99,7 +99,7 @@ See `CLAUDE.md` for placement rules, narration style conventions, and the full p
 
 ## Author clusters worth following
 
-- **Karl McGuinness** (Independent, former Okta SVP): 11 individual I-Ds, 1 OIDF profile (ARAP), 4 Mission-Bound blog posts. Most concentrated single-author body of work in the corpus.
+- **Karl McGuinness** (Independent, former Okta SVP): 18 individual I-Ds on Datatracker, the 34-draft Mission-Bound Authorization family on GitHub, 1 OIDF profile (ARAP), and 47 Control Plane blog posts. By a wide margin the most concentrated single-author body of work in the corpus.
 - **Kühlewind / Birkholz** (Ericsson / Fraunhofer SIT): `draft-kuehlewind-audit-architecture` is the HUB — composes 10+ other specs into a single auditable architecture.
 - **Dick Hardt**: `draft-hardt-oauth-aauth-protocol` is the principled OUTLIER — zero OAuth dependencies; argues PoP-by-default and AS-to-AS federation are architectural changes, not extensions.
 - **Chris Hood / Nomotic**: 18-draft AGTP suite; a complete protocol stack replacement for agent communication.
