@@ -223,11 +223,25 @@ narration of each pair.
 
 **Other deferred items:**
 
+- **Open curation decision — Vauban x402 pair.** `draft-vauban-x402-stark-receipts`
+  and `draft-vauban-x402-pqc-receipts` were surfaced in the Aug 2026 sweep but
+  deliberately left out: they are x402 *receipts* (which the corpus now tracks,
+  via the Hopley cluster) but their subject is STARK / post-quantum proof
+  discipline rather than payment authorization. Maintainer has not ruled. Add
+  them if the corpus decides cryptographic proof systems are in scope.
 - User has deferred adding a "maturity/readiness" column to the Active Drafts
   tab. The Mission-Bound family now carries maturity + adoption_rung inline in
   its comments column, which is a partial precedent — revisit.
 - OAuth WG recharter on 4 June 2026 IESG telechat — outcome still not recorded;
   once known, add formal "Complex Delegation" item under WG drafts.
+
+**Curation bar for the general draft tail** (set 11 Aug 2026, applies to routine
+sweeps — don't re-ask): keep delegation, agent identity, authorization, consent,
+and receipt drafts. Drop networking/transport (IPv6, multicast, network
+management), generic browser-flow and JWT-BCP drafts, and non-agent supply-chain
+work. Payments-infra *is* in scope as of this decision (Skyfire KYA/KYAPay and
+Hopley x402 clusters were reinstated). Primary/authored bodies of work — a single
+author's draft family or blog — are taken in full rather than sampled.
 
 ## Things NOT to do
 
