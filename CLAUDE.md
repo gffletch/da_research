@@ -232,8 +232,25 @@ narration of each pair.
 - User has deferred adding a "maturity/readiness" column to the Active Drafts
   tab. The Mission-Bound family now carries maturity + adoption_rung inline in
   its comments column, which is a partial precedent — revisit.
-- OAuth WG recharter on 4 June 2026 IESG telechat — outcome still not recorded;
-  once known, add formal "Complex Delegation" item under WG drafts.
+- **OAuth cluster taxonomy — use "Complex Delegation".** The official OAuth spec
+  clustering lives at https://wiki.ietf.org/group/oauth/OAuthSpecClusters
+  (presented at IETF 126). Ten clusters; the tenth, "Complex Delegation", is
+  present but `(TBD)` — no documents assigned. Maintainer settled 11 Aug 2026 on
+  using that name rather than coining "Delegated Authorization".
+  - The wiki currently lists **only RFCs and WG drafts** — no individual drafts
+    anywhere. Assignment of individual drafts is underway upstream; publication
+    venue not yet decided. **Don't assign clusters per-draft in the corpus yet.**
+  - A mapping of the corpus's 77 OAuth-named individual drafts against the ten
+    clusters found roughly 35 already fit existing clusters — notably ~5 in
+    Proof of Possession, which currently shows "Active Drafts: (none)". Agent
+    drafts should be filed by *mechanism*, not by being agent-flavoured.
+  - **Open observation worth raising upstream:** six drafts fit no current
+    cluster — gazitt-oauth-authzen-issuance, gazitt-oauth-authzen-token-exchange,
+    liu-oauth-rego-policy, vicente-oauth-apm, liu-oauth-authorization-evidence,
+    fulz-oauth-trust-binding. These concern *who decides, on what evidence*
+    rather than how authority moves, and may warrant a distinct
+    decision/policy cluster.
+- OAuth WG recharter on 4 June 2026 IESG telechat — outcome still not recorded.
 
 **Curation bar for the general draft tail** (set 11 Aug 2026, applies to routine
 sweeps — don't re-ask): keep delegation, agent identity, authorization, consent,
