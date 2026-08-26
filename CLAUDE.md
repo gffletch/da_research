@@ -5,16 +5,16 @@ work on how authority delegates from humans to AI agents. Maintained as a living
 research artifact; updated additively as new drafts and blog posts appear.
 
 Maintainer is an IAM/delegated-authz expert. Date context: current entries
-dated through Aug 2026 (last full sweep: 11 Aug 2026).
+dated through Aug 2026 (last full sweep: 26 Aug 2026).
 
 ## Files
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **366 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **408 sources**
   across 7 tabs (Index + 6 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **396 nodes, 644 edges**,
-  in sync with the workbook as of 11 Aug 2026. **Generated, not hand-edited** —
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **438 nodes, 659 edges**,
+  in sync with the workbook as of 26 Aug 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
   `curated` survives a rebuild, so hand-written analysis is safe but derived
@@ -54,11 +54,11 @@ Both still exist from the original session if needed.
 | -------------------------- | ----- | ------------------------------------------------------ |
 | Index                      | cover | Auto-summed; cell `C11` = TOTAL                        |
 | Published RFCs             | 4     | Stable. Foundation primitives.                         |
-| Active IETF Drafts         | 251   | **★ Where the action is.** WG + individual drafts.     |
+| Active IETF Drafts         | 290   | **★ Where the action is.** WG + individual drafts.     |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
 | Academic Papers            | 12    | arXiv + IEEE.                                          |
-| Industry & Implementations | 81    | Vendor blogs, reference impls, full Control Plane blog.|
+| Industry & Implementations | 84    | Vendor blogs, reference impls, full Control Plane blog.|
 
 Row schema:
 
@@ -105,12 +105,21 @@ Still useful as a mental model when placing new drafts:
   - **1 OIDF profile** in OpenID Foundation tab: AuthZEN Access Request &
     Approval Profile (ARAP) — adopted as WG draft May 2026, Draft 1 published
     3 Jun 2026
-  - **47 blog posts** at `notes.karlmcguinness.com` ("Control Plane"), all now
+  - **50 blog entries** at `notes.karlmcguinness.com` ("Control Plane"), all now
     in the Industry & Implementations tab. Major arcs: Agent Control Points
     (Aug 2026), the Mission-Bound Authorization handbook + 5 series indexes
     (Jul 2026), Open-World OAuth (Mar 2026), Least-Privilege MCP (Jun 2026).
-    The site's `/index.xml` RSS feed is the reliable way to enumerate posts —
+    The site's `/index.xml` RSS feed is the reliable way to enumerate *posts* —
     scraping the paginated HTML index misses most of them and reports wrong dates.
+    **But RSS is not the whole site (learned 26 Aug 2026).** The 27 chapters of
+    the Mission-Bound Authorization handbook live under `/notes/` and are *not*
+    in the feed; only the handbook's series landing pages are. To enumerate the
+    full surface, union the RSS links with the hrefs scraped from
+    `/mission-handbook/` and `/mission-handbook/read/`.
+    **Karl also re-slugs.** Three corpus URLs 404'd by 26 Aug 2026 because the
+    site renamed "Mission-Bound OAuth" to "Mission-Bound Authorization"
+    throughout. `validate.py` only checks that URLs are well-formed, not that
+    they resolve — so a link-liveness pass belongs in every blog sweep.
   - Co-author on `draft-ietf-oauth-identity-assertion-authz-grant` (ID-JAG)
   - **Pending I-Ds** referenced in his blogs but NOT yet on Datatracker —
     see Pending Watch List below
@@ -129,6 +138,22 @@ Still useful as a mental model when placing new drafts:
 - **Larry Lewis**. `agent-trust-protocol/atp-core` (Industry tab, row 5).
   Acronym near-collision with `draft-sharif-attp` — different designs:
   discrete L0–L4 trust levels there, continuous 0.0–1.0 trust scoring here.
+
+- **Morrison** (added 26 Aug 2026). A self-referential **six-draft family** built
+  on a `~handle` identity primitive defined in its own `[MCPDNS]` draft, with an
+  entity-class taxonomy of Sovereign / Bot / Instrument: `consent-settlement`,
+  `identity-accord`, `solo-agent-earn-registration`, `agent-channel-fan-out`,
+  `identity-pronouns`, `identity-attributed-commits`, plus the
+  `mcp-tool-surface-names-registry` that exists only to create the IANA registry
+  the others register into. Taken in full under the primary-body rule. Two things
+  make it worth watching: it is the only body of work here that treats an
+  **owner-less agent** as a first-class economic principal, and its three-tier
+  actor taxonomy restates the actor-chain question in a non-OAuth substrate.
+
+- **Sharif**. Now **four** drafts: `sharif-attp`, `sharif-agent-audit-trail`,
+  `sharif-mcps-secure-mcp` (added 26 Aug 2026), and the SUPERSEDED
+  `sharif-payment-trust`. Crossed the threshold from single draft to a body of
+  work — treat as a primary author on the next sweep.
 
 ## How to add a new source
 
@@ -198,7 +223,7 @@ Still worth periodic checking: whether any of the 33 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
 has been so far. Re-check with the family-manifest slugs.
 
-**Graph — REBUILT 11 Aug 2026.** Now 396 nodes / 644 edges, in sync with the
+**Graph — REBUILT 26 Aug 2026.** Now 438 nodes / 659 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
 analysis, preserved), 373 `composes` from the Mission-Bound family manifest,
@@ -221,7 +246,40 @@ Notes for future graph work:
 (Defakto IETF 122, Rock Lambros RockCyber) were removed, keeping the richer
 narration of each pair.
 
+**26 Aug 2026 sweep — findings that change the corpus's shape:**
+
+- **`draft-ietf-oauth-browser-based-apps` became RFC 10017** (state flipped
+  21 Aug 2026; `became_rfc` relation confirmed on Datatracker). Its row is still
+  in the Active IETF Drafts tab with a note. **Open placement question for the
+  maintainer:** move it to the Published RFCs tab (which would make that tab 5)
+  or leave it annotated in place.
+- **`draft-aap-oauth-profile` is now EXPIRED.** Kept, annotated. It is half of
+  the AAP/AIP acronym tangle recorded under COLLISION.
+- **`draft-ietf-oauth-transaction-tokens` advanced past WGLC** to
+  "WG Consensus: Waiting for Write-Up" (21 Aug 2026). `identity-chaining` and
+  `rfc7523bis` are both sitting in the RFC Editor queue; neither has an RFC
+  number yet. `wimse-workload-identity-practices` reached IESG AD Evaluation.
+- **The candidate decision/policy cluster is now seven drafts**, not six —
+  `gazitt-oauth-authzen-claims` (a third Gazitt AuthZEN draft) and
+  `li-oauth-policy-based-anonymous-tokens` joined; still no OAuth wiki cluster
+  fits them. This strengthens the case for raising it upstream.
+- **`draft-ietf-oauth-rar-metadata-remediation` is the first new WG-level draft
+  in this space since the recharter.** RAR is the primitive the Mission-Bound
+  family builds on, so this is the closest thing yet to Complex Delegation
+  machinery arriving in chartered WG work. Watch it.
+
 **Other deferred items:**
+
+- **Open curation decision — the 27 Mission-Bound handbook chapters.** Surfaced
+  26 Aug 2026. Karl's handbook chapters (all dated 22 Jul 2026) each have their
+  own `/notes/` URL but are **absent from the RSS feed**, which is why the
+  11 Aug sweep missed them. Three of them were already tracked under their
+  pre-handbook slugs and have now been repointed; **24 chapters plus 5
+  handbook-only `/series/` indexes remain untracked.** The argument for adding
+  them is the primary-body rule (all 50 blog entries are tracked). The argument
+  against is that they are a re-issued edition of material already in the
+  corpus rather than new sources. Adding all 29 would take Industry from 84 to
+  113. Maintainer has not ruled.
 
 - **Open curation decision — Vauban x402 pair.** `draft-vauban-x402-stark-receipts`
   and `draft-vauban-x402-pqc-receipts` were surfaced in the Aug 2026 sweep but
