@@ -188,7 +188,39 @@ tracked for the subset that touches delegated authorization.
 | IETF Datatracker | tastypie API via `curl` (never WebFetch); `name__contains=<kw>` + `time__gte=` to discover, `name__in=` batches of ~25 to refresh | Filtered — see the curation bar below |
 | Karl McGuinness — Control Plane (`notes.karlmcguinness.com`) | `/index.xml` RSS **union** hrefs scraped from `/mission-handbook/` and `/mission-handbook/read/` — the handbook chapters are not in the feed | **Take in full** |
 | Mission-Bound family (`github.com/mcguinness/mission-bound-authorization`) | `family-manifest.json` at repo root is the source of truth | **Take in full** |
+| **Heather Flanagan — standards-tracker** (`github.com/hlflanagan/standards-tracker`) | Daily CSV+MD at `reports/YYYY-MM-DD-ietf-identity-ai-watch.csv`, raw from `raw.githubusercontent.com`. CC0. Runs 14:00 UTC daily via GitHub Actions. | **Cross-check, do not ingest.** Use it to find what our own sweeps missed |
 | **Heather Flanagan — Spherical Cow Consulting** (`sphericalcowconsulting.com`) | `/feed/` returns the **complete archive** in one request — 159 posts back to 2019, no pagination needed. (`/index.xml` 404s; it is WordPress, not Hugo.) Strip the trailing `The post … appeared first on Spherical Cow Consulting.` boilerplate from every `description`. | **Filtered** — 36 of 159 tracked as of 26 Aug 2026 |
+
+**On the standards-tracker (added 26 Aug 2026).** Heather's bot watches recent
+IETF I-Ds and W3C specs and classifies them for identity/authz/AI relevance. Her
+CSV columns are `base_name, status, bucket, category, relevance_score,
+group_name, title, abstract, datatracker_url, date_seen`. Buckets are
+`read_now` / `adjacent_watchlist` / `monitor` / `ignored_after_review`;
+categories include `agent_identity`, `authorization`, `core_identity`,
+`trust_infrastructure`, `verifiable_claims`.
+
+**Use it as a recall check on our own discovery, not as a source to ingest.**
+Union the `base_name` column across all daily reports and diff against the
+corpus. The first run of this (26 Aug 2026, 45 reports back to 8 Jul 2026,
+1,617 distinct documents) found **249 `read_now` documents the corpus did not
+have** — including drafts from author families this corpus claims to track *in
+full*. See the coverage-gap entry in the watch list.
+
+**⚠ Why our sweeps missed them — fix the method, not just the gap.** Corpus
+discovery has been using `name__contains=<topic-keyword>` against Datatracker.
+That only matches the *draft name*, so any draft whose slug omits the keyword is
+invisible no matter how on-topic its abstract is — `draft-lundholm-kaif`,
+`draft-sato-soos-kia` and `draft-hardt-httpbis-signature-key` were all missed
+that way. Two rules follow:
+
+1. **For any author or family taken in full, enumerate by author prefix**
+   (`name__contains=schrock`, `name__contains=morrison`, …) and diff against the
+   corpus. Never assume a family is complete because the last sweep added some
+   of it.
+2. **Topic-keyword name search is a supplement, not the primary discovery
+   mechanism.** Heather's classifier reads titles and abstracts, which is
+   strictly better recall; treat her report as the discovery baseline and our
+   keyword sweep as the delta on top.
 
 **On Heather Flanagan specifically.** She is exceptionally well connected across
 the identity industry and worth following as a bellwether, but most of her output
@@ -355,6 +387,41 @@ narration of each pair.
   in this space since the recharter.** RAR is the primitive the Mission-Bound
   family builds on, so this is the closest thing yet to Complex Delegation
   machinery arriving in chartered WG work. Watch it.
+
+- **⚠ OPEN COVERAGE GAP — author families are incomplete (found 26 Aug 2026).**
+  Cross-checking Heather Flanagan's standards-tracker against the corpus, then
+  verifying by author-prefix query on Datatracker, showed that several families
+  this corpus claims to track *in full* are substantially incomplete. Counts are
+  Datatracker / in corpus / missing:
+  - `schrock` (EMILIA Protocol) — 26 / 8 / **18**, incl. `ep-architecture`,
+    `ep-enforcement-point`, `ep-authority-introduction`, `ep-bounded-execution-program`,
+    `ep-presentation-binding`, `ep-revocation-statement`, `ae-challenge`,
+    `canonical-action-identifier`, `model-to-matter`, `emilia-eye`
+  - `hardt` — 17 / 2 / **15** raw, though several are a different author
+    (`enghardt`); real misses incl. `hardt-aauth-headers`, `hardt-distributed-oauth`,
+    `hardt-gnap-advanced`, `hardt-httpbis-signature-key`,
+    `hardt-oauth-protected-authorization`, `hardt-email-verification`.
+    **Hardt is a named author voice in this file — this is the most embarrassing gap.**
+  - `sato-soos` — 18 / 5 / **13** (acd, aep, aop, cap, cap-rrs, dam, faip, grp,
+    kia, peer, pt, rgp, sov). The SOOS suite is far bigger than the corpus shows.
+  - `morrison` — 18 / 8 / **10**. The file's claim of a "six-draft Morrison
+    family" is wrong; it is at least 18.
+  - `ruvalcaba` (NHE) — 8 / 2 / **6**. NHE is a family, not the identity+authz
+    pair the corpus records.
+  - `kavian` (AEP) — 8 / 2 / **6**.
+  - `hopley` (x402) — 11 / 4 / **7**.
+  - `ietf-wimse` — 9 / 4 / **5** missing **WG** drafts: `arch`, `identifier`,
+    `s2s-protocol`, `workload-identity-bcp`, `wpt`.
+  - `sharif` — 4 missing; `skyfire` — 1 missing (`kyapayprofile`);
+    `somoza` — 1 missing.
+  Beyond the families, Flanagan's `read_now` bucket holds **41 more** agent-identity
+  or authorization drafts from authors the corpus does not track at all, incl.
+  `lundholm-kaif`, `burls-mtac`, `sabey-succession-receipts`,
+  `zagarella-autonomy-governor`, `pelov-bounded-agent-capabilities`,
+  `kondoju-evc`, `bradleyb-audit-decision-records`, `ferro-dnsop-apertoid`.
+  **Not yet added — needs a maintainer call on scope.** Note surname-prefix
+  queries also pull unrelated authors (`cui-`, `feng-`, `zhao-` hit networking
+  work); filter by abstract, not by surname alone.
 
 **Other deferred items:**
 
