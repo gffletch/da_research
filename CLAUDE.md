@@ -237,6 +237,10 @@ narration of each pair.
   (presented at IETF 126). Ten clusters; the tenth, "Complex Delegation", is
   present but `(TBD)` — no documents assigned. Maintainer settled 11 Aug 2026 on
   using that name rather than coining "Delegated Authorization".
+  - **The name is now chartered, not just a wiki heading** (confirmed 26 Aug
+    2026, see recharter entry below). Charter rev 06 lists "Complex Delegation"
+    as one of five work-program items. This retires any doubt about the naming
+    choice — the corpus and the WG use the same term for the same thing.
   - The wiki currently lists **only RFCs and WG drafts** — no individual drafts
     anywhere. Assignment of individual drafts is underway upstream; publication
     venue not yet decided. **Don't assign clusters per-draft in the corpus yet.**
@@ -250,7 +254,32 @@ narration of each pair.
     fulz-oauth-trust-binding. These concern *who decides, on what evidence*
     rather than how authority moves, and may warrant a distinct
     decision/policy cluster.
-- OAuth WG recharter on 4 June 2026 IESG telechat — outcome still not recorded.
+- **OAuth WG recharter — SUCCESSFUL. Resolved 26 Aug 2026** (maintainer
+  reported; verified against Datatracker). `charter-ietf-oauth` **rev 06**,
+  timestamped `2026-06-04T16:32:25Z` — the 4 Jun 2026 IESG telechat — is in
+  state **Approved** ("The charter is approved by the IESG").
+  - **Why this matters to the corpus:** the new charter adds an explicit framing
+    sentence — *"As automated agents increasingly act on behalf of users,
+    organizations, or both, these delegation patterns become increasingly
+    involved and complex."* — and charters **Complex Delegation** as work:
+    *"Developing new mechanisms or/and extensions for authorization of automated
+    agents working on behalf of users, including addressing scenarios where
+    automated agents act across multiple administrative domains."* The corpus's
+    entire subject is now in-charter for the OAuth WG, and cross-domain agent
+    delegation is called out by name.
+  - The other four work-program items: Consolidation (OAuth 2.1),
+    Digital Credentials (SD-JWT / SD-JWT VC / Token Status List),
+    First-Party Integration, Security Maintenance (browser-based + native BCPs).
+    Chartered coordination with **WIMSE** (token exchange + DPoP for
+    service-to-service and multi-hop workload identity), SPICE, and the
+    EU Digital Identity Wallet.
+  - **But there is no Complex Delegation milestone yet.** The WG's only three
+    active milestones are SD-JWT VC (due 31 Jul 2026), OAuth 2.1 and
+    Transaction Tokens (both 31 Dec 2026). Chartered scope without a deliverable
+    is consistent with the wiki cluster still reading `(TBD)` — the WG has taken
+    the *mandate* but not yet committed to a document. **Watch for the first
+    Complex Delegation milestone or WG adoption; that is the signal that turns
+    the corpus's individual-draft tail into WG work.**
 
 **Curation bar for the general draft tail** (set 11 Aug 2026, applies to routine
 sweeps — don't re-ask): keep delegation, agent identity, authorization, consent,
