@@ -11,9 +11,9 @@ dated through Aug 2026 (last full sweep: 26 Aug 2026).
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **547 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **566 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **577 nodes, 682 edges**,
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **596 nodes, 690 edges**,
   in sync with the workbook as of 26 Aug 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
@@ -59,7 +59,7 @@ Both still exist from the original session if needed.
 | -------------------------- | ----- | ------------------------------------------------------ |
 | Index                      | cover | Auto-summed; TOTAL row moves when tabs are added       |
 | Published RFCs             | 5     | Stable primitives, plus RFC 10017 for WG completeness. |
-| Active IETF Drafts         | 330   | **★ Where the action is.** WG + individual drafts.     |
+| Active IETF Drafts         | 349   | **★ Where the action is.** WG + individual drafts.     |
 | Mission-Bound (Pre-pub)    | 33    | McGuinness GitHub-only family. Venue split, not topic. |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
@@ -323,7 +323,7 @@ Still worth periodic checking: whether any of the 33 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
 has been so far. Re-check with the family-manifest slugs.
 
-**Graph — REBUILT 26 Aug 2026.** Now 577 nodes / 682 edges, in sync with the
+**Graph — REBUILT 26 Aug 2026.** Now 596 nodes / 690 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
 analysis, preserved), 373 `composes` from the Mission-Bound family manifest,
@@ -406,6 +406,20 @@ narration of each pair.
     while `actor-proofs` and `actor-receipts` were both in.
   - Corrections this forced: the "six-draft Morrison family" is **18**; NHE is a
     **six-draft family**, not the identity+authz pair recorded earlier the same day.
+  - **New-author tier resolved 26 Aug 2026: 19 of 41 added.** The 22 dropped are
+    "authorization" in a different sense or network management — RPKI/ASPA
+    *route* authorization (`ietf-sidrops-aspa-profile`, `geng-sidrops-asra-profile`),
+    ACE/OSCORE for constrained devices (4 drafts), EPP/RPP registry provisioning
+    (`gould-regext-auth-token`, `wullink-rpp-oauth2-*`), plus MoQ, 6G, TLS service
+    affinity and NMRG/OPSAWG network-management work. Kept the agent ones incl.
+    `lundholm-kaif`, `burls-mtac`, `sabey-succession-receipts` (authority
+    *succession*, a lifecycle stage nothing else here covers), `kondoju-evc`,
+    `zagarella-autonomy-governor`, `pelov-bounded-agent-capabilities`,
+    `bradleyb-audit-decision-records`, `singh-psi-agent` (names **liability** as a
+    protocol concern), and the `ferro-*` ApertoID pair — DNS declaration plus HTTP
+    signing, a competing design against WebBotAuth's HTTP Message Signatures.
+    **Watch `lundholm-kaif`**: it is a full agent-identity *framework*, so it belongs
+    in the AIP name-collision comparison rather than being read as a point mechanism.
   - **`draft-ietf-oauth-*` was deliberately excluded from this pass.** The prefix
     matches 52 drafts, but ~35 became RFCs years ago (`draft-ietf-oauth-v2` →
     RFC 6749, `dpop` → RFC 9449, `rar` → RFC 9396) and the corpus tracks the RFCs,
