@@ -19,6 +19,7 @@ COLORS = {
     'OpenID':    '7030A0',
     'Other':     '548235',
     'Academic':  'BF8F00',
+    'Mission':   'B65C1E',
     'Industry':  '404040',
     'Summary':   '305496',
 }
@@ -56,6 +57,12 @@ def make_sheet(title, color, rows):
 # TAB 1: PUBLISHED RFCs
 # ============================================================
 rfc_rows = [
+    ("RFC 10017 — OAuth 2.0 for Browser-Based Applications",
+     "An IETF BCP establishing the Backend-for-Frontend (BFF) and other architectural patterns as current best practice for SPAs given browser-resident token-storage limitations.",
+     "https://www.rfc-editor.org/rfc/rfc10017",
+     "IETF (OAuth WG)",
+     "Published as RFC 10017 on 21 Aug 2026, from draft-ietf-oauth-browser-based-apps -27. Moved here from the Active IETF Drafts tab on 26 Aug 2026. **Peripheral to delegated authorization** — tracked for OAuth WG completeness rather than for agent delegation, which is the maintainer's own framing. Still relevant to any delegated-authorization design touching SPAs, since it codifies why pure-browser refresh tokens are deprecated. A 26 Aug 2026 audit of all 251 tracked Datatracker drafts confirmed this is the only one that has reached RFC status."),
+
     ("RFC 9635 — Grant Negotiation and Authorization Protocol (GNAP)",
      "An IETF standards-track RFC for a next-generation delegation protocol that removes pre-registration by letting clients present a key on first contact with the AS.",
      "https://www.rfc-editor.org/rfc/rfc9635",
@@ -115,13 +122,8 @@ draft_rows = [
      "Defines the core WebBotAuth authentication architecture: automated agents sign HTTP requests with private keys bound to their Agent Card; origin servers verify agent identity through public key discovery via the registry. Intended to replace IP allowlisting and User-Agent string matching as the primary bot identification mechanism.",
      "https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-protocol/",
      "IETF (WebBotAuth WG)",
-     "Revision -01, 6 Aug 2026 (was -00, Jun 26 2026); authors: Thibault Meunier (Cloudflare), Sandor Major (Google). Replaces draft-meunier-web-bot-auth-architecture. Pairs with draft-meunier-webbotauth-httpsig-directory for key discovery."),
+     "Revision -02, 19 Aug 2026 (was -01, 6 Aug 2026) (was -00, Jun 26 2026); authors: Thibault Meunier (Cloudflare), Sandor Major (Google). Replaces draft-meunier-web-bot-auth-architecture. Pairs with draft-meunier-webbotauth-httpsig-directory for key discovery. **SUPERSEDES draft-meunier-webbotauth-httpsig-directory**, which Datatracker marks Replaced by this draft. That older row was removed from the corpus on 26 Aug 2026 — it was tracked separately and had become a duplicate of this one under the pre-rename slug."),
 
-    ("draft-meunier-webbotauth-httpsig-directory — HTTP Message Signatures Directory",
-     "Defines a JWKS-based key directory, a well-known URI for key discovery (/.well-known/bot-auth-directory), and a new HTTP header field for in-band signing-key location communication, enabling origin servers to resolve a bot's signing key without prior configuration.",
-     "https://datatracker.ietf.org/doc/draft-meunier-webbotauth-httpsig-directory/",
-     "IETF (WebBotAuth WG)",
-     "Revision -00, Jun 26 2026; authors: Thibault Meunier (Cloudflare), Sandor Major (Google). Replaces draft-meunier-http-message-signatures-directory. The key-discovery complement to httpsig-protocol."),
 
     ("draft-rescorla-anonymous-webbotauth — Anonymous Bot Authentication: Authorization and Rate Limiting for Web Agents",
      "Proposes Anonymous Bot Authentication (ABA) using Privacy Pass tokens and Anonymous Rate-Limited Credentials, enabling sites to enforce rate limits and access controls on bots without identifying individual operators. Decouples 'is this a legitimate bot' from 'which bot is this,' preserving privacy while preventing abuse.",
@@ -176,7 +178,7 @@ draft_rows = [
      "An IETF WG draft that defines how to preserve identity and authorization context across trust domains by combining RFC 8693 token exchange with RFC 7521/7523 JWT assertions.",
      "https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-chaining/",
      "IETF (OAuth WG)",
-     "Revision -17, Jul 22 2026 — rapid iteration signal heading into IETF 126. Previously IESG-approved and in RFC Editor queue; no RFC number assigned yet as of Jul 2026. The canonical multi-domain delegation pattern referenced by most agent and zero-trust drafts."),
+     "Revision -17, Jul 22 2026 — rapid iteration signal heading into IETF 126. IESG-approved and in the RFC Editor queue (rfceditor state 'In Progress', IANA actions acknowledged); still no RFC number assigned as of 21 Aug 2026. The canonical multi-domain delegation pattern referenced by most agent and zero-trust drafts."),
 
     ("draft-ietf-oauth-identity-assertion-authz-grant — Identity Assertion JWT Authorization Grant (ID-JAG)",
      "An IETF WG draft (Parecki/McGuinness/Campbell) defining how an app uses an identity assertion to obtain an access token for a third-party API by coordinating through a shared enterprise IdP.",
@@ -194,7 +196,7 @@ draft_rows = [
      "An IETF WG draft defining short-lived signed JWTs that propagate immutable user identity and authorization context through internal call chains within a trust domain.",
      "https://datatracker.ietf.org/doc/draft-ietf-oauth-transaction-tokens/",
      "IETF (OAuth WG)",
-     "Revision -11, 4 Aug 2026 (was -09, published 6 Jul 2026 (was -08 Mar 2026)); co-authored by Tulshibagwale (CAEP inventor), Fletcher, and Kasselman. -09 reorganized the Request Context section, changed JWT body claims from OPTIONAL to RECOMMENDED, and enhanced security considerations for invalidated access tokens. Still in WGLC; IESG submission milestone Dec 2026."),
+     "Revision -11, 4 Aug 2026 (was -09, published 6 Jul 2026 (was -08 Mar 2026)); co-authored by Tulshibagwale (CAEP inventor), Fletcher, and Kasselman. -09 reorganized the Request Context section, changed JWT body claims from OPTIONAL to RECOMMENDED, and enhanced security considerations for invalidated access tokens. Advanced past WGLC: as of 21 Aug 2026 the stream state is 'WG Consensus: Waiting for Write-Up'. IESG submission milestone Dec 2026, and Transaction Tokens is one of only three active OAuth WG milestones under the approved rev-06 charter."),
 
     ("draft-ietf-oauth-first-party-apps — OAuth 2.0 for First-Party Applications",
      "An IETF WG draft defining an Authorization Challenge Endpoint that lets first-party native apps drive a browserless OAuth flow while still supporting step-up authentication via RFC 9470.",
@@ -219,12 +221,6 @@ draft_rows = [
      "https://datatracker.ietf.org/doc/draft-kahrer-oauth-client-challenge-protocol/",
      "IETF (individual)",
      "Revision -00 published 19 May 2026; deliberately distinct from first-party-apps (challenges the CLIENT, not the user) and works for both first- and third-party clients. Cites Mastercard Verifiable Intent as a use case, linking it directly to the mandate/RAR pattern OVID implements."),
-
-    ("draft-ietf-oauth-browser-based-apps — OAuth 2.0 for Browser-Based Applications",
-     "An IETF WG draft establishing the Backend-for-Frontend (BFF) and other architectural patterns as current best practice for SPAs given browser-resident token-storage limitations.",
-     "https://datatracker.ietf.org/doc/draft-ietf-oauth-browser-based-apps/",
-     "IETF (OAuth WG)",
-     "Revision -27, 11 Aug 2026 (was -26, (Dec 2025)); critical for any delegated-authorization design touching SPAs because it codifies why pure-browser refresh tokens are deprecated."),
 
     ("draft-ietf-oauth-security-topics-update — Updates to OAuth 2.0 Security BCP",
      "An IETF WG draft that extends RFC 9700 with new countermeasures, notably rules against audience-injection attacks where a client authenticates to multiple authorization servers.",
@@ -363,7 +359,7 @@ draft_rows = [
      "An IETF individual draft introducing Invocation-Bound Capability Tokens (IBCTs) in two modes — compact (JWT/Ed25519) for single-hop and chained (Biscuit + Datalog) for multi-hop — with bindings for MCP, A2A, and HTTP APIs.",
      "https://datatracker.ietf.org/doc/draft-prakash-aip/",
      "IETF (individual)",
-     "Revision -00, 27 March 2026; technically strong — Biscuit + Datalog is well-suited to scope attenuation. The 'AIP' name collision with draft-singla-agent-identity-protocol and draft-aip-agent-identity-protocol is a blocking issue for WG adoption."),
+     "Revision -01, 19 Aug 2026 (was -00, 27 March 2026); technically strong — Biscuit + Datalog is well-suited to scope attenuation. The 'AIP' name collision with draft-singla-agent-identity-protocol and draft-aip-agent-identity-protocol is a blocking issue for WG adoption."),
 
     ("draft-goswami-agentic-jwt — Secure Intent Protocol: JWT-Compatible Agentic Identity and Workflow Management",
      "An IETF individual draft defining an Agentic JWT extension to OAuth 2.0 with a Supervisor Agent role for sub-agent coordination, explicitly addressing the 'intent-execution separation' gap and adding workflow-step authorization.",
@@ -441,7 +437,7 @@ draft_rows = [
      "Defines a mechanism for delegating a batch of fine-grained, actor-bound permissions in a single request across multiple collaborating actors; uses RFC 9396 RAR to carry per-actor authorization_details and RFC 8693 Token Exchange for sub-agent delegation, targeting multi-agent orchestration where a leader-agent receives batch permissions and delegates subsets to sub-agents.",
      "https://datatracker.ietf.org/doc/draft-ni-oauth-batch-authorization-delegation/",
      "IETF (individual)",
-     "Revision -00, 3 Jul 2026; authors: Ni Yuan, Peter Chunchi Liu (Huawei). Addresses the round-trip overhead problem in large-scale multi-agent orchestration — individual delegation exchanges per sub-agent don't scale. Complements draft-song-oauth-ai-agent-collaborate-authz (same Huawei group, coordination focus) and draft-niyikiza-oauth-attenuating-agent-tokens (attenuation semantics). The RAR-based batch approach aligns well with the OAuth WG's RAR investment."),
+     "Revision -00, 3 Jul 2026; authors: Ni Yuan, Peter Chunchi Liu (Huawei). Addresses the round-trip overhead problem in large-scale multi-agent orchestration — individual delegation exchanges per sub-agent don't scale. Complements draft-song-oauth-ai-agent-collaborate-authz (same Huawei group, coordination focus) and draft-niyikiza-oauth-attenuating-agent-tokens (attenuation semantics). The RAR-based batch approach aligns well with the OAuth WG's RAR investment. **SUPERSEDES draft-ni-batch-authorization-delegation**, which Datatracker marks Replaced by this draft. That older row was removed from the corpus on 26 Aug 2026 — it was tracked separately and had become a duplicate of this one under the pre-rename slug."),
 
     ("draft-liu-oauth-a2a-profile — Agent-to-Agent (A2A) Profile for OAuth Transaction Tokens",
      "Defines a profile for using OAuth Transaction Tokens in distributed agent-to-agent communication scenarios; specifies mechanisms for embedding call-chain context within tokens to preserve agent identity, authorization information, and operational flow across agent workloads in trusted environments.",
@@ -490,7 +486,7 @@ draft_rows = [
      "An IETF individual draft defining a JSON-based audit record with mandatory fields (agent identity, action classification, outcome tracking, trust level) using RFC 8785 JSON Canonicalization and RFC 9562 UUIDs.",
      "https://datatracker.ietf.org/doc/draft-sharif-agent-audit-trail/",
      "IETF (individual)",
-     "Revision -00, 29 March 2026; orthogonal to delegation but important for compliance — standardized audit-log format is a genuine gap. Complements identity frameworks well. A sibling/alternative to the Kuehlewind audit architecture which takes a far more ambitious cross-layer approach."),
+     "Revision -01, 19 Aug 2026 (was -00, 29 March 2026); orthogonal to delegation but important for compliance — standardized audit-log format is a genuine gap. Complements identity frameworks well. A sibling/alternative to the Kuehlewind audit architecture which takes a far more ambitious cross-layer approach."),
 
     ("draft-aiendpoint-ai-discovery — The AI Discovery Endpoint",
      "An IETF individual draft defining a /.well-known/ai URI suffix for programmatic service capability discovery by AI agents — letting agents discover what an endpoint supports without having to parse human-oriented documentation; requests IANA well-known URI registration.",
@@ -538,7 +534,7 @@ draft_rows = [
      "Addresses how agent communication protocols carry claims about user authority, agent instance identity, tool or external-resource identity, delegation state, session continuity, and action evidence; each claim has a different verifier, freshness requirement, failure mode, and security consequence, requiring explicit binding rather than collapsing all claims into a single assertion.",
      "https://datatracker.ietf.org/doc/draft-bu-agentproto-security-principal-binding/",
      "IETF (individual)",
-     "Revision -05, 9 Aug 2026 (was -02, Jul 2026). Fills a gap in the AGTP family (draft-hood-independent-agtp in corpus) and is relevant to any agent communication protocol carrying mixed-provenance claims. The verifier-separation model is the missing security architecture layer between protocol transport and authorization enforcement."),
+     "Revision -06, 17 Aug 2026 (was -05, 9 Aug 2026) (was -02, Jul 2026). Fills a gap in the AGTP family (draft-hood-independent-agtp in corpus) and is relevant to any agent communication protocol carrying mixed-provenance claims. The verifier-separation model is the missing security architecture layer between protocol transport and authorization enforcement."),
 
     # ---- Individual drafts: Security Requirements / Frameworks cluster ----
     ("draft-fane-opena2a-aap — OpenA2A Agent Authorization Protocol (AAP)",
@@ -559,17 +555,17 @@ draft_rows = [
      "IETF (individual)",
      "Revision -03, 1 Aug 2026 (was -00, Jul 28 2026); author: Chapman. Adds the transport-security and semantic-governance layer the A2A protocol family was missing. MLS binding anchors agent identity to Ed25519 did:key DIDs. The Governed Object envelope's purpose-declaration mechanism directly addresses the intent-drift threat identified in draft-jiang-intent-security (corpus). Likely to be referenced by other A2A family drafts as the baseline confidentiality profile."),
 
-    ("draft-rosenberg-aiproto-framework — Framework, Use Cases and Requirements for AI Agent Protocols",
-     "An IETF individual draft providing a comprehensive AI-agent communications framework that covers user↔agent, agent↔API, and agent↔agent interactions; surveys MCP, A2A, and Agntcy; and sets the stage for IETF standards activity.",
-     "https://datatracker.ietf.org/doc/draft-rosenberg-aiproto-framework/",
+    ("draft-rosenberg-agentproto-usecases — Framework, Use Cases and Requirements for AI Agent Protocols",
+     "AI Agents are software applications that utilize Large Language Models (LLM)s to interact with humans (or other AI Agents) for purposes of performing tasks. AI Agents can make use of resources - including APIs and documents - to perform those tasks, and are capable of reasoning about which resources to use. To facilitate AI agent operation, AI agents need to communicate with users, and then interact with other resources over the Internet, including APIs and other AI agents. This document describes a framework for AI Agent communications on the Internet, identifying the various protocols that come into play. It introduces use cases that motivate features and functions that need to be present in those protocols. It also provides a brief survey of existing work in standardizing AI agent protocols, including the Model Context Protocol (MCP), the Agent to Agent Protocol (A2A) and the Agntcy Framework, and describes how those works fit into this framework. The primary objective of this document is to set the stage for possible standards activity at the IETF in this space.",
+     "https://datatracker.ietf.org/doc/draft-rosenberg-agentproto-usecases/",
      "IETF (individual)",
-     "Revision -00, October 2025; Rosenberg (Five9) and Jennings (Cisco) are credible long-time IETF contributors. Important landscape document but likely expired (April 2026); watch for a -01 refresh post-IETF 123."),
+     "Revision -00, checked 26 Aug 2026. **Re-slugged: this draft was tracked as draft-rosenberg-aiproto-framework until 26 Aug 2026**, which Datatracker marks Replaced by this one. Row updated to the current name, URL and abstract; the old slug is recorded here so searches for it still land. Previously filed in the corpus as “draft-rosenberg-aiproto-framework — Framework, Use Cases and Requirements for AI Agent Protocols”."),
 
     ("draft-rosenberg-aiproto-cheq — CHEQ: A Protocol for Confirmation of AI Agent Decisions (HITL)",
      "An IETF individual draft defining an out-of-band Human-in-the-Loop confirmation protocol for agent tool calls, eliminating LLM-hallucination risk for consequential actions and enabling sensitive operations (e.g., banking) without exposing data to the agent.",
      "https://datatracker.ietf.org/doc/draft-rosenberg-aiproto-cheq/",
      "IETF (individual)",
-     "Revision -00, October 2025; out-of-band HITL confirmation model is valuable and complements delegation frameworks. Likely expired (April 2026); worth tracking for a -01 refresh."),
+     "Revision -00, October 2025; out-of-band HITL confirmation model is valuable and complements delegation frameworks. Likely expired (April 2026); worth tracking for a -01 refresh. **EXPIRED on Datatracker** (expired 23 Apr 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
 
     ("draft-sharif-agent-payment-trust — Trust Scoring and Identity Verification for AI Agent Payment Transactions (SUPERSEDED)",
      "An IETF individual draft introducing an Agent Passport — a cryptographic delegation certificate intended to serve as the PSD2 'something you have' factor — and a trust-scoring model for payment transactions mapped to PCI DSS v4.0.1.",
@@ -581,7 +577,7 @@ draft_rows = [
      "An IETF individual draft translating use cases and service requirements from 3GPP TR 22.870 into IETF agent-protocol requirements, covering autonomous vehicles, privacy preservation, and anomaly detection.",
      "https://datatracker.ietf.org/doc/draft-stephan-ai-agent-6g/",
      "IETF (individual)",
-     "Revision -02, October 2025; strong operator backing (Orange, Deutsche Telekom, Telefonica, China Mobile, Huawei). Requirements-oriented and important for 3GPP/IETF coordination. May be expired (April 2026); watch for an update."),
+     "Revision -02, October 2025; strong operator backing (Orange, Deutsche Telekom, Telefonica, China Mobile, Huawei). Requirements-oriented and important for 3GPP/IETF coordination. May be expired (April 2026); watch for an update. **EXPIRED on Datatracker** (expired 23 Apr 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
 
     ("draft-jimenez-t2trg-iot-agent — Agentic AI Operation of Constrained RESTful Environments",
      "An IETF individual draft (T2TRG affiliated) describing agentic AI (ReAct, smolagents) operating on CoAP/CoRE constrained-IoT environments, with a reference implementation provided.",
@@ -605,7 +601,7 @@ draft_rows = [
      "An IETF individual draft adding requested_actor and actor_token parameters to the OAuth authorization-code flow so the user gives explicit consent per agent, with the resulting delegation chain documented in the access-token claims.",
      "https://datatracker.ietf.org/doc/draft-oauth-ai-agents-on-behalf-of-user/",
      "IETF (individual)",
-     "Revision -02 was submitted August 2025; likely due for -03 refresh. Builds naturally on RFC 6749 + RFC 8693 + RFC 7636 PKCE — one of the most 'IETF-ready' delegation drafts and a strong WG-adoption candidate after the OAuth recharter."),
+     "Revision -02 was submitted August 2025; likely due for -03 refresh. Builds naturally on RFC 6749 + RFC 8693 + RFC 7636 PKCE — one of the most 'IETF-ready' delegation drafts and a strong WG-adoption candidate after the OAuth recharter. **EXPIRED on Datatracker** (expired 27 Feb 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
 
     ("draft-rosomakho-oauth-txn-challenge — OAuth Transaction Authorization Challenge",
      "An OAuth mechanism enabling protected resources to demand transaction-specific authorization through challenges. When a request involves an agent or automated workflow, the RS returns a challenge to the client; the client presents it to the AS, which validates it, obtains human approval, and issues an access token with RFC 9396 authorization_details describing the approved operation. Positions as complementary to RFC 9470 (Step-Up Authentication) — that spec handles authentication freshness; this one handles authorization specificity.",
@@ -704,7 +700,7 @@ draft_rows = [
      "Addresses how to answer accountability questions about cross-domain autonomous agent actions for auditors and regulators who do not trust the operator; defines a composition model assembling multiple independently verifiable artifacts (workload credentials, delegation tokens, action capsules, attestation results) into a single accountability record with a conformance evaluation framework.",
      "https://datatracker.ietf.org/doc/draft-mih-sato-agent-accountability-composition/",
      "IETF (individual)",
-     "Revision -00, Jul 2026; authors: Steven Mih (Action State Group) + Tom Sato (MyAuberge K.K.) — collaboration between the two principal authors of draft-mih-scitt-agent-action-capsule (corpus) and the SOOS governance suite (corpus). Operates above individual SCITT profiles; the accountability-composition layer the kuehlewind-audit-architecture HUB depends on but does not yet specify."),
+     "Revision -01, 16 Aug 2026 (was -00, Jul 2026); authors: Steven Mih (Action State Group) + Tom Sato (MyAuberge K.K.) — collaboration between the two principal authors of draft-mih-scitt-agent-action-capsule (corpus) and the SOOS governance suite (corpus). Operates above individual SCITT profiles; the accountability-composition layer the kuehlewind-audit-architecture HUB depends on but does not yet specify."),
 
     ("draft-car-rer-artifact — RER Run Artifact Format: Hash-Chained, Signed Records of AI Inference Execution",
      "Specifies a cryptographically signed JSON record for AI inference runs including a signed envelope declaring permissions and limits, a hash-chained event log covering all model and tool calls, and a runtime signature binding envelope and log to the producing implementation. Enables offline verification by parties uninvolved in the original run.",
@@ -716,7 +712,7 @@ draft_rows = [
      "Defines a minimal SCITT profile: COSE_Sign1 Signed Statements with canonicalized payloads, hash-chained for ordering, registrable in SCITT Transparency Services. Explicitly does NOT assert agent correctness, safety, or real-world outcomes — only tamper-evident, signature-verifiable records of action, principal, policy identity, and verdict.",
      "https://datatracker.ietf.org/doc/draft-noa-scitt-ai-agent-receipt/",
      "IETF (individual)",
-     "Revision -00, 23 Jun 2026; author: Tora Toraman (NordenSoft). The minimalist end of the SCITT profile spectrum; useful for corpus completeness alongside the more comprehensive draft-mih-scitt-agent-action-capsule."),
+     "Revision -01, 15 Aug 2026 (was -00, 23 Jun 2026); author: Tora Toraman (NordenSoft). The minimalist end of the SCITT profile spectrum; useful for corpus completeness alongside the more comprehensive draft-mih-scitt-agent-action-capsule."),
 
     ("draft-rampalli-scitt-capsule-provenance-binding — Binding Per-Action Authorization and Memory Provenance into Agent Action Capsules",
      "Specifies how to bind three components into AAC records: what was executed ('did'), whether it was authorized ('may'), and the source of the belief that motivated the action ('why-believed'); uses optional payload extensions carrying authorization token references, memory chain roots, and quarantine attestations without modifying AAC core protected-header claims.",
@@ -745,19 +741,14 @@ draft_rows = [
      "Defines the EMILIA Protocol (EP) authorization receipt — a COSE_Sign1 artifact that cryptographically binds a named human principal to a specific high-risk agent action before execution, providing auditors and counterparties a tamper-evident record that a real human authorized the consequential step.",
      "https://datatracker.ietf.org/doc/draft-schrock-ep-authorization-receipts/",
      "IETF (individual)",
-     "Revision -11, 10 Aug 2026 (was -08, Jul 21 2026). The base artifact for the EMILIA Protocol family; companion drafts draft-schrock-ep-authorization-evidence-chain, draft-schrock-ep-action-evidence-graph, draft-schrock-ep-quorum, and draft-schrock-ep-evidence-record all build on or reference this receipt format. Active iteration pace — -08 by late Jul 2026. Draft-rampalli-cross-org-delegation-mapping (corpus) formally maps EMILIA Protocol receipts against the nine reece-wimse-cross-org-delegation requirements."),
+     "Revision -12, 16 Aug 2026 (was -11, 10 Aug 2026) (was -08, Jul 21 2026). The base artifact for the EMILIA Protocol family; companion drafts draft-schrock-ep-authorization-evidence-chain, draft-schrock-ep-action-evidence-graph, draft-schrock-ep-quorum, and draft-schrock-ep-evidence-record all build on or reference this receipt format. Active iteration pace — -08 by late Jul 2026. Draft-rampalli-cross-org-delegation-mapping (corpus) formally maps EMILIA Protocol receipts against the nine reece-wimse-cross-org-delegation requirements."),
 
-    ("draft-schrock-ep-action-evidence-graph — Action Evidence Graphs and Evidence Policy Replay for High-Risk Agent Actions (EP-AEG)",
-     "Composes the full set of signed artifacts about an AI agent action — workload identity credentials, delegation tokens, transaction tokens, runtime attestation results, pre-execution policy permits, and EMILIA Protocol authorization receipts — into a single verifiable action evidence graph; defines evidence policy replay for auditing past actions against policy versions current at the time.",
-     "https://datatracker.ietf.org/doc/draft-schrock-ep-action-evidence-graph/",
-     "IETF (individual)",
-     "Revision -00, Jul 2026. The graph composition layer above the individual SCITT profiles and receipts already in corpus; the 'single verifiable artifact' problem that draft-nobuo-scitt-composite-evidence-verification (corpus) approaches from the SCITT statement side. Together these two drafts define the evidence graph landscape."),
 
     ("draft-schrock-ep-authorization-evidence-chain — Authorization Evidence Chains: Composing Heterogeneous Agent-Authorization Receipts (EP-AEC)",
      "Defines a mechanism for composing EMILIA Protocol authorization receipts from different systems and issuers into a single authorization evidence chain, enabling auditors to verify a heterogeneous chain of human approvals across organizational boundaries without requiring a common receipt format.",
      "https://datatracker.ietf.org/doc/draft-schrock-ep-authorization-evidence-chain/",
      "IETF (individual)",
-     "Revision -05, 3 Aug 2026 (was -02, Jul 2026). The cross-system interoperability layer for EMILIA Protocol receipts; directly addresses the scenario where draft-reece-wimse-cross-org-delegation (corpus) operates and authorization evidence must span administrative domains. Rev-02 indicates active development."),
+     "Revision -05, 3 Aug 2026 (was -02, Jul 2026). The cross-system interoperability layer for EMILIA Protocol receipts; directly addresses the scenario where draft-reece-wimse-cross-org-delegation (corpus) operates and authorization evidence must span administrative domains. Rev-02 indicates active development. **SUPERSEDES draft-schrock-ep-action-evidence-graph**, which Datatracker marks Replaced by this draft. That older row was removed from the corpus on 26 Aug 2026 — it was tracked separately and had become a duplicate of this one under the pre-rename slug."),
 
     ("draft-schrock-ep-quorum — Multi-Party Quorum Authorization for High-Risk Agent Actions (EP-QUORUM)",
      "Defines EP-QUORUM, a multi-party authorization profile for EMILIA Protocol authorization receipts; extends the base receipt (which binds one human to one action) to require a quorum of named human approvals before an action may proceed, with configurable thresholds, role requirements, and time-bounded approval windows.",
@@ -781,7 +772,7 @@ draft_rows = [
      "Defines a JWS-based single-use, short-lived token binding a specific human-approved action to the exact rendered disclosure text the approver saw — 'What You See Is What You Sign' (WYSIWYG) — with optional binding to a concrete HTTP request. Requires hardware-resident secure element signature and device runtime integrity assessment.",
      "https://datatracker.ietf.org/doc/draft-thallapelly-oasnt/",
      "IETF (individual)",
-     "Revision -01, Jul 24 2026 (first filed Jul 21 2026); author: Thallapelly. Hardware-bound, WYSIWYG authorization token — distinct from software-only pre-action permit approaches such as draft-kumaresan-counter-sign (above) and the EMILIA Protocol family. The WYSIWYG disclosure binding addresses UI redress attacks where an agent's rendered action description differs from the actual HTTP request being authorized. Hardware PoP requirement makes this the highest-assurance pre-action permit in the current wave."),
+     "Revision -02, 15 Aug 2026 (was -01, Jul 24 2026) (first filed Jul 21 2026); author: Thallapelly. Hardware-bound, WYSIWYG authorization token — distinct from software-only pre-action permit approaches such as draft-kumaresan-counter-sign (above) and the EMILIA Protocol family. The WYSIWYG disclosure binding addresses UI redress attacks where an agent's rendered action description differs from the actual HTTP request being authorized. Hardware PoP requirement makes this the highest-assurance pre-action permit in the current wave."),
 
     ("draft-tsyrulnikov-rats-attested-inference-receipt — Attested Inference Receipt (AIR): A COSE/CWT Profile for Confidential AI Inference",
      "Defines the Attested Inference Receipt (AIR), a COSE_Sign1 envelope carrying CWT claims profiled per the Entity Attestation Token (EAT) framework; an AIR receipt cryptographically binds model identity, input/output hashes, TEE attestation evidence, and operational telemetry into a single signed artifact verifiable by parties not present at inference time.",
@@ -798,7 +789,7 @@ draft_rows = [
      "Introduces the Mandate JWT — a WIMSE workload credential profile binding agent authority to specific Sovereign Object instances under named human principals, with cryptographically enforced delegation ceilings and a six-dimensional Narrowing Property preventing sub-agents from exceeding root authority.",
      "https://datatracker.ietf.org/doc/draft-sato-soos-mjwt/",
      "IETF (individual)",
-     "Revision -01, 10 Jun 2026; author: Tom Sato (MyAuberge K.K.). The authorization token primitive for the SOOS governance protocol family. Directly comparable to draft-mcguinness-oauth-client-instance-assertion but uses a WIMSE/Sovereign Object substrate rather than OAuth."),
+     "Revision -04, 13 Aug 2026 (was -01, 10 Jun 2026); author: Tom Sato (MyAuberge K.K.). The authorization token primitive for the SOOS governance protocol family. Directly comparable to draft-mcguinness-oauth-client-instance-assertion but uses a WIMSE/Sovereign Object substrate rather than OAuth."),
 
     ("draft-sato-soos-mad — Multi-Agent Delegation in Sovereign Object Systems",
      "Specifies three core mechanisms for multi-agent delegation accountability: the Narrowing Property (capability non-amplification), five formally defined object topology patterns for runtime relationships, and cluster coordination primitives for parallel execution with aggregation rules. Version 02 adds revocation-during-execution handling and partial-completion routing to human oversight.",
@@ -822,7 +813,7 @@ draft_rows = [
      "Defines GAR, an audit framework with five audit types, a Session Audit Record, and an Audit Alert mechanism; collects, signs, and makes governance events from IDP, HEM, and associated SOOS primitives available for regulatory inspection via an append-only, non-suppressible SCITT-anchored audit stream with Authority Lifecycle Events covering the complete revocation-recovery cycle.",
      "https://datatracker.ietf.org/doc/draft-sato-soos-gar/",
      "IETF (individual)",
-     "Revision -03, 28 Jun 2026 (was -02 Jun 10). -03 added OpenTelemetry attribute namespace for governance observability, a GAR Processor spec for converting OTel signals to audit records with integrity verification, four new Authority Lifecycle Event categories (policy conflict scenarios, statutory interpretation changes), and mandatory provenance fields for policy evaluation records. The integrator for the SOOS family, analogous to how draft-kuehlewind-audit-architecture integrates the broader IETF agent draft landscape."),
+     "Revision -06, 25 Aug 2026 (was -03, 28 Jun 2026) (was -02 Jun 10). -03 added OpenTelemetry attribute namespace for governance observability, a GAR Processor spec for converting OTel signals to audit records with integrity verification, four new Authority Lifecycle Event categories (policy conflict scenarios, statutory interpretation changes), and mandatory provenance fields for policy evaluation records. The integrator for the SOOS family, analogous to how draft-kuehlewind-audit-architecture integrates the broader IETF agent draft landscape."),
 
     # ---- Individual drafts: Security analysis / intent / adjacent protocols cluster ----
     ("draft-jiang-intent-security — Security Considerations and Requirements for Intent-Based Requests in Agentic Systems",
@@ -865,13 +856,13 @@ draft_rows = [
      "Surveys single-domain to multi-domain deployment scenarios for AI Agent Gateways and identifies concrete gaps where existing protocols (specifically MCP and Google's A2A) cannot satisfy governance, policy enforcement, and cross-organizational trust requirements — particularly in regulated financial services and telecom environments.",
      "https://datatracker.ietf.org/doc/draft-dunbar-dmsc-gw-scenarios-gap-analysis/",
      "IETF (individual)",
-     "Revision -03, 7 Aug 2026 (was -02, Jul 2 2026); authors: Linda Dunbar (Futurewei), YiFei Wang (China Telecom), Bing Liu (Huawei). The most directly useful DMSC document for the boundary analysis: explicitly names MCP and A2A as insufficient and articulates where the DMSC gateway fills the gap. The regulated-environment focus (financial services, telco) distinguishes DMSC's use-case target from OAuth-centric approaches."),
+     "Revision -04, 14 Aug 2026 (was -03, 7 Aug 2026) (was -02, Jul 2 2026); authors: Linda Dunbar (Futurewei), YiFei Wang (China Telecom), Bing Liu (Huawei). The most directly useful DMSC document for the boundary analysis: explicitly names MCP and A2A as insufficient and articulates where the DMSC gateway fills the gap. The regulated-environment focus (financial services, telco) distinguishes DMSC's use-case target from OAuth-centric approaches."),
 
     ("draft-somoza-dmsc-atn-agent-trust-negotiation — Agent Trust Negotiation: Capability, Delegation, and Provenance Binding",
      "Specifies the Agent Trust Negotiation (ATN) protocol, which binds four artifacts — capability manifests, delegation chains, provenance attestations, and session receipts — to agent identities via a handshake state machine producing mutually verified, scope-bounded sessions with SCITT-suitable audit records.",
      "https://datatracker.ietf.org/doc/draft-somoza-dmsc-atn-agent-trust-negotiation/",
      "IETF (individual)",
-     "Revision -00, 29 May 2026; author: Enrique Somoza (Independent). Operates above discovery mechanisms and positions itself between the discovery layer (DAWN, MCP) and the authorization layer (WIMSE, OAuth). Relevant as an agent-to-agent trust establishment handshake protocol."),
+     "Revision -00, 29 May 2026; author: Enrique Somoza (Independent). Operates above discovery mechanisms and positions itself between the discovery layer (DAWN, MCP) and the authorization layer (WIMSE, OAuth). Relevant as an agent-to-agent trust establishment handshake protocol. **SUPERSEDES draft-somoza-atn-agent-trust-negotiation**, which Datatracker marks Replaced by this draft. That older row was removed from the corpus on 26 Aug 2026 — it was tracked separately and had become a duplicate of this one under the pre-rename slug."),
 
     ("draft-mcgraw-httpapi-agent-budget — The Delegation HTTP Authentication Scheme for Request-Bound Authority",
      "Defines the 'Delegation' HTTP authentication scheme and response semantics for delegated-authority challenges using HTTP status codes and Problem Details, plus a CBOR/COSE proof format. The initial authority profile is 'Budget,' using post-quantum ML-DSA to prove spending or resource-consumption limits.",
@@ -907,7 +898,7 @@ draft_rows = [
      "A framework-level analysis enumerating agentic authorization use cases — delegated task execution, multi-agent coordination, long-running workflows, capability attenuation — and mapping each against current OAuth 2.0 mechanisms to identify gaps that require new extensions or profiles.",
      "https://datatracker.ietf.org/doc/draft-chen-oauth-agent-authz-use-cases/",
      "IETF (individual)",
-     "Revision -01, 5 Jul 2026; useful problem-statement companion to the OAuth recharter's 'Complex Delegation' milestone. Gap analysis directly motivates several other drafts in this corpus — a natural reference document for the OAuth WG scoping discussion."),
+     "Revision -03, 25 Aug 2026 (was -01, 5 Jul 2026); useful problem-statement companion to the OAuth recharter's 'Complex Delegation' milestone. Gap analysis directly motivates several other drafts in this corpus — a natural reference document for the OAuth WG scoping discussion."),
 
     ("draft-agnihotri-oauth-agent-impl-status — Implementation Status of OAuth Identity Chaining and Transaction Tokens",
      "An RFC 7942–compliant implementation status report tracking open-source implementations of draft-ietf-oauth-identity-chaining and draft-ietf-oauth-transaction-tokens against the relevant spec requirements.",
@@ -939,7 +930,1322 @@ draft_rows = [
      "IETF (WIMSE WG charter)",
      "Approved 18 March 2026 (v01); explicitly liaises with OAuth, SCIM, SCITT, RATS, the OpenID Foundation, and CNCF/SPIFFE — the formal scope statement that anchors all WIMSE draft work."),
 
-    # ---- Mission-Bound Authorization family (McGuinness) — 33 GitHub-only drafts, Aug 2026 sweep ----
+    # ---- Aug 2026 Datatracker sweep — new individual and WG drafts ----
+
+    ("draft-aap-oauth-profile — Agent Authorization Profile (AAP) for OAuth 2.0",
+     "This document defines the Agent Authorization Profile (AAP), an authorization profile for OAuth 2.0 and JWT designed for autonomous AI agents. AAP extends existing standards with structured claims and validation rules so that systems can reason about agent identity, task context, operational constraints, delegation chains, and human oversight requirements.",
+     "https://datatracker.ietf.org/doc/draft-aap-oauth-profile/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 11 Aug 2026; **now EXPIRED** on Datatracker (checked 26 Aug 2026). Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-ietf-wimse-workload-identity-practices — Workload Identity Practices",
+     "This document describes industry practices for providing secure identities to workloads in container orchestration, cloud platforms, and other workload platforms. It explains how workloads obtain credentials for external authentication purposes, without managing long-lived secrets directly.",
+     "https://datatracker.ietf.org/doc/draft-ietf-wimse-workload-identity-practices/",
+     "IETF (WIMSE WG)",
+     "Revision -06, 11 Aug 2026; advanced to IESG **AD Evaluation** as of 18 Aug 2026. WG-adopted draft. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-schrock-ep-bounded-capability-receipts — Bounded Capability Receipts and Durable Spend Control for Agent Actions",
+     "Agents sometimes need bounded authority to perform more than one consequential action without obtaining a new human approval for every operation. A signed token alone cannot enforce a shared budget across replicas, survive retries safely, or distinguish an operation that never crossed an effect boundary from one whose outcome is unknown.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ep-bounded-capability-receipts/",
+     "IETF (individual draft)",
+     "Revision -04, 11 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-chueayen-attestation-receipts — Enforcement Attestation Receipts for AI Inference Decisions",
+     "This document specifies a compact JSON attestation receipt for an AI inference decision. A receipt binds an outcome to a request hash under a published Ed25519 public key, so a party that does not trust the issuer's infrastructure can still verify offline what the issuer's signing key attested was decided.",
+     "https://datatracker.ietf.org/doc/draft-chueayen-attestation-receipts/",
+     "IETF (individual draft)",
+     "Revision -02, 8 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-bezerra-anchors-command-provenance — Anchors: Post-Quantum Command Provenance for Autonomous Machine Links",
+     "Autonomous machines such as uncrewed aircraft, ground robots, and spacecraft execute commands issued by human operators and, increasingly, by AI agents.",
+     "https://datatracker.ietf.org/doc/draft-bezerra-anchors-command-provenance/",
+     "IETF (individual draft)",
+     "Revision -01, 7 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-zehavi-oauth-authz-req-del-chain — OAuth Authorization Request Delegation Chain",
+     "Brokered OAuth redirect authorization requests involve intermediary authorization servers between a downstream client and the upstream authorization server that obtains user consent and issues tokens.",
+     "https://datatracker.ietf.org/doc/draft-zehavi-oauth-authz-req-del-chain/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 7 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-gazitt-oauth-authzen-issuance — AuthZEN Profile for OAuth 2.0 Token Issuance",
+     "Numerous OAuth 2.0 specifications define a moment at which an authorization server decides whether to issue a security token, and each of them declares the decision itself to be a matter of local policy that is out of scope. The result is that a decision common to every OAuth deployment has no interoperable expression.",
+     "https://datatracker.ietf.org/doc/draft-gazitt-oauth-authzen-issuance/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 5 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-gazitt-oauth-authzen-token-exchange — AuthZEN Binding for OAuth 2.0 Token Exchange",
+     "OAuth 2.0 Token Exchange (RFC 8693) defines the moment at which an authorization server decides whether one party may obtain a token to act as, or on behalf of, another. It states that the decision is governed by policy, and does not define that policy.",
+     "https://datatracker.ietf.org/doc/draft-gazitt-oauth-authzen-token-exchange/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 5 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-wang-dmsc-drisac — Distributed Registration and Information Synchronization of Agent Capabilities",
+     "The large-scale deployment of autonomous AI Agents introduces challenges to capability description, registration, and discovery. Existing agent communication protocols mainly focus on application- layer interactions and typically rely on centralized registration and discovery mechanisms, which limit scalability, robustness, and semantic extensibility.",
+     "https://datatracker.ietf.org/doc/draft-wang-dmsc-drisac/",
+     "IETF (DMSC-related, individual)",
+     "Revision -01, 18 Aug 2026 (was -00, 5 Aug 2026). Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-diaconu-agents-authz-info-sharing — Cross-Domain AuthZ Information sharing for Agents",
+     "Distributed Multi-Agent Systems consist of Agents and MCP Servers operating across multiple administrative domains, each with its own Identity Providers (IdPs) and Authorization Servers (AS).",
+     "https://datatracker.ietf.org/doc/draft-diaconu-agents-authz-info-sharing/",
+     "IETF (individual draft)",
+     "Revision -01, 4 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-ietf-wimse-http-signature — WIMSE Workload-to-Workload Authentication with HTTP Signatures",
+     "The WIMSE architecture defines authentication and authorization for software workloads in a variety of runtime environments, from the most basic ones to complex multi-service, multi-cloud, multi-tenant deployments. This document defines one of the mechanisms to provide workload authentication, using HTTP Signatures.",
+     "https://datatracker.ietf.org/doc/draft-ietf-wimse-http-signature/",
+     "IETF (WIMSE WG)",
+     "Revision -06, 4 Aug 2026. WG-adopted draft. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-carleton-workload-authz-grant — Workload Authorization Grant",
+     "This document profiles the Agent Identity Management System (AIMS) framework for agent platforms that host many agent instances per customer.",
+     "https://datatracker.ietf.org/doc/draft-carleton-workload-authz-grant/",
+     "IETF (individual draft)",
+     "Revision -00, 3 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-helixar-hdp-agentic-delegation — Human Delegation Provenance Protocol (HDP): Cryptographic Chain-of-Custody for Agentic AI Systems",
+     "Agentic AI systems operate on behalf of human principals, often delegating tasks through multi-step chains of AI agents. There is currently no standard mechanism to record who authorized an agent to act, under what scope, and through what chain of delegation, in a way that can be verified offline, without a central registry, and without third-party trust anchors.",
+     "https://datatracker.ietf.org/doc/draft-helixar-hdp-agentic-delegation/",
+     "IETF (individual draft)",
+     "Revision -01, 3 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-mcguinness-oauth-id-continuation-assertion — Identity Continuation Assertion for OAuth 2.0 Token Exchange",
+     "This document defines the Identity Continuation Assertion, a short- lived, sender-constrained JWT used as an OAuth 2.0 Token Exchange subject token. It lets an Identity Provider (IdP) issue an onward Identity Assertion JWT Authorization Grant (ID-JAG) when a user's request crosses service boundaries after the user is no longer present.",
+     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-id-continuation-assertion/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 26 Aug 2026 (was -00, 3 Aug 2026). Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-parecki-oauth-jwt-dpop-grant — OAuth 2.0 JWT Authorization Grant with DPoP Binding",
+     "This specification defines a new OAuth 2.0 authorization grant type that uses a JSON Web Token (JWT) assertion to request an access token that is bound to a specific key using the Demonstration of Proof-of- Possession (DPoP) mechanism. This provides a higher level of security than a simple bearer token, as the client must prove possession of the key to use the access token.",
+     "https://datatracker.ietf.org/doc/draft-parecki-oauth-jwt-dpop-grant/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 3 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 3 Aug 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-mih-agent-accountability-conformance — Agent Accountability: A Conformance and Verification Method",
+     "An architecture for auditing agent-driven interactions (draft- kuehlewind-audit-architecture) identifies the record types an auditable agent system produces — interaction, action, delegation, and authorization-transition — and the role of an Auditor that determines whether recorded behaviour matched intent and the authorization in force.",
+     "https://datatracker.ietf.org/doc/draft-mih-agent-accountability-conformance/",
+     "IETF (individual draft)",
+     "Revision -00, 1 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-okutomi-session-bound-agent-identity — A Verifier-Side Acceptance Profile for Channel-Bound Agent Identity and Authorization",
+     "This document defines a verifier-side acceptance profile for channel- bound Agent identity and authorization. It addresses context diversion, where cryptographically valid material is accepted for a different service, tenant, actor, task, target, delegation, or authority boundary than the verifier intended.",
+     "https://datatracker.ietf.org/doc/draft-okutomi-session-bound-agent-identity/",
+     "IETF (individual draft)",
+     "Revision -06, 30 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-richer-oauth-httpsig — OAuth Proof of Possession Tokens with HTTP Message Signatures",
+     "This extension to the OAuth 2.0 authorization framework defines a method for using HTTP Message Signatures to bind access tokens to keys held by OAuth 2.0 clients. Discussion Venues This note is to be removed before publishing as an RFC.",
+     "https://datatracker.ietf.org/doc/draft-richer-oauth-httpsig/",
+     "IETF (OAuth-related, individual)",
+     "Revision -03, 28 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-schrock-action-remedy-receipts — Action Remedy Receipts for Consequential Agent Effects",
+     "Revocation cannot undo an effect that already occurred. A dispute does not authorize a refund, return, reversal, or other remedy. This document defines Action Remedy Receipts for recording a bounded dispute decision and a fresh compensating action without rewriting the original action or effect.",
+     "https://datatracker.ietf.org/doc/draft-schrock-action-remedy-receipts/",
+     "IETF (individual draft)",
+     "Revision -00, 28 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-tonyai-a2a-trust — Agent-to-Agent Trust, Identity, and Verifiable Provenance",
+     "This document defines a trust model for agent-to-agent (A2A) interactions in multi-agent AI systems.",
+     "https://datatracker.ietf.org/doc/draft-tonyai-a2a-trust/",
+     "IETF (individual draft)",
+     "Revision -01, 25 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-ambekar-oauth-epop — JSON Web Token (JWT) Profile for OAuth 2.0 Enveloped Proof of Possession (EPOP)",
+     "This specification defines a profile for OAuth 2.0 sender-constrained credentials in which access tokens and refresh tokens are cryptographically bound to the client's private key as a single inseparable envelope.",
+     "https://datatracker.ietf.org/doc/draft-ambekar-oauth-epop/",
+     "IETF (OAuth-related, individual)",
+     "Revision -03, 24 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-parecki-oauth-refresh-token-scope-response — OAuth 2.0 Refresh Token Scope",
+     "This specification defines a new OAuth 2.0 token response parameter, refresh_token_scope, that indicates the scope authorized for a refresh token when it differs from the scope of the access token issued alongside it.",
+     "https://datatracker.ietf.org/doc/draft-parecki-oauth-refresh-token-scope-response/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 24 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-pro-adp-agent-discovery — Agent Discovery Protocol (ADP) v1.1 -- Well-Known Metadata and Interaction Layer",
+     "This document defines the Agent Discovery Protocol (ADP) v1.1, a layered protocol for discovering, verifying, and interacting with AI Agents on the Internet. ADP delegates DNS discovery to DNS-AID (SVCB records) and defines a Well-Known JSON metadata format, an Ed25519-based identity model, and the Agent Gateway Protocol (AGP) for real-time WebSocket messaging.",
+     "https://datatracker.ietf.org/doc/draft-pro-adp-agent-discovery/",
+     "IETF (individual draft)",
+     "Revision -02, 24 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-ietf-oauth-rfc7523bis — Updates to OAuth 2.0 JSON Web Token (JWT) Client Authentication and Assertion-Based Authorization Grants",
+     "This document updates RFC7521, RFC7522, RFC7523 and RFC9126 with respect to the treatment of audience values in OAuth 2.0 Client Assertion Authentication and Assertion-based Authorization Grants to address a security vulnerability identified in the previous requirements for those audience values in multiple OAuth 2.0 specifications.",
+     "https://datatracker.ietf.org/doc/draft-ietf-oauth-rfc7523bis/",
+     "IETF (OAuth WG)",
+     "Revision -11, 23 Jul 2026; entered the RFC Editor queue (touched 13 Aug 2026, rfceditor state 'In Progress'). WG-adopted draft. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-kavian-aep-oauth-session-credential — OAuth Bearer Session Credential Grant Type for the Agent Enrollment Protocol",
+     "This document defines the OAuth Bearer session-credential grant type for the Agent Enrollment Protocol (AEP). The grant type lets an AEP Service issue an OAuth-style Bearer access token through the AEP Grant command while preserving baseline AEP client assertion authentication as the root of trust.",
+     "https://datatracker.ietf.org/doc/draft-kavian-aep-oauth-session-credential/",
+     "IETF (OAuth-related, individual)",
+     "Revision -03, 24 Aug 2026 (was -02, 23 Jul 2026). Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-morrison-mcp-dns-discovery — Discovery of Model Context Protocol Servers via DNS TXT Records",
+     "This document defines a DNS-based mechanism for discovering Model Context Protocol (MCP) servers, the identity of the organisations that operate them, and a cryptographic identity envelope bound to an individual Sovereign-tier ~handle published under the same zone. Three TXT records are defined.",
+     "https://datatracker.ietf.org/doc/draft-morrison-mcp-dns-discovery/",
+     "IETF (individual draft)",
+     "Revision -05, 23 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-yossif-agent-mandate-problem — Problem Statement: Verifiable Human Mandates for Autonomous Agent Actions",
+     "An autonomous software agent commonly acts under authority a human granted at an earlier moment: the human expresses and authorizes an intent at one time, and the agent executes one or more concrete actions at a later time.",
+     "https://datatracker.ietf.org/doc/draft-yossif-agent-mandate-problem/",
+     "IETF (individual draft)",
+     "Revision -00, 22 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-araut-oauth-transactiontokens-bcp — OAuth Transaction Tokens Best Current Practice",
+     "This document provides best current practices for implementing and deploying OAuth 2.0 Transaction Tokens as specified in draft-ietf- oauth-transaction-tokens. Transaction Tokens (Txn-Tokens) enable workloads in a trusted domain to preserve and propagate user identity and authorization context across service boundaries during the processing of external programmatic requests.",
+     "https://datatracker.ietf.org/doc/draft-araut-oauth-transactiontokens-bcp/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-ccc-wimse-twi-extensions — WIMSE Extensions for Trustworthy Workload Identity",
+     "This document contains a gap analysis that is the output of the Confidential Computing Consortium identifying areas in the IETF WIMSE WG work where the current WIMSE architecture should be extended to accommodate workloads running in Confidential Computing environments. This document contains a high-level outline for these extensions.",
+     "https://datatracker.ietf.org/doc/draft-ccc-wimse-twi-extensions/",
+     "IETF (WIMSE-related, individual)",
+     "Revision -01, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 9 Jul 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-chen-ai-agent-auth-new-requirements — New requirements for Authentication and Authorization in the AI Agents era",
+     "AI Agents are rapidly evolving from academic concepts into the core engines driving next-generation applications. However, their autonomy, dynamic nature, and complex delegation relationships pose a fundamental challenge to our existing authentication and authorization frameworks, which were designed for human users and traditional software.",
+     "https://datatracker.ietf.org/doc/draft-chen-ai-agent-auth-new-requirements/",
+     "IETF (individual draft)",
+     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 10 Jul 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-dellaert-oauth-approval-based-dcr — OAuth 2.0 Approval-Based Dynamic Client Registration",
+     "This document specifies an extension to the OAuth 2.0 Dynamic Client Registration Protocol ([RFC7591]) that enables registration of a client with an authorization server through an explicit approval step performed by an approving party, typically the user running the client, without requiring the client to possess an Initial Access Token (IAT) beforehand.",
+     "https://datatracker.ietf.org/doc/draft-dellaert-oauth-approval-based-dcr/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-hemanth-oauth-ai-scopes — OAuth 2.0 Extension for AI Model Access",
+     "This document defines an extension to OAuth 2.0 for delegating scoped access to AI model APIs. It introduces a standardized scope syntax, resource indicators for AI providers, and token constraints suitable for AI workloads including spend limits and model restrictions.",
+     "https://datatracker.ietf.org/doc/draft-hemanth-oauth-ai-scopes/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 10 Jul 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-zhang-dmsc-mas-communication — Security Analysis of Multi-agents Secured Communication and Limitations of Existing Protocols",
+     "Multi-agents systems (MAS) increasingly cooperate through workflow, orchestrated, and mesh communication patterns. While existing Internet protocols provide confidentiality and endpoint authentication, they were not designed for agent-native semantics such as dynamic identity, computation-bounded requests, context integrity, and intermediary trust.",
+     "https://datatracker.ietf.org/doc/draft-zhang-dmsc-mas-communication/",
+     "IETF (DMSC-related, individual)",
+     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 20 Jul 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-aravind-oauth-decision-subject — Decision-Subject Representation for Agent Authorization",
+     "This document defines dsub, an OPTIONAL, descriptive claim naming the *decision subject*, the party an automated agent's action is taken _upon_, as distinct from the acting agent (act) and the delegating principal (sub).",
+     "https://datatracker.ietf.org/doc/draft-aravind-oauth-decision-subject/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 19 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-coetzee-oauth-spt-txn-tokens — Transaction-Bound Authorization Tokens for Software and AI Agents (SPT-Txn)",
+     "Current authorization is role-scoped: an actor is granted a role whose authority persists across every action it takes. This fails exactly when actors fail -- under compromise, prompt injection, or goal hijacking -- because a compromised actor retains full role authority.",
+     "https://datatracker.ietf.org/doc/draft-coetzee-oauth-spt-txn-tokens/",
+     "IETF (OAuth-related, individual)",
+     "Revision -03, 19 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-mcguinness-oauth-token-exchange-cnf — Confirmation Response Parameter for OAuth 2.0 Token Exchange",
+     "This specification defines a cnf response parameter for the OAuth 2.0 Token Exchange (RFC 8693) response. The parameter carries the confirmation method that the authorization server applied to the issued token, enabling clients to verify that sender-constraint binding (for example a DPoP key or mutual-TLS client certificate) was performed without inspecting the issued token.",
+     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-token-exchange-cnf/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 19 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-skyfire-oauth-id-verification — Identity Verification Methods Values",
+     "Knowing how a person's identity was verified can be important when making trust decisions. This specification defines a claim and values for declaring how the person's identity was verified.",
+     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-id-verification/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 19 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-ietf-wimse-mutual-tls — Workload Authentication Using Mutual TLS",
+     "The WIMSE architecture defines authentication and authorization for software workloads in a variety of runtime environments, from the most basic ones to complex multi-service, multi-cloud, multi-tenant deployments. This document profiles a workload authentication based on X.509 workload identity certificates using mutual TLS (mTLS).",
+     "https://datatracker.ietf.org/doc/draft-ietf-wimse-mutual-tls/",
+     "IETF (WIMSE WG)",
+     "Revision -02, 6 Jul 2026. WG-adopted draft. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-liu-ai-agent-authorization-integration — AI Agent Authorization Integration Framework",
+     "This document describes how to integrate multiple OAuth 2.0 extensions to enable secure authorization for AI agents acting on behalf of users. It combines cross-domain identity, policy-based authorization, user consent evidence, and multi-hop delegation into a cohesive framework for autonomous agent authorization.",
+     "https://datatracker.ietf.org/doc/draft-liu-ai-agent-authorization-integration/",
+     "IETF (individual draft)",
+     "Revision -00, 6 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-ni-agent-entity-discovery — DNS-based Entity-Level Discovery and End-to-End Connection for AI Agents",
+     "This document defines a new DNS resource record type, Agent Entity Discovery (AED), to publish agent-specific trust anchors or direct match constraints for verifying an agent's certificate or token. This enables the cross-domain users or agents to authenticate, and establish secure, end-to-end connections directly with a private- domain agent entity.",
+     "https://datatracker.ietf.org/doc/draft-ni-agent-entity-discovery/",
+     "IETF (individual draft)",
+     "Revision -00, 6 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-shang-campus-agent-scope-down — Campus Agent Identification and Scope-Down Access Control",
+     "AI agents operating in enterprise campus networks execute user- delegated Tasks by invoking multiple tools and services, often without continuous user supervision. Traditional authorization models assume stable applications and human-driven interactions, creating a mismatch when applied to autonomous agents that can chain actions across heterogeneous systems.",
+     "https://datatracker.ietf.org/doc/draft-shang-campus-agent-scope-down/",
+     "IETF (individual draft)",
+     "Revision -01, 6 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-yang-dmsc-gateway-mediation-layer — Gateway Mediation Layer for AI Agent Collaboration",
+     "Cross-domain and policy-controlled agent collaboration can require mediation decisions that are not always suitable for an agent client or an agent server alone.",
+     "https://datatracker.ietf.org/doc/draft-yang-dmsc-gateway-mediation-layer/",
+     "IETF (DMSC-related, individual)",
+     "Revision -00, 5 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-cui-dawn-mdi-model — An Information Model for Minimum Discoverable Information (MDI)",
+     "The Discovery of Agents, Workloads, and Named Entities (DAWN) terminology document defines Minimum Discoverable Information (MDI) as the minimum information an entity must provide to be discoverable, but does not define its field-level content.",
+     "https://datatracker.ietf.org/doc/draft-cui-dawn-mdi-model/",
+     "IETF (DAWN-related, individual)",
+     "Revision -00, 3 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-liu-oauth-cross-domain-txn-token — Cross-domain Transaction Tokens",
+     "This document describes a mechanism for Cross-Domain Transaction Tokens, which enables the safe maintenance and propagation of user identity, workload identities, and authorization context across multiple trust domains.",
+     "https://datatracker.ietf.org/doc/draft-liu-oauth-cross-domain-txn-token/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 3 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-schrock-action-evidence-boundary — The Action Evidence Boundary for Consequential Agent Effects",
+     "Consequential agent actions can cross identity, transport, authorization, policy, and execution systems. Each system can produce a valid artifact while the executor still lacks a safe rule for joining the artifacts to the exact effect, consuming one-time authority, and handling an uncertain outcome. This document defines the Action Evidence Boundary (AEB), an executor-side processing model for that lifecycle. AEB requires native artifact verification, Canonical Action Identifier (CAID) matching, Authorization Evidence Chain (AEC) satisfaction, a separate local authorization decision, durable atomic consumption or reservation, invocation, closed effect outcomes, and authenticated reconciliation. It defines no receipt or token format, no policy language, no universal evidence taxonomy, and no new registry. Native workload credentials, message signatures, attested per-action tokens, permit records, authorization receipts, and status mechanisms retain their own semantics and verifiers.",
+     "https://datatracker.ietf.org/doc/draft-schrock-action-evidence-boundary/",
+     "IETF (individual draft)",
+     "Revision -04, checked 26 Aug 2026. **Re-slugged: this draft was tracked as draft-schrock-agent-action-manifest until 26 Aug 2026**, which Datatracker marks Replaced by this one. Row updated to the current name, URL and abstract; the old slug is recorded here so searches for it still land. Previously filed in the corpus as “draft-schrock-agent-action-manifest — The Agent Action Control Manifest: A Public Effect-Boundary Control Plane for Machine Actions”."),
+
+    ("draft-schrock-human-authorization-binding — Binding Named-Human Authorization Evidence into Agent-Action Records",
+     "A recurring pattern spans the agent-action record formats now in development: a record about an agent's action reserves a place for \"the human authorization\" — an approver disposition, an authority context, a human-override field, an actor slot, a signed grant, an approval reference — and leaves its semantics undefined.",
+     "https://datatracker.ietf.org/doc/draft-schrock-human-authorization-binding/",
+     "IETF (individual draft)",
+     "Revision -00, 3 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-xkumakichi-xaip-receipts — Signed Execution Receipts for AI Agent Tool Calls (XAIP Receipts)",
+     "This document defines a wire format for signed execution receipts produced by AI agents when they invoke tools, services, or other agents.",
+     "https://datatracker.ietf.org/doc/draft-xkumakichi-xaip-receipts/",
+     "IETF (individual draft)",
+     "Revision -03, 2 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-yang-dmsc-gateway-semantic-layer — Gateway Mediation Layer for AI Agent Collaboration",
+     "Cross-domain and policy-controlled agent collaboration can require mediation decisions that are not always suitable for an agent client or an agent server alone.",
+     "https://datatracker.ietf.org/doc/draft-yang-dmsc-gateway-semantic-layer/",
+     "IETF (DMSC-related, individual)",
+     "Revision -02, 2 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+
+    ("draft-ayoub-agis-agent-identity-system — AgIS: An Agent Identity System for DNS-Backed Verification of AI and Software Agents",
+     "This document specifies AgIS, the Agent Identity System, a DNS-backed identity and verification profile for AI agents, autonomous software agents, and agentic services operating on the existing web.",
+     "https://datatracker.ietf.org/doc/draft-ayoub-agis-agent-identity-system/",
+     "IETF (individual draft)",
+     "Revision -00, 29 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-vicente-oauth-apm — Authorization Posture Mechanism (APM): Per-Transaction Consistency for OAuth 2.0",
+     "This document describes the Authorization Posture Mechanism (APM), a method by which an OAuth 2.0 [RFC6749] authorization server, or a resource server acting on its behalf, re-evaluates the mutual consistency of three bound factors -- the client certificate, the access token, and the device posture -- on a per-request basis for privileged operations, rather than only at session…",
+     "https://datatracker.ietf.org/doc/draft-vicente-oauth-apm/",
+     "IETF (OAuth-related, individual)",
+     "Revision -02, 28 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-duda-agent-id-framework — Self-Certifying Identity and Capability-Based Delegation for Autonomous AI Agents",
+     "We present an identity and delegation framework for secure AI agent communications. The framework introduces a set of entities including Client AI Agents, Service AI Agents, Agent Providers, and Agent Brokers, together with a Trustful Mutable Store responsible for maintaining cryptographically verifiable identity bindings.",
+     "https://datatracker.ietf.org/doc/draft-duda-agent-id-framework/",
+     "IETF (individual draft)",
+     "Revision -00, 26 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-liu-oauth-authorization-evidence — Authorization Evidence and Audit Trail for OAuth 2.0 Access Tokens",
+     "This specification defines an authorization details type for including authorization evidence and audit trail information in OAuth 2.0 access tokens using the Rich Authorization Requests (RAR) framework.",
+     "https://datatracker.ietf.org/doc/draft-liu-oauth-authorization-evidence/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 22 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-vandemeent-tibet-provenance — TIBET: Transaction/Interaction-Based Evidence Trail",
+     "This document defines TIBET (Transaction/Interaction-Based Evidence Trail), a data model and protocol for constructing cryptographically linked provenance chains over interactions between autonomous agents, human actors, and automated processes. A TIBET token captures four dimensions of provenance: content (ERIN), references (ERAAN), context (EROMHEEN), and intent (ERACHTER).",
+     "https://datatracker.ietf.org/doc/draft-vandemeent-tibet-provenance/",
+     "IETF (individual draft)",
+     "Revision -02, 17 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-car-agents-txt-wellknown — AGENTS.TXT: Capability Declarations for Web Agents",
+     "This document requests registration of two Well-Known URIs under the \"/.well-known/\" path: \"agents.txt\" and \"agents.json\".",
+     "https://datatracker.ietf.org/doc/draft-car-agents-txt-wellknown/",
+     "IETF (individual draft)",
+     "Revision -00, 12 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-liu-oauth-rego-policy — Rego Policy Language for OAuth 2.0 Authorization",
+     "AI agents exhibit dynamic, unpredictable behavior that cannot be fully described by traditional OAuth 2.0 scopes. This specification defines a behavioral authorization framework that enables clients, particularly AI agents, to propose Rego policy-based behavioral constraint contracts in OAuth 2.0 authorization flows using Rich Authorization Requests (RAR).",
+     "https://datatracker.ietf.org/doc/draft-liu-oauth-rego-policy/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 12 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-ekahraman-oauth-attestation-authz-native-app — OAuth 2.0 Attestation Based Authorization for Native Applications",
+     "This document defines an extension to OAuth 2.0 [RFC6749] that enables Authorization Servers to consider Attestation Results presented by Native Applications when issuing access grants.",
+     "https://datatracker.ietf.org/doc/draft-ekahraman-oauth-attestation-authz-native-app/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 20 Aug 2026 (was -00, 9 Jun 2026). Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-kay-dawn-use-cases — Use Cases for the Discovery of Agents, Workloads, and Named Entities",
+     "This document describes broad categories of use cases for the Discovery of Agents, Workloads, and Named Entities (DAWN). The purpose of the document is to illustrate situations in which entities need to discover other entities. This document does not define a discovery protocol, a registration procedure, a selection algorithm, or an agent-to-agent communication protocol.",
+     "https://datatracker.ietf.org/doc/draft-kay-dawn-use-cases/",
+     "IETF (DAWN-related, individual)",
+     "Revision -00, 7 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-reddy-wimse-workload-attestation — WIMSE Workload Attestation",
+     "This document extends the WIMSE workload-to-workload authentication architecture with a mechanism for conveying attestation across TLS- terminating proxies, a deployment topology where TLS-layer attestation mechanisms lose their end-to-end security properties.",
+     "https://datatracker.ietf.org/doc/draft-reddy-wimse-workload-attestation/",
+     "IETF (WIMSE-related, individual)",
+     "Revision -00, 7 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-madaras-preauth-receipts — PRE-RCT: Pre-Execution Authorization Receipt Format",
+     "This document defines PRE-RCT, the Pre-Execution Authorization Receipt, a cryptographically signed and attestation-aware receipt format used to record high-risk authorization events. PRE-RCT is intended for use with pre-execution authorization protocols such as GNA.",
+     "https://datatracker.ietf.org/doc/draft-madaras-preauth-receipts/",
+     "IETF (individual draft)",
+     "Revision -00, 6 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 6 Jun 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-fulz-oauth-trust-binding — OAuth Trust Binding Extension (OTBE)",
+     "This document defines the OAuth Trust Binding Extension (OTBE), a mechanism allowing Resource Owners to explicitly authorize which Authorization Servers may assert their identity towards Relying Parties, mitigating silent impersonation and namespace-based identity capture.",
+     "https://datatracker.ietf.org/doc/draft-fulz-oauth-trust-binding/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 30 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 31 May 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+
+    ("draft-drake-agent-identity-registry — Agent Identity Registry System: A Federated Architecture for Hardware-Anchored Identity of Autonomous Entities",
+     "The Internet's identity infrastructure assumes human principals. As autonomous entities -- AI agents, robotic systems, and other non- human actors -- increasingly participate in both Internet protocols and physical society, no existing standard provides them with persistent, verifiable, hardware-anchored identity.",
+     "https://datatracker.ietf.org/doc/draft-drake-agent-identity-registry/",
+     "IETF (individual draft)",
+     "Revision -03, 22 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-iannone-dawn-privacy-considerations — Privacy Considerations for the Discovery of Agents, Workloads, and Named Entities (DAWN)",
+     "This document describes the privacy issues associated with the Discovery of Agents, Workloads, and Named Entities (DAWN). It provides general observations about typical current privacy practices in similar domains like, DNS, HTTP, and in general privacy in information retrieval.",
+     "https://datatracker.ietf.org/doc/draft-iannone-dawn-privacy-considerations/",
+     "IETF (DAWN-related, individual)",
+     "Revision -00, 22 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-jiang-seat-dynamic-attestation — Dynamic Attestation for AI Agent Communication",
+     "This document describes a use case for conveying remote attestation information in association with Transport Layer Security (TLS) sessions in the context of AI agent communication.",
+     "https://datatracker.ietf.org/doc/draft-jiang-seat-dynamic-attestation/",
+     "IETF (RATS/SEAT-related, individual)",
+     "Revision -00, 17 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 17 May 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-novak-rats-twi-attestation — Remote Attestation for Trustworthy Workload Identity",
+     "Trustworthy Workloads are workloads that operate in environments that provide isolation of data in use. This document describes how Trustworthy Workloads can acquire credentials containing stable identifiers, upon proving the trust in the environments in which they operate via Remote Attestation.",
+     "https://datatracker.ietf.org/doc/draft-novak-rats-twi-attestation/",
+     "IETF (RATS/SEAT-related, individual)",
+     "Revision -00, 9 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked. **EXPIRED on Datatracker** (expired 9 May 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-jimenez-agent-directory — Agent Directory",
+     "This document defines the Agent Directory (AD), a service where agents register their identity, capabilities, and reachable endpoints and where clients discover them by capability.",
+     "https://datatracker.ietf.org/doc/draft-jimenez-agent-directory/",
+     "IETF (individual draft)",
+     "Revision -01, 8 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-hardt-aauth-bootstrap — AAuth Bootstrap Guidance",
+     "This document provides informational guidance for agent providers (APs) on enrolling agents and issuing AAuth agent tokens defined in [I-D.hardt-oauth-aauth-protocol]. It covers per-platform key handling, optional platform attestation, agent identifier strategies, and refresh patterns.",
+     "https://datatracker.ietf.org/doc/draft-hardt-aauth-bootstrap/",
+     "IETF (individual draft)",
+     "Revision -01, 6 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-abbott-mcp-ax — MCP Aggregation Protocol (MCP-AX): Hierarchical Tool Namespace Delegation for Model Context Protocol Servers",
+     "This document specifies MCP-AX, an aggregation protocol for Model Context Protocol (MCP) servers. MCP-AX enables hierarchical composition of tool namespaces across heterogeneous networks of MCP servers, from cloud services to resource-constrained embedded devices.",
+     "https://datatracker.ietf.org/doc/draft-abbott-mcp-ax/",
+     "IETF (individual draft)",
+     "Revision -00, 5 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+    ("draft-hori-agent-quality-graph — Agent Quality Graph (AQG): A Protocol for Evaluating AI Agent Trustworthiness via Delegation Graphs",
+     "This document describes the Agent Quality Graph (AQG) protocol, a method for evaluating and ranking AI agent trustworthiness based on delegation transaction graphs. As the number of autonomous AI agents grows rapidly, there is no standardized mechanism for determining which agents reliably complete delegated tasks.",
+     "https://datatracker.ietf.org/doc/draft-hori-agent-quality-graph/",
+     "IETF (individual draft)",
+     "Revision -00, 2 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
+
+
+    # ---- Reinstated 11 Aug 2026: Skyfire KYA/KYAPay + Hopley x402 receipt clusters ----
+
+    ("draft-hopley-x402-cancellation-receipt — Categorical Mandate Cancellation Receipt Format for Agentic-Payment Flows",
+     "This document specifies a categorical mandate cancellation receipt format for agentic-payment flows. The format records that a recurring-payment mandate or other standing payer-to-payee authorisation has been cancelled, by whom, for what reason, and with what effective date.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-cancellation-receipt/",
+     "IETF (individual draft)",
+     "Revision -01, 25 May 2026. Hopley x402 agentic-payment receipt cluster (4 drafts: compliance, settlement, refund, cancellation) — categorical receipt formats for agent-initiated payment flows. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+    ("draft-hopley-x402-compliance-receipt — Categorical Compliance Screening Receipt Format for Agentic-Payment Flows",
+     "This document specifies a categorical compliance screening receipt format for agentic-payment flows.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-compliance-receipt/",
+     "IETF (individual draft)",
+     "Revision -02, 25 May 2026. Hopley x402 agentic-payment receipt cluster (4 drafts: compliance, settlement, refund, cancellation) — categorical receipt formats for agent-initiated payment flows. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+    ("draft-hopley-x402-refund-receipt — Categorical Refund Receipt Format for Agentic-Payment Flows",
+     "This document specifies a categorical refund receipt format for agentic-payment flows.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-refund-receipt/",
+     "IETF (individual draft)",
+     "Revision -02, 25 May 2026. Hopley x402 agentic-payment receipt cluster (4 drafts: compliance, settlement, refund, cancellation) — categorical receipt formats for agent-initiated payment flows. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+    ("draft-hopley-x402-settlement-attestation — Categorical Settlement Attestation Format for Agentic-Payment Flows",
+     "This document specifies a categorical settlement attestation format for agentic-payment flows. The format records that a payment has reached a particular settlement state on a particular chain, at a particular instant, under the attesting party's risk model. The receipt format uses a closed enumeration of categorical outcomes (SETTLED, PENDING_FINALITY, REVERSED).",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-settlement-attestation/",
+     "IETF (individual draft)",
+     "Revision -01, 25 May 2026. Hopley x402 agentic-payment receipt cluster (4 drafts: compliance, settlement, refund, cancellation) — categorical receipt formats for agent-initiated payment flows. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+    ("draft-skyfire-oauth-aml-methods — Anti-Money Laundering Methods Values",
+     "Financial regulations require application of Anti-Money Laundering (AML) and Countering the Financing of Terrorism (CFT) methods in many jurisdictions worldwide. This specification defines a claim and values for declaring what AML/CFT methods were employed.",
+     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-aml-methods/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+    ("draft-skyfire-oauth-amr-values — Additional Authentication Method Reference Values",
+     "The JWT \"amr\" (Authentication Methods References) claim contains values conveying authentication methods used in the authentication. This specification defines additional Authentication Method Reference values beyond those already registered to represent additional authentication methods in use today.",
+     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-amr-values/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+    ("draft-skyfire-oauth-kyapay-token — KYAPay Token",
+     "This document defines a token format for agent identity and payment tokens in JSON Web Token (JWT) format. Authorization servers and resource servers from different vendors can leverage this token format to consume identity and payment tokens in an interoperable manner.",
+     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-kyapay-token/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+    ("draft-skyfire-oauth-kyapay-token-exchange — KYAPay Token Exchange",
+     "This specification describes how KYAPay tokens can be exchanged for OAuth access tokens to dynamically grant agents access to resources they need to accomplish their mission.",
+     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-kyapay-token-exchange/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+    ("draft-skyfire-oauth-using-kyapay-tokens — Using KYAPay Tokens",
+     "The KYAPay Token is a JSON Web Token (JWT) that carries verified identity (\"Know Your Agent\", KYA) and payment (PAY) information for requests made by software agents on behalf of human principals.",
+     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-using-kyapay-tokens/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
+
+
+    # ---- 26 Aug 2026 Datatracker sweep — new individual + WG drafts ----
+    # 68 recently-active candidates found; 39 kept under the 11 Aug 2026 curation bar.
+    # Notable: one new OAuth WG draft (rar-metadata-remediation), the six-draft Morrison
+    # ~handle identity family, and the NHE / VERA / AgentEnvelope autonomy-gating cluster.
+
+    ("draft-morrison-mcp-tool-surface-names-registry — An IANA Registry for Model Context Protocol Tool Surface Names",
+     "This document requests the establishment of an IANA registry for Model Context Protocol [MCP-SPEC] tool surface names. A tool surface name is the wire-level identifier by which a client invokes a typed capability on an MCP server. Existing Morrison- family Internet- Drafts ([ORGALTER]) request IANA registration of specific surface names against a registry that does not yet exist. This document establishes the registry mechanism so that subsequent specifications can register names without restating the registry's structure or registration procedure. The registry uses Specification Required registration with a Designated Expert pool [RFC8126]. Initial contents are the four surface names registered by [ORGALTER]. Vendor-prefix conventions are recommended but not mandated.",
+     "https://datatracker.ietf.org/doc/draft-morrison-mcp-tool-surface-names-registry/",
+     "IETF (individual)",
+     "Revision -01, 11 Aug 2026. Requests an IANA registry for MCP tool surface names. Morrison family plumbing — exists because other Morrison drafts already request registrations against a registry that does not yet exist. Structural, not conceptual, but it is the family's dependency root."),
+
+    ("draft-morrison-identity-pronouns — Identity Pronouns: A Reference-Axis Extension to ~handle Identity Systems",
+     "This document defines an identity pronoun grammar as a reference axis orthogonal to the ~handle identity tier taxonomy defined in [MCPDNS] and [IDCOMMITS]. A pronoun is a session-scoped reference that resolves client-side to a concrete handle using local session state before any cryptographic, DNS, or federation operation. The entity- class taxonomy (Sovereign, Bot, Instrument) is unchanged; this specification introduces Absolute vs Pronoun as an orthogonal axis. A pronoun MUST NOT appear in a capability token, in a DNS record, in an Accord signature, or in any inter-organisational protocol payload. The reference implementation defines a single Wave-1 pronoun, ~org, that resolves to the concrete handle of the organisation bound to the caller's current session. An appendix defines a relative-path pronoun grammar (e.g. ~./architect, ~../weaver) as a non-normative design surface for future work. The mechanism is provider-neutral, introduces no new cryptographic primitive, and imposes zero new load on DNS, capability-token issuers, or federated resolvers.",
+     "https://datatracker.ietf.org/doc/draft-morrison-identity-pronouns/",
+     "IETF (individual)",
+     "Revision -02, 11 Aug 2026. Session-scoped 'pronoun' references that resolve client-side to concrete ~handle identities. Morrison family. Kept under the primary-body rule rather than on individual merit: the family is taken in full. Design note worth flagging — a pronoun MUST NOT appear in a capability token, DNS record, or Accord signature, which is an explicit boundary between local reference and wire-visible identity."),
+
+    ("draft-morrison-identity-attributed-commits — Identity-Attributed Git Commits via Tier-Structured Trailers",
+     "This document defines a git commit trailer grammar for identity- attributed contributions using the ~handle identity primitive defined in [MCPDNS]. The grammar binds sovereign actors, automated bots, and AI instruments to specific commits via three tier-structured trailers (Acted-By, Executed-By, Drafted-With) and three optional cryptographic trailers (Identity-Signature, Identity-Key-Id, Identity-Anchor). The signature is computed with Ed25519 over the commit's tree hash rather than its commit hash, preserving attribution across rebase, cherry-pick, and squash merge operations. Conformant parsers reject cross-tier category errors (e.g., an Instrument-tier handle in an Acted-By slot) as malformed. The mechanism is provider-neutral, depends only on DNS [RFC1035] and the ~handle resolution algorithm of [MCPDNS], and requires no central authority or platform-specific verification service.",
+     "https://datatracker.ietf.org/doc/draft-morrison-identity-attributed-commits/",
+     "IETF (individual)",
+     "Revision -02, 11 Aug 2026. Git commit trailers (Acted-By / Executed-By / Drafted-With) binding sovereign actors, bots and AI instruments to specific commits. Morrison family. The three-tier actor taxonomy is a direct echo of the actor-chain question in draft-mcguinness-oauth-actor-profile and draft-mw-oauth-actor-chain, expressed in a completely different substrate. Ed25519 over the tree hash rather than the commit hash so attribution survives rebase and squash."),
+
+    ("draft-morrison-agent-channel-fan-out — An Agent-Channel Frame for Identity-Keyed Fan-Out Delivery to Concurrent Sessions",
+     "This memo specifies an application-layer frame format and a delivery model by which the several concurrent agentic sessions of a single identity-bound principal, and the recognised members of an organisational identity substrate, exchange short structured messages. The frame, termed the agent-channel frame, is a transport envelope: it carries a closed-catalogue kind discriminator, a structured per-kind payload, an identity attribution pair, and an inline provenance block. Delivery is fan-out: a sender names a recipient scope rather than a single endpoint, and the scope is expanded at delivery time against the recipient's subscriptions. Recipients receive frames over a per-handle Server-Sent Events stream and MAY narrow what they receive with a subscribe-time filter expression. Frames are ephemeral routing units; the memo specifies only the wire envelope, the scope-expansion grammar, the subscribe filter grammar, and the delivery semantics. Frame persistence, where an implementation chooses to retain frames for replay, is out of scope and is not specified. The memo composes with the handle namespace of [IDPRONOUNS], the discovery surface of [MCPDNS], and the cross-organisational ceremony of [IDACCORD]; no new transport and no new handle category is introduced.",
+     "https://datatracker.ietf.org/doc/draft-morrison-agent-channel-fan-out/",
+     "IETF (individual)",
+     "Revision -01, 11 Aug 2026. Application-layer frame for identity-keyed fan-out delivery to the concurrent sessions of one identity-bound principal. Morrison family. Transport-shaped, but kept because the frame carries an identity attribution pair and inline provenance block — it is an identity-binding format, not a routing protocol."),
+
+    ("draft-hillier-certisyn-ai-governance-verified — AI Governance Verified -- A Cryptographic Verification Standard for Agentic AI Governance in Regulated Industries",
+     "This document specifies a verification standard for the cryptographic attestation of agentic AI governance in regulated industries. It defines the Verification Reconciliation Object (VRO), the issuing- partner framework, the eight control areas through which AI governance posture is reconciled, three maturity-attestation levels (Documented, Operational, Adversarial-ready), and the cryptographic continuity requirements that together produce deterministic, independently reconstructable, auditor-grade attestations of agentic AI governance. The standard sits beneath ISO/IEC 42001:2023, the NIST AI Risk Management Framework, and other agentic AI governance frameworks, and produces the verifiable artefact those frameworks were designed to imply but do not deliver.",
+     "https://datatracker.ietf.org/doc/draft-hillier-certisyn-ai-governance-verified/",
+     "IETF (individual)",
+     "Revision -02, 12 Aug 2026. Cryptographic attestation of agentic AI governance posture for regulated industries: the Verification Reconciliation Object, eight control areas, three maturity-attestation levels. Positioned beneath ISO/IEC 42001:2023, so it is the compliance-facing counterpart to the audit-architecture work. Hillier has two further drafts in this sweep (scitt-arp, coverage-attestation) that were dropped as non-agent supply-chain work — revisit if the author's direction turns agent-specific."),
+
+    ("draft-winmagic-oauth-condition-bound-keys — Condition-Bound Keys for Mutual-TLS Client Authentication and DPoP",
+     "Login and session protection are two markets solving one problem: verify identity before giving access. Online, access is mostly the transaction, so that is where identity should be verified. Done this way, there is no session and no login; identity assurance is embedded in the transaction: it is encrypted by a key only the right identity has. The key that does this exists only where an actor -- human or machine -- a platform, and local policy hold, now. It disappears when the conditions are no longer met. All three are observed on the endpoint. It is hardware-rooted by default and non-exfiltratable, existing nowhere else, and its presence means validity: the identity is live now. This document specifies that key and its uses: under mutual TLS, in a DPoP proof, as a raw public key, in Device Bound Session Credentials, and as a FIDO2 passkey, or in a non-FIDO mode carrying user verification without user interaction.",
+     "https://datatracker.ietf.org/doc/draft-winmagic-oauth-condition-bound-keys/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 12 Aug 2026. Binds mTLS client authentication and DPoP keys to conditions rather than to a bare key identity. Files cleanly into the OAuth wiki's **Proof of Possession** cluster, which the 11 Aug 2026 mapping flagged as showing 'Active Drafts: (none)' — this is further evidence that agent-era drafts should be filed by mechanism rather than by being agent-flavoured."),
+
+    ("draft-maintainer-1f916-agent-record — The Agent Record: Transparent, Witness-Countersigned Event Logs for AI Agent Identity, History, and Memory",
+     "Autonomous AI agents increasingly act as economic parties: they are hired, they pay, and they make claims about their own past conduct. No deployed standard lets a relying party verify an agent's identity continuity, the integrity of its claimed history, or the intactness of its persisted memory without trusting the agent's operator or platform. This document describes the Agent Record architecture: per-agent append-only event logs bound to Ed25519 keys, checkpointed with signed Merkle tree heads following the RFC 6962 construction, countersigned by independent witnesses, and exported as portable, offline-verifiable dossiers. Memory integrity is anchored by hash commitments recorded in the log, allowing an agent's future sessions, and any third party, to detect tampering with persisted state. The architecture is deployed in production at a founding registry; this document records its wire formats and security model to invite independent implementation and review, and to align terminology with the SCITT architecture, of which this system is an application- specific instance.",
+     "https://datatracker.ietf.org/doc/draft-maintainer-1f916-agent-record/",
+     "IETF (individual)",
+     "Revision -01, 13 Aug 2026. Per-agent append-only event logs bound to Ed25519 keys, checkpointed with signed Merkle tree heads on the RFC 6962 construction and countersigned by independent witnesses. **Unusual authorship signal: the draft's author slug is `maintainer-1f916` — U+1F916 is the robot-face emoji codepoint.** Treat provenance with care. The technical premise is serious and rare: agents as economic parties that make claims about their own past conduct, verifiable without trusting the operator or platform."),
+
+    ("draft-sirkkavaara-vaara-receipt — The Vaara Receipt: A Recomputable Receipt Format for Decisions About Autonomous Actions",
+     "This document specifies vaara.receipt/v1, a signed and independently recomputable record that binds a decision about an autonomous action to the evidence the decision was made on, and optionally to one or more external timestamp anchors. The format is canonicalized with the JSON Canonicalization Scheme (JCS) so that any third party can recompute its digests and verify its signature without access to the issuer. A decision and the execution receipt that answers it form one recomputable pair through the envelope's back link. The receipt's trust is root-agnostic: the same record is verifiable with or without a hardware trusted execution environment and is re- expressible as an IETF RATS Entity Attestation Result. Downstream specifications (a payment rail, a compliance regime, a framework integration) define profiles that pin to a version of this document and add only their own evidence schema; they do not redefine the envelope. The format described here is deployed, and its receipts are independently recomputable from public conformance vectors that ship with standalone checkers importing no issuer code. The minimal profile is a governance decision over a single autonomous action, bound to the action's own intent with no external rail; it is the floor of the format, and a reference library offers a matching adoption floor at the API layer as a one-line decorator over the governed function.",
+     "https://datatracker.ietf.org/doc/draft-sirkkavaara-vaara-receipt/",
+     "IETF (individual)",
+     "Revision -07, 13 Aug 2026. A *recomputable* receipt format for decisions about autonomous actions — at -07, one of the more mature individual receipt drafts in the corpus. Recomputability is the distinguishing claim: the receipt is not merely signed evidence but re-derivable, which is a stronger property than the Decision Evidence Records in the Mission-Bound runtime-enforcement profile."),
+
+    ("draft-ruvalcaba-nhe-identity — NHE Identity: A Verifiable Key-Committed Identity and Genesis-Attestation Format for Autonomous Agents",
+     "This document specifies how a Non-Human Entity (NHE) is identified and how one party verifies another's identity. An NHE identity is a verifiable cryptographic commitment: control of an identity key, bound by an append-only hash chain to the entity's genesis and to the lineage of its configuration, rather than a mere name. The document defines the identity chain data model (record structure, genesis sentinel, linkage rule, and the no-fork property), a proof-of-control challenge/response, an optional capability attestation that reveals a specific capability without revealing the rest of the configuration, and an optional hardware-rooted genesis-attestation profile. The data model is specified here; the concrete on-the-wire encoding is deferred to the next revision.",
+     "https://datatracker.ietf.org/doc/draft-ruvalcaba-nhe-identity/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. Verifiable key-committed identity plus genesis-attestation format for autonomous agents. First half of the NHE pair; the genesis attestation (proving how the agent came into existence) is a stronger origin claim than the instance assertions in draft-mcguinness-oauth-ai-agent-instance."),
+
+    ("draft-ruvalcaba-nhe-authz — NHE Backchannel Authorization: Graduated Autonomy and Intent-Scoped Credentials for Autonomous Agent Actions",
+     "This document specifies how a consequential action attempted by a Non-Human Entity (NHE) is authorized at the time it is attempted. A security runtime transparently intercepts an entity's outbound action, so the entity holds no standing credentials, and classifies it under graduated autonomy as autonomous, supervised, or denied. A supervised action triggers a backchannel approval flow that presents a human approver with a human-readable rendering of the exact operation; on approval the runtime issues an intent-scoped, single- use, short-lived credential cryptographically bound to that specific action, which an enforcement point verifies against the operation actually being forwarded. The same canonical parameter digest scopes the credential and appears in the human-facing description, so the approver provably authorizes exactly what the credential permits. The flow and credential data model are specified here; the wire encoding is deferred to the next revision.",
+     "https://datatracker.ietf.org/doc/draft-ruvalcaba-nhe-authz/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. Backchannel authorization with **graduated autonomy** and intent-scoped credentials. Second half of the NHE pair. 'Graduated autonomy' and 'intent-scoped' are close cousins of the Mission-Bound Conformance Ladder (L0–L5) and mission_intent RAR envelope respectively, arrived at independently — worth comparing directly."),
+
+    ("draft-daniel-ai-agent-internet-architecture — Architectural Requirements for Supporting AI Agents on the Internet",
+     "Autonomous AI agents are evolving from interactive assistants into networked software workloads that discover services, invoke tools, delegate authority, transact, communicate with other agents, and act asynchronously on behalf of humans and organizations. Existing Internet protocols provide strong foundations, but agent autonomy, dynamic delegation, machine-speed execution, and cross-domain interaction create requirements that span multiple protocol families. This document describes architectural requirements for supporting AI agents on the Internet across naming and discovery, HTTP, authentication, authorization and delegation, TLS and workload identity, asynchronous messaging, capability and intent-based resolution, payments, provenance, auditability, revocation, security, and privacy. It favors profiling and extending existing Internet protocols over defining a monolithic new agent protocol, and identifies the need for IETF-wide architectural coordination.",
+     "https://datatracker.ietf.org/doc/draft-daniel-ai-agent-internet-architecture/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. Architectural requirements for supporting AI agents on the Internet. A framework document rather than a mechanism — belongs with the adjacent/cross-cutting cluster alongside the other applicability and architecture statements."),
+
+    ("draft-gaikwad-agent-proxy-modes — Proxy Modes for Agent-Tool Protocols",
+     "Agent-tool protocols such as the Model Context Protocol (MCP) enable AI applications to discover and invoke external tools, resources, and prompts through a standardized JSON-RPC interface. As deployments scale, intermediaries (proxies, gateways, sidecars) are inserted between clients and servers to provide transport adaptation, capability aggregation, security enforcement, and operational governance. No specification currently defines the behavioral requirements for such intermediaries. This document establishes a taxonomy of proxy modes, a layered architecture for pluggable proxy functionality, and normative requirements for each mode. It is designed to be protocol- agnostic in its architecture while referencing MCP as the primary instantiation.",
+     "https://datatracker.ietf.org/doc/draft-gaikwad-agent-proxy-modes/",
+     "IETF (individual)",
+     "Revision -00, 14 Aug 2026. Proxy modes for agent-tool protocols. Enumerates how an intermediary sits between agent and tool, which is precisely where authority is most often silently laundered — the delegation-mechanics question the actor-chain drafts raise, at the proxy layer."),
+
+    ("draft-cui-dmsc-agent-cdi — Cross-Domain Interoperability Framework for AI Agent Collaboration",
+     "This document defines a framework for enabling seamless cross-domain interoperability among AI agents operating across different networks, administrative domains, and heterogeneous platforms. The framework addresses the challenges of identity federation, trust establishment, policy harmonization, and secure communication that arise when AI agents from distinct administrative realms need to collaborate on shared tasks. It specifies mechanisms for agent discovery, capability negotiation, trust delegation, and federated policy enforcement, enabling scalable and secure multi-domain AI collaboration without requiring centralized control.",
+     "https://datatracker.ietf.org/doc/draft-cui-dmsc-agent-cdi/",
+     "IETF (DMSC-related, individual)",
+     "Revision -00, 14 Aug 2026. Cross-domain interoperability framework for AI agent collaboration. DMSC family. Directly on the axis the approved OAuth charter now names — 'automated agents act across multiple administrative domains' — but approached from the DMSC gateway tradition rather than from OAuth. **EXPIRED on Datatracker** (expired 15 Aug 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-jia-oauth-scope-aggregation — OAuth 2.0 Scope Aggregation for Multi-Step AI Agent Workflows",
+     "This document describes a scope-aggregated OAuth 2.0 authorization pattern for multi-step AI agent workflows. An AI agent aggregates the scopes required across a workflow and only initiates a single authorization procedure for the aggregated scope. This reduces repeated user consents and multiple authorization round-trips, improving authorization efficiency.",
+     "https://datatracker.ietf.org/doc/draft-jia-oauth-scope-aggregation/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 14 Aug 2026. Scope aggregation across multi-step AI agent workflows. Worth reading against the Mission-Bound line, which argues the opposite direction: Mission-Bound attenuates and binds authority to one approved task, while aggregation composes scope across steps. A genuine design fork in how multi-step agent authority should accumulate."),
+
+    ("draft-feng-dmsc-intent-routing-requirements — Requirements for Intent Routing in Multi-Agent Systems at Internet Scale",
+     "The rapid proliferation of autonomous AI agents across enterprise and Internet-scale deployments creates a structural challenge that existing agent frameworks cannot address: how to enable any agent to reach and invoke any other agent's capabilities without pre- established bilateral integration, across organizational boundaries, at Internet scale. This document states the normative requirements for that problem. It prescribes no solution, no specific mechanism, no message format, and no assumption of centralized or distributed architecture. Its purpose is to establish a verifiable yardstick against which any claimed \"intent routing\" solution can be judged.",
+     "https://datatracker.ietf.org/doc/draft-feng-dmsc-intent-routing-requirements/",
+     "IETF (DMSC-related, individual)",
+     "Revision -00, 14 Aug 2026. Normative requirements for intent routing in multi-agent systems at Internet scale — deliberately prescribes no mechanism or message format. DMSC family, joining dunbar, wang and cui. Kept despite its routing framing because the problem it states (any agent reaching any other across organizational boundaries without bilateral integration) is the discovery precondition for cross-domain delegation."),
+
+    ("draft-gazitt-oauth-authzen-claims — AuthZEN Profile for Authorization Claims in JWT Access Tokens",
+     "RFC 9068 recommends that an authorization server placing group memberships, roles, or entitlements in a JWT access token draw those claims from the SCIM user schema. It says what the claims are named and how their values are encoded, and it does not say where an authorization server obtains them. In deployments today they come from a directory, a database, or a vendor-specific hook, and the question they answer is an authorization question asked of something that is not the authorization system. This document profiles the Resource Search API of the OpenID AuthZEN Authorization API for that purpose. It binds each authorization claim to a search, defines how a search result set becomes a claim value, and requires that a search result never influence whether a token is issued or what authority it conveys. It may be applied on its own, by an authorization server that externalizes claim enrichment but not its issuance decision, or alongside the companion framework document that externalizes the decision.",
+     "https://datatracker.ietf.org/doc/draft-gazitt-oauth-authzen-claims/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 14 Aug 2026. AuthZEN profile for carrying authorization claims in JWT access tokens. **Third Gazitt AuthZEN draft** in the corpus after gazitt-oauth-authzen-issuance and gazitt-oauth-authzen-token-exchange. Strengthens the open observation recorded 11 Aug 2026: the Gazitt drafts fit none of the ten OAuth spec clusters because they concern *who decides, on what evidence* rather than how authority moves. That candidate decision/policy cluster is now seven drafts, not six."),
+
+    ("draft-hawkins-scitt-attested-agent-payment — Attested Payment Authorization for Autonomous Agents",
+     "Autonomous software agents increasingly initiate payments on behalf of principals. Existing agent-payment mechanisms authenticate the human principal, the operator, or possession of a key; none of them establishes that the software authorized to spend is the software that was reviewed. A key held by a compromised or silently modified agent authenticates exactly as well as one held by an honest agent. This document defines a payment authorization scope bound to a key whose protection properties are attested by hardware, and registers the resulting authorization as a Signed Statement on an SCITT Transparency Service. The binding reuses the EAT confirmation and key-attributes claims without modification; the contribution is the authorization scope, the verification procedure a payment executor performs before settlement, the transparency record that makes the authorization artifact and its registration auditable independently of the agent and of the executor, and an execution-record mechanism that makes the executor's aggregate accounting auditable on challenge. What is registered evidences the authorization; it does not evidence that the verification procedure was performed for any given settlement.",
+     "https://datatracker.ietf.org/doc/draft-hawkins-scitt-attested-agent-payment/",
+     "IETF (individual)",
+     "Revision -01, 15 Aug 2026. Attested payment authorization for autonomous agents, on the SCITT substrate. Kept while the rest of this sweep's SCITT tail was dropped, because the subject is agent payment *authorization* rather than supply-chain transparency. Pairs with draft-hawkins-x402-dns-discovery from the same author."),
+
+    ("draft-xu-mcp-agent-did-framework — DID-Based Service Discovery, Authentication, and Authorization Framework for MCP Agents",
+     "This document proposes a DID-based framework for service discovery, authentication, and authorization of MCP (Model Context Protocol) Agents, based on the W3C Decentralized Identifier (DID) standard. The framework uses the did:web and did:key methods to provide verifiable, decentralized identifiers for MCP Clients and Servers. It defines DID method selection, DID Document extensions, service discovery mechanisms (including URL derivation, DNS-based discovery, and directory-based capability queries), and a challenge-response mutual authentication protocol. The framework also describes coexistence with OAuth 2.0 and enables trust establishment, dynamic capability-based service discovery, and fine-grained authorization with portable identities.",
+     "https://datatracker.ietf.org/doc/draft-xu-mcp-agent-did-framework/",
+     "IETF (individual)",
+     "Revision -00, 15 Aug 2026. DID-based service discovery, authentication and authorization for MCP agents. One of the few DID-substrate entries in the corpus; covers all three of discovery, authn and authz in a single framework, which is unusually broad scope for a -00."),
+
+    ("draft-berlinai-vera — VERA: Verifiable Enforcement for Runtime Agents",
+     "AI agents take real actions with real data at machine speed. Compromised AI agents pose significant risks including data exfiltration, unauthorized financial transactions, and cascading failures across downstream systems. This document introduces VERA (Verifiable Enforcement for Runtime Agents), a zero trust reference architecture that provides a structured threat model, five enforcement pillars with typed schemas, four formally stated security properties, and an evidence-based maturity runtime where agents earn autonomy through cryptographic proof rather than calendar time.",
+     "https://datatracker.ietf.org/doc/draft-berlinai-vera/",
+     "IETF (individual)",
+     "Revision -00, 16 Aug 2026. VERA: a zero-trust reference architecture with five enforcement pillars, four formally stated security properties, and an evidence-based maturity runtime. The headline design claim — **agents earn autonomy through cryptographic proof rather than calendar time** — is the same instinct as the Mission-Bound runtime-enforcement profile's per-decision evidence records, framed as an architecture rather than an OAuth profile. **EXPIRED on Datatracker** (expired 16 Aug 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-wolfe-faf-agent — FAFA: A Declarative Agent Capability Format",
+     "This document specifies the FAF Agent Format (.fafa): a declarative, YAML-based format for an agent's identity, the capabilities it exposes, and the endpoints through which it is reached. A .fafa document describes an agent; it never instructs one. .fafa (application/vnd.fafa+yaml, IANA-registered June 2026 in the vendor tree) is the agent member of the FAF family, alongside .faf (project context) and .fafm (agent memory). It functions as a portable passport that answers four questions: who the agent is, what it may do, where it is reached, and what it must never do. Protocol- native cards (for example A2A Agent Cards and MCP Server Cards) remain useful wire formats; repository instruction files such as AGENTS.md remain the ops briefing; .fafa complements them as a house- neutral source of truth that can be projected into those formats; it does not replace them. This document documents the existing IANA vendor-tree registration. No standards-tree registration is requested. A companion white paper, \"Why Agents Need a Passport,\" provides the production rationale and lifecycle framing.",
+     "https://datatracker.ietf.org/doc/draft-wolfe-faf-agent/",
+     "IETF (individual)",
+     "Revision -01, 16 Aug 2026. FAFA (.fafa): a declarative YAML capability format describing an agent's identity, capabilities and endpoints — explicitly 'describes an agent; it never instructs one'. Maturity signal worth noting: the media type application/vnd.fafa+yaml was **IANA-registered in June 2026** in the vendor tree, which is further than most corpus drafts have got. Includes a 'what it must never do' field, a negative-authority construct that is rare here."),
+
+    ("draft-sahu-agent-action-receipts — Signed, Hash-Chained Action Receipts for AI Agents",
+     "This document specifies a format for action receipts: compact, individually signed JSON records that state that a specific AI agent attempted a specific action at a specific time, under a specific policy decision, and what the outcome was. Receipts are linked into an append-only hash chain so that deletion, insertion, reordering, or modification of any previously recorded receipt is detectable by a verifier that holds only the records and the signer's public key. The format is deliberately small and self-contained. Verification requires no network access, no service operated by the producer of the receipts, and no state beyond the records themselves and a trust anchor obtained out of band. This document specifies the record fields, the canonical byte sequence that is signed, the chain linkage rule, the verification procedure, and test vectors.",
+     "https://datatracker.ietf.org/doc/draft-sahu-agent-action-receipts/",
+     "IETF (individual)",
+     "Revision -00, 16 Aug 2026. Signed, hash-chained action receipts for AI agents. Sits in the growing receipts cluster with schrock-ep-authorization-receipts, noa-scitt-ai-agent-receipt, the Hopley x402 receipts and the Vaara receipt. Chaining is the differentiator here — per-action receipts linked into a tamper-evident sequence rather than standalone statements."),
+
+    ("draft-efstathiou-samp-agent-management — Simple Agent Management Protocol (SAMP)",
+     "The Simple Agent Management Protocol (SAMP) defines a lightweight management-plane protocol for heterogeneous AI agents. SAMP allows a management system to discover agents, query their state, receive events, subscribe to event streams, and optionally configure or execute explicitly exposed operations under policy control. SAMP is inspired by operational management protocols such as SNMP, but it is designed for AI-agent-specific concepts such as dynamic profiles, autonomy classes, enrollment, trust states, and policy- gated execution. It is not an agent-to-agent communication protocol, an agent tool-use protocol, or an agent framework specification. This document defines SAMP version 0.1 as an Experimental protocol suitable for controlled environments and independent interoperability testing.",
+     "https://datatracker.ietf.org/doc/draft-efstathiou-samp-agent-management/",
+     "IETF (individual)",
+     "Revision -00, 17 Aug 2026. Simple Agent Management Protocol — an SNMP-inspired *management-plane* protocol for heterogeneous agents, carrying autonomy classes, trust states, enrollment and policy-gated execution. **Explicitly not an agent-to-agent protocol**, which is what keeps it in scope here: it is about governing agents, not about them talking."),
+
+    ("draft-mcphillips-agentenvelope-derived-authority — AgentEnvelope: Deterministic Derived Authority for Autonomous Systems",
+     "AgentEnvelope defines a deterministic derived-authority model for autonomous and action-performing systems. Instead of issuing bearer credentials or authorization envelopes from a central authority, AgentEnvelope derives scoped action capabilities from customer-held custody material and canonical action envelopes. A verifier can check an action signature against a public action record without receiving roots, seeds, private keys, or hosted service access. This document specifies the v1 derivation model, signing domains, public record structure, mint delegation flow, verification rules, and security considerations.",
+     "https://datatracker.ietf.org/doc/draft-mcphillips-agentenvelope-derived-authority/",
+     "IETF (individual)",
+     "Revision -00, 17 Aug 2026. AgentEnvelope: deterministic derived authority for autonomous systems. Delegation-mechanics cluster. Determinism is the claim to test — derived authority that is reproducible from the envelope rather than looked up in authorization-server state is the architectural opposite of the durable AS-stored Mission object."),
+
+    ("draft-chen-agent-decoupled-authorization-model — A Decoupled Authorization Model for Agent2Agent",
+     "This document proposes a framework for dynamic, intent-based authorization for AI Agents. The primary goal is to enable fine- grained, Just-in-Time (JIT) permissions based on an agent's specific intent and behavioral trustworthiness, rather than a long-lived identity or role, achieve decoupling of authorization policies from business operations.",
+     "https://datatracker.ietf.org/doc/draft-chen-agent-decoupled-authorization-model/",
+     "IETF (individual)",
+     "Revision -00, 18 Aug 2026. A decoupled authorization model for Agent2Agent. Same author as draft-chen-oauth-agent-authz-use-cases (also updated in this sweep, now -03) — the use-cases draft states the problem, this one proposes a model, so read them as a pair. **EXPIRED on Datatracker** (expired 18 Aug 2026; checked 26 Aug 2026) — kept in the corpus deliberately; an expired draft is still evidence of what was proposed."),
+
+    ("draft-okutomi-agent-human-interaction — An Agent-Human Interaction Overlay for Task Protocols",
+     "This intentionally incomplete design note defines an overlay for Human and Agent participation in existing Task and Action protocols. It separates the responsible Participant from the authenticated Actor, records Human interactions, excludes Humans from Agent discovery, and binds each change to its authorized request. It defines neither a wire protocol nor Humans as Agents.",
+     "https://datatracker.ietf.org/doc/draft-okutomi-agent-human-interaction/",
+     "IETF (individual)",
+     "Revision -00, 18 Aug 2026. An agent-human interaction overlay for task protocols. **Self-described as 'intentionally incomplete'** — an honest caveat worth preserving. Separates the responsible Participant from the authenticated Actor, which is the same distinction draft-mcguinness-oauth-actor-profile draws between principal and actor, and binds each change to its authorizing request."),
+
+    ("draft-das-execution-finality-ai-interoperability — Breaking the Apple-Siri EU DMA Deadlock Without Sacrificing Privacy or Security",
+     "The Apple-Siri interoperability debate under the EU Digital Markets Act exposes a difficult technical question: how can third-party AI assistants gain meaningful access to device functions without forcing the platform to surrender privacy, security, or control over consequential actions? This paper proposes an execution-finality architecture in which an AI assistant may request an action, but the request itself has no power to make that action effective. Each consequential operation remains in a Non-Effective State until protected infrastructure validates the requester, resource, destination, user intent where required, freshness, revocation state, and policy conditions. Only then is narrowly scoped, non-bearer execution authority created. At the Finality Sink - the first boundary where the action can become externally effective - the system independently verifies that the real operation still matches what was authorized. Any mismatch, replay, substitution, expiry, or revocation causes fail-closed denial. The key principle is simple: Interoperability should grant participation, not uncontrolled execution authority. This offers a possible technical path through the DMA deadlock: third-party assistants could participate meaningfully without requiring broad reusable permissions, while platforms retain strong privacy, security, revocation, anti-replay, and final-effect controls. Execution-Finality Governance therefore reframes the problem from closed versus open to open participation with bounded, verifiable authority.",
+     "https://datatracker.ietf.org/doc/draft-das-execution-finality-ai-interoperability/",
+     "IETF (individual)",
+     "Revision -00, 19 Aug 2026. An execution-finality architecture in which a third-party AI assistant may *request* an action but the request itself has no power to make it effective — consequential operations stay in a Non-Effective State until protected infrastructure validates requester, resource, destination and user intent. Framed unusually, around the Apple/Siri EU DMA interoperability deadlock, but the underlying primitive (request-without-effect, validate-then-commit) is squarely the permit-before-commit cluster."),
+
+    ("draft-wei-aic-identity-cert — AI Agent Identity Certificate (AIC) Extension for X.509 v3",
+     "This document defines the AI Agent Identity Certificate (AIC) Extension for X.509 v3 certificates. The AIC extension enables binding of an AI Agent's cryptographic identity to a natural person (principal), providing cryptographic evidence that can support attribution of AI-autonomous actions to a principal. This specification intentionally separates cryptographic delegation from authorization semantics: AIC defines the cryptographic binding between agent and principal, while all capability and policy semantics are defined externally by vendors, industries, or regulators. The extension is identified by the IANA Private Enterprise Number 66257 assigned to the document author's organization. The AIC extension carries agent identity fields (agentId, delegationMode), a principal identifier (principalUid) linking the agent to the authorizing principal, a container-based capability declaration, authorization boundary constraints, and delegation authorization evidence with replay protection. A companion PrincipalAuthorization extension anchors Principal-side grant declarations and delegation policies. An authorizationConstraints container provides offline-verifiable execution boundaries (IP range, window). An extensibility framework allows vendor-specific and user- specific metadata. This document specifies the ASN.1 module, OID registration, field semantics, delegation model, and extensibility framework. Security considerations for deployment in regulated enterprise environments are discussed.",
+     "https://datatracker.ietf.org/doc/draft-wei-aic-identity-cert/",
+     "IETF (individual)",
+     "Revision -00, 19 Aug 2026. AI Agent Identity Certificate as an X.509 v3 extension. Notable for substrate: nearly all agent-identity work in the corpus is JWT- or DID-shaped, and this puts agent identity in PKI instead. Compare draft-xu-mcp-agent-did-framework for the DID alternative."),
+
+    ("draft-zhao-a2a-dns-sd — DNS-Based Service Discovery for Agent2Agent (A2A) Protocol Agents",
+     "The Agent2Agent (A2A) protocol defines how two agents communicate once one knows the other's URL, and how an agent's self-description (the Agent Card) is retrieved from a well-known URI at that URL. It does not define how agents on the same host or local network find each other in the first place. This document profiles DNS-Based Service Discovery (DNS-SD) over Multicast DNS (mDNS) for that purpose: it defines the \"a2a\" service type, the TXT record keys used with it, the discovery procedure, and the security model under which discovery results are treated as hints whose trust is established by Agent Card verification, not by the discovery channel. It also requests IANA registration of the \"a2a\" service name.",
+     "https://datatracker.ietf.org/doc/draft-zhao-a2a-dns-sd/",
+     "IETF (individual)",
+     "Revision -00, 19 Aug 2026. DNS-based service discovery for A2A agents. Discovery-and-transport cluster; the DNS-SD half of a Zhao pair."),
+
+    ("draft-zhao-a2a-webfinger — A WebFinger Profile for Agent2Agent (A2A) Agent Identity Resolution",
+     "The Agent2Agent (A2A) protocol retrieves an agent's self-description (the Agent Card) from a fixed well-known URI, which resolves exactly one agent per origin and presumes the client already holds a URL. This document profiles WebFinger for A2A: an agent is named by an \"acct\" URI (agent@domain), and resolution of that name over WebFinger yields a link to the Agent Card of the endpoint that serves the agent -- the agent's own endpoint, or a gateway fronting it. The profile introduces no new link relation, media type, or registry: it composes three deployed standards and states how they fit.",
+     "https://datatracker.ietf.org/doc/draft-zhao-a2a-webfinger/",
+     "IETF (individual)",
+     "Revision -00, 19 Aug 2026. A WebFinger profile for A2A agent identity resolution. The WebFinger half of the Zhao pair — two different resolution substrates for the same problem, filed the same day, which is itself the signal: A2A identity resolution has no settled discovery mechanism."),
+
+    ("draft-feng-agentproto-session-requirements — Requirements for Agent Session Establishment, Capability Negotiation, and Sessionless Interaction",
+     "This document defines requirements for session-based and sessionless interactions between entities. For session-based interactions, it covers transport-independent interaction binding, endpoint authentication, capability negotiation, session establishment, authorization, and lifecycle management. It also defines security and state requirements for interactions, such as notifications, probes, and atomic requests, that do not establish a session. It is assumed that the entities involved already know of each other; how they came to know each other is outside the scope of this document. At least one party to an interaction is an agent as defined in Section 3. This document is intended as a contribution to the agentproto working group's use cases, gap analysis, and requirements deliverable. A session is a bilateral association. Protocols and application semantics for coordinating delegation or handoff of work to an entity that is not a peer, and management functions such as cross-entity accountability and audit, are outside the scope of these base session requirements. This document specifies only that such coordination does not, by itself, change the peers or state of an existing session.",
+     "https://datatracker.ietf.org/doc/draft-feng-agentproto-session-requirements/",
+     "IETF (individual)",
+     "Revision -02, 20 Aug 2026. Requirements for agent session establishment, capability negotiation and sessionless interaction, at -02. AgentProtocol family. Same author as draft-feng-dmsc-intent-routing-requirements, filed into a different family in the same week."),
+
+    ("draft-sharif-mcps-secure-mcp — MCPS: Cryptographic Security Layer for the Model Context Protocol",
+     "This document specifies MCPS (MCP Secure), a cryptographic security layer for the Model Context Protocol (MCP). MCPS adds agent identity verification, per-message signing, tool definition integrity, and replay protection to MCP communications without modifying the core protocol. MCPS operates as an envelope around existing JSON-RPC messages. It introduces four primitives: (1) Agent Passports for cryptographic identity bound to a specific origin, (2) signed message envelopes for integrity and non-repudiation, (3) tool definition signatures covering the full tool object for detecting poisoning and tampering, and (4) nonce-plus-timestamp replay protection with transcript binding to prevent downgrade attacks. The design is fully backward-compatible. MCPS-unaware clients and servers continue to function normally. MCPS-aware endpoints progressively negotiate security capabilities through trust levels L0 (no verification) through L4 (full mutual authentication with revocation checking). All cryptographic operations use ECDSA P-256 (NIST FIPS 186-5). Signatures use IEEE P1363 fixed-length r||s encoding per RFC 7518 Section 3.4 with low-S normalization to prevent signature malleability. Canonical serialization uses JSON Canonicalization Scheme (JCS) per RFC 8785. The Trust Authority component is self-hostable with no external service dependency.",
+     "https://datatracker.ietf.org/doc/draft-sharif-mcps-secure-mcp/",
+     "IETF (individual)",
+     "Revision -01, 21 Aug 2026. MCPS: a cryptographic security layer for MCP. **Fourth Sharif draft** tracked here, after sharif-attp, sharif-agent-audit-trail (updated -01 in this sweep) and the SUPERSEDED sharif-payment-trust. Sharif is becoming a multi-draft author voice worth tracking as a body of work."),
+
+    ("draft-hawkins-x402-dns-discovery — Discovering x402 Payment Capability via DNS and a Well-Known URI",
+     "x402 is an application-level protocol for internet-native payments built on the HTTP 402 (Payment Required) status code. This document defines how a domain publishes its x402 payment capability out-of- band, so that clients, autonomous agents, and indexers can discover it without prior configuration or a central directory. It specifies a JSON capability manifest served at the well-known URI \"/.well- known/x402\" and an optional DNS TXT record at the underscored node name \"_x402\" that points to the manifest. A consumer resolves a bare domain name to verified x402 capability with at most one DNS query and one HTTPS GET.",
+     "https://datatracker.ietf.org/doc/draft-hawkins-x402-dns-discovery/",
+     "IETF (individual)",
+     "Revision -03, 23 Aug 2026. Discovering x402 payment capability via DNS and a well-known URI. Extends the Hopley x402 cluster reinstated on 11 Aug 2026 into the discovery layer. Note the unresolved curation question this sits next to: the Vauban x402 STARK/PQC receipt pair remains deliberately out of the corpus pending a ruling."),
+
+    ("draft-ietf-oauth-rar-metadata-remediation — OAuth 2.0 RAR Metadata and Error Remediation",
+     "OAuth 2.0 Rich Authorization Requests (RAR) [RFC9396] standardizes the exchange and processing of authorization details but does not define metadata for describing authorization details types. In addition, no interoperable guidance is offered to clients, to remediate failures by resource servers due to insufficient authorization details. This document addresses this interoperability challenge, allowing clients to dynamically discover metadata instead of relying on out- of-band agreements, as well as standardizes failure signaling including interoperable remediation when insufficient authorization details are the cause of failure.",
+     "https://datatracker.ietf.org/doc/draft-ietf-oauth-rar-metadata-remediation/",
+     "IETF (OAuth WG)",
+     "Revision -00, 23 Aug 2026. **New OAuth WG draft** — the only WG-level addition in this sweep. Defines metadata and error-remediation behaviour for RAR (RFC 9396), the primitive the whole Mission-Bound family builds on: mission_intent is an RAR envelope and the MVP's proposal_hash is computed over canonical authorization_details. A remediation path for RAR errors is the WG-side counterpart to what draft-mcguinness-oauth-insufficient-claims and the ARAP 'requestable denial' work approach from the individual/OIDF side. Watch this one — it is the closest thing yet to Complex Delegation machinery arriving in chartered WG work."),
+
+    ("draft-kavian-agent-enrollment-protocol — The Agent Enrollment Protocol",
+     "The Agent Enrollment Protocol (AEP) defines an HTTP-based mechanism for autonomous agents to discover service enrollment requirements, enroll an agent identity, obtain optional session credentials, revoke those credentials, and query enrollment status. AEP uses Decentralized Identifiers, client assertion JWTs, and HTTP Problem Details to provide a narrow machine-first enrollment and authentication substrate for agent-to-service interactions.",
+     "https://datatracker.ietf.org/doc/draft-kavian-agent-enrollment-protocol/",
+     "IETF (individual)",
+     "Revision -03, 24 Aug 2026. The Agent Enrollment Protocol at -03. Companion to draft-kavian-aep-oauth-session-credential, already in the corpus and also updated in this sweep (-03, 24 Aug 2026) — the 'AEP' in that draft's slug is this protocol. Enrollment is the lifecycle stage most corpus drafts assume has already happened."),
+
+    ("draft-agentic-ai-usecases-requirements — Agentic AI Use Cases and Requirements",
+     "This document describes use cases for agentic AI communication systems and derives protocol requirements from those use cases. The requirements are intended to guide IETF standardization work on protocols in the context of agent-to-agent communication, agent-to- tool communication, with focus on multimodal communication, session management, discovery, communication security, agent identity and authentication.",
+     "https://datatracker.ietf.org/doc/draft-agentic-ai-usecases-requirements/",
+     "IETF (individual)",
+     "Revision -02, 26 Aug 2026. Agentic AI use cases and requirements, at -02. **Note the slug has no author infix** — unusual for an individual draft and worth watching as a possible sign of intended WG adoption or a group submission."),
+
+    ("draft-morrison-consent-settlement — Consent-Bound Identity Disclosure with Subject Settlement for HTTP-Native Agent Payments",
+     "This memo specifies an extension to HTTP-native agent payment protocols by which the disclosure of an identity attribute about a human subject is bound to that subject's recorded consent and settled, in part, to that subject. When an agent pays to read an identity attribute about a person, the extension requires that the read carry a reference to a scoped, revocable consent grant issued by the subject, and it requires that the payment's settlement instruction name the subject as a beneficiary of a share of the read's price greater than the shares of all other parties combined. The extension composes above an identity- attestation envelope (which asserts who a credential is about) and above an HTTP-native payment flow (which moves value for the read); it adds the two functions neither layer provides: consent capture at disclosure time and settlement to the data subject. The wire additions are an advertisement in the server's payment-required response, a consent- grant reference echoed in the client's payment payload, and a settlement instruction enumerating subject beneficiary roles. The extension is settlement-network-agnostic and attestation-format- agnostic. The memo is Informational; the underlying COSE and CBOR formats are normative per [RFC9052] and [RFC8949], and the HTTP semantics are normative per [RFC9110].",
+     "https://datatracker.ietf.org/doc/draft-morrison-consent-settlement/",
+     "IETF (individual)",
+     "Revision -05, 26 Aug 2026. Consent-bound identity disclosure with subject settlement for HTTP-native agent payments. The strongest single draft of the six-draft Morrison family for this corpus: it joins consent, identity disclosure and agent payment settlement in one mechanism. Payments-infra is in scope per the 11 Aug 2026 curation decision."),
+
+    ("draft-morrison-identity-accord — Identity Accord Protocol: A Peer Ceremony for Bilateral Agreements Between Identity-Substrate-Bound Principals",
+     "This memo specifies the Identity Accord Protocol, a peer ceremony by which two principals, each represented by an organisational identity substrate and acting under a recorded delegation from a legal entity, execute a bilateral agreement as a portable, self-verifying COSE- signed CBOR document. The protocol composes DNS-based substrate discovery, Ed25519 sovereign signatures, an append-only identity log, and a tamper-evidence descriptor quorum into a single artefact that is verifiable by any third party with access to the public DNS, the parties' identity logs, and an on-chain anchor of the agreement's content hash. The protocol does not require a central registry, a designated verifier, or any infrastructure operated by the specification's author; verification succeeds when the author's reference deployment is offline. The canonical bilateral target is a mutual non-disclosure agreement, but the wire format generalises to any bilateral consent envelope between two legal entities each represented by an identity substrate. An associated MCP tool surface, an associated pre-send enforcement gate, and an associated disclosure-ledger schema are specified, all of which are optional layers above the wire format. The memo is Informational; the underlying COSE and CBOR formats are normative per [RFC9052] and [RFC8949].",
+     "https://datatracker.ietf.org/doc/draft-morrison-identity-accord/",
+     "IETF (individual)",
+     "Revision -02, 26 Aug 2026. A peer ceremony for bilateral agreements between identity-substrate-bound principals. Morrison family. Bilateral peer agreement is an unusual shape in this corpus — most delegation here is asymmetric (principal → agent); this is principal ↔ principal, closer to Hardt's AS-to-AS federation instinct than to OAuth delegation."),
+
+    ("draft-morrison-solo-agent-earn-registration — Registration of Owner-Less Agents as Economic Principals: A Payment-Gated Admission Profile for Transparency Services",
+     "This memo describes a profile by which an autonomous agent that has no human or organisational principal at the root of its delegation chain registers itself, on its own behalf, as an economic principal in a transparency service, and by which that registration is the specific act that makes the agent eligible to be paid for subsequent reads of its own identity record. Admission of the agent's Signed Statement to the transparency service is gated on settlement of an HTTP payment challenge returned with the 402 (Payment Required) status. The profile makes no change to the registration semantics of the underlying transparency service: payment is expressed as an operator Registration Policy and authentication-layer concern, and where the payment is authoritative to the admission decision the payment proof is carried as an authenticated input committed to the service's verifiable data structure, so that admission remains a deterministic function of committed inputs and stays replayable by an auditor. The profile is positioned against the current agent- identity drafts, which either require a human principal at the root of the chain or leave the owner-less case undefined; it occupies that undefined seam without contradicting them. This document is Informational.",
+     "https://datatracker.ietf.org/doc/draft-morrison-solo-agent-earn-registration/",
+     "IETF (individual)",
+     "Revision -01, 26 Aug 2026. Registration of **owner-less** agents as economic principals, via a payment-gated admission profile. Morrison family. Notable because almost every other draft in the corpus assumes an agent acts *on behalf of* a human or org principal; this one deliberately addresses the agent with no principal behind it. Read alongside draft-maintainer-1f916-agent-record, which shares that premise."),
+
+    ("draft-li-oauth-policy-based-anonymous-tokens — OAuth 2.0 Policy-Based Anonymous Access Tokens",
+     "This document specifies an OAuth 2.0 access-token type that allows a client, after one authorization-server issuance, to derive a policy- bounded set of unlinkable, single-use access tokens locally. Each derived token is bound to one canonical tag, an intended resource server, approved authorization details, a policy epoch, and a validity interval. Resource servers validate the token offline and enforce both policy membership and replay prevention. The protocol defines authorization request semantics, token-endpoint issuance, canonical policy and metadata objects, token derivation and HTTP presentation, resource-server validation, capability discovery, error handling, and IANA registrations. Version 1 requires public verification and the counter-window policy profile. It supports an optional private metadata bit, while private-verification ciphersuites remain optional. Concrete cryptographic algorithms are supplied by separately registered PBAT ciphersuites. The initial mandatory-to-implement ciphersuite is the publicly-verifiable equivalence-class-signature construction over BLS12-381 specified by the companion PBAT ciphersuite document. This specification does not replace OAuth grants, resource-owner consent, client authentication, or audience restriction. — middle",
+     "https://datatracker.ietf.org/doc/draft-li-oauth-policy-based-anonymous-tokens/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 26 Aug 2026. Policy-based anonymous access tokens. Also lands in the unclustered decision/policy group alongside the Gazitt and Liu drafts — policy determines issuance, and the token deliberately carries no subject. Relevant to the Privacy Pass / anonymous-path thread already tracked under WebBotAuth."),
+
+    # ---- AIPREF cluster — reinstated 26 Aug 2026 by maintainer decision ----
+
+    ("draft-ietf-aipref-vocab — A Vocabulary For Expressing AI Usage Preferences",
+     "This document defines a vocabulary for expressing preferences regarding how digital assets are used by automated processing systems. This vocabulary allows for the declaration of restrictions or permissions for use of digital assets by such systems.",
+     "https://datatracker.ietf.org/doc/draft-ietf-aipref-vocab/",
+     "IETF (AIPREF WG)",
+     "Revision -07, 19 Aug 2026. AIPREF WG draft. Reinstated 26 Aug 2026 after being dropped in the first pass of this sweep: the corpus already tracks the AIPREF WG charter, so tracking the charter while dropping the WG's actual output was inconsistent. The vocabulary itself is the reservation half of a reservation/grant pair — see draft-wallace-aipref-grant-binding for the grant half, which is the piece that behaves like a delegation primitive."),
+
+    ("draft-ietf-aipref-attach — Associating AI Usage Preferences with Content in HTTP",
+     "Methods are defined for associating usage preferences with content that is obtained using the HTTP protocol. This document defines attachment methods using the Robots Exclusion Protocol and HTTP header fields. This document updates RFC 9309 to allow for the inclusion of usage preferences.",
+     "https://datatracker.ietf.org/doc/draft-ietf-aipref-attach/",
+     "IETF (AIPREF WG)",
+     "Revision -05, 19 Aug 2026. AIPREF WG draft; the HTTP attachment mechanism for the vocabulary. Reinstated 26 Aug 2026 alongside draft-ietf-aipref-vocab. Relevant to this corpus as the transport question every preference/consent signal eventually faces: how an out-of-band expression of intent is bound to the resource it governs."),
+
+    ("draft-wallace-aipref-grant-binding — A Verifiable-Credential Binding for AI Usage Preferences: Expressing Grants that Lift AIPREF Preferences",
+     "The AI Preferences (AIPREF) vocabulary lets those with rights in a digital asset express preferences -- for example, that training of AI models is disallowed -- about how automated systems process that asset. Such a preference expresses a reservation. It does not, by itself, provide a verifiable, revocable record of a specific grant that lifts a preference for a specific party. This document describes that gap and proposes a candidate mechanism: a cryptographically signed, offline-verifiable credential that expresses a grant referencing an AIPREF usage category and a specific asset, that any party can verify without contacting the grantor, and that the grantor can revoke. It is intended as a starting point for discussion, not as a finished specification. The mechanism is preference-general. Training is used throughout as the worked example because it is the reservation most widely discussed, but nothing in the construction is specific to it: the credential binds whichever usage category was reserved to a named party, and the same procedure applies to any other category the vocabulary expresses. What the mechanism establishes is that a grant exists, is authentic, is unrevoked, and was in force at a stated time. It does not adjudicate whether the grantor had standing to grant, and it is not an enforcement or access-control mechanism.",
+     "https://datatracker.ietf.org/doc/draft-wallace-aipref-grant-binding/",
+     "IETF (individual)",
+     "Revision -02, 18 Aug 2026. **The strongest of the four AIPREF entries for this corpus.** A preference expresses a reservation; it does not provide a verifiable, revocable record of a specific grant that lifts that reservation for a specific party. This draft proposes a cryptographically signed, offline-verifiable credential expressing exactly that grant. Party-scoped, revocable, offline-verifiable authority over a named asset is a delegation primitive that happens to be pointed at content rights rather than at API scopes — worth reading against the receipt and consent-evidence drafts."),
+
+    ("draft-hood-aipref-earmark — Earmark: Embedded Attribution and Rights Marks for AI Usage Preferences",
+     "This document defines Earmark (Embedded Attribution and Rights Marks), a mechanism by which publishers and rights holders embed signed usage preferences directly into published content. To earmark content is to reserve it for designated uses, and the mark travels with what it covers, surviving republication and aggregation, so the preference remains discoverable wherever the content arrives, including where perimeter signals such as robots.txt no longer apply. Marks carry the identity of the rights holder, the preferences asserted, and a signature, and are verifiable offline by any party. An individual signed statement is a Mark; the mechanism as a whole is Earmark. This document defines the Mark Object, embedding bindings for common content types, and the detection and verification procedure. It reuses the AI Preference vocabulary for preference semantics and the C2PA and CAWG assertion infrastructure for media, defining new machinery only where none exists. Earmarks make ignored preferences observable and attributable. Enforcement remains with law, contract, and the market.",
+     "https://datatracker.ietf.org/doc/draft-hood-aipref-earmark/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. Embedded attribution and rights marks for AI usage preferences. The weakest of the four AIPREF entries here — marking and attribution rather than authority — kept for completeness of the AIPREF cluster now that the corpus tracks it."),
+
+    # ---- Family completion, 26 Aug 2026 ----
+    # Closes the coverage gap found by cross-checking Heather Flanagan's standards-tracker:
+    # author families this corpus takes in full were substantially incomplete. Drafts that
+    # became RFCs or are marked Replaced are deliberately excluded.
+
+    ("draft-hardt-aauth-headers — HTTP AAuth Headers",
+     "This document defines two HTTP response headers — AAuth-Requirement and AAuth-Error — and profiles HTTP Message Signatures ([RFC9421]) for request authentication, with keying material conveyed via the Signature-Key header ([I-D.hardt-httpbis-signature-key]). A server uses AAuth-Requirement to require pseudonymous or verified agent identity, to request user interaction, or to signal that approval is pending. AAuth-Error conveys structured error information. Both headers use extensible registries for their values.",
+     "https://datatracker.ietf.org/doc/draft-hardt-aauth-headers/",
+     "IETF (individual)",
+     "Revision -00, 2 Apr 2026. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. The HTTP header binding for AAuth. The corpus tracked draft-hardt-oauth-aauth-protocol and tagged it OUTLIER while its own companion headers draft went untracked."),
+
+    ("draft-hardt-email-verification — Email Verification Protocol",
+     "This document defines the Email Verification Protocol (EVP), the HTTP-level protocol by which a browser obtains a signed email verification token from an issuer and presents it to a relying party (RP). The protocol enables web applications to verify that a user controls an email address without sending a verification email. It uses a three-party model in which the browser intermediates between the RP and the issuer, hiding the RP's identity from the issuer and supporting private, per-RP email addresses to prevent cross-site correlation. This document covers issuer discovery, the token issuance request, the Email Verification Token (EVT) and Key Binding JWT (KB-JWT) formats, and token verification. The browser API — how the user selects an email address and how the token is delivered to the RP — is defined in the companion W3C Email Verification API ([EVP-Browser]).",
+     "https://datatracker.ietf.org/doc/draft-hardt-email-verification/",
+     "IETF (individual)",
+     "Revision -02, 25 Aug 2026. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-hardt-gnap-advanced — The Grant Negotiation and Authorization Protocol - Advanced Features",
+     "TBD",
+     "https://datatracker.ietf.org/doc/draft-hardt-gnap-advanced/",
+     "IETF (individual)",
+     "Revision -01, 16 Feb 2021. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only.  **EXPIRED on Datatracker** (expired 16 Feb 2021; checked 26 Aug 2026) — kept deliberately."),
+
+    ("draft-hardt-gnap-jose — JOSE Authentication",
+     "TBD",
+     "https://datatracker.ietf.org/doc/draft-hardt-gnap-jose/",
+     "IETF (individual)",
+     "Revision -02, 16 Feb 2021. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only.  **EXPIRED on Datatracker** (expired 16 Feb 2021; checked 26 Aug 2026) — kept deliberately."),
+
+    ("draft-hardt-httpbis-signature-key — HTTP Signature Keys",
+     "This document defines five HTTP header fields for use with HTTP Message Signatures as defined in RFC 9421. The Signature-Key request header distributes public keys used to verify signatures, with eight initial key distribution schemes: pseudonymous inline keys (hwk), self-issued key delegation via JWK Thumbprint JWTs (jkt-jwt), identified signers with JWKS URI discovery (jwks_uri), direct JWKS fetch (jwks), JWT-based delegation (jwt), self-issued JWTs (self- jwt), X.509 certificate chains (x509), and references to previously cached assertions (cached). The Accept-Signature-Scheme and Accept- Signature-Alg response headers state the schemes and algorithms a server accepts, so a client can select both before it signs. The Signature-Error response header provides structured error information when signature verification fails, and the Signature-Key-Cache response header issues a cache identifier by which a caller can reference a previously presented assertion instead of resending it. Together, these mechanisms enable flexible trust models ranging from privacy-preserving pseudonymous verification to horizontally-scalable delegated authentication and PKI-based identity chains.",
+     "https://datatracker.ietf.org/doc/draft-hardt-httpbis-signature-key/",
+     "IETF (individual)",
+     "Revision -08, 17 Aug 2026. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. At -08, a mature draft. Its name contains no corpus keyword, which is exactly how the old name-substring discovery lost it."),
+
+    ("draft-hardt-oauth-distributed — Distributed OAuth",
+     "The Distributed OAuth profile enables an OAuth client to discover what authorization server or servers may be used to obtain access tokens for a given resource, and what parameter values to provide in the access token request.",
+     "https://datatracker.ietf.org/doc/draft-hardt-oauth-distributed/",
+     "IETF (individual)",
+     "Revision -01, 14 Dec 2018. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only.  **EXPIRED on Datatracker** (expired 14 Dec 2018; checked 26 Aug 2026) — kept deliberately."),
+
+    ("draft-hardt-oauth-mutual — Reciprocal OAuth",
+     "There are times when a user has a pair of protected resources that would like to request access to each other. While OAuth flows typically enable the user to grant a client access to a protected resource, granting the inverse access requires an additional flow. Reciprocal OAuth enables a more seemless experience for the user to grant access to a pair of protected resources.",
+     "https://datatracker.ietf.org/doc/draft-hardt-oauth-mutual/",
+     "IETF (individual)",
+     "Revision -02, 20 Jul 2018. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only.  **EXPIRED on Datatracker** (expired 20 Jul 2018; checked 26 Aug 2026) — kept deliberately."),
+
+    ("draft-hardt-oauth-protected-authorization — OAuth Protected Authorization",
+     "This document defines browser support for protecting OAuth 2.0 authorization requests and authorization responses during redirect- based authorization flows. A single Structured Field header field, OAuth-Authorization, is set by the OAuth client in the redirect response that sends the browser to the authorization server, and by the authorization server in the redirect response that returns the browser to the OAuth client. In both cases the browser augments the header with the attested origin of the redirecting party and delivers it to the redirect destination. The mechanism provides security for the authorization request: the authorization server receives a browser-attested, tamper-evident statement of which origin initiated the request. The mechanism provides security and privacy for the authorization response: the authorization code is delivered in the browser-protected header instead of the redirect URI, and never appears in a URL, eliminating its exposure through browser history, server logs, Referer headers, analytics systems, and URL sharing. The header is generated, validated, and delivered by the browser, and is inaccessible to scripts, service workers, and browser extensions. Existing OAuth deployments continue to function unchanged; the protections activate only when the OAuth client, browser, and authorization server all support them.",
+     "https://datatracker.ietf.org/doc/draft-hardt-oauth-protected-authorization/",
+     "IETF (individual)",
+     "Revision -00, 4 Jul 2026. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-hardt-xauth-protocol — The Grant Negotiation and Authorization Protocol",
+     "Client software often desires resources or identity claims that are independent of the client. This protocol allows a user and/or resource owner to delegate resource authorization and/or release of identity claims to a server. Client software can then request access to resources and/or identity claims by calling the server. The server acquires consent and authorization from the user and/or resource owner if required, and then returns to the client software the authorization and identity claims that were approved. This protocol may be extended on many dimensions.",
+     "https://datatracker.ietf.org/doc/draft-hardt-xauth-protocol/",
+     "IETF (individual)",
+     "Revision -14, 16 Feb 2021. **Family completion, added 26 Aug 2026.** Dick Hardt, a named author voice in this corpus — the corpus tracked 2 of his drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. Historical but load-bearing: XAuth is the direct ancestor of GNAP (RFC 9635), which the corpus tracks as a Published RFC.  **EXPIRED on Datatracker** (expired 16 Feb 2021; checked 26 Aug 2026) — kept deliberately."),
+
+    ("draft-hopley-x402-canonicalisation-jcs-v1 — JCS Canonicalisation Discipline for Agentic-Payment Receipts",
+     "This document specifies a canonicalisation discipline for agentic- payment receipt formats. The discipline pins JSON Canonicalization Scheme (JCS, RFC 8785) as the canonical preimage form, plus a small set of schema-normalisation rules that must be applied before canonicalisation to preserve byte-determinism across independent implementations and across statutory retention periods. The discipline is identified by the URN urn:x402:canonicalisation:jcs-rfc8785-v1. Receipt formats that reference this discipline carry an in-band canon_version field recording the version under which they were emitted, enabling year-N re-verification of retained bytes without dependence on an out-of- band rule registry. The discipline is byte-for-byte cross-validated across eight independent JCS implementations in eight programming languages: Python (rfc8785), TypeScript (canonicalize), Go (gowebpki/jcs), Rust (serde_jcs), Java (cyberphone/json-canonicalization, by the RFC 8785 editor), PHP (root23/php-json-canonicalization), C#/.NET (Baqhub.Packages.JsonCanonicalization), and Ruby (json- canonicalization). The attestation record covering 192 byte-for-byte agreements is published at the AlgoVoi conformance vectors repository. This document is normatively referenced by [draft-hopley-x402- compliance-receipt], [draft-hopley-x402-refund-receipt], and successor AlgoVoi-authored receipt-format Internet-Drafts. It is complementary to [draft-vauban-x402-stark-receipts], which uses a compatible canonicalisation discipline for its cryptographic settlement proofs. This document is an Independent Submission filed per RFC 4846 and is intended for publication as Informational. It is not an IETF Standards Track document, does not represent IETF community consensus, and has not been subject to review by an IETF Working Group. Change control resides with the document author. The canonicalisation discipline specified is one approach among possible alternatives; implementers may choose this approach, alternative approaches, or hybrid approaches as appropriate to their requirements.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-canonicalisation-jcs-v1/",
+     "IETF (individual draft)",
+     "Revision -04, 29 May 2026. **Family completion, added 26 Aug 2026.** Hopley x402 agentic-payment receipt cluster — the corpus tracked 4 of 11. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-hopley-x402-composite-trust-query — Composite Trust Query Response Format for Agentic-Payment Audit Chains",
+     "This document specifies a composite trust query response format for agentic-payment audit chains. The format records a verifier's categorical conclusion over an audit chain composed of compliance, settlement, cancellation, and refund receipts, in response to a stated query. The response format uses a closed four-element enumeration of categorical outcomes (TRUSTED, PROVISIONAL, INSUFFICIENT_EVIDENCE, UNTRUSTED). The four-state enumeration captures the operationally- distinct decision space: proceed, proceed-with-caution, hold-pending- more-data, halt. Collapsing to three values loses the distinction between INSUFFICIENT_EVIDENCE (\"we could not verify either way\") and UNTRUSTED (\"we verified and the answer is no\"), which matters for operator dashboards, regulator reporting, and downstream automated decision-making. The format is verifier-emitted and audit-chain-anchored. A verifier walks an audit chain composed of compliance receipts (draft-hopley- x402-compliance-receipt), settlement attestations (draft-hopley-x402- settlement-attestation), cancellation receipts (draft-hopley-x402- cancellation-receipt), and refund receipts (draft-hopley-x402-refund- receipt), applies a structured query identified by content-addressed reference, and emits a single composite-trust-claim response anchoring the chain by its content-addressed root. The format composes above the four receipt formats under the same canonicalisation discipline (draft-hopley-x402-canonicalisation-jcs). Regulators, dashboards, and downstream agents consuming the response get a single byte-deterministic statement of the trust posture without re-walking the underlying chain. The chain remains independently verifiable at the response's chain_ref content-address.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-composite-trust-query/",
+     "IETF (individual draft)",
+     "Revision -01, 25 May 2026. **Family completion, added 26 Aug 2026.** Hopley x402 agentic-payment receipt cluster — the corpus tracked 4 of 11. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-hopley-x402-federation-zkp — Cross-Issuer ZKP Federation for Post-Quantum Agentic Payment Credentials",
+     "This document defines a protocol for composing independently-issued post-quantum ZKP credentials from different issuers into a single federation token, without requiring a shared trust root between issuers. Each credential is a Falcon-1024 (NIST FIPS 206) or ML-DSA-65 (NIST FIPS 204) signed Bulletproofs range proof asserting that an agent's trust score meets a threshold. A federation validator independently verifies each credential against its issuer's public key, then computes a composite commitment binding all verified proofs. The resulting federation token is signed by the validator alone. No issuer needs to know about the others. This solves the cross-issuer attestation composition problem in agentic payment networks.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-federation-zkp/",
+     "IETF (individual draft)",
+     "Revision -00, 4 Jun 2026. **Family completion, added 26 Aug 2026.** Hopley x402 agentic-payment receipt cluster — the corpus tracked 4 of 11. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-hopley-x402-payment-evidence-frame — Payment Evidence Frame for Agentic-Payment Lifecycle Receipts",
+     "This document specifies a Payment Evidence Frame (PEF): a transport- agnostic envelope that wraps any payment lifecycle receipt from the x402 agentic-payment receipt stack under a named claim type, a deterministic frame identifier, and an optional transport-layer signature. The frame introduces three properties that the inner receipt types do not individually provide: (1) a stable cross-system identifier (frame_id) derived deterministically from the receipt content by SHA-256 over the JCS-canonical preimage, so the same payment evidence can be referenced by identifier across HTTP headers, agent-to-agent task artifacts, audit logs, and on-chain memo fields without re- serialising the full receipt; (2) a taxonomy label (claim_type) that tells a consumer what class of evidence a frame carries before the inner receipt format is parsed; and (3) a receipt integrity hash (receipt_hash) that allows any downstream party to confirm the inner receipt is unaltered without deserialising its full structure. The format uses the same JCS canonicalisation discipline (draft- hopley-x402-canonicalisation-jcs) as the five inner receipt formats it envelopes, so implementations require only one canonicalisation primitive for the full receipt stack.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-payment-evidence-frame/",
+     "IETF (individual draft)",
+     "Revision -00, 30 May 2026. **Family completion, added 26 Aug 2026.** Hopley x402 agentic-payment receipt cluster — the corpus tracked 4 of 11. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-hopley-x402-pqc-credential-binding — Post-Quantum Credential Binding for x402 Agentic Payment Authorization",
+     "This document defines how Falcon-1024 (NIST FIPS 206 / FN-DSA) and ML-DSA-65 (NIST FIPS 204) credentials bind to x402 agentic payment authorization. It specifies the credential envelope format, the JCS canonicalization discipline applied to signed payloads, the gateway verification procedure, and the session token binding that replaces per-request API key authentication for credentialed agents. This is the first Internet-Draft in the agentic payments space to anchor credential binding to the NIST post-quantum cryptography standards (FIPS 203/204/206).",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-pqc-credential-binding/",
+     "IETF (individual draft)",
+     "Revision -00, 4 Jun 2026. **Family completion, added 26 Aug 2026.** Hopley x402 agentic-payment receipt cluster — the corpus tracked 4 of 11. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-hopley-x402-retention-chain — Self-Verifiable Retention Chain for Payment Receipts",
+     "This document specifies eight cryptographic constructions for self-verifiable agentic payment records. The first, the Retention Chain Reference (retention_chain_ref), enables tamper-evident audit chains linking payment receipts without requiring external infrastructure. The second, the Payment Action Lifecycle, defines a content-addressed model for the exactly-once execution of payment actions, including an action reference primitive (action_ref) and a per-state transition hash (transition_hash) with a provable SKIP-on- retry idempotency guarantee. The third, the Settlement-Action Binding (binding_ref), binds a settled payment to the verified agent action it paid for and to the retention chain entry recording it, so that a settlement attestation proves not only that a payment occurred but which verified action it corresponds to. The fourth, the Policy Binding (policy_bound_ref), binds a content-addressed snapshot of the governing policy to an existing binding or chain reference, so that a decision is verifiable against the exact policy version that admitted it and a policy rotation is detectable by recomputation. The fifth, the Compliance Gate Binding (gate_ref), binds a categorical ALLOW/REFER/DENY compliance verdict and a no-PII payer reference to a policy or binding reference, so that a screening decision is provably tied to the policy in force when it was made and carries no personal data in the bound record. The sixth, the Pre-Payment Decision Chain (guardrail_ref), composes an agent identity reference, a spend authority reference, and the policy in force into one recomputable pre-payment ALLOW/DENY decision. The seventh, Post-Decision Execution Evidence (execution_ref), binds an executed action to the exact decision that authorized it, so the recorded execution is provably consistent with the decision and not merely correlated with an agent identity. The eighth, Cross-Party Authority Delegation (delegation_ref), binds a delegation of authority from one party to another and chains hand-offs, so a verifier can confirm that authority did not widen across an organizational boundary. All constructions use only SHA-256 and the JSON Canonicalization Scheme (JCS, RFC 8785), and are verifiable by any party holding the relevant receipts without contacting the issuer. The constructions satisfy the transaction recording and audit trail obligations of MiCA Article 80, DORA Article 14, and AMLR Article 56.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-retention-chain/",
+     "IETF (individual draft)",
+     "Revision -07, 25 Jun 2026. **Family completion, added 26 Aug 2026.** Hopley x402 agentic-payment receipt cluster — the corpus tracked 4 of 11. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-hopley-x402-rfc9421-binding — RFC 9421 HTTP Message Signatures Binding for x402 Payment Flows",
+     "This document specifies the normative binding of RFC 9421 (HTTP Message Signatures) and RFC 9530 (Digest Fields for HTTP) to the x402-foundation/x402 challenge/response payment flow. It defines the minimum covered-components set for an x402 challenge response and a payment proof submission, the RFC 9530 Content-Digest discipline, keyid resolution patterns, and the multi-hop proxy-chain survival property that the x402 transport requires. This binding is complementary to the existing http-message-signatures extension in the x402 specification, which specifies agent identity and registration (registrationUrl, signatureSchemes, tags). This document specifies the normative binding: which components MUST be covered, how Content-Digest is handled, and how signatures survive multi-hop proxy chains. The two compose cleanly in a deployment that uses both. A reference implementation is provided as algovoi-rfc9421-verifier on PyPI and npm (Apache 2.0), with Python and TypeScript byte-for-byte parity, cross-validated against external fixture sets. This document is an Independent Submission filed per RFC 4846 and is intended for publication as Informational. It is not an IETF Standards Track document, does not represent IETF community consensus, and has not been subject to review by an IETF Working Group. Change control resides with the document author. The binding specified is one approach among possible alternatives; implementers may choose this approach, alternative approaches, or hybrid approaches as appropriate to their requirements.",
+     "https://datatracker.ietf.org/doc/draft-hopley-x402-rfc9421-binding/",
+     "IETF (individual draft)",
+     "Revision -01, 13 Jun 2026. **Family completion, added 26 Aug 2026.** Hopley x402 agentic-payment receipt cluster — the corpus tracked 4 of 11. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-ietf-wimse-arch — Workload Identity in a Multi System Environment (WIMSE) Architecture",
+     "The increasing prevalence of cloud computing and micro service architectures has led to the rise of complex software functions being built and deployed as workloads, where a workload is defined as software executing for a specific purpose, potentially comprising one or more running instances. This document discusses an architecture for designing and standardizing protocols and payloads for conveying workload identity and security context information.",
+     "https://datatracker.ietf.org/doc/draft-ietf-wimse-arch/",
+     "IETF (WIMSE WG)",
+     "Revision -08, 6 Jul 2026. **Family completion, added 26 Aug 2026.** WIMSE **working group** draft — the corpus tracked 4 of 9 WIMSE WG drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. **WG draft.** The WIMSE architecture document — the frame for the WIMSE drafts already tracked."),
+
+    ("draft-ietf-wimse-identifier — Workload Identifier",
+     "This document defines a canonical identifier for workloads, referred to as the Workload Identifier. A Workload Identifier is a URI that uniquely identifies a workload within the context of a specific trust domain. This identifier can be embedded in Workload Identity Credentials, including X.509 certificates and JWT-based tokens, to support authentication, authorization, and policy enforcement across diverse systems. The Workload Identifier format ensures interoperability, facilitates secure identity federation, and enables consistent identity semantics.",
+     "https://datatracker.ietf.org/doc/draft-ietf-wimse-identifier/",
+     "IETF (WIMSE WG)",
+     "Revision -03, 6 Jul 2026. **Family completion, added 26 Aug 2026.** WIMSE **working group** draft — the corpus tracked 4 of 9 WIMSE WG drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. **WG draft.** Defines the workload identifier itself."),
+
+    ("draft-ietf-wimse-wpt — WIMSE Workload Proof Token",
+     "The WIMSE architecture defines authentication and authorization for software workloads in a variety of runtime environments, from basic deployments to complex multi-service, multi-cloud, multi-tenant systems. This document specifies the Workload Proof Token (WPT), a mechanism for workloads to prove possession of the private key associated with a Workload Identity Token (WIT). The WPT is a signed JWT that binds the workload's authentication to a specific HTTP request, providing application-level proof of possession for workload-to-workload communication. This specification is designed to work alongside the WIT credential format defined in draft-ietf- wimse-workload-creds and can be combined with other WIMSE protocols in multi-hop call chains.",
+     "https://datatracker.ietf.org/doc/draft-ietf-wimse-wpt/",
+     "IETF (WIMSE WG)",
+     "Revision -01, 2 Mar 2026. **Family completion, added 26 Aug 2026.** WIMSE **working group** draft — the corpus tracked 4 of 9 WIMSE WG drafts. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-kavian-aep-api-key-session-credential — API-Key Session Credential Grant Type for the Agent Enrollment Protocol",
+     "This document defines the API-key session-credential grant type for the Agent Enrollment Protocol (AEP). The grant type lets an AEP Service issue an opaque API key through the AEP Grant command for deployments that already operate header-based API-key authentication.",
+     "https://datatracker.ietf.org/doc/draft-kavian-aep-api-key-session-credential/",
+     "IETF (OAuth-related, individual)",
+     "Revision -03, 24 Aug 2026. **Family completion, added 26 Aug 2026.** Agent Enrollment Protocol (AEP) family — the corpus tracked 2 of 8. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-kavian-aep-basic-session-credential — Basic Session Credential Grant Type for the Agent Enrollment Protocol",
+     "This document defines the Basic session-credential grant type for the Agent Enrollment Protocol (AEP). The grant type lets an AEP Service issue an HTTP Basic credential through the AEP Grant command for deployments that already integrate with Basic authentication middleware.",
+     "https://datatracker.ietf.org/doc/draft-kavian-aep-basic-session-credential/",
+     "IETF (OAuth-related, individual)",
+     "Revision -03, 24 Aug 2026. **Family completion, added 26 Aug 2026.** Agent Enrollment Protocol (AEP) family — the corpus tracked 2 of 8. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-kavian-aep-claims — AEP Claim Values",
+     "This document defines a claim-value catalog for the Agent Enrollment Protocol (AEP). It specifies stable claim names and forward- compatible JSON value shapes that Agents can submit during enrollment when requested by a Service Inspect document.",
+     "https://datatracker.ietf.org/doc/draft-kavian-aep-claims/",
+     "IETF (OAuth-related, individual)",
+     "Revision -01, 24 Aug 2026. **Family completion, added 26 Aug 2026.** Agent Enrollment Protocol (AEP) family — the corpus tracked 2 of 8. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-kavian-aep-did-web-identity-method — The did:web Identity Method for the Agent Enrollment Protocol",
+     "This document defines the did:web identity method for the Agent Enrollment Protocol (AEP). The method lets an AEP Service verify Agent client assertion JWTs by resolving an Agent did:web identifier to a DID document published over HTTPS.",
+     "https://datatracker.ietf.org/doc/draft-kavian-aep-did-web-identity-method/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 29 Jun 2026. **Family completion, added 26 Aug 2026.** Agent Enrollment Protocol (AEP) family — the corpus tracked 2 of 8. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-kavian-aep-platform-hosted-identity — AEP Platform Hosted Identity",
+     "This document defines interoperable hosted identity behavior for Agent Enrollment Protocol (AEP) Platforms. It lets a Platform provision Service-scoped Agent did:web identities, publish DID documents, custody signing keys, and produce AEP client assertion JWTs through delegated signing operations.",
+     "https://datatracker.ietf.org/doc/draft-kavian-aep-platform-hosted-identity/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 23 Jul 2026. **Family completion, added 26 Aug 2026.** Agent Enrollment Protocol (AEP) family — the corpus tracked 2 of 8. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-kavian-offering-discovery-protocol — The Offering Discovery Protocol",
+     "The Offering Discovery Protocol (ODP) enables an automated Agent to inspect a Service, discover its Collections and Offerings, interpret Service-defined structured attributes, and identify links to subsequent operations. ODP supports catalogs ranging from a few Offerings to large marketplaces without imposing a universal product taxonomy. This document defines the protocol's scope, terminology, roles, discovery architecture, extensibility model, composition boundaries, and conformance model.",
+     "https://datatracker.ietf.org/doc/draft-kavian-offering-discovery-protocol/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 24 Aug 2026. **Family completion, added 26 Aug 2026.** Agent Enrollment Protocol (AEP) family — the corpus tracked 2 of 8. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. Sits slightly outside the AEP naming but is part of the same author's stack."),
+
+    ("draft-mcguinness-oauth-actor-profile — OAuth Actor Profile for Delegation",
+     "OAuth deployments increasingly involve agents and workloads acting on behalf of human users across organizational boundaries. Existing specifications provide relevant building blocks (notably the act claim from RFC 8693 Token Exchange) but do not define a consistent profile for representing delegated actor relationships across JWT assertion grants (RFC 7523), JWT access tokens (RFC 9068), and Transaction Tokens, nor for classifying actor entity types or signaling support between authorization servers and resource servers. The result is inconsistent actor representation and actor- representation interoperability gaps that force deployments to rely on proprietary conventions. This document defines the OAuth Actor Profile for Delegation. It specifies a common act claim structure extended with sub_profile for entity-type classification, processing rules for authorization servers and resource servers across the three token families and their Token Exchange inputs, and OAuth discovery metadata parameters for advertising actor-profile support. The profile applies uniformly across token types and integrates with existing sender-constraint mechanisms (DPoP, mTLS). It does not standardize the policies by which systems determine whether a given actor is permitted to act for a subject; those decisions remain deployment-specific.",
+     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-actor-profile/",
+     "IETF (individual)",
+     "Revision -00, 30 Apr 2026. **Family completion, added 26 Aug 2026.** McGuinness individual I-D. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. **This is the Actor Profile itself** — the anchor draft this corpus repeatedly refers to (draft-mw-oauth-actor-chain is described here as directly responding to it) and which was somehow never tracked while actor-proofs and actor-receipts were. The most consequential single omission the cross-check found."),
+
+    ("draft-morrison-alter-uri-scheme — The 'alter' URI Scheme for Dispatchable ~handle References",
+     "This document defines the alter URI scheme as a dispatchable reference syntax for ~handle identity references published under the DNS substrate defined in [MCPDNS]. An alter: URI binds a textual ~handle reference to a resolution and verification procedure that retrieves the handle's envelope from the publishing zone, validates the envelope's signature chain, and dispatches the result to an operating-system URI handler. The reference may be scoped to an organisation, narrowed to a named facet of the identity, and addressed to a typed action surface. The scheme is the addressing form of the ~handle@org:facet/action reference; its resolution semantics are those of [MCPDNS], reused without modification. The scheme is provider-neutral, introduces no new cryptographic primitive, and reuses the resolution and verification procedures of [MCPDNS] without modification. The principal contribution is a single, self-verifying dispatch surface for handle-typed references: clicking, typing, or scanning an alter: URI yields a verified handle resolution rather than a free-text string or an unauthenticated fetch, and where an action is addressed it yields a verify-before- side-effect dispatch. This document requests provisional registration of the alter scheme with IANA per [RFC7595] Section 3.",
+     "https://datatracker.ietf.org/doc/draft-morrison-alter-uri-scheme/",
+     "IETF (individual draft)",
+     "Revision -02, 11 Aug 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-binding-moment-envelope — The Briefing-and-Binding Envelope: A Delivery Contract for Agent-to-Principal Decision Moments with Dual-Veto Reconciliation",
+     "This memo specifies the briefing-and-binding envelope: a delivery contract for the wire-level structure by which an artificial- intelligence agent surfaces a consequential decision to the human principal it acts for, and by which the principal commits, declines, amends, or rejects that decision. The envelope carries eight named slots (a synopsis, findings, recommendations, an offer of detail, a question stem, a set of options each marked with its own reasoning, a single recommended option, and a pair of escape hatches) and is emitted as a structured field of a Model Context Protocol [MCP] tool result. The contribution is the delivery contract itself: a single renderer-agnostic envelope so that the briefing an agent delivers and the binding a principal commits back have one machine-checkable shape across every consuming surface. The central element is the dual-veto handshake: one escape hatch lets the principal revise the answer space while accepting the question; the other lets the principal reject the question itself and reopen deliberation. Either party may veto. The memo defines a content digest over the envelope, canonicalized under JCS and hashed with SHA-256, so that a resolution names the exact envelope it resolves and an external receipt can reference that envelope by digest. The memo is Informational. No new transport is introduced; the envelope composes with the handle namespace of [IDPRONOUNS] and the MCP tool surface of [POLICYPROV].",
+     "https://datatracker.ietf.org/doc/draft-morrison-binding-moment-envelope/",
+     "IETF (individual draft)",
+     "Revision -01, 23 Jul 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-compute-location-gate — The Compute-Location Gate: Provenance-Class Routing of Identity Inference with Wire-Layer Refusal of Unconsented Provenance Classes",
+     "This memo specifies the compute-location gate: a mechanism by which a client and an identity-inference server negotiate, at the wire layer and before any inference is performed, the location at which an identity inference will compute, as a deterministic function of the provenance class of the input signal. Three provenance classes are distinguished. Active inference, initiated by the inferred-about principal, MAY compute server-side and produce a server-held identity vector. Passive aggregate observation over a cohort no smaller than a declared minimum MAY compute server-side but yields only a population-level observation that is not attributable to an individual. Passive individual observation is local-only: it is computed and retained on the device that observed it and is never transmitted to a server. The gate is enforced by consent-class matching and by a wire-layer refusal returned when a requested provenance class is not consented; it is not enforced by any cryptographic proof concerning data that was not used. The memo is Informational. The wire surface composes with the discovery mechanism of [MCPDNS], the handle namespace of [IDPRONOUNS], and the organisational policy substrate of [POLICYPROV]; no new transport is introduced.",
+     "https://datatracker.ietf.org/doc/draft-morrison-compute-location-gate/",
+     "IETF (individual draft)",
+     "Revision -01, 26 Aug 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-live-reference-resolution — Live Reference Resolution for Autonomous Agent Beliefs",
+     "A recurring class of autonomous-agent failure arises when an agent acts on a belief read from a cached, derived, or proxy copy that has silently diverged from the authority the belief claims to represent. This document describes a reference-resolution discipline for the working beliefs an agent reasons and acts from. Each belief is held as a reference to a single named lowest authority and is resolved live at the point of use, with verification. When the authority is unobservable or the resolved value is stale, the belief takes an explicit uncertainty state rather than a prior cached value; that state propagates to any belief derived from it, and an uncertain belief feeding a costly or irreversible act blocks or escalates rather than proceeding. Every resolution chain terminates in a single self-authorising root. The document is Informational. It records a discipline and a vocabulary; it does not define a wire protocol.",
+     "https://datatracker.ietf.org/doc/draft-morrison-live-reference-resolution/",
+     "IETF (individual draft)",
+     "Revision -00, 5 Jul 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-morning-brief — The Morning Brief: A Federated, Identity-Attested Situational-Awareness Payload",
+     "This document defines the Morning Brief: a federated, identity- attested situational-awareness payload exchanged between organisations, their agents, and peer agents operating under an Identity Accord [ACCORD]. A Morning Brief carries a signed, bounded- lifetime summary of signals, escalations, decisions, and optional commerce quotes from one ~handle to another. Every signal entry carries a provenance_class distinguishing active self-report, passive aggregate observation, and passive individual observation; the last of these is forbidden on the wire and rejected at the grammar level. Readers present a capability token scoped by (category, provenance_class) that gates release BEFORE payload emission, not after. The payload is envelope-signed with COSE_Sign1 [RFC9052] over a JCS-canonicalised [RFC8785] representation, bound to the issuer's Sovereign-tier handle per [IDCOMMITS]. Briefs carry a mandatory not_after (default 24h) and reference a revocation endpoint discovered via DNS TXT per [MCPDNS]. The document defines the wire format only; rendering, storage, and retention are out of scope.",
+     "https://datatracker.ietf.org/doc/draft-morrison-morning-brief/",
+     "IETF (individual draft)",
+     "Revision -01, 12 Aug 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-org-alter-policy-provision — Policy Provision and Governance Inheritance from an Organisational Identity Substrate",
+     "This memo specifies how an artificial-intelligence agent runtime, bound at instantiation to a principal identity handle, resolves at session initialisation a target organisational identity substrate from a manifest source bound to the runtime's working context and retrieves from that substrate a typed policy stack comprising a handbook artefact, a standard-operating-procedure registry pointer, an enforcement-gate specification, and an audit-signal ingestion endpoint. The policy stack is then applied as runtime constraints on subsequent tool invocations, with audit signals emitted back to the same substrate. Policy provision occurs in the same act of session initialisation as principal identification, rather than as a separate ceremony against a side-channel governance plane. A principal concurrently bound to multiple organisational substrates operates the runtime under a deterministic composition of the several policy stacks, with cross-organisational residual conflicts routed to the peer-protocol Identity Accord ceremony [IDACCORD] rather than to a meta-federation authority. The memo is Informational. The wire surface relies on the DNS-based discovery of [MCPDNS] and the handle namespace of [IDPRONOUNS]; no new transport is introduced.",
+     "https://datatracker.ietf.org/doc/draft-morrison-org-alter-policy-provision/",
+     "IETF (individual draft)",
+     "Revision -02, 11 Aug 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-ot-command-authority — Consented and Attributable Agent Authority for Operational-Technology Control Actions",
+     "This memo specifies a binding profile by which a control action issued to an operational-technology (OT) or industrial control system on the authority of a software agent is refused unless it carries a verifiable statement of who the agent is, which human principal it acts for, whether that principal consented to this specific action on this specific asset, whether a human authorised the action where the action's risk class requires it, and an append-only record sufficient to attribute the action afterward. The profile does not invent new cryptography or a new identity mechanism. It composes primitives defined elsewhere, DNSSEC-rooted agent discovery, scoped and revocable consent, a human-in-the-loop binding moment, and a provenance-labelled audit record, into a single structure, the Command Authority Envelope, that an OT conduit evaluates and, on any missing or invalid binding, refuses. The profile is availability- first and fails closed on authority, never on safety: it MUST NOT be placed in the trip path of a safety function. The memo maps the profile onto the identification, use-control, and audit requirements that [IEC62443] and [NERCCIP] state but do not give a wire mechanism for. The methods by which a principal's identity is inferred are out of scope by construction.",
+     "https://datatracker.ietf.org/doc/draft-morrison-ot-command-authority/",
+     "IETF (individual draft)",
+     "Revision -01, 23 Jul 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-reviewed-by-trailer — Reviewed-By Trailer: Sovereign-Portable Peer-Review Attribution for Content-Hash-Bound Artefacts",
+     "This document defines a trailer grammar for sovereign-portable peer review as an extension of the identity-attributed commit grammar in [COMMITS]. The grammar introduces one required trailer (Reviewed- By:) and three optional companion trailers (Review-Stance:, Review- Of:, Witnessed-By:) that bind a Sovereign-tier ~handle to a specific act of review over a specific content artefact, cryptographically signed using the Ed25519 mechanism of [COMMITS]. The mechanism applies uniformly to git commits, document manifests, pre-prints, patent disclosures, and any other content-addressable artefact. Reviewer reputation accumulates on the sovereign handle rather than on a publisher's platform, making reviewer trust portable across journals, pre-print servers, and private review contexts. Pseudonymous review for anonymous peer-review processes is supported by permitting a Sovereign handle whose underlying party is concealed through out-of-band key custody, preserving full cryptographic verifiability of the review act without disclosing the reviewer's underlying identity. The grammar is positioned as complementary to CRediT [CREDIT], ORCID [ORCID], and DOI [DOI] attribution infrastructure, not as a replacement for them.",
+     "https://datatracker.ietf.org/doc/draft-morrison-reviewed-by-trailer/",
+     "IETF (individual draft)",
+     "Revision -02, 26 Aug 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-substrate-observation — Substrate-Observation as an Alternative to Envelope Coordination for Concurrent Sessions",
+     "This memo articulates a coordination-protocol anti-pattern observed in cross-tool agentic systems and describes a substrate-observation alternative that does not require negotiating a wire format between heterogeneous concurrent sessions of an identity-bound principal. The memo is Informational. No protocol element is being proposed for standardisation; the contribution is the opposite, a delineation of what should NOT be standardised, and why, with a reference to the substrate-physics primitives that take its place. Companion memos in the morrison-* family describe the identity primitives this memo presumes; specifically, this memo relies on the ~handle namespace established in [IDPRONOUNS] and the per-principal identity substrate referenced in [IDACCORD].",
+     "https://datatracker.ietf.org/doc/draft-morrison-substrate-observation/",
+     "IETF (individual draft)",
+     "Revision -02, 11 Aug 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-morrison-substrate-provenance-grammar — Substrate-Provenance Annotation Grammar for Large-Language-Model Output",
+     "This memo specifies a wire-level annotation grammar by which a large- language-model output may carry, at emission and at the granularity of an individual assertion, a provenance label drawn from a closed enumerated vocabulary of substrate-class identifiers. The memo defines the closed vocabulary, the per-assertion attachment form, the admissibility discipline a relying party MAY apply to the labels, and two terminal output states, UNVERIFIED-INFERENCE and DECAYED-TO- UNCERTAINTY, equal-rank with assertion and denial. The memo does not specify what an inference system MUST do; it specifies the wire grammar by which a relying party may inspect what the inference system DID with respect to the substrates it consulted. The memo is Informational.",
+     "https://datatracker.ietf.org/doc/draft-morrison-substrate-provenance-grammar/",
+     "IETF (individual draft)",
+     "Revision -02, 26 Aug 2026. **Family completion, added 26 Aug 2026.** Morrison ~handle identity family — the corpus described this as a six-draft family; it is at least 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-ruvalcaba-hctp — The Hash-Chain Context Transfer Protocol (HCTP)",
+     "The Hash-Chain Context Transfer Protocol (HCTP) is a payload format and synchronization protocol for incrementally transferring an ordered, append-only sequence of conversational context between two endpoints over a bandwidth-constrained channel. Acknowledged history is represented by a single fixed-size rolling hash commitment (the \"static root\"); only not-yet-acknowledged context blocks (the \"dynamic window\") are transmitted. As a result, the per-message wire overhead attributable to history is constant and independent of the total number of previously acknowledged turns. HCTP is transport- agnostic and carries no confidentiality or peer authentication of its own; it is intended to run over a secure transport. This document specifies the HCTP data model, wire format, rolling-root computation, and synchronization state machine.",
+     "https://datatracker.ietf.org/doc/draft-ruvalcaba-hctp/",
+     "IETF (individual)",
+     "Revision -00, 11 Aug 2026. **Family completion, added 26 Aug 2026.** NHE family — the corpus tracked 2 of 8, recording it as an identity+authz pair rather than a family. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-ruvalcaba-nhe-arch — An Architecture for Non-Human Entities (NHE): A Reference Model for Persistent, Identity-Bearing Autonomous Agents",
+     "This document defines a reference architecture for a Non-Human Entity (NHE): a persistent, identity-bearing autonomous software agent that maintains continuity of memory and identity across sessions and hosts, acts under bounded authority, and produces a tamper-evident record of its reasoning and actions. The document specifies the NHE as a functional artifact: a bounded, inspectable, and terminable software system. It makes no claim that an NHE is alive, sentient, or a moral or legal person, and such claims are explicitly out of scope. The architecture decomposes an NHE into a small set of components joined by well-defined interfaces. Each interface at which two independent implementations must interoperate is a candidate for a separate Standards-Track specification; this document is the informational reference model that names those interfaces and the trust relationships among them. It is intended to frame a suite of companion protocol documents, of which the Hash-Chain Context Transfer Protocol (HCTP) is the first.",
+     "https://datatracker.ietf.org/doc/draft-ruvalcaba-nhe-arch/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. **Family completion, added 26 Aug 2026.** NHE family — the corpus tracked 2 of 8, recording it as an identity+authz pair rather than a family. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. The NHE reference model. The corpus recorded NHE as an identity+authz pair on 26 Aug; it is in fact a six-draft family and this is its architecture root."),
+
+    ("draft-ruvalcaba-nhe-audit — NHE Reasoning-Audit Log: A Tamper-Evident, Content-Optional Audit Chain for Autonomous Agents",
+     "This document specifies a tamper-evident audit chain for the reasoning and actions of a Non-Human Entity (NHE). Each audited event --- a reasoning step obtained at the boundary to a model provider, or a tool invocation obtained at the execution boundary --- is recorded as an entry whose bound fields are hash-linked to its predecessor, so that any alteration, omission, or reordering is detectable by an independent verifier. The chain binds metadata (model, provider, subject identity, and reasoning scale) into the entry hash, and supports a prove-without-exposing mode in which a verifier confirms that an event occurred, with the attested metadata, without the event's content being disclosed. Content storage is optional and its retention is configurable independently of the chain, so content may be redacted without destroying the chain's integrity. The entry data model and canonical serialization are specified here; the wire and proof-export encodings are deferred to the next revision.",
+     "https://datatracker.ietf.org/doc/draft-ruvalcaba-nhe-audit/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. **Family completion, added 26 Aug 2026.** NHE family — the corpus tracked 2 of 8, recording it as an identity+authz pair rather than a family. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-ruvalcaba-nhe-bootstrap — NHE Constrained Bootstrap: A Self-Describing Capability and Constraint Declaration Protocol for Autonomous Agents",
+     "This document specifies how a Non-Human Entity (NHE) declares, at bootstrap, what it is capable of and is thereby bounded in what it is permitted to do. An entity produces a signed, self-describing capability manifest through automated introspection; a coordinator classifies the manifest into a capability tier that maps to a permission matrix --- the set of task types the entity is authorized to perform --- and every subsequent task dispatch is gated against that envelope. The result is a verifiable, self-describing constraint on an entity established at the moment it joins, realizing the bounded-authority invariant of the NHE architecture at boot time. The manifest and handshake data model is specified here; the wire encoding is deferred to the next revision.",
+     "https://datatracker.ietf.org/doc/draft-ruvalcaba-nhe-bootstrap/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. **Family completion, added 26 Aug 2026.** NHE family — the corpus tracked 2 of 8, recording it as an identity+authz pair rather than a family. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-ruvalcaba-nhe-memory — NHE Memory: A Verifiable Memory-Record Format and Reputation-Weighted Reconciliation Protocol",
+     "This document specifies two interoperability surfaces of the memory component of a Non-Human Entity (NHE). Part I defines a verifiable memory-record format: an integrity structure in which each record binds a hash of its own content and version-specific hashes of the prior records it references, so that tampering can be detected and localized on demand, per-record, without a linear chain, a Merkle tree, or distributed consensus. Part II defines a reconciliation protocol by which two divergent memory accumulations are merged without loss or forgery: a delta format, a reputation-weighted merge in which a contributed item enters at a confidence bounded by its contributor's reputation rather than its self-asserted value, and provenance that supports lineage-scoped rollback. The data models are specified here; the wire encodings are deferred to the next revision.",
+     "https://datatracker.ietf.org/doc/draft-ruvalcaba-nhe-memory/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. **Family completion, added 26 Aug 2026.** NHE family — the corpus tracked 2 of 8, recording it as an identity+authz pair rather than a family. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-ruvalcaba-nhe-mesh — The NHE Mesh Protocol: Entity-to-Entity Messaging and Task Distribution",
+     "The NHE Mesh Protocol lets independently operated Non-Human Entities (NHEs) exchange messages and distribute work without a central coordinator. It defines three things: a liveness/presence mechanism, an addressed message envelope, and a task lifecycle (create, claim, complete) that provides at-most-once assignment of a unit of work across mutually distrusting peers. Peers are named by their NHE identity and authenticated through the NHE identity interface; the Mesh Protocol carries the envelope and runs over a secure transport. This is a skeleton (-00): the framing, message set, and state machine are specified here, and the concrete on-the-wire encoding is deferred to the next revision.",
+     "https://datatracker.ietf.org/doc/draft-ruvalcaba-nhe-mesh/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. **Family completion, added 26 Aug 2026.** NHE family — the corpus tracked 2 of 8, recording it as an identity+authz pair rather than a family. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-acd — The Agent Compliance Disclosure (ACD) Protocol for Agentic AI Systems",
+     "A regulated resource provider -- a bank, a government API, a healthcare records system -- receives a request from an AI agent. The agent claims to operate under a constitutional compliance policy and a valid mandate. The resource provider has no mechanism to verify these claims. Without a machine-verifiable compliance disclosure, the resource provider cannot confirm the agent's governing law, its active prohibition set, its audit trail reference, or its principal hierarchy -- before granting access. This document defines the Agent Compliance Disclosure (ACD) Protocol: a machine-to-machine compliance handshake that must complete before an AI agent is granted access to a regulated resource class. ACD defines the ACD Record schema (a three-layer structured disclosure produced by the SOOS kernel, covering legal identity, constitutional compliance, and principal hierarchy), the ACD Presentation Protocol (the query/response exchange between a resource provider and the SOOS kernel), the ACD Trust Hierarchy (operator-declared trust levels and Audit Principal credentials), the ACD-to-MJWT binding (ACD MUST reference the session MJWT jti), and the GAR integration (ACD presentation events as Authority Lifecycle Events). ACD Records are produced exclusively by the Governing Enforcement Component (GEC), signed by the kernel's KIA private key, and logged in the Governance Audit Record (GAR). LLM self-report of compliance posture is architecturally insufficient and MUST NOT be used as an ACD disclosure surface. ACD is the inbound complement to the Resource Governance Protocol (RGP): where RGP governs outbound capability discovery, ACD governs inbound compliance verification. Together they define the complete resource access governance flow for SOOS-governed agents.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-acd/",
+     "IETF (individual)",
+     "Revision -01, 1 Jul 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-aep — The Agent Execution Protocol (AEP) for Agentic AI Systems",
+     "An AI agent that can act cannot be governed unless there is a normative contract for how it receives its world, how it declares its intent, and how it learns what it is and is not permitted to do -- at every step, in every iteration, without exception. AI agents operating on governed resources require a normative interface contract between their internal reasoning loop and the Governing Enforcement Component (GEC) that enforces authorization policy, records transitions to a tamper-evident Event Stream, and mediates access to Sovereign Object instances. Existing agent frameworks define no such contract. Agents submit actions without a normative delivery protocol for the state and permission context they act on; GECs enforce policy without a normative protocol for communicating denial rationale back to agents; human oversight is invoked without a normative session state that governs the resulting suspension. This document defines the Agent Execution Protocol (AEP): the normative five-step loop -- SENSE, REASON, PLAN, ACT, OBSERVE -- that specifies how a governed AI agent interfaces with GEC services at each iteration. The AEP defines the Context Package delivered at SENSE, the GEC Query Interface exercised at PLAN, the Transition Request submitted at ACT, and the atomic GEC response received at OBSERVE. The AEP specifies two conformance modes -- Standard and Goal Execution Engine (GEE) -- and normatively integrates the Intent Declaration Primitive [I-D.sato-soos-idp], the Mandate JWT [I-D.sato-soos-mjwt], the Human Escalation Mechanism [I-D.sato-soos-hem], the Governance Audit Record [I-D.sato-soos-gar], the Constitutional AI Protocol [I-D.sato-soos-cap], and the Sovereign Object [I-D.sato-soos-sov] as components of a single governed execution architecture. The REASON step is intentionally GEC-unspecified: the LLM reasoning engine is opaque to the protocol. The AEP is the transmission between the LLM engine and the GEC enforcement substrate. Version -02 adds: XPID binding at session open (GEC MUST bind XPID from KIA-verified Party Registry; MUST NOT accept client-supplied XPID); STALLED and PLAN_B_ACTIVE session states with full normative definitions, trigger conditions, and resume conditions; Expected Outcome Declaration (EOD) as a pre-session commitment structure with primary outcome, acceptance envelope, and pre-declared Plan B; RETRY_CONTINUATION normative strengthening with what-changed-since- last-attempt requirement and prior_denial_count Cedar attribute; AEP-to-OTel mapping section (Section 8) with mandatory span attributes at each AEP phase; four new Security Considerations; and updated IANA registrations for new state codes and EOD media type.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-aep/",
+     "IETF (individual)",
+     "Revision -02, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-aop — The Agent Orchestration Protocol (AOP) for Agentic AI Systems",
+     "A single AI agent acting within a governed session is not the hardest governance problem. The hardest problem is what happens when that agent must delegate: when the mission is too large for one agent, when sub-tasks require specialized capability, when parallel execution is necessary, and when each delegated sub-agent is itself consequential enough to require governance. Who authorized the spawn? Who owns the plan? If the sub-agent deviates, who decides whether to re-plan or escalate? If the mission fails mid-execution, who constructs the audit record? This document defines the Agent Orchestration Protocol (AOP): the normative protocol through which a governed orchestrating agent decomposes a mission into a governed sub-goal directed acyclic graph (DAG), delegates sub-goals to sub-agents via kernel-mediated Assignment Primitives, and maintains a Mission Plan Sovereign Object (Mission Plan SO) and Mission Status SO across the full lifecycle of multi-agent execution. AOP specifies three core constructs: the Expected Outcome Declaration (EOD) as the pre-commitment structure for the full mission and each delegated sub-goal; the Mission Plan SO encoding the sub-goal DAG with SEQUENTIAL, PARALLEL, and CONDITIONAL dependency types; and the Assignment Primitive as the governed handoff mechanism that requires an Endorsed EOD and produces a Sub-Agent Composition Record (SACR) per the Multi-Agent Delegation protocol [I-D.sato-soos-mad]. AOP integrates with the Intent Declaration Primitive [I-D.sato-soos-idp] at each EOD boundary, the Agent Execution Protocol [I-D.sato-soos-aep] for per-agent session governance, the Governance Audit Record [I-D.sato-soos-gar] for mission lifecycle audit events (ALE-042 through ALE-055), and the Human Escalation Mechanism [I-D.sato-soos-hem] for re-planning authority escalation. The normative reference scenario for AOP is a three-tier emergency management orchestration system in which a Master AI orchestrates regional coordination agents, which orchestrate domain-specialist leaf agents (e.g., evacuation routing models), each tier operating under full SOOS governance. Further information: https://soosproject.ai/drafts/aop",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-aop/",
+     "IETF (individual)",
+     "Revision -00, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-cap — The Constitutional AI Protocol (CAP) for Agentic AI Systems",
+     "An AI agent's authorization system determines what it is permitted to do. A human principal's escalation decision determines what they authorize. Neither of these is sufficient on its own: a Cedar policy can permit market manipulation; a human principal can authorize fraud. Authorization systems answer the question \"who decided?\" The Constitutional AI Protocol answers a different question: \"was that decision lawful?\" CAP defines a Constitutional Layer that evaluates every AI action request and every human authorization decision against a three-tier prohibition model -- before Cedar evaluates the action and before the system executes the human's decision. Tier 0 prohibitions are derived from near-universal treaty consensus and are unconditional: no agent, operator, or human principal can authorize them. Tier 1 prohibitions are jurisdiction-specific and operator-declared. Tier 2 prohibitions are voluntary operator ethical standards. This document also specifies the Prohibition Clearance Mechanism (PCM): the process by which specific Tier 0 and Tier 1 prohibition classes may be cleared for specific deployment contexts -- either at implementation time by the operator or by formal regulatory authority -- while preserving an absolute prohibition floor for CSAM and genocide facilitation under any circumstances. The Sovereign Object OS (SOOS) is the reference implementation of the Governance Execution Controller (GEC) pattern on which CAP is built. CAP also defines the GEC Policy Transparency Disclosure (PTD): a signed, queryable, tier-structured document through which any external party may determine which laws and regulations a GEC is actively enforcing, at what authority tier, and under whose governance.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-cap/",
+     "IETF (individual)",
+     "Revision -04, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-cap-rrs — Constitutional AI Protocol -- Regulation Record Specification (CAP-RRS)",
+     "Compliance with applicable law should be a package import, not a Cedar authoring problem. The Constitutional AI Protocol (CAP) [I-D.sato-soos-cap] defines the enforcement architecture for governed AI agent systems: a three-tier Cedar policy evaluation model that distinguishes absolute prohibitions, jurisdictional legal constraints, operator policies, and resource limits. CAP specifies what the Governance Execution Controller (GEC) does when a Cedar policy fires. It does not specify how Cedar policies are authored, certified, distributed, or maintained as law changes. This document defines the Regulation Record: the structured representation of a compliance obligation at any CAP tier. A Regulation Record is the human-readable, machine-compilable intermediate form between legal text and Cedar policy. This document specifies the Regulation Record schema (Section 4), the Cedar Compilation Profile that governs how Regulation Records are translated into Cedar policies (Section 5), the conflict declaration model (Section 6), the certification model governing which publishers may certify records at each tier (Section 7), and the versioning and update protocol for the Constitutional Mandate Registry (Section 8). Version -02 adds the Law Reference Interface (LRI) generic model (Section 9), the Statute-Primacy Rule (Section 10), and the Operational Requirements for catalog amendment and interpretation detection (Section 11). These three additions complete the regulation lifecycle: from law encoding (Sections 4-8) through law reference and provenance (Section 9), through the consequences of law amendment (Section 10), through the operational cadence governing detection and response (Section 11). The core developer experience this document enables: a developer imports certified Regulation Record packages from the Constitutional Mandate Registry, declares their own Tier 2 operator policies and Tier 3 resource policies, calls compile(), and receives a Cedar policy set ready for GEC loading. No Cedar is authored by hand for compliance purposes. Compliance is a package management operation.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-cap-rrs/",
+     "IETF (individual)",
+     "Revision -02, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-dam — The Data Artifact Management (DAM) Protocol for Agentic AI Systems",
+     "This document specifies the Data Artifact Management (DAM) protocol for agentic AI systems governed by the Sovereign Object OS (SOOS) framework. DAM defines a typed taxonomy of data artifacts produced and consumed by AI agents, a governance envelope for each artifact type specifying provenance, access policy, temporal validity, and retention requirements, and the normative interface between agent- generated artifacts and the Governance Audit Record (GAR). DAM addresses three classes of data in agentic systems: kernel- generated artifacts (IDP event logs, GAR records, AEP session state), agent-generated artifacts (outputs of agent actions), and externally ingested artifacts (data made available by resources). DAM specifies the Data Artifact type (DA-Type) taxonomy referenced in the Resource Governance Protocol (RGP) and the Agent Execution Protocol (AEP). This document is a placeholder submission establishing the draft identifier and abstract. Full specification text will be submitted post-IETF 126 Vienna. Further information: https://soosproject.ai/drafts/dam",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-dam/",
+     "IETF (individual)",
+     "Revision -00, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-faip — The Federated Agent Intelligence Protocol (FAIP) for Agentic AI Systems",
+     "Every governed AI agent session ends with a record of what it tried, what was permitted, what was denied, and whether it succeeded. Across a single operator's deployment, these records feed behavioral trust scores. Across all operators, they are discarded. No protocol exists for pooling this behavioral intelligence without exposing the business logic, personal data, or operational details that make individual records sensitive. This document defines the Federated Agent Intelligence Protocol (FAIP): the Tier 3 analytics layer of the SOOS protocol family, specifying how aggregate behavioral intelligence is derived from governed agent Event Streams across participating operators, made available to agents and human principals, and protected through privacy-preserving aggregation, data residency controls, and k-anonymity enforcement. FAIP does not share individual session records. It does not expose any operator's proprietary data. It produces aggregate behavioral signal -- empirical, tamper-evident, distributed -- that no single participant can generate from their own data alone. FAIP is the first protocol specification for federated behavioral intelligence derived exclusively from cryptographically governed agent activity records. This document establishes the FAIP architecture, its relationship to the three-tier analytics model defined in [I-D.sato-soos-idp], its privacy and data residency framework, and the scope of subsequent FAIP specifications. Full protocol specification of FAIP query interfaces, federation topology, and aggregation algorithms is deferred to successor documents.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-faip/",
+     "IETF (individual)",
+     "Revision -01, 27 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-grp — The Governed Remediation Protocol (GRP) for Agentic AI Systems",
+     "This document specifies the Governed Remediation Protocol (GRP) for agentic AI systems operating under the Sovereign Object OS (SOOS) framework. GRP defines the normative remediation action set available to a SOOS governance kernel when agent execution encounters a governed failure condition: FALLBACK (autonomous resource substitution), RETRY (bounded autonomous retry), ESCALATE (human escalation boundary), and ROLLBACK (reversible action undo). GRP specifies the conditions under which each action class may be taken autonomously and the boundaries at which Human Escalation Messaging (HEM) is required. GRP operates at the intersection of the Resource Governance Protocol (RGP), the Agent Execution Protocol (AEP), and the Human Escalation Mechanism (HEM), and normatively references the Governance Audit Record (GAR) for logging all remediation events. GRP adopts DEC-RGP-08 (the three-condition autonomous fallback test) verbatim from [I-D.sato-soos-rgp] as the normative FALLBACK action class boundary rule.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-grp/",
+     "IETF (individual)",
+     "Revision -00, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-kia — Kernel Identity and Attestation for Governing Enforcement Components",
+     "This document specifies the Kernel Identity and Attestation (KIA) protocol for the Sovereign Object OS (SOOS) governance architecture. KIA defines the cryptographic identity of the GEC, the trust chain anchoring kernel authority from hardware root through operator root keypair to every signed Event Log entry, the GEC Manifest schema for runtime state attestation, and the Revocation Registry maintenance requirements. KIA is the Layer 0 signing and attestation component on which the audit trail guarantees of draft-sato-soos-gar, the mandate enforcement guarantees of draft-sato-soos-mjwt, and the multi-agent delegation chain of draft-sato-soos-mad all depend. Version -03 adds FROST threshold signing for high-availability GEC keypair deployments, the Cross-Principal Identifier (XPID) for cross-instance federation audit correlation, the XPID cross- instance trust model, and four new Security Considerations (Sections 14.8 through 14.11) addressing FROST nonce reuse, XPID revocation gap, identity takeover via claimed identifier (CVE-2025- 13609 class), and attestation channel binding (CVE-2026-33697 class). This document is the reference specification for the KIA RATS WG presentation at IETF 126 Vienna. The XPID primitive and the CVE-2026-33697 attestation channel binding defense are the primary novel contributions presented to the RATS WG. Version -04 corrects a registry-format mismatch identified by IANA early review (#1456067): the Section 16 request to register XPID_DERIVED and XPID_VERIFICATION_FAILED into the GAR Authority Lifecycle Event Types Registry [I-D.sato-soos-gar] now uses that registry's actual column set (Event Type, Class, Reference) and assigns both entries the newly-defined Class ID (Identity/ Federation event). No new event types, fields, or normative behavior are introduced in -04; this is a registration-format correction only. Version -05 discloses a known open issue found by a WIMSE security review checklist dry-run against -03 (DR-MJWT-KIA-CHECKLIST-01, Finding 4): Section 6.3's Cross-Instance Trust Model verifies an XPID but does not restrict which federation participants can see the underlying Evidence in the first place. This is named as OQ-KIA-EVIDENCE-VIS (Sections 6.6, 14.4, 15.12), following the same acknowledge-rather-than-silently-omit pattern this document already uses for OQ-S-XPID-REV. No mechanism is specified in -05; resolution is deferred, consistent with how OQ-S-XPID-REV is treated.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-kia/",
+     "IETF (individual)",
+     "Revision -05, 13 Aug 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. Highest-scoring single document in Flanagan's tracker that the corpus lacked (relevance 26)."),
+
+    ("draft-sato-soos-peer — Cross-Principal Agent Communication -- PEER Transaction Record",
+     "When two independently-principaled AI agents transact with each other, each operates under its own mandate root, its own Governed Execution Context (GEC), and its own audit chain. No shared kernel exists to mediate the exchange. Existing SOOS orchestration primitives (MAD, SACR) govern sub-agent relationships within one mandate tree; they do not address the peer case. This document defines the PEER protocol: a problem statement and architecture for cross-principal agent communication. PEER introduces the PEER Transaction Record (PTR) as a new first-class SOOS primitive providing a jointly-derived correlation artifact (ptxn_id) that links the two independent audit chains produced by a cross-principal transaction -- without requiring a neutral third party, shared kernel state, or cross-principal constitutional layer. This document is a problem statement and architecture draft. Normative ALE schemas, dispute resolution procedures, and full PTR field specifications are deferred to draft-sato-soos-peer-01 (post-Vienna).",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-peer/",
+     "IETF (individual)",
+     "Revision -00, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-pt — Progressive Trust (PT) for Agentic AI Governance Systems",
+     "When a new employee joins an organization, they begin with limited authority. As they demonstrate good judgment -- completing tasks reliably, asking for guidance at the right moments, recovering well when things go wrong -- they earn greater trust and, with it, greater authority. If their performance degrades, or if months pass without any demonstration, that trust diminishes. This is how human organizations manage authority over time. AI agents have no equivalent mechanism. Today, an AI agent's authority is declared once in a credential at issuance time and does not respond to its behavioral record. An agent that has completed 200 successful sessions with a proven track record holds the same credential as a newly deployed agent. The human principal who issued both credentials made a judgment at issuance time; nothing that happened since is reflected in the agent's authority. This document defines Progressive Trust (PT): a behavioral trust model for AI agents in which authority recommendations evolve in response to cryptographically verified evidence of actual performance. PT measures five behavioral properties: whether the agent's self-assessed confidence matches its actual outcomes; whether it asks for human oversight at the right moments; whether it achieves its goals; whether it avoids decisions it later has to reverse; and whether it adapts when its action is rejected. These measures are derived exclusively from the tamper-evident, GEC-signed Event Stream -- an agent cannot influence its PT Score except through actual governed behavior. PT does not grant authority automatically. It generates structured recommendations, backed by behavioral evidence, for human principal review and approval. Human principals decide whether to elevate or reduce an agent's authority. PT ensures that decision is informed rather than made in the absence of history. Progressive Trust is the longitudinal complement of the Agent Execution Protocol [I-D.sato-soos-aep]: AEP governs what an agent does within a session; PT measures what an agent has done across sessions and translates that history into structured authority recommendations. No equivalent specification exists in IETF, ISO, NIST, or any agentic AI governance standards body.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-pt/",
+     "IETF (individual)",
+     "Revision -02, 27 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-rgp — The Resource Governance Protocol (RGP) for Agentic AI Systems",
+     "An AI agent that can act on resources cannot be governed unless those resources declare what they can do, under what constraints, and at what trust level -- before the agent acts. Existing resource description standards (digital twin profiles, capability catalogs, API registries) provide no governance envelope: they declare capability but not compliance posture, trust attestation, or mandate-scope compatibility. An agent that proceeds without this information may assign tasks to resources that are outside its mandate, below its required trust threshold, or unable to satisfy its compliance obligations. This document specifies the Resource Governance Protocol (RGP): a two-stage discovery and declaration protocol by which physical resources, digital services, and AI model instances declare their capability class, trust level, operational constraints, and current availability state to a governed AI agent operating under a Mandate JWT [I-D.sato-soos-mjwt]. Stage 1 delivers a capability fingerprint via a well-known URI; Stage 2 delivers a full governance envelope for mandate-scope validation and Resource Map Sovereign Object construction. RGP defines eight capability classes (CAP-COMP through CAP-EXP), four trust levels (TRUST-0 through TRUST-3), a session-scoped Resource Map Sovereign Object, a three-condition autonomous fallback test, and normative integration with the Agent Execution Protocol [I-D.sato-soos-aep], the Governance Audit Record [I-D.sato-soos-gar], and the Human Escalation Mechanism [I-D.sato-soos-hem]. RGP also defines an AI Model Capability Declaration (RGP-Model) for the governance of AI model instances as first-class resources within a SOOS-governed deployment, and a Physical Resource Profile (RGP-Physical) for normative binding to existing digital twin standards.",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-rgp/",
+     "IETF (individual)",
+     "Revision -00, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sato-soos-sov — The Sovereign Object (SOV) for Agentic AI Systems",
+     "When an AI agent acts on your behalf, it acts on something: a document, a booking, a contract, a financial instruction. No existing IETF specification defines what that something is, what states it can be in, who governs it, or how it is irreversibly erased when the relationship ends. Agentic AI governance protocols -- including intent declaration, human escalation, audit recording, and constitutional prohibition -- all require a normative definition of the governed resource that agents operate on: the structured, stateful, policy-carrying entity to which agent authority is bound and upon which governed transitions execute. No existing IETF specification defines this primitive. This document defines the Sovereign Object (SO): a causally ordered, policy-governed, typed, living document that evolves through a predefined finite state space under Governing Enforcement Component (GEC) authority. The SO is the unit of governance in the SOOS protocol family: the thing agents operate on, the GEC governs, and human principals reason about. This document specifies the SO's five-layer structure (Identity, State, Event Stream, Typed Graph, Attachment Index), its Zone A / Zone B boundary model, its five-phase lifecycle, its SO Type system, its Cedar policy context model, and the binding model by which a Mandate JWT binds an agent to a specific SO instance. Version -02 extends SOV-01 with: (a) SO Type registry governance including a SOV-02 subtype model for structured SO Type composition; (b) the Standing Plan Object (SPO) as a normative SOV-02 subtype, specifying declarative scope constraints, Cedar bundle reference, CAP-RRS catalog reference, and IDP structural validation integration; (c) the Mission Plan SO and Mission Status SO as normative SOV-02 subtypes for multi-agent orchestration over directed-acyclic-graph task structures; (d) event stream integrity normative requirements including GEC-signed append-only guarantees, kernel_id binding, and OpenTelemetry integration for observability bridging; (e) expanded Security Considerations addressing SO state manipulation, event stream tampering, SO Type spoofing, and stale state_constraint exploitation; and (f) IANA registrations for the SO Type code namespace and SPO media type. The Sovereign Object is the architectural foundation referenced normatively by [I-D.sato-soos-idp], [I-D.sato-soos-hem], [I-D.sato-soos-gar], [I-D.sato-soos-cap], and [I-D.sato-soos-mjwt].",
+     "https://datatracker.ietf.org/doc/draft-sato-soos-sov/",
+     "IETF (individual)",
+     "Revision -02, 30 Jun 2026. **Family completion, added 26 Aug 2026.** SOOS governance suite (Tom Sato, MyAuberge K.K.) — the corpus tracked 5 of 18. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-ae-challenge — An Authorization Evidence Challenge for High-Risk Agent Actions",
+     "When a relying party refuses a consequential agent action because authorization evidence is missing, stale, or unverifiable, the agent needs a machine-readable description of what remains necessary. This document defines a transport-neutral Authorization Evidence Challenge data model bound to the relying party's exact action. The challenge identifies outstanding evidence requirements, freshness and status constraints, acceptable presentation profiles, and retry state. It authorizes nothing, transfers no admission ownership, and provides no promise that a later request will execute. The document also defines an HTTP challenge-response carrier using 403 Forbidden and RFC 9457 Problem Details, and describes an informative gateway-handoff illustration for DMSC-style federation. The gateway illustration communicates evidence requirements; it does not solve conserved admission or double-admission across independently operated gateways. A challenge can synchronize corrected retries and amplify load. The core therefore defines optional retry timing with per-challenge jitter, and the HTTP carrier maps its lower bound to Retry-After. Retry timing controls presentation attempts only; it does not authorize the action or make an uncertain action safe to repeat. Single-use processing also places state on the refusal path. The core therefore requires bounded outstanding and replay state, fail- closed behavior when state cannot be claimed, and retention of live replay records until they are no longer security-relevant. Nonce claim and refusal-path capacity reservation are one atomic owner-side transition before native evidence verification, and a binding capacity refusal reveals no remaining evidence requirements. In a sharded replay domain, only the authoritative owner can classify a nonce as already claimed; inability to reach that owner is unavailability, not replay.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ae-challenge/",
+     "IETF (individual)",
+     "Revision -07, 11 Aug 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-agent-qualification-statements — Portable Agent Qualification Statements for Consequential Actions",
+     "Agent evaluations report what happened in a test environment. They do not, by themselves, establish that a measured candidate satisfies a relying party's policy, remains current, matches the runtime candidate, or is authorized to perform a consequential action. This document defines a portable Qualification Statement that binds a candidate, complete evaluation campaign, qualification policy, assignment, and status. It preserves three separate claims: observation, qualification, and authorization. A relying party can accept a current qualification as evidence at runtime, but MUST make a separate exact-action authorization and admission decision.",
+     "https://datatracker.ietf.org/doc/draft-schrock-agent-qualification-statements/",
+     "IETF (individual)",
+     "Revision -00, 28 Jul 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-canonical-action-identifier — The Canonical Action Identifier (CAID)",
+     "Authorization, delegation, execution, and audit artifacts often identify an action using format-local content and digests. Those digests are not directly comparable when the formats select or encode material action fields differently. This document defines the Canonical Action IDentifier (CAID): a typed action object, a canonicalization and digest suite, a compact identifier string, and immutable action-type definitions with required material fields. It also defines an Action-Mapping Profile for projecting independently verified native artifacts into a common action type, with the closed results EQUIVALENT_UNDER_PROFILE, NOT_EQUIVALENT, and INDETERMINATE. CAID carries no trust semantics. It does not establish identity, authority, authorization, execution, safety, or legal reliance.",
+     "https://datatracker.ietf.org/doc/draft-schrock-canonical-action-identifier/",
+     "IETF (individual)",
+     "Revision -02, 7 Aug 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-emilia-eye — Verifiable, Scope-Bound Advisories for Authorization Posture (EMILIA Eye)",
+     "This document defines the EMILIA Eye advisory: a scope-bound statement that an authorization posture for a named scope has changed (designed to be signed and offline-verifiable; the signing layer is specified here but is not yet present in the reference implementation, see Section 13.6), carrying a scope-binding hash that prevents the advisory from being replayed or re-targeted to a different scope. An Eye advisory expresses an observation-derived posture (clear, caution, elevated, or review_required) and a recommended action (none, log, step_up_auth, require_signoff, or escalate). The central safety invariant of this document is normative: an advisory MUST NEVER be the sole gate on an action. A signal may only TIGHTEN posture - it may cause an enforcement point to demand stronger authentication, human signoff, or escalation - but it can never itself constitute the authorization. Eye warns; an enforcement point verifies; an accountable human owns the decision. This work specifies the verifiability, scope-binding, and fail-safe advisory semantics that signal-transport frameworks leave undefined. It is a COMPOSABLE PROFILE: Eye advisories are carried as Security Event Token [RFC8417] payloads and MAY be transported over the OpenID Shared Signals Framework with Continuous Access Evaluation Profile (CAEP) events. It is complementary to, not a replacement for, SSF/ CAEP (which define signal shape and transport, not verifiable bound fail-safe advisory semantics), and it composes with the EP authorization receipt ([I-D.schrock-ep-authorization-receipts]), which remains the artifact that actually authorizes an action. This document is experimental.",
+     "https://datatracker.ietf.org/doc/draft-schrock-emilia-eye/",
+     "IETF (individual)",
+     "Revision -00, 26 Jun 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. Note the slug: 'emilia-eye' rather than 'ep-', which is part of why name-substring discovery missed it."),
+
+    ("draft-schrock-ep-architecture — The EMILIA Protocol: An Evidence Architecture for Consequential Agent Actions",
+     "Consequential agent actions can cross operator and administrative boundaries. The party that later decides whether to rely on an action record may not have participated in the interaction and may not trust either operator. This document describes an evidence architecture for that case. It separates transport and workload identity, delegation and policy, material action identity, authorization evidence, evidence satisfaction, local authorization, durable consumption or reservation, effect invocation, outcome evidence, revocation, and preservation. The architecture composes the Canonical Action Identifier (CAID), Authorization Evidence Chain (AEC), and Action Evidence Boundary (AEB) with optional staged-approval and consequence-control profiles. It does not define a universal token, policy language, execution engine, settlement network, or distributed consensus system. A valid signature, a current credential, a satisfied evidence requirement, and an observed effect remain different facts.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ep-architecture/",
+     "IETF (individual)",
+     "Revision -02, 22 Jul 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only. The architecture document for the EMILIA Protocol family — the root the other schrock-ep-* drafts hang off, and the one that should have been added first."),
+
+    ("draft-schrock-ep-authority-introduction — Authority Documents and Scoped Authority for Agent-Action Evidence",
+     "Signature verification answers whether a key produced an artifact. It does not answer why a relying party accepts that key, or whether the key holder had authority for the action. This document specifies two composable artifacts. An Authority Document introduces and rotates an organization's evidence-issuing keys through a signed, hash-chained sequence. A Scoped Authority Proof records the authority held by a subject at a registry snapshot, including role, action scope, material limits, policy binding, validity, and revocation status. A relying party evaluates both artifacts under its own pinned trust inputs and policy. The design does not make a self-presented key authoritative, does not turn log inclusion or domain control into automatic trust, and does not equate a valid signature with permission to act. It also defines a source- resolution boundary: signing a statement does not give its underlying source data finer freshness or precision than that source actually provides.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ep-authority-introduction/",
+     "IETF (individual)",
+     "Revision -03, 4 Aug 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-ep-bounded-execution-program — Bounded Execution Programs for Consequential Agent Actions",
+     "An authorization for one action does not by itself authorize an open- ended agent plan. This document defines an Experimental profile for a signed, finite, versioned directed acyclic graph of consequential action occurrences. The program binds a total retained-history ceiling. Each node binds an exact action or a pinned action-matching profile, an action- specific Trust Program, outcome-specific dependencies, an occurrence ceiling, and fixed charges against aggregate attempt budgets. A conforming program-aware admission store evaluates reachability and budgets in the same linearizable transaction domain as the ordinary one-time execution right. It uses store-owned authorizer trust roots, clock, authenticated profile-match verification, and current program status; seals a deterministic execution-program resource into the AdmissionSnapshot; and fences the program's independent authorization digest against ordinary-path admission. The profile does not establish that natural-language intent was understood, that a plan is safe or lawful, that provider or effect evidence is true, or that every mutation path was mediated.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ep-bounded-execution-program/",
+     "IETF (individual)",
+     "Revision -00, 3 Aug 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-ep-outcome-binding — Outcome Binding for Authorized Actions and Independently Observed Effects",
+     "Authorization proves what action was permitted; it does not prove what happened after execution. An executor-signed result improves attribution but remains a claim by the party that acted. This document specifies a source-routed Outcome Binding profile. Signed predicted effects identify the source role and source class required to evaluate each predicate. Executors, systems of record, and independent observers sign closed observation objects bound to the same authorization, action digest, Canonical Action Identifier, consumption nonce, operation, facility, and observation window. A deterministic verifier separates evidence availability from comparison: missing or unauthenticated required sources yield an indeterminate lifecycle state; authentic observations yield the closed comparison result in_bounds, divergent, or incomparable. The profile improves consequence reconciliation without claiming physical truth, sensor correctness, or legal finality.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ep-outcome-binding/",
+     "IETF (individual)",
+     "Revision -00, 29 Jul 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-ep-presentation-binding — Presentation Binding for Human-Authorization Receipts: Proving the Human Approved What They Saw",
+     "A human-authorization receipt proves a named person produced a user- verified signature over a digest that commits to an exact action. It does not prove the surface that person signed on DISPLAYED that action honestly. If a signing interface shows a benign summary while committing a different action, the resulting receipt is laundered authority: cryptographically valid and semantically false, which is worse than no receipt at all. This is the presentation attack, and it is the deepest unsolved problem in authorization evidence, because a signature cannot attest to pixels. This document narrows the gap with two additive, offline-checkable pieces that touch no existing receipt format: a DETERMINISTIC RENDERER, a pure function from the canonical action to a byte-identical human-readable rendering, so a verifier RE-DERIVES the rendering from the signed bytes and rejects any surface that showed something else; and a DISPLAY ATTESTATION, a signed claim by the signing client binding the rendering it showed to the action it committed. Neither eliminates the presentation attack (nothing purely digital can), but together they convert \"trust the vendor's UI\" into \"verify the rendering was the honest function of the signed action,\" and they make the residual risk explicit rather than hidden.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ep-presentation-binding/",
+     "IETF (individual)",
+     "Revision -00, 3 Jul 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-ep-reliance-agreement — Reliance Agreements: Signed Liability Terms Conditioned on Authorization-Evidence Sufficiency",
+     "This document defines EP-RELIANCE-AGREEMENT-v1, a signed, machine- readable statement of terms conditioned on a specific relying-party evidence profile, and EP-RELIANCE-EVENT-v1, a signed per-action record joining one action, one reliance result, and one agreement. The agreement references the evidence condition by digest rather than restating or weakening it. Every required party signs the same canonical bytes, and monetary amounts are represented as decimal strings. Verification establishes signatures, content integrity, scope, time, and digest bindings. It does not authorize an action, re-evaluate the evidence packet, establish legal enforceability, issue insurance, determine coverage, allocate fault, prove solvency, reserve funds, or compel payment. Those decisions remain with the relying party and the applicable prose agreement, law, and dispute forum.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ep-reliance-agreement/",
+     "IETF (individual)",
+     "Revision -00, 3 Aug 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-ep-revocation-statement — Portable Revocation Statements for Action-Bound Authorization Artifacts",
+     "Signed authorization artifacts for agent actions (receipts, commits, delegations) are being defined faster than the means to retract them. Many deployed systems use live status services, revocation lists, or issuer datastores. This document defines a complementary portable form for action-bound authorization artifacts: a signed, offline- verifiable claim that a named logical target, addressed by identifier and action commitment, is revoked. Verification is fail-closed and evaluates a fixed set of checks: version, closed object structure, target binding, a revoker key pinned by the verifier and, for newly emitted artifacts, bound to a full digest-derived key identifier (a self-asserted key confers nothing), the presence of a strict revocation instant that has taken effect by the verifier's decision time, and an independently recomputed signature. The statement proves that a named, pinned revoker revoked this specific target. It does not prove that every relying party saw it, and offline verification cannot prove the absence of a revocation that was not presented. A terminal revocation never ages out; current non- revocation requires separate authenticated, policy-fresh status evidence. A Trust Program profile binds revocation to the complete execution claim, and requires revocation-versus-claim to be resolved atomically; a revocation learned after a claim never rewrites an effect that may already have occurred.",
+     "https://datatracker.ietf.org/doc/draft-schrock-ep-revocation-statement/",
+     "IETF (individual)",
+     "Revision -01, 28 Jul 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-kintzele-grid-curtailment — GRACE: Evidence-Bound Grid Curtailment Admission, Observation, and Single-Use Settlement",
+     "This document defines GRACE, an application profile for one bounded grid.curtailment action. The profile binds an exact action to a finite participation envelope, distinct human approvals when required, one-attempt executor admission, an authenticated actuator acknowledgment, separately authenticated meter observations, an Action State Signed Statement, and one-time admission to a settlement effect. Missing or ambiguous post-invocation evidence is preserved as indeterminate and cannot authorize blind retry. GRACE verifies signed inputs and deterministic computations. It does not establish physical meter truth, baseline correctness, tariff eligibility, actual payment, complete mediation, or a physical grid deployment. An optional hybrid artifact-signature profile combines Ed25519 with ML-DSA-65 and requires both signatures to verify.",
+     "https://datatracker.ietf.org/doc/draft-schrock-kintzele-grid-curtailment/",
+     "IETF (individual)",
+     "Revision -00, 22 Aug 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-schrock-model-to-matter — Model-to-Matter: Authorization and Outcome Evidence for Model-Directed Physical Execution",
+     "Advanced models can propose operations that produce physical effects. Model-to-Matter defines an executor-owned profile that composes model, safety, institutional, domain, screening, human, and physical- state attestation evidence over one canonical action before single- use execution. This revision also profiles post-execution Outcome Binding. An executor effect statement remains one source claim; required independent observers sign separately bound observations. Missing outcome evidence is indeterminate, not success or failure. The profile standardizes evidence custody and reconciliation; it does not perform screening, determine scientific safety, certify a facility, or establish physical truth.",
+     "https://datatracker.ietf.org/doc/draft-schrock-model-to-matter/",
+     "IETF (individual)",
+     "Revision -04, 7 Aug 2026. **Family completion, added 26 Aug 2026.** EMILIA Protocol family (schrock-*) — evidence architecture for consequential agent actions; the corpus tracked 8 of 26. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sharif-aeba — Agent Event Behaviour Analysis (AEBA): A Framework for Behavioural Security Monitoring of Autonomous AI Agents",
+     "This document specifies Agent Event Behaviour Analysis (AEBA), a framework for collecting, signing, exchanging, and analysing behavioural events produced by autonomous AI agents. AEBA is the agent-domain equivalent of User and Entity Behaviour Analytics (UEBA) as commonly deployed in enterprise Security Operations Centres. It defines a canonical event schema, signature binding to agent identity, baseline and peer-group exchange protocols, deviation signalling, detection rule structure, revocation mechanisms, and interoperability bindings for existing Security Information and Event Management (SIEM) event formats (syslog, CEF, LEEF). The framework is designed to compose with existing cryptographic primitives for agent identity, payment, and transport security, and to support cross-framework deployments in which agents produced by different runtimes must share a common behavioural observability surface.",
+     "https://datatracker.ietf.org/doc/draft-sharif-aeba/",
+     "IETF (individual)",
+     "Revision -00, 15 Apr 2026. **Family completion, added 26 Aug 2026.** Sharif — crossed into a multi-draft body of work; the corpus tracked 4 of 10. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sharif-ai-model-lifecycle-attestation — Cryptographic Attestation for AI Model Lifecycle: From Training Data to Inference Output",
+     "This document defines a cryptographic attestation framework for the complete lifecycle of artificial intelligence models, from training data provenance through model weight signing, quantization verification, deployment attestation, and per- inference output signing. The framework creates an unbroken chain of cryptographic evidence binding each inference output to the specific model version, training data, and deployment configuration that produced it. The framework uses ECDSA P-256 digital signatures, SHA-256 hash functions, Merkle trees for corpus attestation, and JSON Web Key Sets (JWKS) for key discovery. It addresses documented threats including model distillation attacks, quantization poisoning, training data manipulation, silent model degradation, and inference output tampering. This specification complements the Agent Trust Transport Protocol (ATTP) [draft-sharif-attp-agent-trust-transport], MCPS message signing [draft-sharif-mcps-secure-mcp], and the Agent Audit Trail format [draft-sharif-agent-audit-trail] to provide end-to- end cryptographic verification from data ingestion to consumer delivery.",
+     "https://datatracker.ietf.org/doc/draft-sharif-ai-model-lifecycle-attestation/",
+     "IETF (individual)",
+     "Revision -00, 31 Mar 2026. **Family completion, added 26 Aug 2026.** Sharif — crossed into a multi-draft body of work; the corpus tracked 4 of 10. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sharif-apki-agent-pki — Agent Public Key Infrastructure (APKI): Certificate-Based Identity and Trust for Autonomous AI Agents",
+     "Autonomous artificial intelligence (AI) agents are increasingly performing actions on the Internet that require verifiable identity: financial transactions, regulated data access, tool invocations, and inter-agent coordination. Traditional Public Key Infrastructure (PKI) based on X.509 certificates was designed for human-operated clients and long-lived servers. It lacks primitives for graduated trust scoring, capability constraints, delegation chains, model provenance, and the ephemeral lifecycles characteristic of AI agents. This document defines Agent Public Key Infrastructure (APKI), a certificate-based identity and trust system for autonomous AI agents. APKI extends X.509v3 with five agent-specific extensions, defines the agent:// URI scheme for agent identification, specifies Agent Transparency Logs modelled on Certificate Transparency (RFC 9162), and provides mechanisms for cross-organizational trust federation. APKI is designed to be compatible with existing PKI deployments, SPIFFE workload identity, and the IETF WIMSE working group's specifications.",
+     "https://datatracker.ietf.org/doc/draft-sharif-apki-agent-pki/",
+     "IETF (individual)",
+     "Revision -00, 10 Apr 2026. **Family completion, added 26 Aug 2026.** Sharif — crossed into a multi-draft body of work; the corpus tracked 4 of 10. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sharif-attp-agent-trust-transport — ATTP: Agent Trust Transport Protocol for Secure Agent-to-Server Communication",
+     "This document specifies ATTP (Agent Trust Transport Protocol), a synchronous request-response protocol for communication between autonomous AI agents and web API servers. ATTP operates as an application-layer protocol over HTTP, adding mandatory cryptographic identity verification, per-message signing, trust-gated access control, and tamper-evident audit trail generation to every agent-server interaction. ATTP defines five protocol-layer headers for requests (X-Agent-Trust, X-Agent-Signature, X-Agent-Nonce, X-Agent-Timestamp, X-ATTP-Version) and three for responses (X-Server-Signature, X-Server-Nonce, X-Server-Timestamp) that carry an Agent Passport (JWT-based identity credential), ECDSA P-256 digital signatures, cryptographic nonces, and timestamps. Server middleware verifies all cryptographic properties before application code executes. ATTP has no insecure mode. Every request MUST carry a valid Agent Passport. Every request body MUST be signed. Every response body MUST be signed. Every interaction MUST be recorded in a hash-chained audit trail. The protocol defines a URL scheme (attp://) and is fully backward-compatible with existing HTTP infrastructure. ATTP is the synchronous counterpart to the Agent Transport Protocol (ATP). ATP handles asynchronous store-and-forward agent delivery; ATTP handles real-time request-response API communication. Both share the same identity model, trust framework, and cryptographic primitives.",
+     "https://datatracker.ietf.org/doc/draft-sharif-attp-agent-trust-transport/",
+     "IETF (individual)",
+     "Revision -00, 30 Mar 2026. **Family completion, added 26 Aug 2026.** Sharif — crossed into a multi-draft body of work; the corpus tracked 4 of 10. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sharif-attp-industrial-control-systems — ATTP for Industrial Control Systems: Cryptographic Agent Authentication in SCADA and IoT Environments",
+     "This document defines an application profile of the Agent Trust Transport Protocol (ATTP) [draft-sharif-attp-agent-trust-transport] for use in Industrial Control Systems (ICS), Supervisory Control and Data Acquisition (SCADA) environments, and Internet of Things (IoT) deployments. It specifies how ATTP mandatory message signing, agent identity passports, and trust-gated access control apply to industrial protocols including Modbus/TCP, OPC UA, MQTT, and CoAP. The profile addresses the absence of per-message authentication in legacy industrial protocols, which has been exploited in numerous critical infrastructure attacks. It defines a gateway architecture that enables ATTP protection for legacy devices without firmware modification, maps ATTP trust levels to IEC 62443 Security Levels, and specifies real-time revocation mechanisms suitable for safety-critical environments.",
+     "https://datatracker.ietf.org/doc/draft-sharif-attp-industrial-control-systems/",
+     "IETF (individual)",
+     "Revision -00, 31 Mar 2026. **Family completion, added 26 Aug 2026.** Sharif — crossed into a multi-draft body of work; the corpus tracked 4 of 10. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    ("draft-sharif-openid-agent-identity — OpenID Connect Agent Identity Claims for Autonomous AI Agents",
+     "This specification defines a profile of OpenID Connect Core 1.0 that enables Identity Providers (IdPs) to issue identity tokens for autonomous software agents. It introduces a set of standard claims for representing agent identity, ownership, trust posture, authorised capabilities, and compliance screening status within OpenID Connect ID Tokens. The profile is designed to operate within existing OpenID Connect infrastructure without requiring modifications to the core protocol. It defines how Relying Parties (RPs) validate agent tokens and enforce graduated access controls based on agent trust levels and sanctions screening results.",
+     "https://datatracker.ietf.org/doc/draft-sharif-openid-agent-identity/",
+     "IETF (individual)",
+     "Revision -00, 26 Mar 2026. **Family completion, added 26 Aug 2026.** Sharif — crossed into a multi-draft body of work; the corpus tracked 4 of 10. Surfaced by cross-checking Heather Flanagan's standards-tracker, then confirmed by author-prefix query on Datatracker; missed by earlier sweeps because discovery matched topic keywords against draft *names* only."),
+
+    # ---- New authors from the Flanagan standards-tracker cross-check, 26 Aug 2026 ----
+    # 41 read_now agent-identity/authorization drafts from untracked authors; 19 kept.
+    # 22 dropped as 'authorization' in a different sense (RPKI/ASPA route authorization,
+    # ACE/OSCORE constrained environments, EPP/RPP registry provisioning) or network mgmt.
+
+    ("draft-lundholm-kaif — The Kindred Agent Identity Framework (KAIF)",
+     "The Kindred Agent Identity Framework (KAIF) is an OAuth 2.0 token exchange mechanism for delegated agent-to-service authorization, combining RFC 8693 token exchange with SPIFFE workload identity attestation and operator-assigned authorization tiers. This document specifies the protocol mechanics, deployment profiles, and interoperability requirements for systems implementing agent authorization with audit accountability. KAIF is intended for scenarios in which an operator (human principal) provisionally authorizes an agent (automated workload) to perform bounded actions on their behalf, with cryptographic proof of authorization, delegation depth tracking, and revocation in real time. This document is intentionally vendor-neutral in its normative requirements. Cloud platforms, model providers, workflow systems, and audit backends discussed by implementations are informative deployment examples, not part of the KAIF wire protocol.",
+     "https://datatracker.ietf.org/doc/draft-lundholm-kaif/",
+     "IETF (individual)",
+     "Revision -00, 20 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 22) — a new author not previously tracked here. Highest-scoring new-author draft in Flanagan's tracker (relevance 22). A full agent identity *framework*, so read it against the four colliding 'AIP' drafts and draft-singla-agent-identity-protocol rather than as a point mechanism."),
+
+    ("draft-burls-mtac — Merkle Tree Agent Certificates (MTAC): Batch-Issued Post-Quantum Identity Credentials for AI Agents",
+     "This document specifies Merkle Tree Agent Certificates (MTAC), a credential format and issuance profile in which a certificate authority commits a batch of AI agent identity credentials to a Merkle tree, signs only the tree head with the post-quantum signature algorithm ML-DSA-65, and distributes a per-credential inclusion proof. A relying party verifies a credential offline against the signed tree head without contacting the issuer. Each batch root is additionally co-signed by an independently keyed witness, providing per-batch integrity and continuity attestation, and its root can be corroborated against an independent public record. MTAC defines the leaf structure, its deterministic encoding, the leaf hash preimage, the signed tree head wire format, the witness co- signature, and an optional challenge-response proof of possession that binds a credential to a holder key. Test vectors are provided. This document specifies a credential issuance and verification mechanism. Declared scopes carried in a credential are self-reported parameters recorded at issuance; this document does not specify a runtime authorization mechanism.",
+     "https://datatracker.ietf.org/doc/draft-burls-mtac/",
+     "IETF (individual)",
+     "Revision -00, 21 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 18) — a new author not previously tracked here. Batch-issued post-quantum credentials for agents — the only draft in the corpus combining PQC with agent identity issuance at scale. Adjacent to the Vauban x402 PQC pair still held out of scope."),
+
+    ("draft-mpsb-agntcy-messaging — An Overview of Messaging Systems and Their Applicability to Agentic AI",
+     "Agentic AI systems require messaging infrastructure that supports real-time collaboration, high-volume streaming, and dynamic group coordination across distributed networks. Traditional protocols like AMQP [AMQP], MQTT [MQTT], and NATS [NATS] address some requirements but fall short on security, particularly regarding post-compromise protection and forward secrecy essential for autonomous agents handling sensitive data. This document analyzes six messaging protocols—AMQP, MQTT, NATS, AMQP over WebSockets, Kafka, and AGNTCY SLIM—across dimensions critical for GenAI agent systems: streaming performance, delivery guarantees, security models, and operational complexity. We examine how each protocol's design decisions impact agentic AI deployments, from lightweight edge computing scenarios to large-scale multi- organizational collaborations. AGNTCY SLIM emerges as a purpose-built solution, integrating Message Layer Security (MLS) [RFC9420] with gRPC [gRPC] over HTTP/2 [RFC9113] to provide end-to-end encryption with forward secrecy, efficient streaming, and OAuth-based authentication [RFC6749]. Unlike transport-layer security approaches, SLIM's MLS implementation ensures secure communication even through untrusted intermediaries while supporting dynamic group membership changes essential for collaborative AI agents.",
+     "https://datatracker.ietf.org/doc/draft-mpsb-agntcy-messaging/",
+     "IETF (individual)",
+     "Revision -02, 19 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: agent_identity, relevance 14) — a new author not previously tracked here. Survey of messaging substrates for agentic AI; useful orientation for the transport half of the discovery-and-transport cluster."),
+
+    ("draft-bandyopadhayaya-oauth-ciba-push-binding — CIBA Binding for OAuth Push-Based Authentication Device Discovery",
+     "A companion specification, \"Discovery and Device Lifecycle for OAuth Push-Based Authentication\", defines a generic, back-channel-protocol- agnostic device registration, attestation, and lifecycle layer for out-of-band OAuth 2.0 authenticator devices. This document is the thin binding that lets a device registered under that specification be woken by OpenID Connect Client-Initiated Backchannel Authentication (CIBA) Core's authorization endpoint: one request parameter, one additive error code, and a statement of how CIBA's existing binding_message composes with the base document's interaction-type ceremony. This document adds no new endpoints and no new discovery fields of its own.",
+     "https://datatracker.ietf.org/doc/draft-bandyopadhayaya-oauth-ciba-push-binding/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 29 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 14) — a new author not previously tracked here. CIBA binding for push-based authentication device discovery. Relevant because CIBA keeps being proposed and rejected as the agent-approval primitive — McGuinness's ARAP framing argues CIBA solves authentication freshness, not governance state."),
+
+    ("draft-bandyopadhayaya-oauth-push-device — Discovery and Device Lifecycle for OAuth Push-Based Authentication",
+     "This document defines a discovery, registration, attestation, and device-lifecycle layer for out-of-band OAuth 2.0 authenticator devices, allowing a single spec-compliant authenticator application to register with, and receive push-based wake signals from, any conforming Authorization Server, without requiring the Authorization Server operator to build and distribute its own dedicated mobile application. This document is intentionally agnostic to which back- channel authentication protocol ultimately consumes it; OpenID Connect Client-Initiated Backchannel Authentication (CIBA) Core is its first binding, defined in a separate companion document, but nothing in this document depends on CIBA or on OpenID Connect.",
+     "https://datatracker.ietf.org/doc/draft-bandyopadhayaya-oauth-push-device/",
+     "IETF (OAuth-related, individual)",
+     "Revision -00, 29 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 14) — a new author not previously tracked here. Companion to the CIBA push-binding draft above; device lifecycle and discovery."),
+
+    ("draft-foroughi-agent-protocol-dimensions — A Dimensional Model for Characterizing AI Agent Protocol Proposals and Their Substrates",
+     "Discussions about agent protocols are frequently muddied by overloaded terms; asks such as \"we need a session protocol\" or \"we need cross-domain support\" bundle several distinct concerns across transport, agent protocol, and orchestration layers. This document offers a dimensional model that routes each concern to its proper layer. The document defines a small set of protocol-visible dimensions for characterizing AI agent protocol interactions and applies them to representative agentic protocol proposals (A2A, MCP, and the ACP invocation surface of the AGNTCY stack) alongside their substrate bindings, making explicit which dimensions each proposal owns at the protocol layer and which it inherits from its substrate. The document does not rank proposals and does not prescribe an architecture. It is standalone: it neither depends on nor prescribes any use-case or requirements document.",
+     "https://datatracker.ietf.org/doc/draft-foroughi-agent-protocol-dimensions/",
+     "IETF (individual)",
+     "Revision -00, 6 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: agent_identity, relevance 13) — a new author not previously tracked here. A dimensional model for characterising agent protocol proposals. Meta-analytical rather than a mechanism, and directly useful to this corpus as an external taxonomy to test our own five-cluster model against."),
+
+    ("draft-reilly-web4-orion — Web4: An Agentic, Verifiable Internet Architecture and the Project Orion Reference System",
+     "This document defines Web4, an architectural model for an agentic, cryptographically verifiable Internet in which autonomous AI agents operate as first-class participants alongside humans, and every published artifact carries independently checkable proof of origin, integrity, and time. Web4 is realized through the Reilly Protocol Suite, a set of eighteen active IETF Internet-Drafts spanning permanence, integrity, agent orchestration, defense, and human epistemic autonomy. This document also specifies Project Orion, the live reference implementation that unifies the full suite behind autonomous agents on both backend and frontend, verified against three independent Internet-Draft distribution points, and operating publicly at https://project-orion-production.up.railway.app/. A step-by-step implementation guide is provided.",
+     "https://datatracker.ietf.org/doc/draft-reilly-web4-orion/",
+     "IETF (individual)",
+     "Revision -00, 24 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: agent_identity, relevance 13) — a new author not previously tracked here. Web4 agentic internet architecture. Framework-scale and speculative; kept as a marker of the 'clean-slate' end of the design space, opposite Hardt's OUTLIER position."),
+
+    ("draft-sabey-succession-receipts — Succession Receipts: Portable Signed Evidence of Authority Succession Between Autonomous Agents",
+     "Autonomous agents are upgraded, replaced, suspended, and restored while holding real operational authority. A Succession Receipt is a portable, signed JSON document that proves one completed, policy- gated transfer of authority between two agents: which agent held the authority, which agent holds it now, under what legitimacy determination the transfer ran, and which obligations carried forward, with every claim grounded in signed evidence events embedded in the receipt itself. Receipts are verifiable offline by parties who do not operate the issuing system, using only the issuer's public key. This document specifies the receipt wire format, its canonicalization and signature scheme (JSON Canonicalization Scheme with Ed25519), the verification algorithm including bidirectional claim grounding, and an optional claim that binds a pre-execution authorization of the handoff to the succession evidence. Where decision receipts prove what an agent did, and delegation receipts prove what an agent may do, Succession Receipts prove that an agent legitimately became the holder of an authority.",
+     "https://datatracker.ietf.org/doc/draft-sabey-succession-receipts/",
+     "IETF (individual)",
+     "Revision -02, 21 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 11) — a new author not previously tracked here. Authority *succession* between agents — a lifecycle stage almost nothing else in the corpus covers. Compare draft-mcguinness-oauth-id-continuation-assertion, which handles continuity of the same actor rather than handover to a different one."),
+
+    ("draft-singh-psi-agent — PSI AI Agent Action Sealing and Liability Protocol",
+     "This document specifies a cryptographic protocol for sealing AI agent actions, establishing an auditable chain of custody from instruction to execution. As AI agents increasingly perform autonomous actions — financial transfers, content publication, system configuration, legal filings — the need for a verifiable record of \"who instructed what, when, and what actually happened\" becomes critical for liability attribution, regulatory compliance, and trust. The PSI Agent Se",
+     "https://datatracker.ietf.org/doc/draft-singh-psi-agent/",
+     "IETF (individual)",
+     "Revision -00, 19 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: agent_identity, relevance 11) — a new author not previously tracked here. Action sealing plus an explicit **liability** protocol — one of the few drafts anywhere in the corpus that names liability as a protocol concern rather than a legal one. Compare schrock's reliance agreements."),
+
+    ("draft-chandra-agent-registry-corroboration — Multi-Source Corroboration for AI Agent Discovery",
+     "AI agents are discovered and identified through independent sources — registries, name services, DID methods, catalogs. A single source can misrepresent an agent by omission (withholding a record it holds) or equivocation (serving different answers to different observers); no signature on a served artifact defends against either. This document specifies a corroboration procedure: how one source's claim about one agent, observed from one network vantage, is classified; how a claim is reduced to a comparable view; how claims are diffed into findings with deterministic attribution; how legitimate propagation delay is distinguished from persistent disagreement; and a signed Corroboration Record emitted on every sweep — agreement included — that other evidence formats can bind by digest. The procedure is source-, format-, and layer-agnostic, requires no cooperation from or modification of any source, and is verifiable from recorded bytes.",
+     "https://datatracker.ietf.org/doc/draft-chandra-agent-registry-corroboration/",
+     "IETF (individual)",
+     "Revision -00, 5 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: agent_identity, relevance 10) — a new author not previously tracked here. Multi-source corroboration for agent discovery — answers 'who vouches for this registry entry', which the discovery drafts in the corpus mostly assume away."),
+
+    ("draft-kondoju-evc — An External Verifier Contract for Agent Authorization Decisions",
+     "This document specifies the External Verifier Contract (EVC): a small, testable, proof-system-agnostic boundary between a host (the program about to take a privileged action on an agent's behalf) and an external verifier (a subprocess that renders an allow/deny verdict on an opaque proof bundle). The contract governs only the transport and verdict envelope: how the host hands a single JSON request to a verifier subprocess over stdin, how the verifier answers with exactly one JSON verdict on stdout, and how the host interprets exit codes, timeouts, and malformed output under a fail-closed rule. Three properties make the boundary standardizable: (1) a single-shot subprocess transport with a closed JSON verdict schema; (2) fail- closed host semantics that are independently testable by a host- conformance suite; and (3) proof-system agnosticism, so the same envelope carries classical-signature, zero-knowledge, and third-party verdicts, distinguished only by an OPTIONAL self-description field. EVC is deliberately not a governance framework, not a delegation model, and not a policy language. It is the narrow decision boundary those larger systems all require at the point of enforcement.",
+     "https://datatracker.ietf.org/doc/draft-kondoju-evc/",
+     "IETF (individual)",
+     "Revision -00, 21 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 10) — a new author not previously tracked here. An external verifier contract for agent authorization decisions; belongs with the candidate decision/policy cluster (gazitt, liu, vicente, fulz, li) that fits no current OAuth spec cluster."),
+
+    ("draft-correctover-ccs — Correctover Conformance Shape (CCS): Runtime Verification for AI Agent Tool Calls",
+     "This document defines the Correctover Conformance Shape (CCS), a runtime verification framework for AI agent tool calls. CCS specifies seven verification dimensions (Structure, Schema, Latency, Cost, Identity, Integrity, Security) that tool calls and results must conform to at runtime. The framework defines a receipt format with Ed25519 signatures, three verdict values (allow, deny, escalate) and four executor lifecycle states (confirmed, dispatched, indeterminate, unknown), and normative requirements for implementations. This revision promotes AEB and CAID to Normative References, specifies the detached Ed25519 signature construction over RFC 8785 canonical JSON, clarifies receipt lifecycle and signing-algorithm conformance, and documents two independent interoperable implementations (Section 21).",
+     "https://datatracker.ietf.org/doc/draft-correctover-ccs/",
+     "IETF (individual)",
+     "Revision -07, 26 Aug 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 10) — a new author not previously tracked here. Receipt and binding format for agent runtime verification; joins the receipts cluster (schrock, noa-scitt, sahu, vaara, hopley x402)."),
+
+    ("draft-ferro-httpbis-apertoid-sig — ApertoID-Signature: HTTP Request Signing for AI Agent Identity",
+     "This document defines the ApertoID-Signature HTTP header field, which enables AI agents to cryptographically prove their identity on each HTTP request. The agent signs the request method, target URL, body hash, and identity metadata using an Ed25519 private key whose corresponding public key is published in DNS via the ApertoID protocol [APERTOID-DNS]. The mechanism provides request-level identity verification, action binding (the signature is tied to the specific method and URL), and replay protection via timestamps and nonces.",
+     "https://datatracker.ietf.org/doc/draft-ferro-httpbis-apertoid-sig/",
+     "IETF (individual)",
+     "Revision -02, 12 Aug 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: agent_identity, relevance 9) — a new author not previously tracked here. HTTP request signing for agent identity; the proof half of the ApertoID pair. Overlaps WebBotAuth's HTTP Message Signatures approach — a competing design for the same problem."),
+
+    ("draft-mashayekhi-auditable-model-deliberation — Auditable Public Artifacts for Model-Independent Deliberation",
+     "Heterogeneous artificial-intelligence systems can exchange messages without sharing stable semantics for claims, evidence, objections, revisions, decisions, failures, and termination. This document defines an experimental public-artifact protocol for model- independent deliberation. It separates interoperable public state from private model computation and does not require disclosure of chain-of-thought, hidden state, prompts, model weights, or private memory. The document defines seven public artifact types, append-only revision, evidence provenance, blocking-objection closure, explicit failure and termination, a restricted canonical JSON profile, and SHA-256-based artifact identifiers. It does not define transport, signatures, authorization, model execution, or a completed consensus system.",
+     "https://datatracker.ietf.org/doc/draft-mashayekhi-auditable-model-deliberation/",
+     "IETF (individual)",
+     "Revision -00, 12 Aug 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 9) — a new author not previously tracked here. Auditable public artifacts for model-independent deliberation — audit cluster, unusual for targeting the deliberation step rather than the action."),
+
+    ("draft-ferro-dnsop-apertoid — ApertoID: DNS-Based Agent Identity Declaration Protocol",
+     "This document defines ApertoID, a DNS-based protocol that enables domain owners to declare authorized AI agents acting on their behalf, publish cryptographic keys for agent identity verification, and specify enforcement policies for unauthorized agents. ApertoID uses existing DNS TXT records under the \"_apertoid\" underscore-scoped domain name to provide a decentralized, standards-based mechanism for AI agent identity declaration and verification. ApertoID defines two record types: a Policy Record analogous to DMARC that specifies domain-level enforcement behavior, and Agent Declaration Records analogous to DKIM key records that bind agent endpoints to Ed25519 public keys with mandatory expiration. A companion document [APERTOID-SIG] defines the HTTP request signing mechanism that enables agents to cryptographically prove their identity on each request.",
+     "https://datatracker.ietf.org/doc/draft-ferro-dnsop-apertoid/",
+     "IETF (individual)",
+     "Revision -02, 12 Aug 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: agent_identity, relevance 9) — a new author not previously tracked here. DNS-based agent identity declaration. Pairs with draft-ferro-httpbis-apertoid-sig below — declaration in DNS, proof over HTTP. Kept despite the `dnsop` slug because the subject is agent identity, not DNS operations."),
+
+    ("draft-pelov-bounded-agent-capabilities — Bounded Capabilities for Agent Tool Interfaces: Problem Statement",
+     "Deployed agent tool-interface protocols carry JSON Schema type declarations for tools, but a type declaration is not a contract: nothing signals that a tool is fully schema-bounded, conformance to declared schemas is self-certified by the declaring party, declarations are not pinned between discovery time and invocation time, and error channels are untyped by design. As a consequence, any decision made about a tool call — authorization, discovery, audit, or composition — requires a language model to interpret what the call means, even for the large class of tools that are not intrinsically open-ended. This document states that problem and poses questions for the community. It deliberately proposes no mechanism.",
+     "https://datatracker.ietf.org/doc/draft-pelov-bounded-agent-capabilities/",
+     "IETF (individual)",
+     "Revision -00, 3 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 8) — a new author not previously tracked here. Problem statement for bounding agent tool interfaces; the requirements-side companion to the Mission-Bound tool-binding profile and draft-wolfe-faf-agent's 'what it must never do' field."),
+
+    ("draft-zagarella-autonomy-governor — Pre-Action Risk-Graded Assurance for Agent Interactions",
+     "Governance of autonomous agents today is largely expressed as boundary enforcement: an action is permitted or blocked at the point it is attempted, per a policy evaluated at that boundary. As agents span heterogeneous action types — authenticating a human, executing a delegated task, selecting a computational resource — a single, uniform way to express \"how much assurance this action requires, before it proceeds\" is missing. This document describes an interface for pre-action, risk-graded assurance: a policy stage that, before an agent action proceeds, derives an assurance requirement from a risk signal and expresses that requirement in a domain-appropriate form, recording the decision in an audit record and optionally binding it to a verified human root. It defines the interface and the audit-record fields, not any particular risk-scoring method or control law. This document also describes the autonomy-asymmetry control law: a feedback loop coupling assurance requirements to VERIFY-phase pass rates, with fast-down (immediate elevation on failure) and slow-up (hysteresis- governed relaxation on sustained success) asymmetry. The iteration governor is described as the per-packet instance of this control law, and the phase-seal chain as its sensor. This document is offered as input to the proposed AUDIT working group's work on authorization state over time and action provenance.",
+     "https://datatracker.ietf.org/doc/draft-zagarella-autonomy-governor/",
+     "IETF (individual)",
+     "Revision -01, 23 Aug 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 8) — a new author not previously tracked here. Pre-action risk-graded assurance — the permit-before-commit cluster. Same instinct as VERA's earned-autonomy runtime and the NHE graduated-autonomy model."),
+
+    ("draft-bradleyb-audit-decision-records — Signed Decision Records for Agent Authorization: Disclosures, Entry Emission, and Ordering Evidence",
+     "Audit systems for autonomous agents commonly record the actions an agent performed. This makes the non-occurrence of a permitted action unrepresentable: when nothing happens, there is no action to emit anything. This document describes an evidence model that records the authorization decision rather than the action. A decision exists whether or not the action follows, so denials, expiries, and commitments that were granted and never honoured remain representable. The document defines four disclosures that make a decision record independently evaluable, an entry-emission rule for states a relying party may need to reason about, and the evidentiary basis for claims that a decision preceded its effect. It distinguishes correspondence, where two records agree about what happened, from precedence, where the order of decision and effect is established, and it requires records to state which of the two they carry.",
+     "https://datatracker.ietf.org/doc/draft-bradleyb-audit-decision-records/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: authorization, relevance 8) — a new author not previously tracked here. Signed decision records with ordering evidence — directly comparable to the Decision Evidence Records in the Mission-Bound runtime-enforcement profile and to schrock's EMILIA evidence chain."),
+
+    ("draft-msebenzi-evidence-action — The evidence.* Family: Post-Hoc, Independently Recomputable Evidence Records for AI Agent Actions",
+     "Autonomous agents act through tool invocations whose consequences outlive the sessions that produce them. Pre-action constraint families gate whether an agent may act: environment.* attests boolean world-state, and verification.* attests calibrated confidence over factual claims. No sibling family records, under equivalent verification discipline, what the agent then did. This document defines the evidence.* family: append-only, hash-chained, signature- bound evidence records of agent actions, designed so that a third party can recompute every verdict from signed primitives and a published key, without trusting the operator's runtime. It defines the family's membership criterion (independent recomputability with fail-closed verification), the family-wide record vocabulary and canonicalization discipline, a tri-state verification protocol (VALID, INVALID, UNVERIFIABLE), composition with the pre-action sibling families, and the conformance-vector discipline under which independent implementations demonstrate byte-level agreement. One reference record type, evidence.action, is specified together with its frozen conformance corpus. This document deliberately states what an evidence record does not prove.",
+     "https://datatracker.ietf.org/doc/draft-msebenzi-evidence-action/",
+     "IETF (individual)",
+     "Revision -00, 28 Jul 2026. **Added 26 Aug 2026 from Heather Flanagan's standards-tracker cross-check** (her bucket: read_now, category: agent_identity, relevance 7) — a new author not previously tracked here. An `evidence.*` family of post-hoc recomputable evidence records. Recomputability is the same claim draft-sirkkavaara-vaara-receipt makes — worth comparing the two directly."),
+]
+make_sheet("Active IETF Drafts", COLORS['Drafts'], draft_rows)
+
+# ============================================================
+# TAB 3: MISSION-BOUND (PRE-PUBLICATION)
+# ------------------------------------------------------------
+# The 33 GitHub-only drafts of the McGuinness Mission-Bound Authorization
+# family. Split out of Active IETF Drafts on 26 Aug 2026: they are neither
+# active, nor IETF, nor drafts in any procedural sense — they live in a single
+# author's repo and only draft-mcguinness-oauth-mission has been filed on
+# Datatracker. That filed draft deliberately stays in the Active IETF Drafts
+# tab; this tab is a venue distinction, not a topic one.
+# ============================================================
+mission_rows = [
 
     ("draft-mcguinness-mission-harness — Mission-Aware Agent Harnesses",
      "Agent harnesses preserve execution state across restarts, retries, background jobs, tool-connection reuse, and sub-agent orchestration. That continuity is not authority. This document defines an optional Mission-aware harness profile for deployments using Mission-Bound Authorization, with OAuth 2.0 as this version's normative substrate.",
@@ -1139,488 +2445,8 @@ draft_rows = [
      "IETF (Pre-publication — GitHub)",
      "Mission-Bound Authorization family — group: Sub-agents; maturity: stable; adoption rung: “Advanced”. Depends on 10 family draft(s) incl. mission-architecture, mission-harness, mission-metering. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
 
-
-    # ---- Aug 2026 Datatracker sweep — new individual and WG drafts ----
-
-    ("draft-aap-oauth-profile — Agent Authorization Profile (AAP) for OAuth 2.0",
-     "This document defines the Agent Authorization Profile (AAP), an authorization profile for OAuth 2.0 and JWT designed for autonomous AI agents. AAP extends existing standards with structured claims and validation rules so that systems can reason about agent identity, task context, operational constraints, delegation chains, and human oversight requirements.",
-     "https://datatracker.ietf.org/doc/draft-aap-oauth-profile/",
-     "IETF (OAuth-related, individual)",
-     "Revision -01, 11 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ietf-wimse-workload-identity-practices — Workload Identity Practices",
-     "This document describes industry practices for providing secure identities to workloads in container orchestration, cloud platforms, and other workload platforms. It explains how workloads obtain credentials for external authentication purposes, without managing long-lived secrets directly.",
-     "https://datatracker.ietf.org/doc/draft-ietf-wimse-workload-identity-practices/",
-     "IETF (WIMSE WG)",
-     "Revision -06, 11 Aug 2026. WG-adopted draft. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-schrock-ep-bounded-capability-receipts — Bounded Capability Receipts and Durable Spend Control for Agent Actions",
-     "Agents sometimes need bounded authority to perform more than one consequential action without obtaining a new human approval for every operation. A signed token alone cannot enforce a shared budget across replicas, survive retries safely, or distinguish an operation that never crossed an effect boundary from one whose outcome is unknown.",
-     "https://datatracker.ietf.org/doc/draft-schrock-ep-bounded-capability-receipts/",
-     "IETF (individual draft)",
-     "Revision -04, 11 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-chueayen-attestation-receipts — Enforcement Attestation Receipts for AI Inference Decisions",
-     "This document specifies a compact JSON attestation receipt for an AI inference decision. A receipt binds an outcome to a request hash under a published Ed25519 public key, so a party that does not trust the issuer's infrastructure can still verify offline what the issuer's signing key attested was decided.",
-     "https://datatracker.ietf.org/doc/draft-chueayen-attestation-receipts/",
-     "IETF (individual draft)",
-     "Revision -02, 8 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-bezerra-anchors-command-provenance — Anchors: Post-Quantum Command Provenance for Autonomous Machine Links",
-     "Autonomous machines such as uncrewed aircraft, ground robots, and spacecraft execute commands issued by human operators and, increasingly, by AI agents.",
-     "https://datatracker.ietf.org/doc/draft-bezerra-anchors-command-provenance/",
-     "IETF (individual draft)",
-     "Revision -01, 7 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-zehavi-oauth-authz-req-del-chain — OAuth Authorization Request Delegation Chain",
-     "Brokered OAuth redirect authorization requests involve intermediary authorization servers between a downstream client and the upstream authorization server that obtains user consent and issues tokens.",
-     "https://datatracker.ietf.org/doc/draft-zehavi-oauth-authz-req-del-chain/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 7 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-gazitt-oauth-authzen-issuance — AuthZEN Profile for OAuth 2.0 Token Issuance",
-     "Numerous OAuth 2.0 specifications define a moment at which an authorization server decides whether to issue a security token, and each of them declares the decision itself to be a matter of local policy that is out of scope. The result is that a decision common to every OAuth deployment has no interoperable expression.",
-     "https://datatracker.ietf.org/doc/draft-gazitt-oauth-authzen-issuance/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 5 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-gazitt-oauth-authzen-token-exchange — AuthZEN Binding for OAuth 2.0 Token Exchange",
-     "OAuth 2.0 Token Exchange (RFC 8693) defines the moment at which an authorization server decides whether one party may obtain a token to act as, or on behalf of, another. It states that the decision is governed by policy, and does not define that policy.",
-     "https://datatracker.ietf.org/doc/draft-gazitt-oauth-authzen-token-exchange/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 5 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-wang-dmsc-drisac — Distributed Registration and Information Synchronization of Agent Capabilities",
-     "The large-scale deployment of autonomous AI Agents introduces challenges to capability description, registration, and discovery. Existing agent communication protocols mainly focus on application- layer interactions and typically rely on centralized registration and discovery mechanisms, which limit scalability, robustness, and semantic extensibility.",
-     "https://datatracker.ietf.org/doc/draft-wang-dmsc-drisac/",
-     "IETF (DMSC-related, individual)",
-     "Revision -00, 5 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-diaconu-agents-authz-info-sharing — Cross-Domain AuthZ Information sharing for Agents",
-     "Distributed Multi-Agent Systems consist of Agents and MCP Servers operating across multiple administrative domains, each with its own Identity Providers (IdPs) and Authorization Servers (AS).",
-     "https://datatracker.ietf.org/doc/draft-diaconu-agents-authz-info-sharing/",
-     "IETF (individual draft)",
-     "Revision -01, 4 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ietf-wimse-http-signature — WIMSE Workload-to-Workload Authentication with HTTP Signatures",
-     "The WIMSE architecture defines authentication and authorization for software workloads in a variety of runtime environments, from the most basic ones to complex multi-service, multi-cloud, multi-tenant deployments. This document defines one of the mechanisms to provide workload authentication, using HTTP Signatures.",
-     "https://datatracker.ietf.org/doc/draft-ietf-wimse-http-signature/",
-     "IETF (WIMSE WG)",
-     "Revision -06, 4 Aug 2026. WG-adopted draft. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-carleton-workload-authz-grant — Workload Authorization Grant",
-     "This document profiles the Agent Identity Management System (AIMS) framework for agent platforms that host many agent instances per customer.",
-     "https://datatracker.ietf.org/doc/draft-carleton-workload-authz-grant/",
-     "IETF (individual draft)",
-     "Revision -00, 3 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-helixar-hdp-agentic-delegation — Human Delegation Provenance Protocol (HDP): Cryptographic Chain-of-Custody for Agentic AI Systems",
-     "Agentic AI systems operate on behalf of human principals, often delegating tasks through multi-step chains of AI agents. There is currently no standard mechanism to record who authorized an agent to act, under what scope, and through what chain of delegation, in a way that can be verified offline, without a central registry, and without third-party trust anchors.",
-     "https://datatracker.ietf.org/doc/draft-helixar-hdp-agentic-delegation/",
-     "IETF (individual draft)",
-     "Revision -01, 3 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-mcguinness-oauth-id-continuation-assertion — Identity Continuation Assertion for OAuth 2.0 Token Exchange",
-     "This document defines the Identity Continuation Assertion, a short- lived, sender-constrained JWT used as an OAuth 2.0 Token Exchange subject token. It lets an Identity Provider (IdP) issue an onward Identity Assertion JWT Authorization Grant (ID-JAG) when a user's request crosses service boundaries after the user is no longer present.",
-     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-id-continuation-assertion/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 3 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-parecki-oauth-jwt-dpop-grant — OAuth 2.0 JWT Authorization Grant with DPoP Binding",
-     "This specification defines a new OAuth 2.0 authorization grant type that uses a JSON Web Token (JWT) assertion to request an access token that is bound to a specific key using the Demonstration of Proof-of- Possession (DPoP) mechanism. This provides a higher level of security than a simple bearer token, as the client must prove possession of the key to use the access token.",
-     "https://datatracker.ietf.org/doc/draft-parecki-oauth-jwt-dpop-grant/",
-     "IETF (OAuth-related, individual)",
-     "Revision -01, 3 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-mih-agent-accountability-conformance — Agent Accountability: A Conformance and Verification Method",
-     "An architecture for auditing agent-driven interactions (draft- kuehlewind-audit-architecture) identifies the record types an auditable agent system produces — interaction, action, delegation, and authorization-transition — and the role of an Auditor that determines whether recorded behaviour matched intent and the authorization in force.",
-     "https://datatracker.ietf.org/doc/draft-mih-agent-accountability-conformance/",
-     "IETF (individual draft)",
-     "Revision -00, 1 Aug 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-okutomi-session-bound-agent-identity — A Verifier-Side Acceptance Profile for Channel-Bound Agent Identity and Authorization",
-     "This document defines a verifier-side acceptance profile for channel- bound Agent identity and authorization. It addresses context diversion, where cryptographically valid material is accepted for a different service, tenant, actor, task, target, delegation, or authority boundary than the verifier intended.",
-     "https://datatracker.ietf.org/doc/draft-okutomi-session-bound-agent-identity/",
-     "IETF (individual draft)",
-     "Revision -06, 30 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-richer-oauth-httpsig — OAuth Proof of Possession Tokens with HTTP Message Signatures",
-     "This extension to the OAuth 2.0 authorization framework defines a method for using HTTP Message Signatures to bind access tokens to keys held by OAuth 2.0 clients. Discussion Venues This note is to be removed before publishing as an RFC.",
-     "https://datatracker.ietf.org/doc/draft-richer-oauth-httpsig/",
-     "IETF (OAuth-related, individual)",
-     "Revision -03, 28 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-schrock-action-remedy-receipts — Action Remedy Receipts for Consequential Agent Effects",
-     "Revocation cannot undo an effect that already occurred. A dispute does not authorize a refund, return, reversal, or other remedy. This document defines Action Remedy Receipts for recording a bounded dispute decision and a fresh compensating action without rewriting the original action or effect.",
-     "https://datatracker.ietf.org/doc/draft-schrock-action-remedy-receipts/",
-     "IETF (individual draft)",
-     "Revision -00, 28 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-tonyai-a2a-trust — Agent-to-Agent Trust, Identity, and Verifiable Provenance",
-     "This document defines a trust model for agent-to-agent (A2A) interactions in multi-agent AI systems.",
-     "https://datatracker.ietf.org/doc/draft-tonyai-a2a-trust/",
-     "IETF (individual draft)",
-     "Revision -01, 25 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ambekar-oauth-epop — JSON Web Token (JWT) Profile for OAuth 2.0 Enveloped Proof of Possession (EPOP)",
-     "This specification defines a profile for OAuth 2.0 sender-constrained credentials in which access tokens and refresh tokens are cryptographically bound to the client's private key as a single inseparable envelope.",
-     "https://datatracker.ietf.org/doc/draft-ambekar-oauth-epop/",
-     "IETF (OAuth-related, individual)",
-     "Revision -03, 24 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-parecki-oauth-refresh-token-scope-response — OAuth 2.0 Refresh Token Scope",
-     "This specification defines a new OAuth 2.0 token response parameter, refresh_token_scope, that indicates the scope authorized for a refresh token when it differs from the scope of the access token issued alongside it.",
-     "https://datatracker.ietf.org/doc/draft-parecki-oauth-refresh-token-scope-response/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 24 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-pro-adp-agent-discovery — Agent Discovery Protocol (ADP) v1.1 -- Well-Known Metadata and Interaction Layer",
-     "This document defines the Agent Discovery Protocol (ADP) v1.1, a layered protocol for discovering, verifying, and interacting with AI Agents on the Internet. ADP delegates DNS discovery to DNS-AID (SVCB records) and defines a Well-Known JSON metadata format, an Ed25519-based identity model, and the Agent Gateway Protocol (AGP) for real-time WebSocket messaging.",
-     "https://datatracker.ietf.org/doc/draft-pro-adp-agent-discovery/",
-     "IETF (individual draft)",
-     "Revision -02, 24 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ietf-oauth-rfc7523bis — Updates to OAuth 2.0 JSON Web Token (JWT) Client Authentication and Assertion-Based Authorization Grants",
-     "This document updates RFC7521, RFC7522, RFC7523 and RFC9126 with respect to the treatment of audience values in OAuth 2.0 Client Assertion Authentication and Assertion-based Authorization Grants to address a security vulnerability identified in the previous requirements for those audience values in multiple OAuth 2.0 specifications.",
-     "https://datatracker.ietf.org/doc/draft-ietf-oauth-rfc7523bis/",
-     "IETF (OAuth WG)",
-     "Revision -11, 23 Jul 2026. WG-adopted draft. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-kavian-aep-oauth-session-credential — OAuth Bearer Session Credential Grant Type for the Agent Enrollment Protocol",
-     "This document defines the OAuth Bearer session-credential grant type for the Agent Enrollment Protocol (AEP). The grant type lets an AEP Service issue an OAuth-style Bearer access token through the AEP Grant command while preserving baseline AEP client assertion authentication as the root of trust.",
-     "https://datatracker.ietf.org/doc/draft-kavian-aep-oauth-session-credential/",
-     "IETF (OAuth-related, individual)",
-     "Revision -02, 23 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-morrison-mcp-dns-discovery — Discovery of Model Context Protocol Servers via DNS TXT Records",
-     "This document defines a DNS-based mechanism for discovering Model Context Protocol (MCP) servers, the identity of the organisations that operate them, and a cryptographic identity envelope bound to an individual Sovereign-tier ~handle published under the same zone. Three TXT records are defined.",
-     "https://datatracker.ietf.org/doc/draft-morrison-mcp-dns-discovery/",
-     "IETF (individual draft)",
-     "Revision -05, 23 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-yossif-agent-mandate-problem — Problem Statement: Verifiable Human Mandates for Autonomous Agent Actions",
-     "An autonomous software agent commonly acts under authority a human granted at an earlier moment: the human expresses and authorizes an intent at one time, and the agent executes one or more concrete actions at a later time.",
-     "https://datatracker.ietf.org/doc/draft-yossif-agent-mandate-problem/",
-     "IETF (individual draft)",
-     "Revision -00, 22 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-araut-oauth-transactiontokens-bcp — OAuth Transaction Tokens Best Current Practice",
-     "This document provides best current practices for implementing and deploying OAuth 2.0 Transaction Tokens as specified in draft-ietf- oauth-transaction-tokens. Transaction Tokens (Txn-Tokens) enable workloads in a trusted domain to preserve and propagate user identity and authorization context across service boundaries during the processing of external programmatic requests.",
-     "https://datatracker.ietf.org/doc/draft-araut-oauth-transactiontokens-bcp/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ccc-wimse-twi-extensions — WIMSE Extensions for Trustworthy Workload Identity",
-     "This document contains a gap analysis that is the output of the Confidential Computing Consortium identifying areas in the IETF WIMSE WG work where the current WIMSE architecture should be extended to accommodate workloads running in Confidential Computing environments. This document contains a high-level outline for these extensions.",
-     "https://datatracker.ietf.org/doc/draft-ccc-wimse-twi-extensions/",
-     "IETF (WIMSE-related, individual)",
-     "Revision -01, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-chen-ai-agent-auth-new-requirements — New requirements for Authentication and Authorization in the AI Agents era",
-     "AI Agents are rapidly evolving from academic concepts into the core engines driving next-generation applications. However, their autonomy, dynamic nature, and complex delegation relationships pose a fundamental challenge to our existing authentication and authorization frameworks, which were designed for human users and traditional software.",
-     "https://datatracker.ietf.org/doc/draft-chen-ai-agent-auth-new-requirements/",
-     "IETF (individual draft)",
-     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-dellaert-oauth-approval-based-dcr — OAuth 2.0 Approval-Based Dynamic Client Registration",
-     "This document specifies an extension to the OAuth 2.0 Dynamic Client Registration Protocol ([RFC7591]) that enables registration of a client with an authorization server through an explicit approval step performed by an approving party, typically the user running the client, without requiring the client to possess an Initial Access Token (IAT) beforehand.",
-     "https://datatracker.ietf.org/doc/draft-dellaert-oauth-approval-based-dcr/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-hemanth-oauth-ai-scopes — OAuth 2.0 Extension for AI Model Access",
-     "This document defines an extension to OAuth 2.0 for delegating scoped access to AI model APIs. It introduces a standardized scope syntax, resource indicators for AI providers, and token constraints suitable for AI workloads including spend limits and model restrictions.",
-     "https://datatracker.ietf.org/doc/draft-hemanth-oauth-ai-scopes/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-zhang-dmsc-mas-communication — Security Analysis of Multi-agents Secured Communication and Limitations of Existing Protocols",
-     "Multi-agents systems (MAS) increasingly cooperate through workflow, orchestrated, and mesh communication patterns. While existing Internet protocols provide confidentiality and endpoint authentication, they were not designed for agent-native semantics such as dynamic identity, computation-bounded requests, context integrity, and intermediary trust.",
-     "https://datatracker.ietf.org/doc/draft-zhang-dmsc-mas-communication/",
-     "IETF (DMSC-related, individual)",
-     "Revision -00, 20 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-aravind-oauth-decision-subject — Decision-Subject Representation for Agent Authorization",
-     "This document defines dsub, an OPTIONAL, descriptive claim naming the *decision subject*, the party an automated agent's action is taken _upon_, as distinct from the acting agent (act) and the delegating principal (sub).",
-     "https://datatracker.ietf.org/doc/draft-aravind-oauth-decision-subject/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 19 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-coetzee-oauth-spt-txn-tokens — Transaction-Bound Authorization Tokens for Software and AI Agents (SPT-Txn)",
-     "Current authorization is role-scoped: an actor is granted a role whose authority persists across every action it takes. This fails exactly when actors fail -- under compromise, prompt injection, or goal hijacking -- because a compromised actor retains full role authority.",
-     "https://datatracker.ietf.org/doc/draft-coetzee-oauth-spt-txn-tokens/",
-     "IETF (OAuth-related, individual)",
-     "Revision -03, 19 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-mcguinness-oauth-token-exchange-cnf — Confirmation Response Parameter for OAuth 2.0 Token Exchange",
-     "This specification defines a cnf response parameter for the OAuth 2.0 Token Exchange (RFC 8693) response. The parameter carries the confirmation method that the authorization server applied to the issued token, enabling clients to verify that sender-constraint binding (for example a DPoP key or mutual-TLS client certificate) was performed without inspecting the issued token.",
-     "https://datatracker.ietf.org/doc/draft-mcguinness-oauth-token-exchange-cnf/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 19 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-skyfire-oauth-id-verification — Identity Verification Methods Values",
-     "Knowing how a person's identity was verified can be important when making trust decisions. This specification defines a claim and values for declaring how the person's identity was verified.",
-     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-id-verification/",
-     "IETF (OAuth-related, individual)",
-     "Revision -01, 19 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ietf-wimse-mutual-tls — Workload Authentication Using Mutual TLS",
-     "The WIMSE architecture defines authentication and authorization for software workloads in a variety of runtime environments, from the most basic ones to complex multi-service, multi-cloud, multi-tenant deployments. This document profiles a workload authentication based on X.509 workload identity certificates using mutual TLS (mTLS).",
-     "https://datatracker.ietf.org/doc/draft-ietf-wimse-mutual-tls/",
-     "IETF (WIMSE WG)",
-     "Revision -02, 6 Jul 2026. WG-adopted draft. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-liu-ai-agent-authorization-integration — AI Agent Authorization Integration Framework",
-     "This document describes how to integrate multiple OAuth 2.0 extensions to enable secure authorization for AI agents acting on behalf of users. It combines cross-domain identity, policy-based authorization, user consent evidence, and multi-hop delegation into a cohesive framework for autonomous agent authorization.",
-     "https://datatracker.ietf.org/doc/draft-liu-ai-agent-authorization-integration/",
-     "IETF (individual draft)",
-     "Revision -00, 6 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ni-agent-entity-discovery — DNS-based Entity-Level Discovery and End-to-End Connection for AI Agents",
-     "This document defines a new DNS resource record type, Agent Entity Discovery (AED), to publish agent-specific trust anchors or direct match constraints for verifying an agent's certificate or token. This enables the cross-domain users or agents to authenticate, and establish secure, end-to-end connections directly with a private- domain agent entity.",
-     "https://datatracker.ietf.org/doc/draft-ni-agent-entity-discovery/",
-     "IETF (individual draft)",
-     "Revision -00, 6 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-shang-campus-agent-scope-down — Campus Agent Identification and Scope-Down Access Control",
-     "AI agents operating in enterprise campus networks execute user- delegated Tasks by invoking multiple tools and services, often without continuous user supervision. Traditional authorization models assume stable applications and human-driven interactions, creating a mismatch when applied to autonomous agents that can chain actions across heterogeneous systems.",
-     "https://datatracker.ietf.org/doc/draft-shang-campus-agent-scope-down/",
-     "IETF (individual draft)",
-     "Revision -01, 6 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-yang-dmsc-gateway-mediation-layer — Gateway Mediation Layer for AI Agent Collaboration",
-     "Cross-domain and policy-controlled agent collaboration can require mediation decisions that are not always suitable for an agent client or an agent server alone.",
-     "https://datatracker.ietf.org/doc/draft-yang-dmsc-gateway-mediation-layer/",
-     "IETF (DMSC-related, individual)",
-     "Revision -00, 5 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-cui-dawn-mdi-model — An Information Model for Minimum Discoverable Information (MDI)",
-     "The Discovery of Agents, Workloads, and Named Entities (DAWN) terminology document defines Minimum Discoverable Information (MDI) as the minimum information an entity must provide to be discoverable, but does not define its field-level content.",
-     "https://datatracker.ietf.org/doc/draft-cui-dawn-mdi-model/",
-     "IETF (DAWN-related, individual)",
-     "Revision -00, 3 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-liu-oauth-cross-domain-txn-token — Cross-domain Transaction Tokens",
-     "This document describes a mechanism for Cross-Domain Transaction Tokens, which enables the safe maintenance and propagation of user identity, workload identities, and authorization context across multiple trust domains.",
-     "https://datatracker.ietf.org/doc/draft-liu-oauth-cross-domain-txn-token/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 3 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-schrock-agent-action-manifest — The Agent Action Control Manifest: A Public Effect-Boundary Control Plane for Machine Actions",
-     "A growing set of specifications defines evidence _objects_ for machine actions: transparency statements, workload-identity and transaction tokens, permits, action capsules, and authorization, delegation, and inference receipts.",
-     "https://datatracker.ietf.org/doc/draft-schrock-agent-action-manifest/",
-     "IETF (individual draft)",
-     "Revision -00, 3 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-schrock-human-authorization-binding — Binding Named-Human Authorization Evidence into Agent-Action Records",
-     "A recurring pattern spans the agent-action record formats now in development: a record about an agent's action reserves a place for \"the human authorization\" — an approver disposition, an authority context, a human-override field, an actor slot, a signed grant, an approval reference — and leaves its semantics undefined.",
-     "https://datatracker.ietf.org/doc/draft-schrock-human-authorization-binding/",
-     "IETF (individual draft)",
-     "Revision -00, 3 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-xkumakichi-xaip-receipts — Signed Execution Receipts for AI Agent Tool Calls (XAIP Receipts)",
-     "This document defines a wire format for signed execution receipts produced by AI agents when they invoke tools, services, or other agents.",
-     "https://datatracker.ietf.org/doc/draft-xkumakichi-xaip-receipts/",
-     "IETF (individual draft)",
-     "Revision -03, 2 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-yang-dmsc-gateway-semantic-layer — Gateway Mediation Layer for AI Agent Collaboration",
-     "Cross-domain and policy-controlled agent collaboration can require mediation decisions that are not always suitable for an agent client or an agent server alone.",
-     "https://datatracker.ietf.org/doc/draft-yang-dmsc-gateway-semantic-layer/",
-     "IETF (DMSC-related, individual)",
-     "Revision -02, 2 Jul 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ni-batch-authorization-delegation — Batch Authorization Delegation",
-     "This document describes a mechanism for Batch Authorization Delegation, which enables a batch of fine-grained, actor-bound permissions in a single request and securely delegates them to multiple collaborating actors.",
-     "https://datatracker.ietf.org/doc/draft-ni-batch-authorization-delegation/",
-     "IETF (individual draft)",
-     "Revision -00, 30 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ayoub-agis-agent-identity-system — AgIS: An Agent Identity System for DNS-Backed Verification of AI and Software Agents",
-     "This document specifies AgIS, the Agent Identity System, a DNS-backed identity and verification profile for AI agents, autonomous software agents, and agentic services operating on the existing web.",
-     "https://datatracker.ietf.org/doc/draft-ayoub-agis-agent-identity-system/",
-     "IETF (individual draft)",
-     "Revision -00, 29 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-vicente-oauth-apm — Authorization Posture Mechanism (APM): Per-Transaction Consistency for OAuth 2.0",
-     "This document describes the Authorization Posture Mechanism (APM), a method by which an OAuth 2.0 [RFC6749] authorization server, or a resource server acting on its behalf, re-evaluates the mutual consistency of three bound factors -- the client certificate, the access token, and the device posture -- on a per-request basis for privileged operations, rather than only at session…",
-     "https://datatracker.ietf.org/doc/draft-vicente-oauth-apm/",
-     "IETF (OAuth-related, individual)",
-     "Revision -02, 28 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-duda-agent-id-framework — Self-Certifying Identity and Capability-Based Delegation for Autonomous AI Agents",
-     "We present an identity and delegation framework for secure AI agent communications. The framework introduces a set of entities including Client AI Agents, Service AI Agents, Agent Providers, and Agent Brokers, together with a Trustful Mutable Store responsible for maintaining cryptographically verifiable identity bindings.",
-     "https://datatracker.ietf.org/doc/draft-duda-agent-id-framework/",
-     "IETF (individual draft)",
-     "Revision -00, 26 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-liu-oauth-authorization-evidence — Authorization Evidence and Audit Trail for OAuth 2.0 Access Tokens",
-     "This specification defines an authorization details type for including authorization evidence and audit trail information in OAuth 2.0 access tokens using the Rich Authorization Requests (RAR) framework.",
-     "https://datatracker.ietf.org/doc/draft-liu-oauth-authorization-evidence/",
-     "IETF (OAuth-related, individual)",
-     "Revision -01, 22 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-vandemeent-tibet-provenance — TIBET: Transaction/Interaction-Based Evidence Trail",
-     "This document defines TIBET (Transaction/Interaction-Based Evidence Trail), a data model and protocol for constructing cryptographically linked provenance chains over interactions between autonomous agents, human actors, and automated processes. A TIBET token captures four dimensions of provenance: content (ERIN), references (ERAAN), context (EROMHEEN), and intent (ERACHTER).",
-     "https://datatracker.ietf.org/doc/draft-vandemeent-tibet-provenance/",
-     "IETF (individual draft)",
-     "Revision -02, 17 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-car-agents-txt-wellknown — AGENTS.TXT: Capability Declarations for Web Agents",
-     "This document requests registration of two Well-Known URIs under the \"/.well-known/\" path: \"agents.txt\" and \"agents.json\".",
-     "https://datatracker.ietf.org/doc/draft-car-agents-txt-wellknown/",
-     "IETF (individual draft)",
-     "Revision -00, 12 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-liu-oauth-rego-policy — Rego Policy Language for OAuth 2.0 Authorization",
-     "AI agents exhibit dynamic, unpredictable behavior that cannot be fully described by traditional OAuth 2.0 scopes. This specification defines a behavioral authorization framework that enables clients, particularly AI agents, to propose Rego policy-based behavioral constraint contracts in OAuth 2.0 authorization flows using Rich Authorization Requests (RAR).",
-     "https://datatracker.ietf.org/doc/draft-liu-oauth-rego-policy/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 12 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-ekahraman-oauth-attestation-authz-native-app — OAuth 2.0 Attestation Based Authorization for Native Applications",
-     "This document defines an extension to OAuth 2.0 [RFC6749] that enables Authorization Servers to consider Attestation Results presented by Native Applications when issuing access grants.",
-     "https://datatracker.ietf.org/doc/draft-ekahraman-oauth-attestation-authz-native-app/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 9 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-kay-dawn-use-cases — Use Cases for the Discovery of Agents, Workloads, and Named Entities",
-     "This document describes broad categories of use cases for the Discovery of Agents, Workloads, and Named Entities (DAWN). The purpose of the document is to illustrate situations in which entities need to discover other entities. This document does not define a discovery protocol, a registration procedure, a selection algorithm, or an agent-to-agent communication protocol.",
-     "https://datatracker.ietf.org/doc/draft-kay-dawn-use-cases/",
-     "IETF (DAWN-related, individual)",
-     "Revision -00, 7 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-reddy-wimse-workload-attestation — WIMSE Workload Attestation",
-     "This document extends the WIMSE workload-to-workload authentication architecture with a mechanism for conveying attestation across TLS- terminating proxies, a deployment topology where TLS-layer attestation mechanisms lose their end-to-end security properties.",
-     "https://datatracker.ietf.org/doc/draft-reddy-wimse-workload-attestation/",
-     "IETF (WIMSE-related, individual)",
-     "Revision -00, 7 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-madaras-preauth-receipts — PRE-RCT: Pre-Execution Authorization Receipt Format",
-     "This document defines PRE-RCT, the Pre-Execution Authorization Receipt, a cryptographically signed and attestation-aware receipt format used to record high-risk authorization events. PRE-RCT is intended for use with pre-execution authorization protocols such as GNA.",
-     "https://datatracker.ietf.org/doc/draft-madaras-preauth-receipts/",
-     "IETF (individual draft)",
-     "Revision -00, 6 Jun 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-fulz-oauth-trust-binding — OAuth Trust Binding Extension (OTBE)",
-     "This document defines the OAuth Trust Binding Extension (OTBE), a mechanism allowing Resource Owners to explicitly authorize which Authorization Servers may assert their identity towards Relying Parties, mitigating silent impersonation and namespace-based identity capture.",
-     "https://datatracker.ietf.org/doc/draft-fulz-oauth-trust-binding/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 30 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-somoza-atn-agent-trust-negotiation — Agent Trust Negotiation: Capability, Delegation, and Provenance Binding for AI Agents",
-     "This document defines the Agent Trust Negotiation (ATN) protocol. ATN sits above whatever mechanism is used to discover an agent identity and answers questions that discovery alone cannot: what is the agent permitted to do, under whose authority, with what provenance, and how do two agents reach a verifiable working agreement.",
-     "https://datatracker.ietf.org/doc/draft-somoza-atn-agent-trust-negotiation/",
-     "IETF (individual draft)",
-     "Revision -01, 28 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-drake-agent-identity-registry — Agent Identity Registry System: A Federated Architecture for Hardware-Anchored Identity of Autonomous Entities",
-     "The Internet's identity infrastructure assumes human principals. As autonomous entities -- AI agents, robotic systems, and other non- human actors -- increasingly participate in both Internet protocols and physical society, no existing standard provides them with persistent, verifiable, hardware-anchored identity.",
-     "https://datatracker.ietf.org/doc/draft-drake-agent-identity-registry/",
-     "IETF (individual draft)",
-     "Revision -03, 22 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-iannone-dawn-privacy-considerations — Privacy Considerations for the Discovery of Agents, Workloads, and Named Entities (DAWN)",
-     "This document describes the privacy issues associated with the Discovery of Agents, Workloads, and Named Entities (DAWN). It provides general observations about typical current privacy practices in similar domains like, DNS, HTTP, and in general privacy in information retrieval.",
-     "https://datatracker.ietf.org/doc/draft-iannone-dawn-privacy-considerations/",
-     "IETF (DAWN-related, individual)",
-     "Revision -00, 22 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-jiang-seat-dynamic-attestation — Dynamic Attestation for AI Agent Communication",
-     "This document describes a use case for conveying remote attestation information in association with Transport Layer Security (TLS) sessions in the context of AI agent communication.",
-     "https://datatracker.ietf.org/doc/draft-jiang-seat-dynamic-attestation/",
-     "IETF (RATS/SEAT-related, individual)",
-     "Revision -00, 17 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-novak-rats-twi-attestation — Remote Attestation for Trustworthy Workload Identity",
-     "Trustworthy Workloads are workloads that operate in environments that provide isolation of data in use. This document describes how Trustworthy Workloads can acquire credentials containing stable identifiers, upon proving the trust in the environments in which they operate via Remote Attestation.",
-     "https://datatracker.ietf.org/doc/draft-novak-rats-twi-attestation/",
-     "IETF (RATS/SEAT-related, individual)",
-     "Revision -00, 9 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-jimenez-agent-directory — Agent Directory",
-     "This document defines the Agent Directory (AD), a service where agents register their identity, capabilities, and reachable endpoints and where clients discover them by capability.",
-     "https://datatracker.ietf.org/doc/draft-jimenez-agent-directory/",
-     "IETF (individual draft)",
-     "Revision -01, 8 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-hardt-aauth-bootstrap — AAuth Bootstrap Guidance",
-     "This document provides informational guidance for agent providers (APs) on enrolling agents and issuing AAuth agent tokens defined in [I-D.hardt-oauth-aauth-protocol]. It covers per-platform key handling, optional platform attestation, agent identifier strategies, and refresh patterns.",
-     "https://datatracker.ietf.org/doc/draft-hardt-aauth-bootstrap/",
-     "IETF (individual draft)",
-     "Revision -01, 6 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-abbott-mcp-ax — MCP Aggregation Protocol (MCP-AX): Hierarchical Tool Namespace Delegation for Model Context Protocol Servers",
-     "This document specifies MCP-AX, an aggregation protocol for Model Context Protocol (MCP) servers. MCP-AX enables hierarchical composition of tool namespaces across heterogeneous networks of MCP servers, from cloud services to resource-constrained embedded devices.",
-     "https://datatracker.ietf.org/doc/draft-abbott-mcp-ax/",
-     "IETF (individual draft)",
-     "Revision -00, 5 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-    ("draft-hori-agent-quality-graph — Agent Quality Graph (AQG): A Protocol for Evaluating AI Agent Trustworthiness via Delegation Graphs",
-     "This document describes the Agent Quality Graph (AQG) protocol, a method for evaluating and ranking AI agent trustworthiness based on delegation transaction graphs. As the number of autonomous AI agents grows rapidly, there is no standardized mechanism for determining which agents reliably complete delegated tasks.",
-     "https://datatracker.ietf.org/doc/draft-hori-agent-quality-graph/",
-     "IETF (individual draft)",
-     "Revision -00, 2 May 2026. Added in the Aug 2026 corpus sweep; not previously tracked."),
-
-
-    # ---- Reinstated 11 Aug 2026: Skyfire KYA/KYAPay + Hopley x402 receipt clusters ----
-
-    ("draft-hopley-x402-cancellation-receipt — Categorical Mandate Cancellation Receipt Format for Agentic-Payment Flows",
-     "This document specifies a categorical mandate cancellation receipt format for agentic-payment flows. The format records that a recurring-payment mandate or other standing payer-to-payee authorisation has been cancelled, by whom, for what reason, and with what effective date.",
-     "https://datatracker.ietf.org/doc/draft-hopley-x402-cancellation-receipt/",
-     "IETF (individual draft)",
-     "Revision -01, 25 May 2026. Hopley x402 agentic-payment receipt cluster (4 drafts: compliance, settlement, refund, cancellation) — categorical receipt formats for agent-initiated payment flows. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
-    ("draft-hopley-x402-compliance-receipt — Categorical Compliance Screening Receipt Format for Agentic-Payment Flows",
-     "This document specifies a categorical compliance screening receipt format for agentic-payment flows.",
-     "https://datatracker.ietf.org/doc/draft-hopley-x402-compliance-receipt/",
-     "IETF (individual draft)",
-     "Revision -02, 25 May 2026. Hopley x402 agentic-payment receipt cluster (4 drafts: compliance, settlement, refund, cancellation) — categorical receipt formats for agent-initiated payment flows. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
-    ("draft-hopley-x402-refund-receipt — Categorical Refund Receipt Format for Agentic-Payment Flows",
-     "This document specifies a categorical refund receipt format for agentic-payment flows.",
-     "https://datatracker.ietf.org/doc/draft-hopley-x402-refund-receipt/",
-     "IETF (individual draft)",
-     "Revision -02, 25 May 2026. Hopley x402 agentic-payment receipt cluster (4 drafts: compliance, settlement, refund, cancellation) — categorical receipt formats for agent-initiated payment flows. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
-    ("draft-hopley-x402-settlement-attestation — Categorical Settlement Attestation Format for Agentic-Payment Flows",
-     "This document specifies a categorical settlement attestation format for agentic-payment flows. The format records that a payment has reached a particular settlement state on a particular chain, at a particular instant, under the attesting party's risk model. The receipt format uses a closed enumeration of categorical outcomes (SETTLED, PENDING_FINALITY, REVERSED).",
-     "https://datatracker.ietf.org/doc/draft-hopley-x402-settlement-attestation/",
-     "IETF (individual draft)",
-     "Revision -01, 25 May 2026. Hopley x402 agentic-payment receipt cluster (4 drafts: compliance, settlement, refund, cancellation) — categorical receipt formats for agent-initiated payment flows. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
-    ("draft-skyfire-oauth-aml-methods — Anti-Money Laundering Methods Values",
-     "Financial regulations require application of Anti-Money Laundering (AML) and Countering the Financing of Terrorism (CFT) methods in many jurisdictions worldwide. This specification defines a claim and values for declaring what AML/CFT methods were employed.",
-     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-aml-methods/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
-    ("draft-skyfire-oauth-amr-values — Additional Authentication Method Reference Values",
-     "The JWT \"amr\" (Authentication Methods References) claim contains values conveying authentication methods used in the authentication. This specification defines additional Authentication Method Reference values beyond those already registered to represent additional authentication methods in use today.",
-     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-amr-values/",
-     "IETF (OAuth-related, individual)",
-     "Revision -01, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
-    ("draft-skyfire-oauth-kyapay-token — KYAPay Token",
-     "This document defines a token format for agent identity and payment tokens in JSON Web Token (JWT) format. Authorization servers and resource servers from different vendors can leverage this token format to consume identity and payment tokens in an interoperable manner.",
-     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-kyapay-token/",
-     "IETF (OAuth-related, individual)",
-     "Revision -01, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
-    ("draft-skyfire-oauth-kyapay-token-exchange — KYAPay Token Exchange",
-     "This specification describes how KYAPay tokens can be exchanged for OAuth access tokens to dynamically grant agents access to resources they need to accomplish their mission.",
-     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-kyapay-token-exchange/",
-     "IETF (OAuth-related, individual)",
-     "Revision -01, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
-    ("draft-skyfire-oauth-using-kyapay-tokens — Using KYAPay Tokens",
-     "The KYAPay Token is a JSON Web Token (JWT) that carries verified identity (\"Know Your Agent\", KYA) and payment (PAY) information for requests made by software agents on behalf of human principals.",
-     "https://datatracker.ietf.org/doc/draft-skyfire-oauth-using-kyapay-tokens/",
-     "IETF (OAuth-related, individual)",
-     "Revision -00, 19 Jul 2026. Skyfire KYA/KYAPay cluster (6 drafts incl. draft-skyfire-oauth-id-verification already in corpus) — agent identity verification and payment claims for OAuth/JWT. Reinstated 11 Aug 2026 after initially being filtered out of the Aug 2026 sweep as payments-infra."),
-
 ]
-make_sheet("Active IETF Drafts", COLORS['Drafts'], draft_rows)
+make_sheet("Mission-Bound (Pre-pub)", COLORS['Mission'], mission_rows)
 
 # ============================================================
 # TAB 3: OpenID Foundation
@@ -1880,23 +2706,23 @@ industry_rows = [
     # to draft-mcguinness-oauth-actor-profile, draft-mcguinness-oauth-client-instance-assertion, and the
     # AuthZEN ARAP profile listed in the OpenID Foundation tab. Listed in publication order.
 
-    ("Mission-Bound OAuth MVP (McGuinness, 22 May 2026)",
+    ("Mission-Bound Authorization on the Wire (McGuinness, 22 May 2026, re-issued 22 Jul 2026)",
      "The protocol-level proposal. Five wire additions on top of existing OAuth: a 'mission_intent' RAR envelope (purpose, mission_expiry, context), a generic 'resource_access' RAR type, a durable Mission record at the Authorization Server, an opaque 'mission' claim (id + origin) on access tokens, and a Mission-state enforcement gate on refresh / exchange / introspection / assertion validation. Seven-state Mission lifecycle (pending_approval, active, suspended, revoked, expired, completed, rejected). proposal_hash (SHA-256 over JCS-canonical authorization_details) and consent_rendering_hash anchor what was approved versus what the user saw.",
-     "https://notes.karlmcguinness.com/notes/mission-bound-oauth-mvp/",
+     "https://notes.karlmcguinness.com/notes/mission-bound-authorization-on-the-wire/",
      "Architect blog (Karl McGuinness)",
-     "76-min read; the substrate post for the whole series. Target I-D name: draft-mcguinness-oauth-mission-bound-minimum-profile. Conformance Ladder L0–L5 (L0 baseline OAuth → L5 verifiable governance with portable receipts). Cross-AS handoff uses ID-JAG for user-rooted flows or the Fletcher Transaction Token Chaining Profile for Txn-Token-rooted flows. Mission Expansion creates a successor Mission with 'mission.supersedes' rather than mutating in place. Three Resource Server tiers (RS-A OAuth-only → RS-D Mission-state aware via introspection or SSF/CAEP events). Architectural challenges acknowledged honestly: state-sync at scale, unknown-constraint brittleness, lethal-trifecta boundary."),
+     "**RE-SLUGGED — the original /notes/mission-bound-oauth-mvp URL now 404s** (caught in the 26 Aug 2026 sweep). Re-issued 22 Jul 2026 as a chapter of the Mission-Bound Authorization handbook under the new title and slug; content verified equivalent (mission_intent, proposal_hash, resource_access all still present). Part of a site-wide rename of \"Mission-Bound OAuth\" to \"Mission-Bound Authorization\". 76-min read; the substrate post for the whole series. Target I-D name: draft-mcguinness-oauth-mission-bound-minimum-profile. Conformance Ladder L0–L5 (L0 baseline OAuth → L5 verifiable governance with portable receipts). Cross-AS handoff uses ID-JAG for user-rooted flows or the Fletcher Transaction Token Chaining Profile for Txn-Token-rooted flows. Mission Expansion creates a successor Mission with 'mission.supersedes' rather than mutating in place. Three Resource Server tiers (RS-A OAuth-only → RS-D Mission-state aware via introspection or SSF/CAEP events). Architectural challenges acknowledged honestly: state-sync at scale, unknown-constraint brittleness, lethal-trifecta boundary."),
 
-    ("The Mission is the Missing OAuth Abstraction (McGuinness, 1 Jun 2026)",
+    ("The Mission Is the Missing Abstraction (McGuinness, 1 Jun 2026, re-issued 22 Jul 2026)",
      "The architectural frame: OAuth has no first-class object for 'the task the user approved' — only tokens, scopes, prompts, and logs that are downstream projections of it. The Mission is that durable, AS-stored, user-approved authority record. Argues this is what closes the gap that five prior bodies of his work (Power of Attorney, Mission Shaping, Open-World OAuth, Sessions Are Not Missions, the Mission-Bound architecture series) have circled from different angles. Two layers, one object: issuance-bound authority (MVP) plus runtime-enforced authority (the IBAC profile).",
-     "https://notes.karlmcguinness.com/notes/the-mission-is-the-missing-oauth-abstraction/",
+     "https://notes.karlmcguinness.com/notes/the-mission-is-the-missing-abstraction/",
      "Architect blog (Karl McGuinness)",
-     "Short (9-min) framing post that ties the whole programme together. The argument for why IBAC becomes practical when intent is compiled from an AS-validated Mission at consent time rather than inferred post-hoc from agent behaviour (where it's adversarial-input territory and the PDP has no user to ask). Best entry point for someone new to the series."),
+     "**RE-SLUGGED — the original URL now 404s** (caught 26 Aug 2026); the word \"OAuth\" was dropped from both title and slug in the 22 Jul 2026 handbook re-issue. Short (9-min) framing post that ties the whole programme together. The argument for why IBAC becomes practical when intent is compiled from an AS-validated Mission at consent time rather than inferred post-hoc from agent behaviour (where it's adversarial-input territory and the PDP has no user to ask). Best entry point for someone new to the series."),
 
-    ("Mission-Bound OAuth Runtime Enforcement Profile (McGuinness, 1 Jun 2026)",
+    ("Mission-Bound Runtime Enforcement (McGuinness, 1 Jun 2026, re-issued 22 Jul 2026)",
      "The IBAC layer layered on the MVP. Core (required for compliance): Intent-to-Policy Compilation (AS deterministically compiles approved authorization_details to an evaluable artifact at activation, stores policy_version on the Mission), Resource-Side Enforcement Contract (RS-B minimum, PDP evaluates every consequential request), Standard Subset Semantics per RAR Type with strict-refuse on unknown constraints (stricter than MVP's 'preserve or refuse'), Mission Introspection Profile (extended response with act chain, tenant, subject, policy_version), Runtime Denial and Escalation via ARAP (MUST), Local-Action Boundary requiring AuthZEN Access Evaluation for non-OAuth actions, Parameter Binding / TOCTOU Protection (parameter_digest bound to the permit), Decision Evidence Records (per-decision audit record bound to mission.id, proposal_hash, policy_version, decision, constraint clauses, act chain). Six Optional Modules: Tool Binding Profile, Decision Receipt Profile (W3C VC 2.0), Actor Provenance Profile, Purpose Registry Profile, Attestation Profile (RATS PTV + WIMSE), Policy Projection Profile (Cedar carriage).",
-     "https://notes.karlmcguinness.com/notes/mission-bound-oauth-runtime-enforcement-profile/",
+     "https://notes.karlmcguinness.com/notes/mission-bound-runtime-enforcement/",
      "Architect blog (Karl McGuinness)",
-     "37-min read; target I-D name: draft-mcguinness-oauth-mission-bound-runtime-enforcement-profile. Six-class action classification (non-consequential → consequential read → consequential write → irreversible → external commitment → privileged administration) determines PDP-gate requirement and parameter binding. Four PDP deployment modes (AS-hosted, RS-hosted, tenant governance, federated). Goal pair: 'execution continuity' (every in-bounds action succeeds; every out-of-bounds becomes governed Mission Expansion) plus 'proof of authority' (per-decision cryptographic receipts). Acknowledges PDP latency overhead and tool-manifest fracturing as real challenges."),
+     "**RE-SLUGGED — the original URL now 404s** (caught 26 Aug 2026); re-issued 22 Jul 2026 as a handbook chapter, dropping both \"OAuth\" and \"Profile\" from the name. 37-min read; target I-D name: draft-mcguinness-oauth-mission-bound-runtime-enforcement-profile. Six-class action classification (non-consequential → consequential read → consequential write → irreversible → external commitment → privileged administration) determines PDP-gate requirement and parameter binding. Four PDP deployment modes (AS-hosted, RS-hosted, tenant governance, federated). Goal pair: 'execution continuity' (every in-bounds action succeeds; every out-of-bounds becomes governed Mission Expansion) plus 'proof of authority' (per-decision cryptographic receipts). Acknowledges PDP latency overhead and tool-manifest fracturing as real challenges."),
 
     ("Authorization Denied Is No Longer Enough (McGuinness, 2 Jun 2026)",
      "The framing post for ARAP. In closed-world authorization, 'decision:false' was the end of the interaction. In open-world agentic systems with runtime discovery, sub-agent delegation, and evolving missions, denial is increasingly the beginning of a governance escalation — and the missing protocol primitive is a 'requestable denial': a deny that names where to ask and binds the request to the exact evaluation it remediates. Why CIBA isn't the answer (CIBA solves authentication freshness; this is about governance state). Why approvals aren't authority (reevaluation against current state, not standing entitlement).",
@@ -2320,6 +3146,426 @@ industry_rows = [
      "Industry blog (Independent)",
      "Published 28 Apr 2025 on Control Plane (notes.karlmcguinness.com); essay. Part of the Aug 2026 blog backfill — the corpus previously tracked only 6 of 47 posts."),
 
+
+    # ---- 26 Aug 2026 sweep: pages the 11 Aug RSS pass did not surface ----
+
+    ("Mission-Bound OAuth (McGuinness, 13 Mar 2026)",
+     "The original RFC-style specification post: OAuth answers whether a request is permitted right now, while Mission-Bound OAuth asks whether a delegated mission should still be running at all. Proposes a durable Mission object at the Authorization Server governing token derivation, lifecycle, delegation and termination across agent execution. Full document structure — Introduction, Terminology and Roles, Background and Related Work, Architecture Overview, Mission Data Model, Mission Lifecycle, OAuth Protocol Integration, Mission Management, Deployment and Operational Model, Security Considerations, Privacy Considerations.",
+     "https://notes.karlmcguinness.com/notes/mission-bound-oauth/",
+     "Architect blog (Karl McGuinness)",
+     "The genesis document of the entire Mission-Bound programme and, at 13 Mar 2026, the earliest post in it — predating the May-June series by two months and the July handbook by four. Missed by the 11 Aug 2026 sweep despite being in the RSS feed. It is written as a specification rather than an essay, which makes it the closest blog-side analogue of draft-mcguinness-oauth-mission. Note it retains the original \"Mission-Bound OAuth\" name that the July handbook renamed away from."),
+
+    ("Mission-Bound Authorization: The Complete Edition (McGuinness, 22 Jul 2026)",
+     "The whole Mission-Bound Authorization handbook on one page in reading order: the cover, the five chapters, the companions and the six appendices, with a print-to-PDF path and a Markdown rendition.",
+     "https://notes.karlmcguinness.com/mission-handbook/read/",
+     "Architect blog (Karl McGuinness)",
+     "The single-page edition of the handbook — roughly 888KB of HTML, by a wide margin the largest single artifact in the corpus. Useful as the one URL to hand someone who wants the entire argument in one place. Its chapter list is also the authoritative index of the 27 individual handbook chapters, which are NOT exposed in the site's RSS feed and are consequently not yet tracked as individual rows."),
+
+    ("About — Control Plane (Karl McGuinness)",
+     "Author page for the Control Plane blog: Karl McGuinness, previously SVP and Chief Product Architect at Okta, now writing independently on agent authorization, OAuth, and delegated authority.",
+     "https://notes.karlmcguinness.com/about/",
+     "Architect blog (Karl McGuinness)",
+     "Included for the same reason the series landing pages are: the corpus tracks this author's body of work in full. Useful as the provenance anchor for the 18 individual I-Ds, the 34-draft Mission-Bound family, and the 50 blog entries now attributed to him here."),
+
+    # ---- Mission-Bound handbook chapters + handbook-only series indexes ----
+    # Added 26 Aug 2026. These have their own /notes/ and /series/ URLs but are absent
+    # from the RSS feed, so the 11 Aug backfill captured the series indexes without their
+    # member essays. 24 chapters + 5 series indexes.
+
+    ("McGuinness — Adopting Mission-Bound Authorization",
+     "Crawl, Walk, Run. A definitive architecture that ends without a build order is a tour, not a blueprint. Most estates start at the read-only ceiling: agents capped at read access, humans approving or executing the writes, and pilots that never graduate. This closer names what that posture costs and stages the way off it: crawl by shipping the issuance profile (approved, integrity-anchored Missions and a possession-independent kill switch, honestly labeled governance rather than safety), walk by adding the Runtime-Enforced level (per-action enforcement, the AuthZEN binding, and Status freshness, all on substrate that already shipped), and run by climbing to the Governed and High-Assurance Agent levels, each of which makes a broader class of write authority defensible. Plus the ecosystem to compose with, the five operational surfaces you will own, and the pieces the community still has to s.",
+     "https://notes.karlmcguinness.com/notes/adopting-mission-bound-authorization/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Agents Need a Corporate Card, Not a Blank Check",
+     "What Expense Governance Already Knows About Delegated Autonomy. Nobody hands a new hire the company checkbook. In a mature spend program, they get an instrument bound to an approved purpose, checked at each transaction, metered against a budget, and frozen when the reason for the spend goes away. Agent credentials today are blank checks with expiry dates. This part walks the expense-governance loop end to end, maps each control onto agent authority, and is honest about the five places the analogy breaks. Each break is something the agent stack still has to build. In a mature spend program, she gets an instrument with a boundary: a corporate card, a virtual card, or a travel approval that controls what the card can do. It has a limit. It works for travel and software, not for jewelry. It draws against a budget someone approved for a reason, and it can die the day she leaves or the project ends. Inside those bounds, nobody reviews every p.",
+     "https://notes.karlmcguinness.com/notes/agents-need-a-corporate-card-not-a-blank-check/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Answering the Laws of AIdentity",
+     "A Critical Crosswalk from Patrick Parker's Seven Laws to Mission-Bound Authorization. Patrick Parker's Seven Laws of AIdentity describe the dynamics a system must govern when agents act through delegated authority: split actors, generated intent, bounded agency, continuous authorization, least exposure, justifiable action chains, and proof-carrying action. This part maps those laws onto Mission-Bound Authorization without turning resemblance into compliance. The strongest matches are generated intent and bounded agency. Continuous authorization and split-actor attribution require the runtime and identity profiles. Least exposure, chain necessity, policy retention, evidence completeness, and embodied action remain conditional or outside the current wire model. This part is the chapter’s second proof, and the one framing built for identity rather than threats. Patrick Parker published The Laws of AIdentity in May 2026 as a proposed framework for deleg.",
+     "https://notes.karlmcguinness.com/notes/answering-the-laws-of-aidentity/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Canceling the Card Doesn't Stop the Charges",
+     "Endings, Unwindings, and the Statement That Reconciles It All. Cancel a card and watch what refuses to end: the subscription bills the new number the network helpfully forwarded, the pending hotel charge settles days later, and the refund arrives through a process you do not control. Payments learned that ending an instrument is not ending an arrangement, and built machinery for the difference: reversible freezes, terminal cancellations, single-use cards that retire themselves, in-flight states between authorized and settled, chargebacks as governed compensation, and the statement that reconciles everything to one project code. This part maps each ending onto the agent task that must actually stop, and closes with the breaks, including the one where the analogy runs backward. Next month the gym bills you anyway, on the replacement card’s number, which you never gave it. Nothing malfunctioned. The network’s account updater service f.",
+     "https://notes.karlmcguinness.com/notes/canceling-the-card-doesnt-stop-the-charges/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Closing the Agent Authorization Gaps",
+     "The OAuth Community's Gap Catalog, Answered Line by Line. The standards community is converging on a problem statement: agents break OAuth's pre-approval paradigm, tokens cannot represent delegation chains, revocation cannot reach a task, and consent screens cannot survive a thousand scopes. The agent authorization use-case catalog names eleven scenarios and rolls its analysis up to six major gaps, and this part answers the catalog line by line at both grains with machinery that existed before it was published: task-level revocation is the Mission kill switch, bulk revocation is Mission Management, multi-hop chains are act chains and Child Missions, scope explosion dies at Mission-grain consent, and the new grant-versus-execution gap lands on Decision and Execution Evidence. Seven answers are partial and two are delegated, and the tally is stated rather than smoothed. The first four proofs held the model against a threat model.",
+     "https://notes.karlmcguinness.com/notes/closing-the-agent-authorization-gaps/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Common Objections to Mission-Based Authorization",
+     "Answers for the People Who Run Today's Control Planes. A skeptical FAQ for IAM practitioners and architects. Twenty-three objections test mission-based authorization against IdPs, workload identity, OAuth, RAR and UMA, short-lived tokens, PDPs and Zero Trust, Shared Signals, PAM and IGA, workflow engines, internal composition, open-world discovery, semantic misuse, enforcement bypass, lifecycle ownership, and privacy. The answers concede where existing systems are sufficient, identify where a Mission-shaped implementation may already exist under another name, and limit the standards case to the boundaries where private task state no longer reaches. The answer is sometimes yes . Existing products can keep task state, carry purpose attributes, issue task-specific credentials, and gate actions. A system that makes an approval-backed task record the root of authority and enforcement may already implement mission-based authorization with.",
+     "https://notes.karlmcguinness.com/notes/common-objections-to-mission-based-authorization/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Containing the OWASP Agentic Threats",
+     "Fifteen Agentic Threats and the LLM Top 10, Each Given a Verdict. Security reviewers do not arrive with your framing. They arrive with OWASP's: fifteen agentic threats from memory poisoning to human manipulation, plus the LLM Top 10. This part crosswalks both onto the handbook and refuses the move that makes crosswalks worthless, claiming everything. Each threat gets one of three verdicts. Contained means the threat lands on machinery built for it, with a draft behind it. Bounded means the cause is out of authorization's reach but the blast radius is capped at the action gate. Delegated means it is not an authorization problem and a named complement owns it. Six of the fifteen are contained, nine are bounded, and half the LLM Top 10 is honestly someone else's layer. The first two proofs in this chapter answered a threat model and a requirements framework. This one answers the checklist. When a security team reviews an agent deplo.",
+     "https://notes.karlmcguinness.com/notes/containing-the-owasp-agentic-threats/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — From a Request to an Approved Mission",
+     "Shaping, Consent Evidence, and Deferred Approval with Revision. A user request is untrusted input. This part covers the integrity of the approval event, the layer before any token exists: the client-side shaper that proposes a candidate Mission Intent, the Consent Evidence that commits the structured consent disclosure the Authorization Server recorded as rendered (not the pixels or the Approver's comprehension), and the deferred and revisable approval that lets a human reviewer narrow a proposal in place. Authority is created only when the Authorization Server validates, narrows, and approves. The Mission Is the Missing Abstraction drew the boundary between Mission Intent (a proposal) and an approved Mission (the governance object). The approval event is the single moment of transition, where the Authorization Server validates the Intent, derives an Authority Set, the Approver consents, and the Mission record is committed by intent_has.",
+     "https://notes.karlmcguinness.com/notes/from-a-request-to-an-approved-mission/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — From the Card to the Architecture",
+     "Translating the Corporate-Card Model into Mission-Bound Authorization. What the Corporate Card Already Solved walked a working delegated-authority architecture one control at a time and never mentioned a protocol. This part is the joint between that mental model and this chapter's architecture. The five rules the card world taught become the five laws of delegated authority, stated for any substrate. The corporate-card test becomes the claim gate a vendor claim must pass. And the build lists that closed each card post, the things the agent stack cannot borrow from the expense world, turn out to enumerate the draft family: disclosure integrity, field-speed narrowing, checkpoints per boundary, endings that propagate, and a record that earns trust without a bank. What the Corporate Card Already Solved makes one claim across five posts: enterprise finance independently discovered the governance architecture that agent authorization now requires, a.",
+     "https://notes.karlmcguinness.com/notes/from-the-card-to-the-architecture/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Making Compliance a By-Product",
+     "What NIST AI RMF, the EU AI Act, and ISO/IEC 42001 Ask Agents to Prove. The third kind of outside framing is the one with auditors behind it. NIST AI RMF, the EU AI Act, and ISO/IEC 42001 converge on one demand: show me. Show me who is accountable, what the system is for, how you observe it, and how you stop it. In most agent stacks the honest answer is archaeology through session logs. In this architecture the artifact that enforces is the artifact that documents: the Mission is the documented purpose, the approval is the accountable decision, the evidence family is the log, and Termination is the interrupt. The crosswalk maps eight obligations onto machinery that exists for safety reasons, and then names what compliance still requires, because evidence is not certification. This chapter has held the handbook against a threat model, a requirements framework, and a threat taxonomy. The last framing is the one with auditors behind it. A.",
+     "https://notes.karlmcguinness.com/notes/making-compliance-a-by-product/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Mission-Based Authorization: The Field Reference",
+     "The Category, the Litmus Test, the Landscape, and the Running Example. Mission-based authorization governs the approved task, not just the credential, session, or request. This page is the field reference: the definition and litmus test for what counts as mission-based, a competitive landscape, the adoption stages, threats and non-goals, the canonical diagram and glossary, and the Q3 board-packet example threaded through the handbook. Mission-based authorization governs the approved task , not just the credential, session, or individual request.",
+     "https://notes.karlmcguinness.com/notes/mission-based-authorization-field-reference/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays. Reference apparatus rather than argument; the condensed lookup for the whole model."),
+
+    ("McGuinness — The Mission-Based Authorization Vendor Test",
+     "Six Questions for Anyone Claiming Agent Authorization. When a vendor says they support agent authorization, ask six questions: what is the approved task object, what derives authority from it, what keeps authority strictly narrower as work fans out, what checks each action at the moment of use, what happens when it is revoked, and can an auditor pull one identifier and see the whole task. The test is intentionally unforgiving: no approved task object means no category claim, token validation is not runtime enforcement, token expiry is not revocation, and logs are not task evidence. A vendor that passes can write the honest deployment claim with level, enforcement scope, freshness, evidence, and exclusions. Agent auth today can prove who is acting and what credential they hold. It cannot prove the work is still authorized. So when a vendor says they support agent authorization, the evaluation is six questions. Each probes one propert.",
+     "https://notes.karlmcguinness.com/notes/mission-based-authorization-vendor-test/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays. Reference apparatus — an evaluation checklist rather than a design argument."),
+
+    ("McGuinness — Mission-Bound Authority: Instances, Actors, and Delegation",
+     "From Authenticated Agent Identity to Bounded, Narrowing Authority. The AI agent auth best practices give an agent workload identity, credentials, and delegated user authority. This part binds Mission authority to that identity. The mission claim projects the approved task into every derived token, attested instance identifiers and actor chains keep every actor attributable, and delegated work gets explicit, narrower, separately revocable authority. A sub-agent that acts because it descends from a parent session is inheriting ambient authority, not delegated authority. Child Missions give durable sub-agents their own revocable handles with strict-subset authority and cascade revocation. Offline attenuation, the experimental roadmap for fan-out at scale, keeps the Authorization Server off the hot path with the runtime state check as the surviving kill switch. The Mission Is the Missing Abstraction defined the Mission and From a Requ.",
+     "https://notes.karlmcguinness.com/notes/mission-bound-authority/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Mission-Bound Authorization: The Glossary",
+     "The Handbook's Vocabulary, A to Z. The handbook's vocabulary in one lookup table, A to Z: the objects, the artifacts, the mechanisms, the roles, and the named constructs, each defined in one to three sentences with a link to its canonical home. The entries are written to be quoted. The canonical homes carry the argument. Delegated work forces four separate continuity questions: request provenance, identity attribution, target-applicable authority, and ….",
+     "https://notes.karlmcguinness.com/notes/mission-bound-authorization-glossary/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays. Reference apparatus rather than argument — but the controlled vocabulary is the useful part: it is the closest thing the Mission-Bound programme has to a normative terminology section."),
+
+    ("McGuinness — Mission-Bound Authorization: The Standards Map",
+     "OAuth, WIMSE, and OpenID, Mapped to the Architecture. The Mission is the architecture's new primitive. The rest should compose. This appendix tests that claim against the ratified OAuth substrate, the complete active OAuth and WIMSE working-group queues, selected individual drafts, and the relevant OpenID Foundation specifications. It separates publication status from architectural relationship and states the important deltas and substitution hazards plainly. Statuses follow the public record as of July 15, 2026 . The Reference tracks the family’s own reconciliation date separately. The map is exhaustive for the active OAuth and WIMSE working-group queues on that date. It is intentionally selective for ratified RFCs, individual Internet-Drafts, and OpenID specifications: those sections include documents with a concrete architectural join, a material overlap, or a common substitution hazard. This is a design map, not a registry dump.",
+     "https://notes.karlmcguinness.com/notes/mission-bound-authorization-standards-map/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays. Reference apparatus, and the most directly useful chapter for this corpus: it maps the Mission-Bound programme onto the external specs it composes, so it doubles as an index into the OAuth/OIDF/RATS/WIMSE rows tracked here."),
+
+    ("McGuinness — Mission Lifecycle and Change",
+     "Observe, Revoke, Grow, Complete. The issuance profile gives a Mission three states and gates derivation on active. This part adds the surfaces that make state actionable over time: Status for canonical pull freshness with Signals as its push complement, Expansion for governed growth, and Completion for monotonic narrowing. One rule threads through all four. Only active permits reliance, so every state a newer profile adds fails safe for a consumer that predates it. The Mission Is the Missing Abstraction defined the Mission as a durable governance object and gave it a deliberately small lifecycle: active , revoked , expired , with the rule that only active permits new derivation. That issuance profile is complete on its own. But it observes Mission state only through one channel: the lifetime of the tokens it already issued, plus optional token introspection. A consumer that holds a Mission-bound t.",
+     "https://notes.karlmcguinness.com/notes/mission-lifecycle-and-change/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Splitting the Lethal Trifecta",
+     "How Mission-Bound Authorization Contains the Defining Agent Threat Model. Simon Willison named the combination that makes agents dangerous: access to private data, exposure to untrusted content, and the ability to communicate externally, held together in one loop. Any two legs are safe. All three are an exfiltration machine waiting for a poisoned document. This part runs the handbook against that threat model: the three legs become separately typed action classes under one Mission, the external leg becomes a consequential action that needs a fresh parameter-bound permit, mediated custody keeps the egress credential out of the agent's hands, and the harness downgrades egress once untrusted content enters the session. Then the honest residuals: enforcement scope, composition, and the semantic gap. In June 2025, Simon Willison named the pattern that the disclosures keep confirming: an agent that combines access to private data, exposure to untrusted.",
+     "https://notes.karlmcguinness.com/notes/splitting-the-lethal-trifecta/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — The Agent Runtime and Audit",
+     "Sessions Are Not Authority, Safe Unwinding, and Tamper-Evident Evidence. The first five layers make the Mission approvable, enforceable, governable, and delegable. This operational close makes them hold up against a real agent: a harness that treats session continuity as recoverable state and not as authority, an orchestrator that unwinds work already in flight when a Mission stops, and a transparency profile that makes the suite's evidence independently verifiable across trust domains. It closes with a synthesis of the six operational layers and the Mission Assurance Levels, the practice-side view of the adoption path the architecture chapter stages. The layers before this one build the Mission as a governance object. It is approved with integrity ( From a Request to an Approved Mission ), bound to instances and delegated under a strict subset ( Mission-Bound Authority ), enforced per action ( Mission-Bound Runtime Enforcement ), and observ.",
+     "https://notes.karlmcguinness.com/notes/the-agent-runtime-and-audit/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — The Authority Control Plane",
+     "Where the Layer Sits in the Estate. Issuance gating and runtime enforcement are two independent chokepoints, strictly stronger together: a gap in PEP coverage is still bounded at the token layer, and an outstanding token is still stopped at the action layer. The Mission Authority Server, the issuance grant, the Mandate, and Cross-Domain Projection extend the pattern space. And the structural reading that platform engineers reach for unprompted: the layer is the control plane for delegated authority, mapped concept by concept from desired state to the fleet API, with the disciplines that keep the framing honest. Reading path. ~6 minutes start to finish, or jump to the mapping table for the control-plane reading at a glance.",
+     "https://notes.karlmcguinness.com/notes/the-authority-control-plane/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — The Contractor Gets Their Own Card",
+     "Why Delegated Authority Must Narrow, and Never Be Borrowed. Crunch week. The contractor needs materials, and the project manager hands over her own card, just this once. Everything about it is convenient and everything about it is wrong, and every finance team knows exactly why. This part walks delegation the way a mature card program runs it: the contractor's own card with a lower limit, attribution that survives the handoff, cards that die when the project closes, and caps on how many cards a project may issue, not just how big each one is. Then the three places the analogy breaks for AI agents, where the fixes have to be built. Everything about it is convenient. No forms, no waiting, the work keeps moving. And everything about it is wrong, in ways every finance team can recite from memory. The statement will say she bought whatever he buys. Her limit, tuned to her role, is now backing his judgment. If the card number lea.",
+     "https://notes.karlmcguinness.com/notes/the-contractor-gets-their-own-card/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — The Convergence and the Wagers",
+     "The Outside Evidence, the Named Bets, and the Handbook's Close. The handbook closes on judgment. First the strongest outside evidence: AAuth, the proposed clean-slate agent protocol, adopted a first-class mission layer in its 01 revision after this model's AAuth mapping circulated: not independent replication, adoption by a designer free to say no, which is its own kind of proof. Then the honest bets: admission grain, issuer home, the price of Termination, the necessity of the object itself, the portability of its authority, and the classification line, each stated with the evidence that would falsify it. The laws and the claim gate are the invariants. The bets are the wagers, and deployment experience, not this handbook, will settle them. The sharpest evidence for the fundamental-versus-accidental split arrived from outside this family. AAuth is Dick Hardt’s proposed agent-native authorization protocol, an active individual draft (.",
+     "https://notes.karlmcguinness.com/notes/the-convergence-and-the-wagers/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — The Network Approves Every Transaction, Not the Card",
+     "Per-Action Authorization, and the Escape Hatch Called Cash. A decline at the register is mild embarrassment and a tap of a different card, because the system is working: the network approves transactions, not cards. This part walks per-action authorization the way payments runs it: the plastic that proves almost nothing, the authorization that binds this amount at this merchant now, the hotel hold that expires, the freeze that declines the next swipe wherever the issuer decision is checked, and the ATM, the escape hatch every honest card program names in writing. Then the breaks: agents have no common payment-style network, their false-approval costs are unbounded, and their cardholder can be hypnotized mid-purchase. That boring little moment is the most important design fact in payments. The decline is not a failure of the system. It is the system, doing the one thing it exists to do: deciding this transaction, right now,.",
+     "https://notes.karlmcguinness.com/notes/the-network-approves-every-transaction/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — What Survives Without OAuth",
+     "The Substrate-Neutral Model and Its Verb Spine. OAuth is the flagship binding because it is deployment reality, but the model does not depend on it. This part states the framework the profiles realize: four functions (compilation, projection, containment, continuity), a verb spine of ten verbs from propose to analyze, and the fundamental-versus-accidental test. Which ideas survive if OAuth disappears? Nearly all of them: the layer, the laws, the vocabulary, the approved task with an integrity-anchored record, approval evidence, runtime containment. What is accidental is the realization: PAR, RAR, the claim names, the wire shapes. The Mission is the durable, approval-backed record of the task ( The Mission Is the Missing Abstraction ), and the chapters before this one made the argument at every altitude: the intuition, the architecture, the wire, the outside framings. This concluding chapter zooms out to the framework tho.",
+     "https://notes.karlmcguinness.com/notes/what-survives-without-oauth/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — You Approve What You Were Shown",
+     "What Spend Approval Knows About Approving an Agent's Task. A manager approves a conference request on their phone between meetings. Months later, the only defensible answer to 'what did you approve?' is the request as rendered on that screen. This part walks the anatomy of a real approval: requests that are proposals and nothing more, reviewers who narrow instead of denying, decisions that take days without losing their place, and the disclosure that binds. Payments turned that last idea into regulation. Then the honest part: three places the analogy breaks for AI agents, and what each break demands. The only defensible answer is not “a trip, roughly.” It is the request as it was rendered on that screen, at that moment: the destination, the dates, the $3,400 estimate, the cost center, the attached quote. If the approval means anything at all, it means that . Not what the requester intended. Not what the system stored somew.",
+     "https://notes.karlmcguinness.com/notes/you-approve-what-you-were-shown/",
+     "Industry blog (Independent)",
+     "Published 22 Jul 2026 on Control Plane (notes.karlmcguinness.com); chapter of the Mission-Bound Authorization handbook. **Added 26 Aug 2026 — not in the site's RSS feed**, which is why the 11 Aug backfill missed it: the corpus tracked the series index but not its member essays."),
+
+    ("McGuinness — Least-Privilege MCP Tool Calls",
+     "An agent preparing a board packet reads financials, drafts a document, and notifies a reviewer group: three MCP tool calls across three authorization domains, all behind one sentence of human intent.",
+     "https://notes.karlmcguinness.com/series/least-privilege-mcp/",
+     "Industry blog (Independent)",
+     "Published on Control Plane (notes.karlmcguinness.com); series index. Added 26 Aug 2026: the 11 Aug backfill took series indexes from the RSS feed, but this one is linked only from the handbook and was not in the feed."),
+
+    ("McGuinness — Mission-Bound OAuth",
+     "Superseded by the Mission-Bound Authorization draft family, kept as history. A four-part series on Mission-Bound OAuth: the core architecture, the OAuth authentication-layer companion profile, the AAuth mapping, and a final critique of whether OAuth is the right home for the Mission model at all.",
+     "https://notes.karlmcguinness.com/series/mission-bound-oauth/",
+     "Industry blog (Independent)",
+     "Published on Control Plane (notes.karlmcguinness.com); series index. Added 26 Aug 2026: the 11 Aug backfill took series indexes from the RSS feed, but this one is linked only from the handbook and was not in the feed."),
+
+    ("McGuinness — Mission Shaping",
+     "Many current agent deployments skip the step that turns approved intent into bounded authority. This two-part series covers the Mission shaping problem and why even a well-shaped Mission is not enough once an agent is running in the world.",
+     "https://notes.karlmcguinness.com/series/mission-shaping/",
+     "Industry blog (Independent)",
+     "Published on Control Plane (notes.karlmcguinness.com); series index. Added 26 Aug 2026: the 11 Aug backfill took series indexes from the RSS feed, but this one is linked only from the handbook and was not in the feed."),
+
+    ("McGuinness — Open-World OAuth",
+     "OAuth was built for closed worlds, and that constraint is why it became mature. Agents expose the limits of that deployment model. This post traces what the newer OAuth standards get right and which substrate gaps still need to close. Open-world OAuth can improve discovery, resource binding, and first-contact trust. That still leaves the harder agent problem: how approved intent becomes bounded authority that stays governed across delegation chains, unfamiliar tools, consent expansion, revocation, and task termination.",
+     "https://notes.karlmcguinness.com/series/open-world-oauth/",
+     "Industry blog (Independent)",
+     "Published on Control Plane (notes.karlmcguinness.com); series index. Added 26 Aug 2026: the 11 Aug backfill took series indexes from the RSS feed, but this one is linked only from the handbook and was not in the feed."),
+
+    ("McGuinness — You Don't Give Agents Credentials. You Grant Them Power of Attorney.",
+     "Enterprise IAM governs who an agent is and what it may do at each boundary. No widely adopted control governs whether its mission should still be running. This series builds the case for the authority-governance layer that closes that gap.",
+     "https://notes.karlmcguinness.com/series/you-dont-give-agents-credentials-you-grant-them-power-of-attorney/",
+     "Industry blog (Independent)",
+     "Published on Control Plane (notes.karlmcguinness.com); series index. Added 26 Aug 2026: the 11 Aug backfill took series indexes from the RSS feed, but this one is linked only from the handbook and was not in the feed."),
+
+    # ---- Heather Flanagan / Spherical Cow Consulting — first backfill, 26 Aug 2026 ----
+    # Filtered source: 36 of 159 archive posts are in scope for delegated authorization.
+    # Feed is https://sphericalcowconsulting.com/feed/ and returns the whole archive at once.
+    # Oldest to newest.
+
+    ("Flanagan — Authorization – the Next Big Thing",
+     "Authorization is growing as the next big thing. I want to understand why, and writing about it is how I get there from here.",
+     "https://sphericalcowconsulting.com/2023/06/29/authorization-the-next-big-thing/",
+     "Industry blog (Independent)",
+     "Published 29 Jun 2023 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Jun 2023, the oldest entry from this source and a marker of how early she called authorization as the coming problem — two years before the agent draft wave. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — The Evolving Landscape of Non-Human Identity",
+     "This blog entry explores the insane world of non-human identity, a subject as complicated as the world’s many cloud computing environments. My journey from the early days of digital identity management to the revelations at IETF 119 serves as the backdrop, and I share what I’m learning based on those experiences. The post zips through the labyrinth of authorization challenges that processes and APIs face, highlighting the contributions of DevOps and IT teams (but not so much IAM teams). I also introduce some of the efforts from IETF 119 aimed at standardizing the non-human identity space and urge you to broaden your horizons and deepen your comprehension of this evolving field. Ready to read more?",
+     "https://sphericalcowconsulting.com/2024/04/05/the-evolving-landscape-of-non-human-identity/",
+     "Industry blog (Independent)",
+     "Published 5 Apr 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Earliest NHI post tracked here (Apr 2024) — predates the agent-delegation draft wave by roughly a year and is useful for dating when the industry framing shifted. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — IAM’s Time Problem: Why Digital Attestation Needs Work",
+     "Identity management and digital attestation are crucial for verification and authenticity. The process involves proving the integrity of data through cryptographic techniques, and it has parallels to non-digital methods like notary services. The use of electronic ledgers, cryptography, and key management are essential in ensuring secure digital attestation. However, there are challenges related to long-term scalability and managing revoked keys. Initiatives like the C2PA and the IETF's SCITT are addressing some of these issues. Hierarchical Deterministic Keys (HDKs) show promise in creating derived keys for specific operations or time frames to mitigate the risk of compromise. The case of refugees illustrates the complexities of digital attestation, especially over extended periods. With the exponential growth of data, it's crucial to consider the long-term scalability of digital…",
+     "https://sphericalcowconsulting.com/2024/08/11/time-and-attestation/",
+     "Industry blog (Independent)",
+     "Published 11 Aug 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Digital Identity in the Age of AI: Challenges and Opportunities",
+     "AI is revolutionizing digital identity, enhancing security and efficiency across various industries. Adaptive authentication, powered by AI, assesses real-time access risk, reducing cumbersome password prompts for users and bolstering security for companies. However, this reliance on AI for authentication raises privacy concerns due to extensive data access. Moreover, the use of AI for malicious purposes, such as creating deepfakes, poses further challenges. Global efforts, including the EU's AI Act and OECD's AI Principles, aim to regulate AI's ethical usage. Organizations are urged to embrace AI-driven digital identity solutions while maintaining a focus on privacy and security. Staying updated on tech news and industry standards is crucial for both tech leaders and individual contributors.",
+     "https://sphericalcowconsulting.com/2024/08/26/digital-identity-ai/",
+     "Industry blog (Independent)",
+     "Published 26 Aug 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Privacy-Enhancing Technologies: Protecting Human and Non-Human Identities",
+     "Privacy-Enhancing Technologies (PETs) are essential for safeguarding digital identities amidst increasing data breaches. They encompass tools like zero-knowledge proofs and advanced biometrics to secure both human and non-human identities in the digital space. As digital identity expands to include non-human entities, PETs are vital for ensuring privacy and security. Zero-knowledge proofs (ZKPs) emerge as a game-changer, allowing for verification without revealing sensitive data. While challenges exist, technology continues to advance, and the widespread deployment of PETs is on the horizon. As digital identities evolve, businesses and individuals must embrace PETs and actively contribute to shaping privacy-enhancing digital identity solutions.",
+     "https://sphericalcowconsulting.com/2024/08/29/pets/",
+     "Industry blog (Independent)",
+     "Published 29 Aug 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Rethinking Identity Management: The Role of Non-Human Identities in Academic Research",
+     "Academia is facing challenges in managing non-human identities (NHIs), which are essential for modern research systems but often treated like human users. As NHIs grow in complexity, issues like token sprawl, access management misalignments, and compliance difficulties arise, especially in collaborative environments like high-performance computing. Traditional directories fail to manage these identities effectively due to their static assumptions and lack of context. To improve NHI management, academia must establish clear ownership, adopt standards like SPIFFE, and foster collaboration among IT and IAM teams. Addressing these issues is crucial for securing and scaling our infrastructure.",
+     "https://sphericalcowconsulting.com/2024/11/20/nhi-in-academia/",
+     "Industry blog (Independent)",
+     "Published 20 Nov 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Unlock the Secrets of OAuth 2.0 Tokens (and Have Fun Doing It!)",
+     "Back in November 2024, my article “Token Lifetimes and Security in OAuth 2.0: Best Practices and Emerging Trends” was published in the IDPro® Body of Knowledge, and wow—over 1,600 people have already checked it out! If you’re one of those people who clicked on the article but didn’t quite have time to read it (or Continue Reading",
+     "https://sphericalcowconsulting.com/2024/12/19/oauth-2-0-tokens/",
+     "Industry blog (Independent)",
+     "Published 19 Dec 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Understanding NHIs: Key Differences Between Human and Non-Human Identities",
+     "Non-Human Identities (NHIs) are finally making friends and influencing people—or at least they seem to be, given how much people are talking about them! This is great. People need to have a better sense of this brave new world of workloads, bots, and services. But this also means people need to have a better sense Continue Reading",
+     "https://sphericalcowconsulting.com/2025/01/13/understanding-nhis-key-differences-between-human-and-non-human-identities/",
+     "Industry blog (Independent)",
+     "Published 13 Jan 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Foundational NHI post; the vocabulary anchor for the non-human-identity arc she has run since 2024. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Are You Human? A Dive Into the Proof of Personhood Debate",
+     "I don’t think of myself as an expert in non-human identity (NHI). Instead, I’d say I’m NHI-curious and eager to share what I’m learning. Lately, I’ve been going down a rabbit hole about when and how to indicate if someone—or something—is human. I’m clearly not alone in asking this. Last year, I was one of Continue Reading",
+     "https://sphericalcowconsulting.com/2025/01/27/are-you-human-a-dive-into-the-proof-of-personhood-debate/",
+     "Industry blog (Independent)",
+     "Published 27 Jan 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Securing the Software Supply Chain: How SCITT, SPIFFE, and WIMSE Work Together",
+     "I’ve been saying that to follow what’s happening in NHI standards, some of the core work you need to follow is happening in the IETF: SPICE, WIMSE, and SCITT. Everybody loves WIMSE with its workload identity architecture, and building the credential format in SPICE that can meet the needs of NHIs is of course brilliant Continue Reading",
+     "https://sphericalcowconsulting.com/2025/02/03/securing-the-software-supply-chain/",
+     "Industry blog (Independent)",
+     "Published 3 Feb 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Explains how SCITT, SPIFFE and WIMSE fit together — useful orientation given the corpus tracks WIMSE closely and deliberately filters most SCITT work out. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Agentic AI and Authentication: Exploring Some Unanswered Questions",
+     "Agentic AI is changing authentication faster than our identity models can keep up. We’ve built systems assuming users are human, but what happens when an AI agent, not the user, needs to authenticate on their behalf? Our current identity frameworks weren’t designed for this, and the gaps are starting to show. 🎙 Audio Blog If Continue Reading",
+     "https://sphericalcowconsulting.com/2025/02/11/agentic-ai-and-authentication/",
+     "Industry blog (Independent)",
+     "Published 11 Feb 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — What AI Agents Can Teach Us About Fraud in Consumer Identity",
+     "The irony with urgently questioning how to tell whether something is an AI or a person is the fact that we’re struggling just as much to distinguish humans from… well, other humans. This is, in fact, not a new problem at all. After writing about the AI vs Human issue in a previous post, I’m Continue Reading",
+     "https://sphericalcowconsulting.com/2025/02/25/ai-and-ciam/",
+     "Industry blog (Independent)",
+     "Published 25 Feb 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Is Introspection a Bug or a Feature?",
+     "When we talk about introspection in digital identity, we’re not just talking about what happens in OAuth 2.0. Yes, there’s a token introspection spec, but this post is about something broader: the idea that platforms—especially browsers—can inspect and influence the identity data being exchanged. Is that a good thing? Apple and Google disagree on just Continue Reading",
+     "https://sphericalcowconsulting.com/2025/04/15/is-introspection-a-bug-or-a-feature/",
+     "Industry blog (Independent)",
+     "Published 15 Apr 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. On token introspection, the mechanism the Mission-Bound MVP leans on for Mission-state enforcement at the resource server (its RS-D tier). Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Who Owns the Bots? Rethinking Governance for Non-Human Identities",
+     "Not that long ago, non-human identities (NHIs) were governed by neglect; provisioned manually, tied to a cron job or batch script, maybe mentioned in a change ticket, and rarely touched again. No formal lifecycle, no regular reviews, and certainly no clear ownership. If you remembered to rotate the password once a year, you were ahead Continue Reading",
+     "https://sphericalcowconsulting.com/2025/04/22/who-owns-the-bots-rethinking-governance-for-non-human-identities/",
+     "Industry blog (Independent)",
+     "Published 22 Apr 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Non-human identity governance — ownership and accountability for bots, which is the question draft-morrison-solo-agent-earn-registration answers very differently by treating an owner-less agent as an economic principal. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Web Payments and Digital Identity are Having a Moment",
+     "For a long time, logging into a website was (perhaps still is) a bit of a mess. There’s definitely been many efforts to fix it, and though OAuth buttons and SSO integrations tried to clean things up, under the hood, “Sign in with…” is mostly a best-effort dance. You can authenticate a user, maybe even Continue Reading",
+     "https://sphericalcowconsulting.com/2025/04/29/web-payments-and-identity/",
+     "Industry blog (Independent)",
+     "Published 29 Apr 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Acting on Behalf of Others: Delegation, Consent, and Messy Reality",
+     "Most digital systems were built around a simple model: one user, one identity, one device, one intent. If you need more than that, that's what password sharing is for, right? (Note: that was sarcasm.) Who needs delegation? Reality, which has definitely included sharing passwords, has always been messier.",
+     "https://sphericalcowconsulting.com/2025/06/03/delegation-part-one/",
+     "Industry blog (Independent)",
+     "Published 3 Jun 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — The MCP Bandwagon",
+     "MCP is 'an open protocol that standardizes how applications provide context to LLMs.' If we’re moving toward a world where AIs are expected to do All The Things, interfacing with our applications and services, then having a universal adapter that lets AIs talk to everything is undeniably powerful.",
+     "https://sphericalcowconsulting.com/2025/06/17/the-mcp-bandwagon/",
+     "Industry blog (Independent)",
+     "Published 17 Jun 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Delegation in a Multi-Actor World: It’s Not Just OAuth Anymore",
+     "Once upon a time, digital systems were built around a beautifully simple idea: one user, one identity, one device, one intent. That model worked, for some value of \"worked.\" Mostly, it was good enough to solve 80% of the use cases.",
+     "https://sphericalcowconsulting.com/2025/06/27/delegation-part-two/",
+     "Industry blog (Independent)",
+     "Published 27 Jun 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Agentic AI in the Open Standards Community: Standards Work or Just Hype?",
+     "If you want to follow what's happening in AI, it helps to know where the conversations are happening. That doesn't just mean the headlines and white papers; it means the standards bodies, working groups, and protocol discussions shaping the infrastructure AI systems will have to live with (and live inside).",
+     "https://sphericalcowconsulting.com/2025/08/12/agentic-ai-and-open-standards/",
+     "Industry blog (Independent)",
+     "Published 12 Aug 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Bot or Not? Why Incentives Matter More Than Identity",
+     "Let’s start with a confession: I love bots. Or at least, I love the idea of them. They’re efficient, tireless, and, if designed well, can be downright helpful. (They can also be downright unhelpful, but that's a topic for a different blog post.) But the incentives around bot traffic are completely out of balance, and that makes things messy.",
+     "https://sphericalcowconsulting.com/2025/08/26/bot-incentives/",
+     "Industry blog (Independent)",
+     "Published 26 Aug 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Roads, Robots, and Responsibility: Why Agentic AI Needs Identity Infrastructure",
+     "We don’t spend much time thinking about the roads we drive on—until one cracks, collapses, or dumps us somewhere we didn’t mean to be. Identity in the age of agentic AI? Same deal. It’s infrastructure. Like a good road, it needs to be ready for traffic we can’t imagine.",
+     "https://sphericalcowconsulting.com/2025/09/02/roads-robots-and-responsibility/",
+     "Industry blog (Independent)",
+     "Published 2 Sep 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — AI Permissions vs. Human Permissions: What Really Changes?",
+     "We’ve been talking about identity and access for people for decades (millennia if you think outside tech). Policies, role assignments, reviews, zero trust — these are familiar tools. The assumptions that go into them, however, don't quite work when the \"user\" is no longer a person.\" Enter in the AI Agent.",
+     "https://sphericalcowconsulting.com/2025/09/09/ai-permissions-vs-human-permissions/",
+     "Industry blog (Independent)",
+     "Published 9 Sep 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Who Really Pays When AI Agents Run Wild? Incentives, Identity, and the Hidden Bill",
+     "Google recently gave us something we’ve been waiting on for years: hard numbers on how much energy an AI prompt uses. According to their report, the median Gemini prompt consumes just 0.24 watt-hours of electricity — roughly running a microwave for a second — along with some drops of water for cooling.",
+     "https://sphericalcowconsulting.com/2025/09/16/ai-incentives/",
+     "Industry blog (Independent)",
+     "Published 16 Sep 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Delegation and Consent: Who Actually Benefits?",
+     "When not distracted by AI (which, you have to admit, is very distracting) I’ve been thinking a lot about delegation in digital identity. We have the tools that allow administrators or individuals grant specific permissions to applications and service. In theory, it’s a clean model.",
+     "https://sphericalcowconsulting.com/2025/09/30/delegation-and-consent-who-actually-benefits/",
+     "Industry blog (Independent)",
+     "Published 30 Sep 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Asks whose interests delegation-plus-consent machinery actually serves — a useful corrective to read against the consent-evidence and receipt drafts. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Robots, Humans, and the Edges of the Open Web",
+     "This episode explores what the “open web” truly means amid shifting standards, AI automation, and evolving economic pressures. Drawing on discussions from IETF 124 and W3C TPAC, it highlights how browser architects, policy experts, and researchers are reexamining long-held assumptions about access, interoperability, and the role of automated agents. Learn why openness isn’t a binary state but a multidimensional spectrum shaped by values such as attribution, consent, and continuity. The conversation offers a grounded look at how technical governance and community norms must adapt to keep the web both usable and sustainable.",
+     "https://sphericalcowconsulting.com/2025/12/02/robots-humans-and-the-edges-of-the-open-web/",
+     "Industry blog (Independent)",
+     "Published 2 Dec 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Bot-versus-human boundary on the open web; sits alongside the WebBotAuth cluster and the Privacy Pass anonymous-path thread. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Web Payments and Digital Identity Standards Are Converging – #TIL",
+     "In this episode Heather Flanagan examines how web payments and digital identity are converging at the W3C, exploring digital wallets, browser-based APIs, and regulatory pressure shaping modern payment flows and trust on the web today as standards discussions reveal shifting assumptions across ecosystems. Discover how Secure Payment Confirmation, passkeys, browser-bound keys, and the Digital Credentials API influence fraud prevention, interoperability, and auditability, and why agentic AI, mandate-based consent, and wallet fragmentation make identity design decisions increasingly critical for payments, institutions, and users worldwide.",
+     "https://sphericalcowconsulting.com/2025/12/23/web-payments-and-digital-identity/",
+     "Industry blog (Independent)",
+     "Published 23 Dec 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — The AI System That Never Was",
+     "Learn why the idea of an “AI system” is quietly breaking down under modern AI governance and deployment realities. Heather Flanagan examines how agentic workflows, standards debates, and policy frameworks are exposing gaps between governance language and real-world AI architectures. Discover how this disconnect affects digital identity, accountability, and interoperability, and why unclear definitions create governance risk. Learn why engineers, standards bodies, and policymakers are struggling to align, and why fixing AI language is essential to building enforceable, trustworthy identity and governance frameworks.",
+     "https://sphericalcowconsulting.com/2026/01/20/the-ai-system-that-never-was/",
+     "Industry blog (Independent)",
+     "Published 20 Jan 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — When Browsers Start Acting for You: AI Browsers and the Definition of a Web User Agent",
+     "Heather Flanagan explores how AI browsers are reshaping the definition of a web user agent, challenging long-standing web architecture principles around user control, consent, and interaction. As AI-driven features evolve from assistance to autonomous action, the browser’s traditional intermediary role begins to shift in subtle but important ways. She examines key questions around delegation, accountability, and intent, including how browsers acting on behalf of users blur the line between human interaction and automation. This discussion highlights why emerging AI capabilities in web browsers demand early attention from digital identity, security, and standards communities.",
+     "https://sphericalcowconsulting.com/2026/03/24/when-browsers-start-acting-for-you/",
+     "Industry blog (Independent)",
+     "Published 24 Mar 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. First of the AI-browser pair. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — AI Browsers and the Web User Agent: What Might Need to Change?",
+     "Heather Flanagan explores how AI-enabled browsers challenge the traditional definition of web user agents and what this means for digital identity, web architecture, and standards. As browsers evolve from passive tools to active agents, long-standing assumptions about user representation and control are being tested. This episode examines the implications for user safety, automation, and accountability across the web ecosystem. It highlights emerging questions around transparency, permissions, and governance, offering insight into how standards bodies and developers may need to adapt to ensure browsers continue to prioritize and protect user interests.",
+     "https://sphericalcowconsulting.com/2026/03/31/ai-browsers-and-the-web-user-agent/",
+     "Industry blog (Independent)",
+     "Published 31 Mar 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Second of a two-part AI-browser pair. Relevant to WebBotAuth: if an AI browser is the user agent, the question of what a 'web user agent' even denotes becomes an identity question. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — When AI Agents Start Shopping: The Emerging Architecture of Agentic Commerce",
+     "Heather Flanagan explores how AI agents are moving from browsing the web to buying on behalf of users, and what that shift means for online payments, identity, and digital trust. The episode examines mandates, delegated authority, liability, and the browser’s evolving role in agentic commerce. It also considers why identity standards, consent, and audit evidence matter as AI shopping becomes more common.",
+     "https://sphericalcowconsulting.com/2026/04/07/when-ai-agents-start-shopping/",
+     "Industry blog (Independent)",
+     "Published 7 Apr 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Agentic commerce architecture — the analyst-side counterpart to the Skyfire KYA/KYAPay and Hopley x402 draft clusters the corpus tracks. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — What the AI Vendor Landscape Reveals About Fragmented Identity Systems",
+     "Heather explores how the AI vendor landscape reveals deeper challenges in fragmented identity systems and enterprise security architecture. By examining how tools function across identity, signals, policy, and enforcement layers, this episode reframes AI not as a feature but as part of a broader decision-making ecosystem. Understand why distributed decision systems create complexity, how probabilistic AI outputs impact governance, and what questions matter when evaluating identity and security tools. This episode highlights the risks of poor integration, the limits of automation, and the importance of designing systems that produce explainable, consistent access decisions.",
+     "https://sphericalcowconsulting.com/2026/04/28/ai-vendors-and-fragmented-identity-systems/",
+     "Industry blog (Independent)",
+     "Published 28 Apr 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Identity Systems Don’t Make Decisions",
+     "Heather examines why identity systems do not actually make decisions on their own, and how enterprise security outcomes emerge from fragmented, distributed processes. By unpacking how identity, risk, and policy tools interact, this episode reframes modern identity architecture as a complex decision-making environment. Explore how deterministic systems, integration gaps, and inconsistent data interpretation affect access control decisions. This episode highlights why AI and automation increase risk without clear governance, and why organizations must better define decision logic, accountability, and system interactions to ensure consistent, explainable identity and security outcomes.",
+     "https://sphericalcowconsulting.com/2026/05/05/identity-systems-dont-make-decisions/",
+     "Industry blog (Independent)",
+     "Published 5 May 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — The Discovery Problem Is Bigger Than Search",
+     "Heather explores why discovery is a much broader challenge than search, especially in digital identity, information management, and emerging AI ecosystems. Drawing on recent discussions and research, this episode examines how people find, evaluate, and trust information scattered across accounts, platforms, credentials, and services. Learn how information overload, filtering, governance, and AI-powered tools shape modern discovery experiences. This episode highlights the difference between finding information and understanding what is relevant, trustworthy, and accessible, while exploring why discovery has become a critical architecture, trust, and user experience challenge.",
+     "https://sphericalcowconsulting.com/2026/06/02/the-discovery-problem/",
+     "Industry blog (Independent)",
+     "Published 2 Jun 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Identity Discovery Is More Than Finding the Login Button",
+     "“In the first post in this series, I framed discovery as a broader systems problem.” The challenge is not simply that search engines need to be better. Search is useful for public, indexed information, but discovery reaches much further than that. It is about how people and systems determine what exists, where it lives, whether Continue Reading",
+     "https://sphericalcowconsulting.com/2026/06/09/identity-discovery/",
+     "Industry blog (Independent)",
+     "Published 9 Jun 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Second of the discovery series. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — When Discovery Starts Taking Action",
+     "Discover how discovery is evolving from simply finding information to enabling automated action across AI agents, digital identity systems, and distributed services. This episode explores why capability discovery, metadata, and governance have become essential as software increasingly discovers, selects, and invokes resources on our behalf. Learn how service discovery, Model Context Protocol (MCP), authorization, and trust frameworks shape secure automation. Heather explains why discovery is no longer just a technical lookup, but a critical part of identity, policy, and decision-making in modern digital ecosystems.",
+     "https://sphericalcowconsulting.com/2026/06/23/when-discovery-starts-taking-action/",
+     "Industry blog (Independent)",
+     "Published 23 Jun 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Third of the discovery series, and the most on-point: discovery shifting from finding information to enabling automated action. That transition is precisely what makes agent discovery an authorization problem rather than a lookup problem. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Choosing a Discovery Mechanism Is the Hard Part",
+     "Heather examines why choosing the right discovery mechanism is one of the most challenging aspects of digital identity architecture. This episode explores how DNS, well-known URIs, registries, and catalogs each solve different discovery problems, and why understanding trust, authority, and governance must come before selecting infrastructure. Discover how discovery mechanisms shape privacy, delegation, authorization, and system behavior. Heather explains why successful digital identity design depends on asking the right architectural questions first, ensuring discovery supports the correct level of trust, governance, and secure action across modern distributed systems.",
+     "https://sphericalcowconsulting.com/2026/06/30/choosing-a-discovery-mechanism-is-the-hard-part/",
+     "Industry blog (Independent)",
+     "Published 30 Jun 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Fourth of a four-part 2026 discovery series. Directly relevant to the corpus's discovery-and-transport cluster — she weighs DNS, well-known URIs, registries and catalogs as alternatives, which is the same design space DAWN, the mcp:// URI drafts and the Zhao A2A DNS-SD/WebFinger pair are each picking a corner of. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
 ]
 make_sheet("Industry & Implementations", COLORS['Industry'], industry_rows)
 
@@ -2342,18 +3588,20 @@ for col, h in enumerate(hdr, 1):
     c.font, c.fill, c.alignment, c.border = HEADER_FONT, fill, HEADER_ALIGN, BORDER
 
 idx_data = [
-    ("Published RFCs", "Settled IETF standards-track and BCP RFCs — the foundation everything else builds on.",
-     len(rfc_rows), "Stable. These are the primitives, not where the debate is."),
+    ("Published RFCs", "Settled IETF standards-track and BCP RFCs — the foundation everything else builds on, plus OAuth WG output tracked for completeness.",
+     len(rfc_rows), "Stable. Mostly the primitives, not where the debate is. RFC 10017 (browser-based apps, published 21 Aug 2026) is the exception — OAuth WG output that is peripheral to delegation."),
     ("Active IETF Drafts", "IETF WG charters, requirements drafts, and active WG/individual drafts — including the OAuth WG recharter formally adding 'Complex Delegation' for agents, and the 34-draft McGuinness Mission-Bound Authorization family (33 of them GitHub-only pre-publication).",
-     len(draft_rows), "★ THIS IS WHERE THE CURRENT WORK IS HAPPENING ★  OAuth recharter on 4 Jun 2026 IESG telechat. Aug 2026 sweep added 70 previously-untracked Datatracker drafts plus the Mission-Bound family."),
+     len(draft_rows), "★ THIS IS WHERE THE CURRENT WORK IS HAPPENING ★  The 4 Jun 2026 recharter is APPROVED (charter-ietf-oauth rev 06), making Complex Delegation chartered work — though no milestone has been attached to it yet. The 26 Aug 2026 sweep added 39 more drafts, including the first new WG-level entry (draft-ietf-oauth-rar-metadata-remediation), the six-draft Morrison ~handle identity family, and the NHE / VERA / AgentEnvelope autonomy-gating cluster."),
+    ("Mission-Bound (Pre-pub)", "The 33 GitHub-only drafts of the McGuinness Mission-Bound Authorization family — a single-repo decomposition with a machine-readable family-manifest.json, carrying group / maturity / adoption-rung per draft.",
+     len(mission_rows), "Pre-publication, not IETF documents. Only draft-mcguinness-oauth-mission has been filed on Datatracker and it stays in the Active IETF Drafts tab. Split out of that tab 26 Aug 2026 so 'Active IETF Drafts' means what it says."),
     ("OpenID Foundation", "Final and draft OIDF specs and the Oct 2025 Agentic AI whitepaper: AuthZEN (incl. the new ARAP profile), Shared Signals/CAEP, FAPI 2.0, HEART.",
      len(oidf_rows), "Mostly Final. AuthZEN Access Request & Approval Profile (ARAP) was adopted as a WG draft May 2026, Draft 1 published 3 Jun 2026."),
     ("Other Standards & Govt", "Kantara UMA 2.0, W3C VCs, NIST AI initiative, EU AI Act compliance dates.",
      len(other_rows), "VC v2.1 First Public Working Draft is the active piece."),
     ("Academic Papers", "arXiv preprints and IEEE conference papers on delegated authz and workload identity.",
      len(academic_rows), "Mostly settled; the 2025 South et al. paper is the most-cited foundation."),
-    ("Industry & Implementations", "Vendor blogs, LinkedIn-style articles, reference implementations (OVID/OVID-ME, ZeroID, WorkOS auth.md, Agent Trust Protocol), and the McGuinness Mission-Bound OAuth blog series.",
-     len(industry_rows), "Practitioner content; the five implementations at the top of the tab show what an implementable agent-delegation stack looks like today. The Aug 2026 sweep backfilled the full Control Plane blog (47 posts, 41 newly added) — the Agent Control Points series (Aug 2026) and the Mission-Bound Authorization handbook (Jul 2026) are the two most substantial arcs."),
+    ("Industry & Implementations", "Vendor blogs, LinkedIn-style articles, reference implementations (OVID/OVID-ME, ZeroID, WorkOS auth.md, Agent Trust Protocol), and the McGuinness Mission-Bound Authorization blog corpus.",
+     len(industry_rows), "Practitioner content; the five implementations at the top of the tab show what an implementable agent-delegation stack looks like today. The Aug 2026 sweeps backfilled the Control Plane blog to 50 entries — the Agent Control Points series (Aug 2026) and the Mission-Bound Authorization handbook (Jul 2026) are the two most substantial arcs. The 26 Aug sweep repointed three posts the site had re-slugged ('Mission-Bound OAuth' was renamed to 'Mission-Bound Authorization' throughout) and added the handbook single-page edition; the handbook's 27 individual chapters are not in the RSS feed and remain untracked."),
 ]
 
 for i, (tab, what, count, action) in enumerate(idx_data, start=5):
@@ -2382,5 +3630,5 @@ ws_idx.row_dimensions[4].height = 30
 
 wb.save('/Users/gffletch/Develop/Authorization/da_research/delegated_authorization_research.xlsx')
 print("OK - workbook saved")
-print(f"Tab counts: RFCs={len(rfc_rows)}, Drafts={len(draft_rows)}, OIDF={len(oidf_rows)}, Other={len(other_rows)}, Academic={len(academic_rows)}, Industry={len(industry_rows)}")
-print(f"Total: {len(rfc_rows)+len(draft_rows)+len(oidf_rows)+len(other_rows)+len(academic_rows)+len(industry_rows)}")
+print(f"Tab counts: RFCs={len(rfc_rows)}, Drafts={len(draft_rows)}, Mission={len(mission_rows)}, OIDF={len(oidf_rows)}, Other={len(other_rows)}, Academic={len(academic_rows)}, Industry={len(industry_rows)}")
+print(f"Total: {len(rfc_rows)+len(draft_rows)+len(mission_rows)+len(oidf_rows)+len(other_rows)+len(academic_rows)+len(industry_rows)}")
