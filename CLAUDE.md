@@ -11,9 +11,9 @@ dated through Aug 2026 (last full sweep: 26 Aug 2026).
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **441 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **437 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **471 nodes, 661 edges**,
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **468 nodes, 659 edges**,
   in sync with the workbook as of 26 Aug 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
@@ -59,7 +59,7 @@ Both still exist from the original session if needed.
 | -------------------------- | ----- | ------------------------------------------------------ |
 | Index                      | cover | Auto-summed; TOTAL row moves when tabs are added       |
 | Published RFCs             | 5     | Stable primitives, plus RFC 10017 for WG completeness. |
-| Active IETF Drafts         | 260   | **★ Where the action is.** WG + individual drafts.     |
+| Active IETF Drafts         | 256   | **★ Where the action is.** WG + individual drafts.     |
 | Mission-Bound (Pre-pub)    | 33    | McGuinness GitHub-only family. Venue split, not topic. |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
@@ -223,8 +223,21 @@ Standard workflow (Claude Code + git):
   `fane-opena2a-aip` (-02, 6 Aug 2026). Note its companion `fane-opena2a-aap`
   also collides acronym-wise with the unrelated `draft-aap-oauth-profile`
   (Agent Authorization Profile) added in the Aug 2026 sweep.
-- **SUPERSEDED** — replaced by a re-slug. Currently: `sharif-payment-trust`
-  (replaced by `sharif-attp`).
+- **SUPERSEDED** — replaced by a re-slug. `sharif-payment-trust` (replaced by
+  `sharif-attp`), plus the six pairs resolved 26 Aug 2026. **Two shapes, two
+  treatments** — check which one you have before editing:
+  - *Successor not yet tracked* → rename the row in place (title, URL, summary
+    from the new abstract) and record the old slug in comments so searches for
+    it still land. Applied to `rosenberg-aiproto-framework` →
+    `rosenberg-agentproto-usecases` and `schrock-agent-action-manifest` →
+    `schrock-action-evidence-boundary`.
+  - *Successor already tracked* → the old row is a **duplicate**, not a rename.
+    Delete it and put a `SUPERSEDES <old-slug>` note on the successor's row.
+    Applied to `meunier-webbotauth-httpsig-directory`,
+    `ni-batch-authorization-delegation`, `schrock-ep-action-evidence-graph`,
+    and `somoza-atn-agent-trust-negotiation` — four rows that had been sitting
+    in the corpus as silent duplicates of drafts already tracked under their
+    post-rename slugs.
 
 ## Pending watch list
 
@@ -238,7 +251,7 @@ Still worth periodic checking: whether any of the 33 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
 has been so far. Re-check with the family-manifest slugs.
 
-**Graph — REBUILT 26 Aug 2026.** Now 471 nodes / 661 edges, in sync with the
+**Graph — REBUILT 26 Aug 2026.** Now 468 nodes / 659 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
 analysis, preserved), 373 `composes` from the Mission-Bound family manifest,
@@ -287,17 +300,16 @@ narration of each pair.
   "WG Consensus: Waiting for Write-Up" (21 Aug 2026). `identity-chaining` and
   `rfc7523bis` are both sitting in the RFC Editor queue; neither has an RFC
   number yet. `wimse-workload-identity-practices` reached IESG AD Evaluation.
-- **17 tracked drafts are EXPIRED and 6 are REPLACED** (audited 26 Aug 2026,
-  not yet annotated in the workbook — a deliberate deferral, not an oversight).
-  Expired incl. `oauth-ai-agents-on-behalf-of-user`, `fulz-oauth-trust-binding`,
-  `liu-oauth-a2a-profile`, `madaras-preauth-receipts`, `rosenberg-aiproto-cheq`,
-  and `cui-dmsc-agent-cdi` (which expired 15 Aug, days after being added).
-  Replaced pairs worth tagging SUPERSEDED: `meunier-webbotauth-httpsig-directory`
-  → `-protocol`, `ni-batch-authorization-delegation` → `ni-oauth-batch-...`,
-  `rosenberg-aiproto-framework` → `rosenberg-agentproto-usecases`,
-  `schrock-agent-action-manifest` → `schrock-action-evidence-boundary`,
-  `schrock-ep-action-evidence-graph` → `schrock-ep-authorization-evidence-chain`,
-  `somoza-atn-agent-trust-negotiation` → `somoza-dmsc-atn-...`.
+- **Expired and replaced drafts — RESOLVED 26 Aug 2026.** All 17 expired drafts
+  are **tagged in their comments and kept in the corpus** by maintainer decision:
+  an expired draft is still evidence of what was proposed. Three of them expired
+  during this very sweep — `berlinai-vera`, `chen-agent-decoupled-authorization-model`
+  and `cui-dmsc-agent-cdi` were added and tagged expired on the same day, which is
+  a useful signal about how fast this individual-draft tail turns over.
+  The 6 replaced drafts were resolved two different ways (see SUPERSEDED above);
+  **four of them turned out to be duplicates already in the corpus under their
+  new slugs**, so the tab lost 4 rows. Re-run the expiry check on future sweeps —
+  it is a cheap pass over the same Datatracker batch fetch.
 - **The candidate decision/policy cluster is now seven drafts**, not six —
   `gazitt-oauth-authzen-claims` (a third Gazitt AuthZEN draft) and
   `li-oauth-policy-based-anonymous-tokens` joined; still no OAuth wiki cluster
