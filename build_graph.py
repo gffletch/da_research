@@ -161,6 +161,7 @@ MISSION_FAMILY = {
 TAB_DEFAULT_TYPE = {
     "Published RFCs": "rfc",
     "Active IETF Drafts": "individual-draft",
+    "Mission-Bound (Pre-pub)": "pre-publication-draft",
     "OpenID Foundation": "external-spec",
     "Other Standards & Govt": "external-spec",
     "Academic Papers": "academic-paper",
@@ -185,8 +186,8 @@ def slugify(text, maxlen=60):
 # Tabs whose rows ARE the spec they name. Commentary tabs are excluded: a blog post
 # titled "RFC 9396: ... (CIAM Weekly)" is *about* RFC 9396, not RFC 9396 itself, and
 # must not claim that node id.
-SPEC_TABS = ("Published RFCs", "Active IETF Drafts", "OpenID Foundation",
-             "Other Standards & Govt")
+SPEC_TABS = ("Published RFCs", "Active IETF Drafts", "Mission-Bound (Pre-pub)",
+             "OpenID Foundation", "Other Standards & Govt")
 
 
 def node_id_for(title, url, tab):

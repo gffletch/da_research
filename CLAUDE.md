@@ -11,9 +11,9 @@ dated through Aug 2026 (last full sweep: 26 Aug 2026).
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **408 sources**
-  across 7 tabs (Index + 6 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **438 nodes, 659 edges**,
+- `delegated_authorization_research.xlsx` — the bibliography. **412 sources**
+  across 8 tabs (Index + 7 content tabs).
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **442 nodes, 661 edges**,
   in sync with the workbook as of 26 Aug 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
@@ -38,7 +38,12 @@ dated through Aug 2026 (last full sweep: 26 Aug 2026).
 
 - `validate.py` — quick sanity check. Run after every edit. Loads workbook,
   prints tab counts, confirms Index total equals row sum, lists any unparseable
-  rows, sanity-checks every URL is well-formed.
+  rows, sanity-checks every URL is well-formed. **Rewritten 26 Aug 2026 to be
+  tab-agnostic**: it discovers content tabs from the workbook and finds the
+  TOTAL row by its label instead of hardcoding a tab list and cell `C11`. Both
+  assumptions broke the moment a tab was added. Note it still checks only that
+  URLs are *well-formed*, never that they resolve — that gap let three dead
+  blog links sit unnoticed for a full cycle.
 
 **Explicitly out of scope for ongoing maintenance** (these are snapshots that
 will not be updated as the corpus grows — do not regenerate unless asked):
@@ -52,9 +57,10 @@ Both still exist from the original session if needed.
 
 | Tab                        | Count | Notes                                                  |
 | -------------------------- | ----- | ------------------------------------------------------ |
-| Index                      | cover | Auto-summed; cell `C11` = TOTAL                        |
-| Published RFCs             | 4     | Stable. Foundation primitives.                         |
-| Active IETF Drafts         | 290   | **★ Where the action is.** WG + individual drafts.     |
+| Index                      | cover | Auto-summed; TOTAL row moves when tabs are added       |
+| Published RFCs             | 5     | Stable primitives, plus RFC 10017 for WG completeness. |
+| Active IETF Drafts         | 260   | **★ Where the action is.** WG + individual drafts.     |
+| Mission-Bound (Pre-pub)    | 33    | McGuinness GitHub-only family. Venue split, not topic. |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
 | Academic Papers            | 12    | arXiv + IEEE.                                          |
@@ -95,8 +101,10 @@ Still useful as a mental model when placing new drafts:
     token-exchange-cnf (Jul 2026), id-continuation-assertion (Aug 2026)
   - **The 34-draft Mission-Bound Authorization family** at
     `github.com/mcguinness/mission-bound-authorization` — 33 are GitHub-only
-    (marked "IETF (Pre-publication — GitHub)" in standards-org); only
-    `draft-mcguinness-oauth-mission` is also on Datatracker. The repo ships a
+    (marked "IETF (Pre-publication — GitHub)" in standards-org) and **now live
+    in their own `Mission-Bound (Pre-pub)` tab** (split out 26 Aug 2026); only
+    `draft-mcguinness-oauth-mission` is also on Datatracker, and that one
+    deliberately stays in the Active IETF Drafts tab. The repo ships a
     machine-readable `family-manifest.json` (group, maturity, adoption_rung,
     deps per draft) — **use it as the source of truth** for this family rather
     than re-deriving structure. Groups: architecture, core, approval-time,
@@ -185,6 +193,12 @@ Standard workflow (Claude Code + git):
 - **Industry & Implementations:** 5 reference implementations lead (rows 1–5),
   then the McGuinness Mission-Bound blog series (rows 7–10, publication order:
   MVP first as the substrate post), then blogs and analyst articles.
+- **Mission-Bound (Pre-pub):** the 33 GitHub-only family drafts, in the order
+  the Aug 2026 sweep generated them from `family-manifest.json`. This tab is a
+  **venue** split, not a topic one — the test for belonging here is "lives only
+  in the author's repo", not "is about missions". If one of these gets filed on
+  Datatracker, move that row to Active IETF Drafts and update its standards-org,
+  the way `draft-mcguinness-oauth-mission` already sits there.
 - **OpenID Foundation:** AuthZEN cluster groups together (AuthZEN 1.0 →
   MCP Profile → ARAP), then CAEP/SSF, then FAPI, then HEART.
 
@@ -223,7 +237,7 @@ Still worth periodic checking: whether any of the 33 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
 has been so far. Re-check with the family-manifest slugs.
 
-**Graph — REBUILT 26 Aug 2026.** Now 438 nodes / 659 edges, in sync with the
+**Graph — REBUILT 26 Aug 2026.** Now 442 nodes / 661 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
 analysis, preserved), 373 `composes` from the Mission-Bound family manifest,
@@ -235,6 +249,12 @@ Notes for future graph work:
   like 7519/7521/7523/9068/9334 that the bibliography cites but doesn't track as
   its own sources. They are preserved across rebuilds because curated edges hang
   off them. Don't "clean them up".
+- **Adding a workbook tab means editing `build_graph.py` in two places** —
+  `TAB_DEFAULT_TYPE` (line ~161) and `SPEC_TABS` (line ~188). Miss the first and
+  every row on the new tab is typed `ext-*` instead of its real type; miss the
+  second and node ids stop being derived from draft/RFC names, which breaks the
+  curated overlay's ability to match them. Both were needed for the
+  `Mission-Bound (Pre-pub)` tab on 26 Aug 2026.
 - `MISSION_FAMILY` in `build_graph.py` mirrors the upstream `family-manifest.json`
   (snapshot 11 Aug 2026). Re-sync it if the family changes shape.
 - The HTML shell's filter pills, `TYPE_COLOR`/`CAT_COLOR`, and `nodeRadius` maps
@@ -249,16 +269,34 @@ narration of each pair.
 **26 Aug 2026 sweep — findings that change the corpus's shape:**
 
 - **`draft-ietf-oauth-browser-based-apps` became RFC 10017** (state flipped
-  21 Aug 2026; `became_rfc` relation confirmed on Datatracker). Its row is still
-  in the Active IETF Drafts tab with a note. **Open placement question for the
-  maintainer:** move it to the Published RFCs tab (which would make that tab 5)
-  or leave it annotated in place.
+  21 Aug 2026; `became_rfc` relation confirmed on Datatracker). **RESOLVED
+  26 Aug 2026 — moved to the Published RFCs tab** (now 5) and annotated as
+  peripheral to delegated authorization, tracked for OAuth WG completeness.
+  A full audit of all 251 tracked Datatracker drafts confirmed it is the **only**
+  one that has reached RFC status — no others were hiding.
+  Graph note: the move changed the node id from `draft-ietf-oauth-browser-based-apps`
+  to `rfc-10017`, which orphaned the old id as a curated substrate node and
+  duplicated the document. Fixed by retargeting its one curated edge
+  (`depends_on rfc-6749`) onto `rfc-10017` and deleting the stale node from the
+  JSON before rebuilding. **Watch for this whenever a row's title changes shape:
+  node ids are derived from titles, so a retitle silently forks the node.**
 - **`draft-aap-oauth-profile` is now EXPIRED.** Kept, annotated. It is half of
   the AAP/AIP acronym tangle recorded under COLLISION.
 - **`draft-ietf-oauth-transaction-tokens` advanced past WGLC** to
   "WG Consensus: Waiting for Write-Up" (21 Aug 2026). `identity-chaining` and
   `rfc7523bis` are both sitting in the RFC Editor queue; neither has an RFC
   number yet. `wimse-workload-identity-practices` reached IESG AD Evaluation.
+- **17 tracked drafts are EXPIRED and 6 are REPLACED** (audited 26 Aug 2026,
+  not yet annotated in the workbook — a deliberate deferral, not an oversight).
+  Expired incl. `oauth-ai-agents-on-behalf-of-user`, `fulz-oauth-trust-binding`,
+  `liu-oauth-a2a-profile`, `madaras-preauth-receipts`, `rosenberg-aiproto-cheq`,
+  and `cui-dmsc-agent-cdi` (which expired 15 Aug, days after being added).
+  Replaced pairs worth tagging SUPERSEDED: `meunier-webbotauth-httpsig-directory`
+  → `-protocol`, `ni-batch-authorization-delegation` → `ni-oauth-batch-...`,
+  `rosenberg-aiproto-framework` → `rosenberg-agentproto-usecases`,
+  `schrock-agent-action-manifest` → `schrock-action-evidence-boundary`,
+  `schrock-ep-action-evidence-graph` → `schrock-ep-authorization-evidence-chain`,
+  `somoza-atn-agent-trust-negotiation` → `somoza-dmsc-atn-...`.
 - **The candidate decision/policy cluster is now seven drafts**, not six —
   `gazitt-oauth-authzen-claims` (a third Gazitt AuthZEN draft) and
   `li-oauth-policy-based-anonymous-tokens` joined; still no OAuth wiki cluster
@@ -344,7 +382,13 @@ sweeps — don't re-ask): keep delegation, agent identity, authorization, consen
 and receipt drafts. Drop networking/transport (IPv6, multicast, network
 management), generic browser-flow and JWT-BCP drafts, and non-agent supply-chain
 work. Payments-infra *is* in scope as of this decision (Skyfire KYA/KYAPay and
-Hopley x402 clusters were reinstated). Primary/authored bodies of work — a single
+Hopley x402 clusters were reinstated). **AIPREF is in scope as of 26 Aug 2026** —
+the corpus already tracked the AIPREF WG charter, so dropping the WG's output was
+inconsistent; `wallace-aipref-grant-binding` is the reason it matters, since a
+party-scoped revocable grant that lifts a reservation is a delegation primitive.
+**SCITT remains out of scope** unless a draft is about agent authority rather than
+supply-chain transparency (`hawkins-scitt-attested-agent-payment` is the kind that
+gets in). Primary/authored bodies of work — a single
 author's draft family or blog — are taken in full rather than sampled.
 
 ## Things NOT to do

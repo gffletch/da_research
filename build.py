@@ -19,6 +19,7 @@ COLORS = {
     'OpenID':    '7030A0',
     'Other':     '548235',
     'Academic':  'BF8F00',
+    'Mission':   'B65C1E',
     'Industry':  '404040',
     'Summary':   '305496',
 }
@@ -56,6 +57,12 @@ def make_sheet(title, color, rows):
 # TAB 1: PUBLISHED RFCs
 # ============================================================
 rfc_rows = [
+    ("RFC 10017 — OAuth 2.0 for Browser-Based Applications",
+     "An IETF BCP establishing the Backend-for-Frontend (BFF) and other architectural patterns as current best practice for SPAs given browser-resident token-storage limitations.",
+     "https://www.rfc-editor.org/rfc/rfc10017",
+     "IETF (OAuth WG)",
+     "Published as RFC 10017 on 21 Aug 2026, from draft-ietf-oauth-browser-based-apps -27. Moved here from the Active IETF Drafts tab on 26 Aug 2026. **Peripheral to delegated authorization** — tracked for OAuth WG completeness rather than for agent delegation, which is the maintainer's own framing. Still relevant to any delegated-authorization design touching SPAs, since it codifies why pure-browser refresh tokens are deprecated. A 26 Aug 2026 audit of all 251 tracked Datatracker drafts confirmed this is the only one that has reached RFC status."),
+
     ("RFC 9635 — Grant Negotiation and Authorization Protocol (GNAP)",
      "An IETF standards-track RFC for a next-generation delegation protocol that removes pre-registration by letting clients present a key on first contact with the AS.",
      "https://www.rfc-editor.org/rfc/rfc9635",
@@ -219,12 +226,6 @@ draft_rows = [
      "https://datatracker.ietf.org/doc/draft-kahrer-oauth-client-challenge-protocol/",
      "IETF (individual)",
      "Revision -00 published 19 May 2026; deliberately distinct from first-party-apps (challenges the CLIENT, not the user) and works for both first- and third-party clients. Cites Mastercard Verifiable Intent as a use case, linking it directly to the mandate/RAR pattern OVID implements."),
-
-    ("draft-ietf-oauth-browser-based-apps — OAuth 2.0 for Browser-Based Applications",
-     "An IETF WG draft establishing the Backend-for-Frontend (BFF) and other architectural patterns as current best practice for SPAs given browser-resident token-storage limitations.",
-     "https://datatracker.ietf.org/doc/draft-ietf-oauth-browser-based-apps/",
-     "IETF (OAuth WG)",
-     "**PUBLISHED as RFC 10017** (state changed 21 Aug 2026; became_rfc relation confirmed on Datatracker). No longer an active draft — candidate to move to the Published RFCs tab. Final draft revision was -27, 11 Aug 2026 (was -26, (Dec 2025)); critical for any delegated-authorization design touching SPAs because it codifies why pure-browser refresh tokens are deprecated."),
 
     ("draft-ietf-oauth-security-topics-update — Updates to OAuth 2.0 Security BCP",
      "An IETF WG draft that extends RFC 9700 with new countermeasures, notably rules against audience-injection attacks where a client authenticates to multiple authorization servers.",
@@ -938,207 +939,6 @@ draft_rows = [
      "https://datatracker.ietf.org/doc/charter-ietf-wimse/01/",
      "IETF (WIMSE WG charter)",
      "Approved 18 March 2026 (v01); explicitly liaises with OAuth, SCIM, SCITT, RATS, the OpenID Foundation, and CNCF/SPIFFE — the formal scope statement that anchors all WIMSE draft work."),
-
-    # ---- Mission-Bound Authorization family (McGuinness) — 33 GitHub-only drafts, Aug 2026 sweep ----
-
-    ("draft-mcguinness-mission-harness — Mission-Aware Agent Harnesses",
-     "Agent harnesses preserve execution state across restarts, retries, background jobs, tool-connection reuse, and sub-agent orchestration. That continuity is not authority. This document defines an optional Mission-aware harness profile for deployments using Mission-Bound Authorization, with OAuth 2.0 as this version's normative substrate.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-harness.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Agent runtime; maturity: stable; adoption rung: “Recommended for AI agents”. Depends on 10 family draft(s) incl. mission-audit, mission-authzen, mission-discovery. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-orchestration — Mission Orchestration and Unwinding",
-     "Mission runtime enforcement can refuse the next consequential action, but Mission termination can occur while an agent workflow is already in flight. This document defines an optional orchestration profile for Mission-governed workflows.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-orchestration.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Agent runtime; maturity: experimental; adoption rung: “Experimental”. Depends on 8 family draft(s) incl. mission-architecture, mission-authzen, mission-harness. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-shaping — Mission Intent Shaping",
-     "Mission-Bound Authorization for OAuth 2.0 defines a Mission Intent and the Authority Set an Authorization Server derives from it, but leaves the step that turns an open-ended task request into a candidate Mission Intent to deployment policy.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-shaping.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Approval-time; maturity: informational; adoption rung: “Advanced”. Depends on 10 family draft(s) incl. mission-aauth, mission-architecture, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-approval — Mission Deferred Approval for OAuth 2.0",
-     "Mission-Bound Authorization for OAuth 2.0 (the \"issuance profile\") records an approval event at which an Approver consents to a Mission's derived Authority Set, but it treats that event as immediate. A human review of an agent's Proposed Mission is often asynchronous. This document defines an optional Mission Deferred Approval profile. It profiles OAuth Deferred Token Response so a Mission approval can be deferred and polled.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-approval.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Approval-time; maturity: stable; adoption rung: “Advanced”. Depends on 6 family draft(s) incl. mission-authority-server, mission-shaping, oauth-mission. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-approval-revision — Mission Approval Revision for OAuth 2.0",
-     "Mission Deferred Approval for OAuth 2.0 defers a Mission approval and lets a client poll for the decision. A reviewer commonly approves a narrowed subset of a proposed Mission rather than an all-or-nothing outcome.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-approval-revision.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Approval-time; maturity: experimental; adoption rung: “Experimental”. Depends on 5 family draft(s) incl. mission-shaping, oauth-mission, oauth-mission-approval. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-consent-evidence — Mission Consent Evidence for OAuth 2.0",
-     "Mission-Bound Authorization for OAuth 2.0 commits the approved Mission Intent and Authority Set, but does not commit the exact consent disclosure shown to the Approver. This document defines an optional Consent Evidence profile.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-consent-evidence.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Approval-time; maturity: stable; adoption rung: “Recommended for AI agents”. Depends on 11 family draft(s) incl. mission-aauth, mission-audit, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-template — Mission Template for OAuth 2.0",
-     "An agent that dispatches work at machine speed cannot pause for a fresh human approval at every run, and a standing Mission broad enough to cover every run over-provisions authority the agent holds the whole time. This document defines an experimental option between those two: the Mission Template.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-template.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Approval-time; maturity: experimental; adoption rung: “Experimental”. Depends on 9 family draft(s) incl. mission-architecture, mission-runtime, oauth-mission. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-architecture — An Architecture for Mission-Bound Authorization",
-     "A Mission is a durable, approval-backed governance object for authorization: the approved task, with a lifecycle, that authority is derived for, bound to, and gated on. It is not a new way to express authority. Read as one system, the Mission model defines a delegated-authority layer: authentication says who is acting, and entitlement governance says what a principal may hold; this layer governs the approved task itself.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-architecture.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Architecture; maturity: informational; adoption rung: “outside-ordering”. Depends on 31 family draft(s) incl. aauth-mission-expiry, mission-aauth, mission-aauth-management. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-aauth — Mission Context Binding for AAuth",
-     "AAuth defines missions as optional, immutable authorization contexts for agent governance at a Person Server. A mission is approved through AAuth's native propose, clarify, and approve interaction, is identified by the native `approver` and `s256` reference, and accumulates an ordered mission log.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-aauth.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: stable; adoption rung: “By binding”. Depends on 2 family draft(s) incl. aauth-mission-expiry, mission-substrate. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-authority-server — Mission Authority Server",
-     "Mission-Bound Authorization for OAuth 2.0 defines the Mission, a durable, human-approved, integrity-bound authorization artifact, and binds it to OAuth issuance: the Authorization Server derives tokens under the Mission and gates them on its state. Many deployments cannot change their Authorization Server.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-authority-server.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: stable; adoption rung: “By binding”. Depends on 18 family draft(s) incl. mission-architecture, mission-audit, mission-authzen. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-metering — Mission Consumption Metering",
-     "Mission-Bound Authorization for OAuth 2.0 bounds an agent's authority by resources, actions, and constraints, and its runtime enforcement profile evaluates each consequential action at the point of use. Neither bounds how much of an approved authority a Mission may consume.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-metering.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: experimental; adoption rung: “Experimental”. Depends on 7 family draft(s) incl. mission-architecture, mission-authzen, mission-orchestration. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-substrate — Mission Substrate Requirements",
-     "A Mission binds an actor to approved context under the governance of an identified controller. Authorization substrates realize that relationship in materially different ways. Some carry structured authority in credentials; others keep contextual policy at an online service and use substrate-native authorization at each resource.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-substrate.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: stable; adoption rung: “By binding”. Depends on 12 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-uma — Mission-Bound Authorization for UMA 2.0",
-     "User-Managed Access (UMA) 2.0 standardized the plumbing of asynchronous, party-asymmetric authorization: a requesting party and client that can only request, a resource owner who approves at the authorization server on their own schedule, a rotating permission ticket carrying the pending request, claims pushing at the token endpoint, a persisted claims token that carries continuity but grants nothing, and per-use introspection at the resource server.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-uma.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: sketch; adoption rung: “Experimental”. Depends on 24 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-issuance-grant — Mission Issuance Grant for OAuth 2.0",
-     "The standalone Mission Authority Server binding governs Missions with no change to an estate's Authorization Servers: tokens remain ordinary, and enforcement joins them to Missions at the point of use. That mode provides no Mission-bound credential and no issuance gating.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-issuance-grant.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: stable; adoption rung: “By binding”. Depends on 8 family draft(s) incl. mission-architecture, mission-authority-server, mission-mandate. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-continuation — Mission Continuation: Authorization Continuity for Mission-Bound Authorization",
-     "This document profiles authorization continuity for Mission-Bound Authorization. A Mission is the durable, grant-anchored record of what work remains authorized, under which constraints, on whose approval.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-continuation.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Cross-domain projection; maturity: experimental; adoption rung: “Experimental”. Depends on 8 family draft(s) incl. mission-aauth, mission-architecture, mission-authzen. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-cross-domain — Mission Cross-Domain Projection for OAuth 2.0",
-     "The Mission-Bound Authorization for OAuth 2.0 profile binds issued authority to a durable, human-approved Mission held by a single Authorization Server, the Mission Issuer. This document specifies that profile's optional cross-domain projection: a single hop that lets an Authorization Server in another trust domain, a Resource AS, honor a Mission it did not issue.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-cross-domain.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Cross-domain projection; maturity: stable; adoption rung: “Advanced”. Depends on 8 family draft(s) incl. mission-architecture, mission-mandate, mission-runtime. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-aauth-mission-expiry — AAuth Mission Expiry",
-     "AAuth's approved mission blob MAY carry `expires_at`: an immutable, consent-bound lifetime the Person Server enforces on every decision path, capping every token carrying `mission_s256`. This document profiles that member: values are RFC 3339 date-times, deployments document their clock-skew posture, and the Person Server terminates promptly at the deadline.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-aauth-mission-expiry.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “By binding”. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-aauth-management — AAuth Mission Management",
-     "AAuth defines an immutable mission blob, identifies it by the native `{approver, s256}` mission reference, and gives a mission two states: `active` and `terminated`. It leaves revocation, delegation-tree queries, and administrative interfaces to a companion specification. This document defines that companion.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-aauth-management.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “By binding”. Depends on 4 family draft(s) incl. aauth-mission-expiry, mission-aauth, mission-architecture. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-discovery — Mission Open-World Discovery",
-     "A Mission commits its authority at approval, but an open-world agent meets resources the approval could not name.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-discovery.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: experimental; adoption rung: “Experimental”. Depends on 13 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-containment — Mission Containment for OAuth 2.0",
-     "Mission-Bound Authorization for OAuth 2.0 commits a Mission's authority at a single approval event: the approved Authority Set and its integrity anchors never change. This document defines Mission Containment, an optional layered extension for narrowing a live Mission without ending it.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-containment.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: experimental; adoption rung: “Experimental”. Depends on 15 family draft(s) incl. mission-audit, mission-authzen, mission-discovery. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-expansion — Mission Expansion for OAuth 2.0",
-     "Mission-Bound Authorization for OAuth 2.0 commits a Mission's authority at a single approval event and defers widening: enlarging authority requires a new approval, a successor Mission. This document defines that successor mechanism as an optional, layered extension to the issuance profile.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-expansion.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “Advanced”. Depends on 6 family draft(s) incl. mission-runtime, oauth-mission, oauth-mission-child-delegation. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-management — Mission Management for OAuth 2.0",
-     "The Mission Status and Lifecycle profile observes and changes one Mission at a time and defers fleet-scale management.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-management.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “Advanced”. Depends on 9 family draft(s) incl. mission-architecture, mission-audit, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-progressive — Mission Progressive Authorization for OAuth 2.0",
-     "Mission Expansion for OAuth 2.0 widens an agent's authority only through a fresh human approval that creates a successor Mission. An open-ended agentic task often cannot have its full authority enumerated at the initial approval, which leaves a deployment choosing between over-provisioning a broad standing Mission and interrupting the user for a fresh approval at every step.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-progressive.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: experimental; adoption rung: “Experimental”. Depends on 11 family draft(s) incl. mission-aauth, mission-architecture, mission-discovery. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-signals — Mission Lifecycle Signals for OAuth 2.0",
-     "The Mission Status and Lifecycle profile names event-driven propagation (Mission state changes reaching consumers over a Shared Signals stream) as one way to bound revocation latency, but leaves the channel itself unspecified.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-signals.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “Advanced”. Depends on 9 family draft(s) incl. mission-aauth, mission-audit, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-status — Mission Status and Lifecycle for OAuth 2.0",
-     "The Mission-Bound Authorization for OAuth 2.0 profile binds issued authority to a durable, human-approved Mission and gates issuance on Mission state, but it observes Mission state only through token lifetime and optional token introspection.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-status.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “Implementation minimum”. Depends on 9 family draft(s) incl. mission-aauth, mission-authority-server, mission-runtime. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-audit — Mission Audit Transparency",
-     "Mission-Bound Authorization for OAuth 2.0 and its companions produce many evidence records: the approval event, lifecycle transitions, consent evidence, runtime decision and execution evidence, and further evidence types profiles define.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-audit.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Proof portability; maturity: stable; adoption rung: “Advanced”. Depends on 15 family draft(s) incl. mission-aauth, mission-architecture, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-mandate — Mission Mandate",
-     "A Mission's committed facts (the approved task, the consented authority, the principals, and the expiry) live on the Mission record at its issuer, and a party outside the issuing domain cannot verify what was approved short of a token-exchange hop or trust in the issuer's own records.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-mandate.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Proof portability; maturity: stable; adoption rung: “Advanced”. Depends on 9 family draft(s) incl. mission-aauth, mission-audit, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-authzen — Mission-Bound Runtime Enforcement: AuthZEN Profile",
-     "Mission-Bound Runtime Enforcement defines a substrate-independent decision contract: before each consequential action runs, a Policy Enforcement Point (PEP) obtains a permit from a Policy Decision Point (PDP) that evaluates the action against the established Mission. This document is the concrete OpenID AuthZEN binding of that contract.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-authzen.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Runtime enforcement; maturity: stable; adoption rung: “Implementation minimum”. Depends on 10 family draft(s) incl. mission-audit, mission-harness, mission-metering. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-runtime — Mission-Bound Runtime Enforcement",
-     "This document specifies runtime enforcement for Mission-Bound Authorization: within a declared enforcement scope, no consequential action executes until a policy enforcement point obtains a permit from a policy decision point that evaluates the action and its concrete parameters against the Mission established for the acting credential.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-runtime.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Runtime enforcement; maturity: stable; adoption rung: “Implementation minimum”. Depends on 18 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-mission-security-model — Mission Security Model",
-     "Mission-Bound Authorization for OAuth 2.0 and its companion profiles spread enforcement across several components: a Mission Issuer, in one of three bindings (OAuth Authorization Server, standalone Mission Authority Server, AAuth Person Server), derives authority and, where it also issues tokens, gates issuance; a Policy Enforcement Point and Policy Decision Point evaluate each action; a harness establishes a mediated execution environment; a consent rendering layer discloses authority to an Approver; an orchestrator unwinds in-flight work; and optional services report Mission state, adjudicate requested authority, meter consumption, manage the Mission fleet, log evidence, and report completion events.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-security-model.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Security model; maturity: informational; adoption rung: “outside-ordering”. Depends on 28 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-work-products — Mission Work Products",
-     "Agents produce durable artifacts, files, messages, memory entries, queue events, packages, and directory names, that other agents and Missions later read. An artifact can carry knowledge across a boundary, but it must not carry authority across with it. This document defines, as an experimental companion to Mission-Bound Authorization for OAuth 2.0, how a work product records where it came from without becoming a grant.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-work-products.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Security model; maturity: experimental; adoption rung: “Experimental”. Depends on 7 family draft(s) incl. mission-architecture, mission-audit, mission-security-model. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-attenuation — Mission Offline Attenuation for OAuth 2.0",
-     "Mission-Bound Authorization for OAuth 2.0 derives delegated authority through the Authorization Server: each narrowing is a derivation at the issuer. For deep sub-agent fan-out, the common agent topology, that puts the Authorization Server in the hot path as a latency and availability dependency. This document defines an optional Mission Offline Attenuation profile.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-attenuation.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Sub-agents; maturity: experimental; adoption rung: “Experimental”. Depends on 7 family draft(s) incl. mission-harness, mission-runtime, oauth-mission. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
-    ("draft-mcguinness-oauth-mission-child-delegation — Mission Child Delegation for OAuth 2.0",
-     "Mission-Bound Authorization for OAuth 2.0 defines delegated tokens and the rule that authority narrows down a delegation chain. Agent harnesses, however, can spawn sub-agents whose work outlives a call frame or crosses a different execution boundary. This document defines an optional Mission Child Delegation profile.",
-     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-child-delegation.md",
-     "IETF (Pre-publication — GitHub)",
-     "Mission-Bound Authorization family — group: Sub-agents; maturity: stable; adoption rung: “Advanced”. Depends on 10 family draft(s) incl. mission-architecture, mission-harness, mission-metering. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
-
 
     # ---- Aug 2026 Datatracker sweep — new individual and WG drafts ----
 
@@ -1858,8 +1658,247 @@ draft_rows = [
      "https://datatracker.ietf.org/doc/draft-li-oauth-policy-based-anonymous-tokens/",
      "IETF (OAuth-related, individual)",
      "Revision -00, 26 Aug 2026. Policy-based anonymous access tokens. Also lands in the unclustered decision/policy group alongside the Gazitt and Liu drafts — policy determines issuance, and the token deliberately carries no subject. Relevant to the Privacy Pass / anonymous-path thread already tracked under WebBotAuth."),
+
+    # ---- AIPREF cluster — reinstated 26 Aug 2026 by maintainer decision ----
+
+    ("draft-ietf-aipref-vocab — A Vocabulary For Expressing AI Usage Preferences",
+     "This document defines a vocabulary for expressing preferences regarding how digital assets are used by automated processing systems. This vocabulary allows for the declaration of restrictions or permissions for use of digital assets by such systems.",
+     "https://datatracker.ietf.org/doc/draft-ietf-aipref-vocab/",
+     "IETF (AIPREF WG)",
+     "Revision -07, 19 Aug 2026. AIPREF WG draft. Reinstated 26 Aug 2026 after being dropped in the first pass of this sweep: the corpus already tracks the AIPREF WG charter, so tracking the charter while dropping the WG's actual output was inconsistent. The vocabulary itself is the reservation half of a reservation/grant pair — see draft-wallace-aipref-grant-binding for the grant half, which is the piece that behaves like a delegation primitive."),
+
+    ("draft-ietf-aipref-attach — Associating AI Usage Preferences with Content in HTTP",
+     "Methods are defined for associating usage preferences with content that is obtained using the HTTP protocol. This document defines attachment methods using the Robots Exclusion Protocol and HTTP header fields. This document updates RFC 9309 to allow for the inclusion of usage preferences.",
+     "https://datatracker.ietf.org/doc/draft-ietf-aipref-attach/",
+     "IETF (AIPREF WG)",
+     "Revision -05, 19 Aug 2026. AIPREF WG draft; the HTTP attachment mechanism for the vocabulary. Reinstated 26 Aug 2026 alongside draft-ietf-aipref-vocab. Relevant to this corpus as the transport question every preference/consent signal eventually faces: how an out-of-band expression of intent is bound to the resource it governs."),
+
+    ("draft-wallace-aipref-grant-binding — A Verifiable-Credential Binding for AI Usage Preferences: Expressing Grants that Lift AIPREF Preferences",
+     "The AI Preferences (AIPREF) vocabulary lets those with rights in a digital asset express preferences -- for example, that training of AI models is disallowed -- about how automated systems process that asset. Such a preference expresses a reservation. It does not, by itself, provide a verifiable, revocable record of a specific grant that lifts a preference for a specific party. This document describes that gap and proposes a candidate mechanism: a cryptographically signed, offline-verifiable credential that expresses a grant referencing an AIPREF usage category and a specific asset, that any party can verify without contacting the grantor, and that the grantor can revoke. It is intended as a starting point for discussion, not as a finished specification. The mechanism is preference-general. Training is used throughout as the worked example because it is the reservation most widely discussed, but nothing in the construction is specific to it: the credential binds whichever usage category was reserved to a named party, and the same procedure applies to any other category the vocabulary expresses. What the mechanism establishes is that a grant exists, is authentic, is unrevoked, and was in force at a stated time. It does not adjudicate whether the grantor had standing to grant, and it is not an enforcement or access-control mechanism.",
+     "https://datatracker.ietf.org/doc/draft-wallace-aipref-grant-binding/",
+     "IETF (individual)",
+     "Revision -02, 18 Aug 2026. **The strongest of the four AIPREF entries for this corpus.** A preference expresses a reservation; it does not provide a verifiable, revocable record of a specific grant that lifts that reservation for a specific party. This draft proposes a cryptographically signed, offline-verifiable credential expressing exactly that grant. Party-scoped, revocable, offline-verifiable authority over a named asset is a delegation primitive that happens to be pointed at content rights rather than at API scopes — worth reading against the receipt and consent-evidence drafts."),
+
+    ("draft-hood-aipref-earmark — Earmark: Embedded Attribution and Rights Marks for AI Usage Preferences",
+     "This document defines Earmark (Embedded Attribution and Rights Marks), a mechanism by which publishers and rights holders embed signed usage preferences directly into published content. To earmark content is to reserve it for designated uses, and the mark travels with what it covers, surviving republication and aggregation, so the preference remains discoverable wherever the content arrives, including where perimeter signals such as robots.txt no longer apply. Marks carry the identity of the rights holder, the preferences asserted, and a signature, and are verifiable offline by any party. An individual signed statement is a Mark; the mechanism as a whole is Earmark. This document defines the Mark Object, embedding bindings for common content types, and the detection and verification procedure. It reuses the AI Preference vocabulary for preference semantics and the C2PA and CAWG assertion infrastructure for media, defining new machinery only where none exists. Earmarks make ignored preferences observable and attributable. Enforcement remains with law, contract, and the market.",
+     "https://datatracker.ietf.org/doc/draft-hood-aipref-earmark/",
+     "IETF (individual)",
+     "Revision -00, 13 Aug 2026. Embedded attribution and rights marks for AI usage preferences. The weakest of the four AIPREF entries here — marking and attribution rather than authority — kept for completeness of the AIPREF cluster now that the corpus tracks it."),
 ]
 make_sheet("Active IETF Drafts", COLORS['Drafts'], draft_rows)
+
+# ============================================================
+# TAB 3: MISSION-BOUND (PRE-PUBLICATION)
+# ------------------------------------------------------------
+# The 33 GitHub-only drafts of the McGuinness Mission-Bound Authorization
+# family. Split out of Active IETF Drafts on 26 Aug 2026: they are neither
+# active, nor IETF, nor drafts in any procedural sense — they live in a single
+# author's repo and only draft-mcguinness-oauth-mission has been filed on
+# Datatracker. That filed draft deliberately stays in the Active IETF Drafts
+# tab; this tab is a venue distinction, not a topic one.
+# ============================================================
+mission_rows = [
+
+    ("draft-mcguinness-mission-harness — Mission-Aware Agent Harnesses",
+     "Agent harnesses preserve execution state across restarts, retries, background jobs, tool-connection reuse, and sub-agent orchestration. That continuity is not authority. This document defines an optional Mission-aware harness profile for deployments using Mission-Bound Authorization, with OAuth 2.0 as this version's normative substrate.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-harness.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Agent runtime; maturity: stable; adoption rung: “Recommended for AI agents”. Depends on 10 family draft(s) incl. mission-audit, mission-authzen, mission-discovery. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-orchestration — Mission Orchestration and Unwinding",
+     "Mission runtime enforcement can refuse the next consequential action, but Mission termination can occur while an agent workflow is already in flight. This document defines an optional orchestration profile for Mission-governed workflows.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-orchestration.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Agent runtime; maturity: experimental; adoption rung: “Experimental”. Depends on 8 family draft(s) incl. mission-architecture, mission-authzen, mission-harness. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-shaping — Mission Intent Shaping",
+     "Mission-Bound Authorization for OAuth 2.0 defines a Mission Intent and the Authority Set an Authorization Server derives from it, but leaves the step that turns an open-ended task request into a candidate Mission Intent to deployment policy.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-shaping.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Approval-time; maturity: informational; adoption rung: “Advanced”. Depends on 10 family draft(s) incl. mission-aauth, mission-architecture, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-approval — Mission Deferred Approval for OAuth 2.0",
+     "Mission-Bound Authorization for OAuth 2.0 (the \"issuance profile\") records an approval event at which an Approver consents to a Mission's derived Authority Set, but it treats that event as immediate. A human review of an agent's Proposed Mission is often asynchronous. This document defines an optional Mission Deferred Approval profile. It profiles OAuth Deferred Token Response so a Mission approval can be deferred and polled.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-approval.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Approval-time; maturity: stable; adoption rung: “Advanced”. Depends on 6 family draft(s) incl. mission-authority-server, mission-shaping, oauth-mission. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-approval-revision — Mission Approval Revision for OAuth 2.0",
+     "Mission Deferred Approval for OAuth 2.0 defers a Mission approval and lets a client poll for the decision. A reviewer commonly approves a narrowed subset of a proposed Mission rather than an all-or-nothing outcome.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-approval-revision.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Approval-time; maturity: experimental; adoption rung: “Experimental”. Depends on 5 family draft(s) incl. mission-shaping, oauth-mission, oauth-mission-approval. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-consent-evidence — Mission Consent Evidence for OAuth 2.0",
+     "Mission-Bound Authorization for OAuth 2.0 commits the approved Mission Intent and Authority Set, but does not commit the exact consent disclosure shown to the Approver. This document defines an optional Consent Evidence profile.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-consent-evidence.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Approval-time; maturity: stable; adoption rung: “Recommended for AI agents”. Depends on 11 family draft(s) incl. mission-aauth, mission-audit, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-template — Mission Template for OAuth 2.0",
+     "An agent that dispatches work at machine speed cannot pause for a fresh human approval at every run, and a standing Mission broad enough to cover every run over-provisions authority the agent holds the whole time. This document defines an experimental option between those two: the Mission Template.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-template.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Approval-time; maturity: experimental; adoption rung: “Experimental”. Depends on 9 family draft(s) incl. mission-architecture, mission-runtime, oauth-mission. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-architecture — An Architecture for Mission-Bound Authorization",
+     "A Mission is a durable, approval-backed governance object for authorization: the approved task, with a lifecycle, that authority is derived for, bound to, and gated on. It is not a new way to express authority. Read as one system, the Mission model defines a delegated-authority layer: authentication says who is acting, and entitlement governance says what a principal may hold; this layer governs the approved task itself.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-architecture.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Architecture; maturity: informational; adoption rung: “outside-ordering”. Depends on 31 family draft(s) incl. aauth-mission-expiry, mission-aauth, mission-aauth-management. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-aauth — Mission Context Binding for AAuth",
+     "AAuth defines missions as optional, immutable authorization contexts for agent governance at a Person Server. A mission is approved through AAuth's native propose, clarify, and approve interaction, is identified by the native `approver` and `s256` reference, and accumulates an ordered mission log.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-aauth.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: stable; adoption rung: “By binding”. Depends on 2 family draft(s) incl. aauth-mission-expiry, mission-substrate. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-authority-server — Mission Authority Server",
+     "Mission-Bound Authorization for OAuth 2.0 defines the Mission, a durable, human-approved, integrity-bound authorization artifact, and binds it to OAuth issuance: the Authorization Server derives tokens under the Mission and gates them on its state. Many deployments cannot change their Authorization Server.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-authority-server.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: stable; adoption rung: “By binding”. Depends on 18 family draft(s) incl. mission-architecture, mission-audit, mission-authzen. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-metering — Mission Consumption Metering",
+     "Mission-Bound Authorization for OAuth 2.0 bounds an agent's authority by resources, actions, and constraints, and its runtime enforcement profile evaluates each consequential action at the point of use. Neither bounds how much of an approved authority a Mission may consume.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-metering.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: experimental; adoption rung: “Experimental”. Depends on 7 family draft(s) incl. mission-architecture, mission-authzen, mission-orchestration. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-substrate — Mission Substrate Requirements",
+     "A Mission binds an actor to approved context under the governance of an identified controller. Authorization substrates realize that relationship in materially different ways. Some carry structured authority in credentials; others keep contextual policy at an online service and use substrate-native authorization at each resource.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-substrate.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: stable; adoption rung: “By binding”. Depends on 12 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-uma — Mission-Bound Authorization for UMA 2.0",
+     "User-Managed Access (UMA) 2.0 standardized the plumbing of asynchronous, party-asymmetric authorization: a requesting party and client that can only request, a resource owner who approves at the authorization server on their own schedule, a rotating permission ticket carrying the pending request, claims pushing at the token endpoint, a persisted claims token that carries continuity but grants nothing, and per-use introspection at the resource server.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-uma.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: sketch; adoption rung: “Experimental”. Depends on 24 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-issuance-grant — Mission Issuance Grant for OAuth 2.0",
+     "The standalone Mission Authority Server binding governs Missions with no change to an estate's Authorization Servers: tokens remain ordinary, and enforcement joins them to Missions at the point of use. That mode provides no Mission-bound credential and no issuance gating.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-issuance-grant.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Bindings / substrate; maturity: stable; adoption rung: “By binding”. Depends on 8 family draft(s) incl. mission-architecture, mission-authority-server, mission-mandate. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-continuation — Mission Continuation: Authorization Continuity for Mission-Bound Authorization",
+     "This document profiles authorization continuity for Mission-Bound Authorization. A Mission is the durable, grant-anchored record of what work remains authorized, under which constraints, on whose approval.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-continuation.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Cross-domain projection; maturity: experimental; adoption rung: “Experimental”. Depends on 8 family draft(s) incl. mission-aauth, mission-architecture, mission-authzen. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-cross-domain — Mission Cross-Domain Projection for OAuth 2.0",
+     "The Mission-Bound Authorization for OAuth 2.0 profile binds issued authority to a durable, human-approved Mission held by a single Authorization Server, the Mission Issuer. This document specifies that profile's optional cross-domain projection: a single hop that lets an Authorization Server in another trust domain, a Resource AS, honor a Mission it did not issue.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-cross-domain.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Cross-domain projection; maturity: stable; adoption rung: “Advanced”. Depends on 8 family draft(s) incl. mission-architecture, mission-mandate, mission-runtime. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-aauth-mission-expiry — AAuth Mission Expiry",
+     "AAuth's approved mission blob MAY carry `expires_at`: an immutable, consent-bound lifetime the Person Server enforces on every decision path, capping every token carrying `mission_s256`. This document profiles that member: values are RFC 3339 date-times, deployments document their clock-skew posture, and the Person Server terminates promptly at the deadline.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-aauth-mission-expiry.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “By binding”. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-aauth-management — AAuth Mission Management",
+     "AAuth defines an immutable mission blob, identifies it by the native `{approver, s256}` mission reference, and gives a mission two states: `active` and `terminated`. It leaves revocation, delegation-tree queries, and administrative interfaces to a companion specification. This document defines that companion.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-aauth-management.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “By binding”. Depends on 4 family draft(s) incl. aauth-mission-expiry, mission-aauth, mission-architecture. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-discovery — Mission Open-World Discovery",
+     "A Mission commits its authority at approval, but an open-world agent meets resources the approval could not name.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-discovery.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: experimental; adoption rung: “Experimental”. Depends on 13 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-containment — Mission Containment for OAuth 2.0",
+     "Mission-Bound Authorization for OAuth 2.0 commits a Mission's authority at a single approval event: the approved Authority Set and its integrity anchors never change. This document defines Mission Containment, an optional layered extension for narrowing a live Mission without ending it.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-containment.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: experimental; adoption rung: “Experimental”. Depends on 15 family draft(s) incl. mission-audit, mission-authzen, mission-discovery. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-expansion — Mission Expansion for OAuth 2.0",
+     "Mission-Bound Authorization for OAuth 2.0 commits a Mission's authority at a single approval event and defers widening: enlarging authority requires a new approval, a successor Mission. This document defines that successor mechanism as an optional, layered extension to the issuance profile.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-expansion.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “Advanced”. Depends on 6 family draft(s) incl. mission-runtime, oauth-mission, oauth-mission-child-delegation. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-management — Mission Management for OAuth 2.0",
+     "The Mission Status and Lifecycle profile observes and changes one Mission at a time and defers fleet-scale management.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-management.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “Advanced”. Depends on 9 family draft(s) incl. mission-architecture, mission-audit, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-progressive — Mission Progressive Authorization for OAuth 2.0",
+     "Mission Expansion for OAuth 2.0 widens an agent's authority only through a fresh human approval that creates a successor Mission. An open-ended agentic task often cannot have its full authority enumerated at the initial approval, which leaves a deployment choosing between over-provisioning a broad standing Mission and interrupting the user for a fresh approval at every step.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-progressive.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: experimental; adoption rung: “Experimental”. Depends on 11 family draft(s) incl. mission-aauth, mission-architecture, mission-discovery. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-signals — Mission Lifecycle Signals for OAuth 2.0",
+     "The Mission Status and Lifecycle profile names event-driven propagation (Mission state changes reaching consumers over a Shared Signals stream) as one way to bound revocation latency, but leaves the channel itself unspecified.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-signals.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “Advanced”. Depends on 9 family draft(s) incl. mission-aauth, mission-audit, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-status — Mission Status and Lifecycle for OAuth 2.0",
+     "The Mission-Bound Authorization for OAuth 2.0 profile binds issued authority to a durable, human-approved Mission and gates issuance on Mission state, but it observes Mission state only through token lifetime and optional token introspection.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-status.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Lifecycle; maturity: stable; adoption rung: “Implementation minimum”. Depends on 9 family draft(s) incl. mission-aauth, mission-authority-server, mission-runtime. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-audit — Mission Audit Transparency",
+     "Mission-Bound Authorization for OAuth 2.0 and its companions produce many evidence records: the approval event, lifecycle transitions, consent evidence, runtime decision and execution evidence, and further evidence types profiles define.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-audit.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Proof portability; maturity: stable; adoption rung: “Advanced”. Depends on 15 family draft(s) incl. mission-aauth, mission-architecture, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-mandate — Mission Mandate",
+     "A Mission's committed facts (the approved task, the consented authority, the principals, and the expiry) live on the Mission record at its issuer, and a party outside the issuing domain cannot verify what was approved short of a token-exchange hop or trust in the issuer's own records.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-mandate.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Proof portability; maturity: stable; adoption rung: “Advanced”. Depends on 9 family draft(s) incl. mission-aauth, mission-audit, mission-authority-server. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-authzen — Mission-Bound Runtime Enforcement: AuthZEN Profile",
+     "Mission-Bound Runtime Enforcement defines a substrate-independent decision contract: before each consequential action runs, a Policy Enforcement Point (PEP) obtains a permit from a Policy Decision Point (PDP) that evaluates the action against the established Mission. This document is the concrete OpenID AuthZEN binding of that contract.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-authzen.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Runtime enforcement; maturity: stable; adoption rung: “Implementation minimum”. Depends on 10 family draft(s) incl. mission-audit, mission-harness, mission-metering. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-runtime — Mission-Bound Runtime Enforcement",
+     "This document specifies runtime enforcement for Mission-Bound Authorization: within a declared enforcement scope, no consequential action executes until a policy enforcement point obtains a permit from a policy decision point that evaluates the action and its concrete parameters against the Mission established for the acting credential.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-runtime.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Runtime enforcement; maturity: stable; adoption rung: “Implementation minimum”. Depends on 18 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-mission-security-model — Mission Security Model",
+     "Mission-Bound Authorization for OAuth 2.0 and its companion profiles spread enforcement across several components: a Mission Issuer, in one of three bindings (OAuth Authorization Server, standalone Mission Authority Server, AAuth Person Server), derives authority and, where it also issues tokens, gates issuance; a Policy Enforcement Point and Policy Decision Point evaluate each action; a harness establishes a mediated execution environment; a consent rendering layer discloses authority to an Approver; an orchestrator unwinds in-flight work; and optional services report Mission state, adjudicate requested authority, meter consumption, manage the Mission fleet, log evidence, and report completion events.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-mission-security-model.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Security model; maturity: informational; adoption rung: “outside-ordering”. Depends on 28 family draft(s) incl. mission-aauth, mission-architecture, mission-audit. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-work-products — Mission Work Products",
+     "Agents produce durable artifacts, files, messages, memory entries, queue events, packages, and directory names, that other agents and Missions later read. An artifact can carry knowledge across a boundary, but it must not carry authority across with it. This document defines, as an experimental companion to Mission-Bound Authorization for OAuth 2.0, how a work product records where it came from without becoming a grant.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-work-products.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Security model; maturity: experimental; adoption rung: “Experimental”. Depends on 7 family draft(s) incl. mission-architecture, mission-audit, mission-security-model. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-attenuation — Mission Offline Attenuation for OAuth 2.0",
+     "Mission-Bound Authorization for OAuth 2.0 derives delegated authority through the Authorization Server: each narrowing is a derivation at the issuer. For deep sub-agent fan-out, the common agent topology, that puts the Authorization Server in the hot path as a latency and availability dependency. This document defines an optional Mission Offline Attenuation profile.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-attenuation.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Sub-agents; maturity: experimental; adoption rung: “Experimental”. Depends on 7 family draft(s) incl. mission-harness, mission-runtime, oauth-mission. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+    ("draft-mcguinness-oauth-mission-child-delegation — Mission Child Delegation for OAuth 2.0",
+     "Mission-Bound Authorization for OAuth 2.0 defines delegated tokens and the rule that authority narrows down a delegation chain. Agent harnesses, however, can spawn sub-agents whose work outlives a call frame or crosses a different execution boundary. This document defines an optional Mission Child Delegation profile.",
+     "https://github.com/mcguinness/mission-bound-authorization/blob/main/draft-mcguinness-oauth-mission-child-delegation.md",
+     "IETF (Pre-publication — GitHub)",
+     "Mission-Bound Authorization family — group: Sub-agents; maturity: stable; adoption rung: “Advanced”. Depends on 10 family draft(s) incl. mission-architecture, mission-harness, mission-metering. GitHub-only (pre-publication) — not on Datatracker as of 11 Aug 2026. Family is a 34-draft decomposition with a machine-readable family-manifest.json."),
+
+]
+make_sheet("Mission-Bound (Pre-pub)", COLORS['Mission'], mission_rows)
 
 # ============================================================
 # TAB 3: OpenID Foundation
@@ -2601,10 +2640,12 @@ for col, h in enumerate(hdr, 1):
     c.font, c.fill, c.alignment, c.border = HEADER_FONT, fill, HEADER_ALIGN, BORDER
 
 idx_data = [
-    ("Published RFCs", "Settled IETF standards-track and BCP RFCs — the foundation everything else builds on.",
-     len(rfc_rows), "Stable. These are the primitives, not where the debate is."),
+    ("Published RFCs", "Settled IETF standards-track and BCP RFCs — the foundation everything else builds on, plus OAuth WG output tracked for completeness.",
+     len(rfc_rows), "Stable. Mostly the primitives, not where the debate is. RFC 10017 (browser-based apps, published 21 Aug 2026) is the exception — OAuth WG output that is peripheral to delegation."),
     ("Active IETF Drafts", "IETF WG charters, requirements drafts, and active WG/individual drafts — including the OAuth WG recharter formally adding 'Complex Delegation' for agents, and the 34-draft McGuinness Mission-Bound Authorization family (33 of them GitHub-only pre-publication).",
      len(draft_rows), "★ THIS IS WHERE THE CURRENT WORK IS HAPPENING ★  The 4 Jun 2026 recharter is APPROVED (charter-ietf-oauth rev 06), making Complex Delegation chartered work — though no milestone has been attached to it yet. The 26 Aug 2026 sweep added 39 more drafts, including the first new WG-level entry (draft-ietf-oauth-rar-metadata-remediation), the six-draft Morrison ~handle identity family, and the NHE / VERA / AgentEnvelope autonomy-gating cluster."),
+    ("Mission-Bound (Pre-pub)", "The 33 GitHub-only drafts of the McGuinness Mission-Bound Authorization family — a single-repo decomposition with a machine-readable family-manifest.json, carrying group / maturity / adoption-rung per draft.",
+     len(mission_rows), "Pre-publication, not IETF documents. Only draft-mcguinness-oauth-mission has been filed on Datatracker and it stays in the Active IETF Drafts tab. Split out of that tab 26 Aug 2026 so 'Active IETF Drafts' means what it says."),
     ("OpenID Foundation", "Final and draft OIDF specs and the Oct 2025 Agentic AI whitepaper: AuthZEN (incl. the new ARAP profile), Shared Signals/CAEP, FAPI 2.0, HEART.",
      len(oidf_rows), "Mostly Final. AuthZEN Access Request & Approval Profile (ARAP) was adopted as a WG draft May 2026, Draft 1 published 3 Jun 2026."),
     ("Other Standards & Govt", "Kantara UMA 2.0, W3C VCs, NIST AI initiative, EU AI Act compliance dates.",
@@ -2641,5 +2682,5 @@ ws_idx.row_dimensions[4].height = 30
 
 wb.save('/Users/gffletch/Develop/Authorization/da_research/delegated_authorization_research.xlsx')
 print("OK - workbook saved")
-print(f"Tab counts: RFCs={len(rfc_rows)}, Drafts={len(draft_rows)}, OIDF={len(oidf_rows)}, Other={len(other_rows)}, Academic={len(academic_rows)}, Industry={len(industry_rows)}")
-print(f"Total: {len(rfc_rows)+len(draft_rows)+len(oidf_rows)+len(other_rows)+len(academic_rows)+len(industry_rows)}")
+print(f"Tab counts: RFCs={len(rfc_rows)}, Drafts={len(draft_rows)}, Mission={len(mission_rows)}, OIDF={len(oidf_rows)}, Other={len(other_rows)}, Academic={len(academic_rows)}, Industry={len(industry_rows)}")
+print(f"Total: {len(rfc_rows)+len(draft_rows)+len(mission_rows)+len(oidf_rows)+len(other_rows)+len(academic_rows)+len(industry_rows)}")

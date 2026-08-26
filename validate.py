@@ -17,14 +17,11 @@ from openpyxl import load_workbook
 
 WORKBOOK_PATH = sys.argv[1] if len(sys.argv) > 1 else "delegated_authorization_research.xlsx"
 
-CONTENT_TABS = [
-    "Published RFCs",
-    "Active IETF Drafts",
-    "OpenID Foundation",
-    "Other Standards & Govt",
-    "Academic Papers",
-    "Industry & Implementations",
-]
+# Content tabs are discovered from the workbook rather than hardcoded, so adding
+# a tab in build.py does not silently drop it from the totals. (It did: the
+# Mission-Bound tab added 26 Aug 2026 was invisible here until this was fixed.)
+def content_tabs(wb) -> list[str]:
+    return [name for name in wb.sheetnames if name != "Index"]
 
 # Actual column layout (1-indexed, with header row at row 1):
 #   col 1: #               (row number)
@@ -54,8 +51,9 @@ def main() -> int:
     print(f"  {'Tab':<32} {'Rows':>6}")
     print(f"  {'-' * 32} {'-' * 6}")
 
+    tabs = content_tabs(wb)
     counts: dict[str, int] = {}
-    for tab in CONTENT_TABS:
+    for tab in tabs:
         if tab not in wb.sheetnames:
             issues.append(f"missing tab: {tab}")
             continue
@@ -72,22 +70,31 @@ def main() -> int:
     # ---- Index total reconciliation ----
     if "Index" in wb.sheetnames:
         idx = wb["Index"]
-        # Index C11 holds the TOTAL formula
-        index_cell = idx["C11"]
-        formula = index_cell.value
+        # The TOTAL row moves whenever a tab is added, so find it by label in
+        # column A rather than assuming C11.
+        total_row = None
+        for r in range(1, idx.max_row + 1):
+            if str(idx.cell(row=r, column=1).value or "").strip().upper() == "TOTAL":
+                total_row = r
+                break
+        if total_row is None:
+            issues.append("Index tab has no TOTAL row")
+            total_row = 11
+        cell_ref = f"C{total_row}"
+        formula = idx[cell_ref].value
         # Reload data_only to get computed value
         wb_calc = load_workbook(path, data_only=True)
         idx_calc = wb_calc["Index"]
-        computed = idx_calc["C11"].value
-        print(f"Index C11 formula:  {formula}")
-        print(f"Index C11 computed: {computed}")
+        computed = idx_calc[cell_ref].value
+        print(f"Index {cell_ref} formula:  {formula}")
+        print(f"Index {cell_ref} computed: {computed}")
         print(f"Row-sum total:      {total}")
         if computed is None:
             print("  NOTE: computed value is None — workbook needs a recalc pass.")
             print("        Open it once in Excel/LibreOffice, or run a recalc tool,")
             print("        so the SUM formula populates. Then re-run validate.py.")
         elif computed != total:
-            issues.append(f"Index C11 ({computed}) != row sum ({total})")
+            issues.append(f"Index {cell_ref} ({computed}) != row sum ({total})")
         else:
             print("  ✓ Index total matches row sum.")
     else:
@@ -97,7 +104,7 @@ def main() -> int:
     # ---- Row-level lint: title presence, URL well-formedness ----
     print("Row lint:")
     lint_count = 0
-    for tab in CONTENT_TABS:
+    for tab in tabs:
         if tab not in wb.sheetnames:
             continue
         ws = wb[tab]
