@@ -11,9 +11,9 @@ dated through Aug 2026 (last full sweep: 26 Aug 2026).
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **412 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **441 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **442 nodes, 661 edges**,
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **471 nodes, 661 edges**,
   in sync with the workbook as of 26 Aug 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
@@ -64,7 +64,7 @@ Both still exist from the original session if needed.
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
 | Academic Papers            | 12    | arXiv + IEEE.                                          |
-| Industry & Implementations | 84    | Vendor blogs, reference impls, full Control Plane blog.|
+| Industry & Implementations | 113   | Vendor blogs, reference impls, full Control Plane blog.|
 
 Row schema:
 
@@ -113,8 +113,9 @@ Still useful as a mental model when placing new drafts:
   - **1 OIDF profile** in OpenID Foundation tab: AuthZEN Access Request &
     Approval Profile (ARAP) — adopted as WG draft May 2026, Draft 1 published
     3 Jun 2026
-  - **50 blog entries** at `notes.karlmcguinness.com` ("Control Plane"), all now
-    in the Industry & Implementations tab. Major arcs: Agent Control Points
+  - **79 blog entries** at `notes.karlmcguinness.com` ("Control Plane"), all now
+    in the Industry & Implementations tab — verified 26 Aug 2026 as complete
+    coverage of the live site, with no dead links. Major arcs: Agent Control Points
     (Aug 2026), the Mission-Bound Authorization handbook + 5 series indexes
     (Jul 2026), Open-World OAuth (Mar 2026), Least-Privilege MCP (Jun 2026).
     The site's `/index.xml` RSS feed is the reliable way to enumerate *posts* —
@@ -237,7 +238,7 @@ Still worth periodic checking: whether any of the 33 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
 has been so far. Re-check with the family-manifest slugs.
 
-**Graph — REBUILT 26 Aug 2026.** Now 442 nodes / 661 edges, in sync with the
+**Graph — REBUILT 26 Aug 2026.** Now 471 nodes / 661 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
 analysis, preserved), 373 `composes` from the Mission-Bound family manifest,
@@ -308,16 +309,19 @@ narration of each pair.
 
 **Other deferred items:**
 
-- **Open curation decision — the 27 Mission-Bound handbook chapters.** Surfaced
-  26 Aug 2026. Karl's handbook chapters (all dated 22 Jul 2026) each have their
-  own `/notes/` URL but are **absent from the RSS feed**, which is why the
-  11 Aug sweep missed them. Three of them were already tracked under their
-  pre-handbook slugs and have now been repointed; **24 chapters plus 5
-  handbook-only `/series/` indexes remain untracked.** The argument for adding
-  them is the primary-body rule (all 50 blog entries are tracked). The argument
-  against is that they are a re-issued edition of material already in the
-  corpus rather than new sources. Adding all 29 would take Industry from 84 to
-  113. Maintainer has not ruled.
+- **Mission-Bound handbook chapters — RESOLVED 26 Aug 2026, all 29 added.**
+  Industry went 84 → 113. The chapters each have their own `/notes/` URL but are
+  **absent from the RSS feed**, which is why the 11 Aug sweep missed them.
+  The initial framing — that they were a re-issued edition of material already
+  tracked — **was wrong**, and the check that settled it is worth repeating on
+  any similar call: a title diff found **zero** of the 24 matched an existing
+  row, and fetching `/series/what-the-corporate-card-already-solved` showed
+  **24 of its 30 member essays untracked while the series index itself was
+  tracked.** The corpus held the table of contents without the chapters. Only
+  the 3 chapters that were genuine re-slugs of pre-handbook posts were
+  duplicates, and those were repointed rather than re-added.
+  **General lesson: a tracked series index is not evidence its members are
+  tracked.** Check members explicitly.
 
 - **Open curation decision — Vauban x402 pair.** `draft-vauban-x402-stark-receipts`
   and `draft-vauban-x402-pqc-receipts` were surfaced in the Aug 2026 sweep but
