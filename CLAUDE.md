@@ -11,9 +11,9 @@ dated through Aug 2026 (last full sweep: 26 Aug 2026).
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **566 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **572 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **596 nodes, 690 edges**,
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **602 nodes, 702 edges**,
   in sync with the workbook as of 26 Aug 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
@@ -59,7 +59,7 @@ Both still exist from the original session if needed.
 | -------------------------- | ----- | ------------------------------------------------------ |
 | Index                      | cover | Auto-summed; TOTAL row moves when tabs are added       |
 | Published RFCs             | 5     | Stable primitives, plus RFC 10017 for WG completeness. |
-| Active IETF Drafts         | 349   | **★ Where the action is.** WG + individual drafts.     |
+| Active IETF Drafts         | 355   | **★ Where the action is.** WG + individual drafts.     |
 | Mission-Bound (Pre-pub)    | 33    | McGuinness GitHub-only family. Venue split, not topic. |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
@@ -323,7 +323,7 @@ Still worth periodic checking: whether any of the 33 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
 has been so far. Re-check with the family-manifest slugs.
 
-**Graph — REBUILT 26 Aug 2026.** Now 596 nodes / 690 edges, in sync with the
+**Graph — REBUILT 26 Aug 2026.** Now 602 nodes / 702 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
 analysis, preserved), 373 `composes` from the Mission-Bound family manifest,
@@ -443,12 +443,23 @@ narration of each pair.
   **General lesson: a tracked series index is not evidence its members are
   tracked.** Check members explicitly.
 
-- **Open curation decision — Vauban x402 pair.** `draft-vauban-x402-stark-receipts`
-  and `draft-vauban-x402-pqc-receipts` were surfaced in the Aug 2026 sweep but
-  deliberately left out: they are x402 *receipts* (which the corpus now tracks,
-  via the Hopley cluster) but their subject is STARK / post-quantum proof
-  discipline rather than payment authorization. Maintainer has not ruled. Add
-  them if the corpus decides cryptographic proof systems are in scope.
+- **Vauban x402 — RESOLVED 26 Aug 2026, ruled IN.** Cryptographic proof systems
+  are in scope when attached to agentic-payment receipts. **It was a seven-draft
+  family, not the pair that was held**: `delegation-binding` was already tracked
+  and six were added (`stark-receipts`, `pqc-receipts`, `vpsf-algebra`,
+  `starknet-anchor`, `lifecycle-fsm`, `consolidated`).
+  - `stark-receipts` is the family **hub** — four siblings reference it
+    normatively, and `draft-dogru-cedulon` references it from the SCITT tail the
+    corpus deliberately does not track, a rare inbound link from outside.
+  - `x402-consolidated` (-00) folds format + PQC discipline + Starknet anchor into
+    one document. Datatracker does **not** mark the components Replaced, so all six
+    are tracked; **watch for supersession**, which would make the consolidated draft
+    the survivor and the other three SUPERSEDED.
+  - `starknet-anchor` is the most blockchain-specific document in the corpus and is
+    the point where this cluster leaves protocol territory — kept for family
+    completeness, flagged rather than pretended otherwise.
+  - `lifecycle-fsm` is the most reusable of the six: an explicit payment-lifecycle
+    FSM, the same shape of artifact as the seven-state Mission lifecycle.
 - User has deferred adding a "maturity/readiness" column to the Active Drafts
   tab. The Mission-Bound family now carries maturity + adoption_rung inline in
   its comments column, which is a partial precedent — revisit.
