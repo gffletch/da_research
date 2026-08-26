@@ -2086,7 +2086,7 @@
       "url": "https://datatracker.ietf.org/doc/draft-vauban-x402-delegation-binding/",
       "revision": "-01",
       "origin": "workbook",
-      "degree": 1
+      "degree": 7
     },
     {
       "id": "draft-samal-vap",
@@ -4036,7 +4036,7 @@
       "url": "https://datatracker.ietf.org/doc/draft-hopley-x402-canonicalisation-jcs-v1/",
       "revision": "-04",
       "origin": "workbook",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "draft-hopley-x402-composite-trust-query",
@@ -4962,7 +4962,7 @@
       "url": "https://datatracker.ietf.org/doc/draft-burls-mtac/",
       "revision": "-00",
       "origin": "workbook",
-      "degree": 0
+      "degree": 1
     },
     {
       "id": "draft-mpsb-agntcy-messaging",
@@ -5201,6 +5201,90 @@
       "revision": "-00",
       "origin": "workbook",
       "degree": 1
+    },
+    {
+      "id": "draft-vauban-x402-stark-receipts",
+      "type": "individual-draft",
+      "name": "draft-vauban-x402-stark-receipts — x402 STARK Receipt Format Extension",
+      "summary": "The x402 PAYMENT-RESPONSE carries a facilitator-issued settlement reference but does not provide a self-contained, offline-verifiable payment-condition proof. A verifier must today contact the facilitator to confirm whether a specific amount, currency, and payer attestation were satisfied at the time of payment. This gap prevents compliance with EU AI Act Art. 12 (transparency and documentation) and MiCA Art. 76 (settlement record-keeping) in automated payment pipelines. This document defines the receipt-format extension for x402 V2. The extension introduces a negotiable receipt format selection mechanism that allows resource servers, facilitators, and clients to agree on which cryptographic receipt variant to produce and verify, without altering the core PAYMENT-RESPONSE wire structure. Three variants are defined: a Stwo Circle STARK proof of payment conditions (post- quantum sound, offline verifiable), a hybrid ES256K + ML-DSA-65 dual- signature receipt (receipt integrity under quantum adversary), and a classical ES256K fallback. A canonical preimage discipline using JCS ([RFC8785]) ensures cross-implementation digest consistency. The canonical preimage discipline in this document is cross-validated against the x402 canonicalisation conformance set, which is checked byte-for-byte across five independent RFC 8785 ([RFC8785]) implementations in five languages (Python, TypeScript, Go, Java, Rust).",
+      "long_description": "The x402 PAYMENT-RESPONSE carries a facilitator-issued settlement reference but does not provide a self-contained, offline-verifiable payment-condition proof. A verifier must today contact the facilitator to confirm whether a specific amount, currency, and payer attestation were satisfied at the time of payment. This gap prevents compliance with EU AI Act Art. 12 (transparency and documentation) and MiCA Art. 76 (settlement record-keeping) in automated payment pipelines. This document defines the receipt-format extension for x402 V2. The extension introduces a negotiable receipt format selection mechanism that allows resource servers, facilitators, and clients to agree on which cryptographic receipt variant to produce and verify, without altering the core PAYMENT-RESPONSE wire structure. Three variants are defined: a Stwo Circle STARK proof of payment conditions (post- quantum sound, offline verifiable), a hybrid ES256K + ML-DSA-65 dual- signature receipt (receipt integrity under quantum adversary), and a classical ES256K fallback. A canonical preimage discipline using JCS ([RFC8785]) ensures cross-implementation digest consistency. The canonical preimage discipline in this document is cross-validated against the x402 canonicalisation conformance set, which is checked byte-for-byte across five independent RFC 8785 ([RFC8785]) implementations in five languages (Python, TypeScript, Go, Java, Rust). Revision -02, 25 May 2026; author: Vauban Research. **Added 26 Aug 2026 — resolves the curation hold open since 11 Aug 2026**, when this cluster was left out because its subject is cryptographic proof discipline rather than payment authorization. Maintainer ruled it in. Checking the family found it is **seven drafts, not the pair that was held**; draft-vauban-x402-delegation-binding was already tracked. **The hub of the Vauban family** — five siblings reference it, four of them normatively (pqc-receipts, vpsf-algebra, starknet-anchor, delegation-binding). Also referenced by draft-dogru-cedulon, a SCITT draft this corpus deliberately does not track, which is a rare cross-link out of the payments cluster. This is the draft the 11 Aug 2026 hold was really about: it is an x402 *receipt* format, but its subject is STARK proof discipline.",
+      "category": "payments",
+      "tab": "Active IETF Drafts",
+      "standards_org": "IETF (individual)",
+      "url": "https://datatracker.ietf.org/doc/draft-vauban-x402-stark-receipts/",
+      "revision": "-02",
+      "origin": "workbook",
+      "degree": 3
+    },
+    {
+      "id": "draft-vauban-x402-pqc-receipts",
+      "type": "individual-draft",
+      "name": "draft-vauban-x402-pqc-receipts — Post-Quantum Cryptographic Discipline for x402 STARK Receipts",
+      "summary": "This document specifies a post-quantum cryptographic discipline for x402 STARK receipts. The discipline applies on two layers : (a) proof integrity via hash-based proving systems (the Stwo Circle STARK M31 reference implementation), which are post-quantum sound under standard cryptanalytic assumptions, and (b) signature integrity via the hybrid ES256K + ML-DSA-65 dual-signed receipt variant ([FIPS204]). It maps the hybrid-pqc receipt variant of the x402 STARK Receipt Format Extension ([STARK-RECEIPTS]) to the NIST PQC migration roadmap and to the EU eIDAS 2.0, ANSSI, and BSI migration timelines for the 2025-2030 window. Reference runners are published as the vauban-x402-jcs-conformance and vauban-x402-canonical Rust crates. Companion documents are [STARK-RECEIPTS] (receipt format) and [VPSF-ALGEBRA] (composability grammar).",
+      "long_description": "This document specifies a post-quantum cryptographic discipline for x402 STARK receipts. The discipline applies on two layers : (a) proof integrity via hash-based proving systems (the Stwo Circle STARK M31 reference implementation), which are post-quantum sound under standard cryptanalytic assumptions, and (b) signature integrity via the hybrid ES256K + ML-DSA-65 dual-signed receipt variant ([FIPS204]). It maps the hybrid-pqc receipt variant of the x402 STARK Receipt Format Extension ([STARK-RECEIPTS]) to the NIST PQC migration roadmap and to the EU eIDAS 2.0, ANSSI, and BSI migration timelines for the 2025-2030 window. Reference runners are published as the vauban-x402-jcs-conformance and vauban-x402-canonical Rust crates. Companion documents are [STARK-RECEIPTS] (receipt format) and [VPSF-ALGEBRA] (composability grammar). Revision -01, 25 May 2026; author: Vauban Research. **Added 26 Aug 2026 — resolves the curation hold open since 11 Aug 2026**, when this cluster was left out because its subject is cryptographic proof discipline rather than payment authorization. Maintainer ruled it in. Checking the family found it is **seven drafts, not the pair that was held**; draft-vauban-x402-delegation-binding was already tracked. The other half of the pair held out on 11 Aug 2026. Post-quantum discipline for the STARK receipts, motivated by the migration horizon in NIST SP 800-208, ANSSI, BSI and eIDAS 2.0. Compare draft-burls-mtac, added earlier today, which brings PQC to agent *credential issuance* rather than to payment receipts.",
+      "category": "payments",
+      "tab": "Active IETF Drafts",
+      "standards_org": "IETF (individual)",
+      "url": "https://datatracker.ietf.org/doc/draft-vauban-x402-pqc-receipts/",
+      "revision": "-01",
+      "origin": "workbook",
+      "degree": 2
+    },
+    {
+      "id": "draft-vauban-x402-vpsf-algebra",
+      "type": "individual-draft",
+      "name": "draft-vauban-x402-vpsf-algebra — VPSF Claim Algebra for x402 Payment Receipts",
+      "summary": "The x402 protocol ([X402-V2]) defines three wire messages for HTTP- native payment flows but provides no composability model for payment receipts. A recipient holding a SettlementReceipt and a DelegationGrant cannot natively express that the settlement satisfies a delegated spending condition, or that a RefundClaim negates an earlier SettlementReceipt, without bespoke facilitator-side logic. As automated payment pipelines grow, the absence of a normative composability layer leads to fragmented, non-interoperable verification surfaces. This document specifies the Vauban Proof Stack Framework (VPSF) Claim Algebra for x402 payment receipts: a grammar of five composition operators (Conjunction, Implication, Aggregation, Selective Disclosure, Revocation; abbreviated ∧, →, ⊕, ▷, ¬) applied over the four canonical Payment Claim types (PaymentIntent, SettlementReceipt, RefundClaim, DelegationGrant) defined in [LIFECYCLE-FSM]. The algebra is chain-agnostic by invariant; the Starknet-based proof system described in [STARK-RECEIPTS] is the first reference implementation. Composability is grounded in the JCS canonical preimage discipline ([RFC8785]), ensuring operator results are deterministic and cross-implementation consistent. An open-source Rust implementation is provided in [VAUBAN-CRATE].",
+      "long_description": "The x402 protocol ([X402-V2]) defines three wire messages for HTTP- native payment flows but provides no composability model for payment receipts. A recipient holding a SettlementReceipt and a DelegationGrant cannot natively express that the settlement satisfies a delegated spending condition, or that a RefundClaim negates an earlier SettlementReceipt, without bespoke facilitator-side logic. As automated payment pipelines grow, the absence of a normative composability layer leads to fragmented, non-interoperable verification surfaces. This document specifies the Vauban Proof Stack Framework (VPSF) Claim Algebra for x402 payment receipts: a grammar of five composition operators (Conjunction, Implication, Aggregation, Selective Disclosure, Revocation; abbreviated ∧, →, ⊕, ▷, ¬) applied over the four canonical Payment Claim types (PaymentIntent, SettlementReceipt, RefundClaim, DelegationGrant) defined in [LIFECYCLE-FSM]. The algebra is chain-agnostic by invariant; the Starknet-based proof system described in [STARK-RECEIPTS] is the first reference implementation. Composability is grounded in the JCS canonical preimage discipline ([RFC8785]), ensuring operator results are deterministic and cross-implementation consistent. An open-source Rust implementation is provided in [VAUBAN-CRATE]. Revision -01, 25 May 2026; author: Vauban Research. **Added 26 Aug 2026 — resolves the curation hold open since 11 Aug 2026**, when this cluster was left out because its subject is cryptographic proof discipline rather than payment authorization. Maintainer ruled it in. Checking the family found it is **seven drafts, not the pair that was held**; draft-vauban-x402-delegation-binding was already tracked. Claim algebra for x402 payment receipts; normatively references stark-receipts and is referenced by pqc-receipts. Not part of the original hold, surfaced by checking the family.",
+      "category": "payments",
+      "tab": "Active IETF Drafts",
+      "standards_org": "IETF (individual)",
+      "url": "https://datatracker.ietf.org/doc/draft-vauban-x402-vpsf-algebra/",
+      "revision": "-01",
+      "origin": "workbook",
+      "degree": 2
+    },
+    {
+      "id": "draft-vauban-x402-starknet-anchor",
+      "type": "individual-draft",
+      "name": "draft-vauban-x402-starknet-anchor — x402 V2 Starknet On-Chain Anchor",
+      "summary": "The x402 receipt-format extension defined in [STARK-RECEIPTS] and the lifecycle finite state machine defined in [LIFECYCLE-FSM] specify cryptographic evidence for x402 V2 payment events as off-chain verifiable artefacts. Neither document specifies how a settlement receipt is promoted to on-chain finality, nor how an independent auditor verifies that promotion without contacting the originating facilitator. This document defines the Starknet on-chain anchor format for x402 V2 payment settlements. The anchor consists of a Starknet event emitted by a conforming Cairo contract, identified by a canonical tuple of chain identifier, transaction hash, event index, and optional block number. A reference implementation, PaymentDemoEmitter, is deployed on Starknet Sepolia at 0x044dd87a94a801cf775d4c5e4b6703102d4e97e1cd1d0a8879341219ae4f19ff and is inspectable via the Voyager block explorer. The document also specifies an RPC endpoint convention, grounded in the Starknet JSON- RPC specification, that any compliant node implementation satisfies; the Vauban Pay reference endpoints are cited as one such implementation. This anchor specification is one instantiation of a chain-agnostic anchoring pattern; the protocol contract is designed to accommodate future per-chain adapter specifications that satisfy the same structural requirements.",
+      "long_description": "The x402 receipt-format extension defined in [STARK-RECEIPTS] and the lifecycle finite state machine defined in [LIFECYCLE-FSM] specify cryptographic evidence for x402 V2 payment events as off-chain verifiable artefacts. Neither document specifies how a settlement receipt is promoted to on-chain finality, nor how an independent auditor verifies that promotion without contacting the originating facilitator. This document defines the Starknet on-chain anchor format for x402 V2 payment settlements. The anchor consists of a Starknet event emitted by a conforming Cairo contract, identified by a canonical tuple of chain identifier, transaction hash, event index, and optional block number. A reference implementation, PaymentDemoEmitter, is deployed on Starknet Sepolia at 0x044dd87a94a801cf775d4c5e4b6703102d4e97e1cd1d0a8879341219ae4f19ff and is inspectable via the Voyager block explorer. The document also specifies an RPC endpoint convention, grounded in the Starknet JSON- RPC specification, that any compliant node implementation satisfies; the Vauban Pay reference endpoints are cited as one such implementation. This anchor specification is one instantiation of a chain-agnostic anchoring pattern; the protocol contract is designed to accommodate future per-chain adapter specifications that satisfy the same structural requirements. Revision -01, 25 May 2026; author: Vauban Research. **Added 26 Aug 2026 — resolves the curation hold open since 11 Aug 2026**, when this cluster was left out because its subject is cryptographic proof discipline rather than payment authorization. Maintainer ruled it in. Checking the family found it is **seven drafts, not the pair that was held**; draft-vauban-x402-delegation-binding was already tracked. On-chain anchoring for ledger-backed finality. The most blockchain-specific document in the corpus — kept for family completeness rather than on its own merits, and worth flagging as the point where this cluster leaves protocol territory.",
+      "category": "payments",
+      "tab": "Active IETF Drafts",
+      "standards_org": "IETF (individual)",
+      "url": "https://datatracker.ietf.org/doc/draft-vauban-x402-starknet-anchor/",
+      "revision": "-01",
+      "origin": "workbook",
+      "degree": 1
+    },
+    {
+      "id": "draft-vauban-x402-lifecycle-fsm",
+      "type": "individual-draft",
+      "name": "draft-vauban-x402-lifecycle-fsm — x402 V2 Payment Lifecycle Finite State Machine",
+      "summary": "This document defines a normative finite state machine (FSM) for x402 V2 Payment lifecycle transitions, covering the four canonical Payment Claim states: PaymentIntent (initialisation), SettlementReceipt (completion), RefundClaim (reversal), and DelegationGrant (bounded authority). Each transition is bound to the prior state by cryptographic linkage via the JCS canonical preimage discipline ([RFC8785]), enabling supervisor reconstruction of full payment histories from retained off-VM manifests. The FSM is compatible with the x402 STARK Receipt Format Extension [STARK-RECEIPTS] but applicable to any x402 receipt format that implements the canonical preimage discipline. Implementation evidence: 18 DelegationGrant vectors cross-validated byte-identical across five language runtimes ([X402-2432]), live on-chain anchor on Starknet Sepolia (PaymentDemoEmitter at 0x044dd87a94a801cf775d4c5e4b6703102d4e97e1cd1d0a8879341219ae4f19ff).",
+      "long_description": "This document defines a normative finite state machine (FSM) for x402 V2 Payment lifecycle transitions, covering the four canonical Payment Claim states: PaymentIntent (initialisation), SettlementReceipt (completion), RefundClaim (reversal), and DelegationGrant (bounded authority). Each transition is bound to the prior state by cryptographic linkage via the JCS canonical preimage discipline ([RFC8785]), enabling supervisor reconstruction of full payment histories from retained off-VM manifests. The FSM is compatible with the x402 STARK Receipt Format Extension [STARK-RECEIPTS] but applicable to any x402 receipt format that implements the canonical preimage discipline. Implementation evidence: 18 DelegationGrant vectors cross-validated byte-identical across five language runtimes ([X402-2432]), live on-chain anchor on Starknet Sepolia (PaymentDemoEmitter at 0x044dd87a94a801cf775d4c5e4b6703102d4e97e1cd1d0a8879341219ae4f19ff). Revision -01, 25 May 2026; author: Vauban Research. **Added 26 Aug 2026 — resolves the curation hold open since 11 Aug 2026**, when this cluster was left out because its subject is cryptographic proof discipline rather than payment authorization. Maintainer ruled it in. Checking the family found it is **seven drafts, not the pair that was held**; draft-vauban-x402-delegation-binding was already tracked. A finite state machine for the x402 V2 payment lifecycle. The most broadly reusable of the six: an explicit lifecycle FSM is the same shape of artifact as the seven-state Mission lifecycle in the Mission-Bound MVP, arrived at for payments instead of tasks.",
+      "category": "mission-bound",
+      "tab": "Active IETF Drafts",
+      "standards_org": "IETF (individual)",
+      "url": "https://datatracker.ietf.org/doc/draft-vauban-x402-lifecycle-fsm/",
+      "revision": "-01",
+      "origin": "workbook",
+      "degree": 2
+    },
+    {
+      "id": "draft-vauban-x402-consolidated",
+      "type": "individual-draft",
+      "name": "draft-vauban-x402-consolidated — x402 Cryptographic Receipts: Format, Post-Quantum Discipline, and Starknet Anchor",
+      "summary": "The x402 V2 protocol defines HTTP-native payment flows but leaves three gaps that block compliance use cases. First, the PAYMENT- RESPONSE carries a facilitator-issued reference rather than a self- contained, offline-verifiable cryptographic receipt; an auditor cannot validate a retained receipt without contacting the facilitator. Second, classical signatures alone (ES256K) do not satisfy the post-quantum migration horizon set by NIST SP 800-208, ANSSI, BSI, and EU eIDAS 2.0 for high-value or long-retention material. Third, off-chain receipts alone do not provide ledger- anchored finality required by frameworks such as MiCA Art. 76 (settlement record-keeping) and EU AI Act Art. 12 (transparency-and- documentation). This document consolidates three previously separate extensions into a single specification. It defines (a) a negotiable receipt-format extension with three variants (Stwo Circle STARK proof, hybrid ES256K + ML-DSA-65 dual-signature, classical ES256K fallback) over a JCS canonical preimage discipline grounded in RFC 8785; (b) a two-axis post-quantum discipline mapping hash-based proving and hybrid signatures to the NIST PQC migration roadmap; and (c) a Starknet on- chain anchor format with a canonical anchor tuple, Cairo event layout, RPC endpoint convention, and block explorer reference for human-readable audit. Topics under active coalition discussion are explicitly out of scope: the VPSF composability claim algebra, the payment lifecycle finite state machine, and the delegation binding extension are deferred to companion documents not included in this consolidated submission.",
+      "long_description": "The x402 V2 protocol defines HTTP-native payment flows but leaves three gaps that block compliance use cases. First, the PAYMENT- RESPONSE carries a facilitator-issued reference rather than a self- contained, offline-verifiable cryptographic receipt; an auditor cannot validate a retained receipt without contacting the facilitator. Second, classical signatures alone (ES256K) do not satisfy the post-quantum migration horizon set by NIST SP 800-208, ANSSI, BSI, and EU eIDAS 2.0 for high-value or long-retention material. Third, off-chain receipts alone do not provide ledger- anchored finality required by frameworks such as MiCA Art. 76 (settlement record-keeping) and EU AI Act Art. 12 (transparency-and- documentation). This document consolidates three previously separate extensions into a single specification. It defines (a) a negotiable receipt-format extension with three variants (Stwo Circle STARK proof, hybrid ES256K + ML-DSA-65 dual-signature, classical ES256K fallback) over a JCS canonical preimage discipline grounded in RFC 8785; (b) a two-axis post-quantum discipline mapping hash-based proving and hybrid signatures to the NIST PQC migration roadmap; and (c) a Starknet on- chain anchor format with a canonical anchor tuple, Cairo event layout, RPC endpoint convention, and block explorer reference for human-readable audit. Topics under active coalition discussion are explicitly out of scope: the VPSF composability claim algebra, the payment lifecycle finite state machine, and the delegation binding extension are deferred to companion documents not included in this consolidated submission. Revision -00, 29 May 2026; author: Vauban Research. **Added 26 Aug 2026 — resolves the curation hold open since 11 Aug 2026**, when this cluster was left out because its subject is cryptographic proof discipline rather than payment authorization. Maintainer ruled it in. Checking the family found it is **seven drafts, not the pair that was held**; draft-vauban-x402-delegation-binding was already tracked. A -00 consolidation of the receipt format, post-quantum discipline and Starknet anchor into one document, referencing lifecycle-fsm, delegation-binding and vpsf-algebra for context. Datatracker does **not** mark the component drafts Replaced, so all six are tracked; watch whether the components get superseded, which would make this the survivor.",
+      "category": "payments",
+      "tab": "Active IETF Drafts",
+      "standards_org": "IETF (individual)",
+      "url": "https://datatracker.ietf.org/doc/draft-vauban-x402-consolidated/",
+      "revision": "-00",
+      "origin": "workbook",
+      "degree": 2
     },
     {
       "id": "draft-mcguinness-mission-harness",
@@ -8179,7 +8263,7 @@
       "in_workbook": false,
       "category": "cross-cutting",
       "origin": "curated",
-      "degree": 7
+      "degree": 11
     },
     {
       "id": "rfc-9068",
@@ -12871,6 +12955,13 @@
     },
     {
       "source": "draft-hopley-x402-canonicalisation-jcs-v1",
+      "target": "draft-vauban-x402-stark-receipts",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-hopley-x402-canonicalisation-jcs-v1",
       "target": "rfc-8785",
       "type": "references",
       "origin": "derived",
@@ -13036,6 +13127,83 @@
       "type": "references",
       "origin": "derived",
       "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-vauban-x402-stark-receipts",
+      "target": "draft-vauban-x402-delegation-binding",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-vauban-x402-stark-receipts",
+      "target": "rfc-8785",
+      "type": "references",
+      "origin": "derived",
+      "label": "Cites RFC in annotation"
+    },
+    {
+      "source": "draft-vauban-x402-pqc-receipts",
+      "target": "draft-vauban-x402-delegation-binding",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-vauban-x402-pqc-receipts",
+      "target": "draft-burls-mtac",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-vauban-x402-vpsf-algebra",
+      "target": "draft-vauban-x402-delegation-binding",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-vauban-x402-vpsf-algebra",
+      "target": "rfc-8785",
+      "type": "references",
+      "origin": "derived",
+      "label": "Cites RFC in annotation"
+    },
+    {
+      "source": "draft-vauban-x402-starknet-anchor",
+      "target": "draft-vauban-x402-delegation-binding",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-vauban-x402-lifecycle-fsm",
+      "target": "draft-vauban-x402-delegation-binding",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-vauban-x402-lifecycle-fsm",
+      "target": "rfc-8785",
+      "type": "references",
+      "origin": "derived",
+      "label": "Cites RFC in annotation"
+    },
+    {
+      "source": "draft-vauban-x402-consolidated",
+      "target": "draft-vauban-x402-delegation-binding",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-vauban-x402-consolidated",
+      "target": "rfc-8785",
+      "type": "references",
+      "origin": "derived",
+      "label": "Cites RFC in annotation"
     },
     {
       "source": "paper-authorization-propagation-in-multi-agent-ai-systems-identity",
