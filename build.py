@@ -2777,6 +2777,227 @@ industry_rows = [
      "https://notes.karlmcguinness.com/series/you-dont-give-agents-credentials-you-grant-them-power-of-attorney/",
      "Industry blog (Independent)",
      "Published on Control Plane (notes.karlmcguinness.com); series index. Added 26 Aug 2026: the 11 Aug backfill took series indexes from the RSS feed, but this one is linked only from the handbook and was not in the feed."),
+
+    # ---- Heather Flanagan / Spherical Cow Consulting — first backfill, 26 Aug 2026 ----
+    # Filtered source: 36 of 159 archive posts are in scope for delegated authorization.
+    # Feed is https://sphericalcowconsulting.com/feed/ and returns the whole archive at once.
+    # Oldest to newest.
+
+    ("Flanagan — Authorization – the Next Big Thing",
+     "Authorization is growing as the next big thing. I want to understand why, and writing about it is how I get there from here.",
+     "https://sphericalcowconsulting.com/2023/06/29/authorization-the-next-big-thing/",
+     "Industry blog (Independent)",
+     "Published 29 Jun 2023 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Jun 2023, the oldest entry from this source and a marker of how early she called authorization as the coming problem — two years before the agent draft wave. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — The Evolving Landscape of Non-Human Identity",
+     "This blog entry explores the insane world of non-human identity, a subject as complicated as the world’s many cloud computing environments. My journey from the early days of digital identity management to the revelations at IETF 119 serves as the backdrop, and I share what I’m learning based on those experiences. The post zips through the labyrinth of authorization challenges that processes and APIs face, highlighting the contributions of DevOps and IT teams (but not so much IAM teams). I also introduce some of the efforts from IETF 119 aimed at standardizing the non-human identity space and urge you to broaden your horizons and deepen your comprehension of this evolving field. Ready to read more?",
+     "https://sphericalcowconsulting.com/2024/04/05/the-evolving-landscape-of-non-human-identity/",
+     "Industry blog (Independent)",
+     "Published 5 Apr 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Earliest NHI post tracked here (Apr 2024) — predates the agent-delegation draft wave by roughly a year and is useful for dating when the industry framing shifted. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — IAM’s Time Problem: Why Digital Attestation Needs Work",
+     "Identity management and digital attestation are crucial for verification and authenticity. The process involves proving the integrity of data through cryptographic techniques, and it has parallels to non-digital methods like notary services. The use of electronic ledgers, cryptography, and key management are essential in ensuring secure digital attestation. However, there are challenges related to long-term scalability and managing revoked keys. Initiatives like the C2PA and the IETF's SCITT are addressing some of these issues. Hierarchical Deterministic Keys (HDKs) show promise in creating derived keys for specific operations or time frames to mitigate the risk of compromise. The case of refugees illustrates the complexities of digital attestation, especially over extended periods. With the exponential growth of data, it's crucial to consider the long-term scalability of digital…",
+     "https://sphericalcowconsulting.com/2024/08/11/time-and-attestation/",
+     "Industry blog (Independent)",
+     "Published 11 Aug 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Digital Identity in the Age of AI: Challenges and Opportunities",
+     "AI is revolutionizing digital identity, enhancing security and efficiency across various industries. Adaptive authentication, powered by AI, assesses real-time access risk, reducing cumbersome password prompts for users and bolstering security for companies. However, this reliance on AI for authentication raises privacy concerns due to extensive data access. Moreover, the use of AI for malicious purposes, such as creating deepfakes, poses further challenges. Global efforts, including the EU's AI Act and OECD's AI Principles, aim to regulate AI's ethical usage. Organizations are urged to embrace AI-driven digital identity solutions while maintaining a focus on privacy and security. Staying updated on tech news and industry standards is crucial for both tech leaders and individual contributors.",
+     "https://sphericalcowconsulting.com/2024/08/26/digital-identity-ai/",
+     "Industry blog (Independent)",
+     "Published 26 Aug 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Privacy-Enhancing Technologies: Protecting Human and Non-Human Identities",
+     "Privacy-Enhancing Technologies (PETs) are essential for safeguarding digital identities amidst increasing data breaches. They encompass tools like zero-knowledge proofs and advanced biometrics to secure both human and non-human identities in the digital space. As digital identity expands to include non-human entities, PETs are vital for ensuring privacy and security. Zero-knowledge proofs (ZKPs) emerge as a game-changer, allowing for verification without revealing sensitive data. While challenges exist, technology continues to advance, and the widespread deployment of PETs is on the horizon. As digital identities evolve, businesses and individuals must embrace PETs and actively contribute to shaping privacy-enhancing digital identity solutions.",
+     "https://sphericalcowconsulting.com/2024/08/29/pets/",
+     "Industry blog (Independent)",
+     "Published 29 Aug 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Rethinking Identity Management: The Role of Non-Human Identities in Academic Research",
+     "Academia is facing challenges in managing non-human identities (NHIs), which are essential for modern research systems but often treated like human users. As NHIs grow in complexity, issues like token sprawl, access management misalignments, and compliance difficulties arise, especially in collaborative environments like high-performance computing. Traditional directories fail to manage these identities effectively due to their static assumptions and lack of context. To improve NHI management, academia must establish clear ownership, adopt standards like SPIFFE, and foster collaboration among IT and IAM teams. Addressing these issues is crucial for securing and scaling our infrastructure.",
+     "https://sphericalcowconsulting.com/2024/11/20/nhi-in-academia/",
+     "Industry blog (Independent)",
+     "Published 20 Nov 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Unlock the Secrets of OAuth 2.0 Tokens (and Have Fun Doing It!)",
+     "Back in November 2024, my article “Token Lifetimes and Security in OAuth 2.0: Best Practices and Emerging Trends” was published in the IDPro® Body of Knowledge, and wow—over 1,600 people have already checked it out! If you’re one of those people who clicked on the article but didn’t quite have time to read it (or Continue Reading",
+     "https://sphericalcowconsulting.com/2024/12/19/oauth-2-0-tokens/",
+     "Industry blog (Independent)",
+     "Published 19 Dec 2024 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Understanding NHIs: Key Differences Between Human and Non-Human Identities",
+     "Non-Human Identities (NHIs) are finally making friends and influencing people—or at least they seem to be, given how much people are talking about them! This is great. People need to have a better sense of this brave new world of workloads, bots, and services. But this also means people need to have a better sense Continue Reading",
+     "https://sphericalcowconsulting.com/2025/01/13/understanding-nhis-key-differences-between-human-and-non-human-identities/",
+     "Industry blog (Independent)",
+     "Published 13 Jan 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Foundational NHI post; the vocabulary anchor for the non-human-identity arc she has run since 2024. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Are You Human? A Dive Into the Proof of Personhood Debate",
+     "I don’t think of myself as an expert in non-human identity (NHI). Instead, I’d say I’m NHI-curious and eager to share what I’m learning. Lately, I’ve been going down a rabbit hole about when and how to indicate if someone—or something—is human. I’m clearly not alone in asking this. Last year, I was one of Continue Reading",
+     "https://sphericalcowconsulting.com/2025/01/27/are-you-human-a-dive-into-the-proof-of-personhood-debate/",
+     "Industry blog (Independent)",
+     "Published 27 Jan 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Securing the Software Supply Chain: How SCITT, SPIFFE, and WIMSE Work Together",
+     "I’ve been saying that to follow what’s happening in NHI standards, some of the core work you need to follow is happening in the IETF: SPICE, WIMSE, and SCITT. Everybody loves WIMSE with its workload identity architecture, and building the credential format in SPICE that can meet the needs of NHIs is of course brilliant Continue Reading",
+     "https://sphericalcowconsulting.com/2025/02/03/securing-the-software-supply-chain/",
+     "Industry blog (Independent)",
+     "Published 3 Feb 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Explains how SCITT, SPIFFE and WIMSE fit together — useful orientation given the corpus tracks WIMSE closely and deliberately filters most SCITT work out. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Agentic AI and Authentication: Exploring Some Unanswered Questions",
+     "Agentic AI is changing authentication faster than our identity models can keep up. We’ve built systems assuming users are human, but what happens when an AI agent, not the user, needs to authenticate on their behalf? Our current identity frameworks weren’t designed for this, and the gaps are starting to show. 🎙 Audio Blog If Continue Reading",
+     "https://sphericalcowconsulting.com/2025/02/11/agentic-ai-and-authentication/",
+     "Industry blog (Independent)",
+     "Published 11 Feb 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — What AI Agents Can Teach Us About Fraud in Consumer Identity",
+     "The irony with urgently questioning how to tell whether something is an AI or a person is the fact that we’re struggling just as much to distinguish humans from… well, other humans. This is, in fact, not a new problem at all. After writing about the AI vs Human issue in a previous post, I’m Continue Reading",
+     "https://sphericalcowconsulting.com/2025/02/25/ai-and-ciam/",
+     "Industry blog (Independent)",
+     "Published 25 Feb 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Is Introspection a Bug or a Feature?",
+     "When we talk about introspection in digital identity, we’re not just talking about what happens in OAuth 2.0. Yes, there’s a token introspection spec, but this post is about something broader: the idea that platforms—especially browsers—can inspect and influence the identity data being exchanged. Is that a good thing? Apple and Google disagree on just Continue Reading",
+     "https://sphericalcowconsulting.com/2025/04/15/is-introspection-a-bug-or-a-feature/",
+     "Industry blog (Independent)",
+     "Published 15 Apr 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. On token introspection, the mechanism the Mission-Bound MVP leans on for Mission-state enforcement at the resource server (its RS-D tier). Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Who Owns the Bots? Rethinking Governance for Non-Human Identities",
+     "Not that long ago, non-human identities (NHIs) were governed by neglect; provisioned manually, tied to a cron job or batch script, maybe mentioned in a change ticket, and rarely touched again. No formal lifecycle, no regular reviews, and certainly no clear ownership. If you remembered to rotate the password once a year, you were ahead Continue Reading",
+     "https://sphericalcowconsulting.com/2025/04/22/who-owns-the-bots-rethinking-governance-for-non-human-identities/",
+     "Industry blog (Independent)",
+     "Published 22 Apr 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Non-human identity governance — ownership and accountability for bots, which is the question draft-morrison-solo-agent-earn-registration answers very differently by treating an owner-less agent as an economic principal. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Web Payments and Digital Identity are Having a Moment",
+     "For a long time, logging into a website was (perhaps still is) a bit of a mess. There’s definitely been many efforts to fix it, and though OAuth buttons and SSO integrations tried to clean things up, under the hood, “Sign in with…” is mostly a best-effort dance. You can authenticate a user, maybe even Continue Reading",
+     "https://sphericalcowconsulting.com/2025/04/29/web-payments-and-identity/",
+     "Industry blog (Independent)",
+     "Published 29 Apr 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Acting on Behalf of Others: Delegation, Consent, and Messy Reality",
+     "Most digital systems were built around a simple model: one user, one identity, one device, one intent. If you need more than that, that's what password sharing is for, right? (Note: that was sarcasm.) Who needs delegation? Reality, which has definitely included sharing passwords, has always been messier.",
+     "https://sphericalcowconsulting.com/2025/06/03/delegation-part-one/",
+     "Industry blog (Independent)",
+     "Published 3 Jun 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — The MCP Bandwagon",
+     "MCP is 'an open protocol that standardizes how applications provide context to LLMs.' If we’re moving toward a world where AIs are expected to do All The Things, interfacing with our applications and services, then having a universal adapter that lets AIs talk to everything is undeniably powerful.",
+     "https://sphericalcowconsulting.com/2025/06/17/the-mcp-bandwagon/",
+     "Industry blog (Independent)",
+     "Published 17 Jun 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Delegation in a Multi-Actor World: It’s Not Just OAuth Anymore",
+     "Once upon a time, digital systems were built around a beautifully simple idea: one user, one identity, one device, one intent. That model worked, for some value of \"worked.\" Mostly, it was good enough to solve 80% of the use cases.",
+     "https://sphericalcowconsulting.com/2025/06/27/delegation-part-two/",
+     "Industry blog (Independent)",
+     "Published 27 Jun 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Agentic AI in the Open Standards Community: Standards Work or Just Hype?",
+     "If you want to follow what's happening in AI, it helps to know where the conversations are happening. That doesn't just mean the headlines and white papers; it means the standards bodies, working groups, and protocol discussions shaping the infrastructure AI systems will have to live with (and live inside).",
+     "https://sphericalcowconsulting.com/2025/08/12/agentic-ai-and-open-standards/",
+     "Industry blog (Independent)",
+     "Published 12 Aug 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Bot or Not? Why Incentives Matter More Than Identity",
+     "Let’s start with a confession: I love bots. Or at least, I love the idea of them. They’re efficient, tireless, and, if designed well, can be downright helpful. (They can also be downright unhelpful, but that's a topic for a different blog post.) But the incentives around bot traffic are completely out of balance, and that makes things messy.",
+     "https://sphericalcowconsulting.com/2025/08/26/bot-incentives/",
+     "Industry blog (Independent)",
+     "Published 26 Aug 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Roads, Robots, and Responsibility: Why Agentic AI Needs Identity Infrastructure",
+     "We don’t spend much time thinking about the roads we drive on—until one cracks, collapses, or dumps us somewhere we didn’t mean to be. Identity in the age of agentic AI? Same deal. It’s infrastructure. Like a good road, it needs to be ready for traffic we can’t imagine.",
+     "https://sphericalcowconsulting.com/2025/09/02/roads-robots-and-responsibility/",
+     "Industry blog (Independent)",
+     "Published 2 Sep 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — AI Permissions vs. Human Permissions: What Really Changes?",
+     "We’ve been talking about identity and access for people for decades (millennia if you think outside tech). Policies, role assignments, reviews, zero trust — these are familiar tools. The assumptions that go into them, however, don't quite work when the \"user\" is no longer a person.\" Enter in the AI Agent.",
+     "https://sphericalcowconsulting.com/2025/09/09/ai-permissions-vs-human-permissions/",
+     "Industry blog (Independent)",
+     "Published 9 Sep 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Who Really Pays When AI Agents Run Wild? Incentives, Identity, and the Hidden Bill",
+     "Google recently gave us something we’ve been waiting on for years: hard numbers on how much energy an AI prompt uses. According to their report, the median Gemini prompt consumes just 0.24 watt-hours of electricity — roughly running a microwave for a second — along with some drops of water for cooling.",
+     "https://sphericalcowconsulting.com/2025/09/16/ai-incentives/",
+     "Industry blog (Independent)",
+     "Published 16 Sep 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Delegation and Consent: Who Actually Benefits?",
+     "When not distracted by AI (which, you have to admit, is very distracting) I’ve been thinking a lot about delegation in digital identity. We have the tools that allow administrators or individuals grant specific permissions to applications and service. In theory, it’s a clean model.",
+     "https://sphericalcowconsulting.com/2025/09/30/delegation-and-consent-who-actually-benefits/",
+     "Industry blog (Independent)",
+     "Published 30 Sep 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Asks whose interests delegation-plus-consent machinery actually serves — a useful corrective to read against the consent-evidence and receipt drafts. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Robots, Humans, and the Edges of the Open Web",
+     "This episode explores what the “open web” truly means amid shifting standards, AI automation, and evolving economic pressures. Drawing on discussions from IETF 124 and W3C TPAC, it highlights how browser architects, policy experts, and researchers are reexamining long-held assumptions about access, interoperability, and the role of automated agents. Learn why openness isn’t a binary state but a multidimensional spectrum shaped by values such as attribution, consent, and continuity. The conversation offers a grounded look at how technical governance and community norms must adapt to keep the web both usable and sustainable.",
+     "https://sphericalcowconsulting.com/2025/12/02/robots-humans-and-the-edges-of-the-open-web/",
+     "Industry blog (Independent)",
+     "Published 2 Dec 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Bot-versus-human boundary on the open web; sits alongside the WebBotAuth cluster and the Privacy Pass anonymous-path thread. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Web Payments and Digital Identity Standards Are Converging – #TIL",
+     "In this episode Heather Flanagan examines how web payments and digital identity are converging at the W3C, exploring digital wallets, browser-based APIs, and regulatory pressure shaping modern payment flows and trust on the web today as standards discussions reveal shifting assumptions across ecosystems. Discover how Secure Payment Confirmation, passkeys, browser-bound keys, and the Digital Credentials API influence fraud prevention, interoperability, and auditability, and why agentic AI, mandate-based consent, and wallet fragmentation make identity design decisions increasingly critical for payments, institutions, and users worldwide.",
+     "https://sphericalcowconsulting.com/2025/12/23/web-payments-and-digital-identity/",
+     "Industry blog (Independent)",
+     "Published 23 Dec 2025 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — The AI System That Never Was",
+     "Learn why the idea of an “AI system” is quietly breaking down under modern AI governance and deployment realities. Heather Flanagan examines how agentic workflows, standards debates, and policy frameworks are exposing gaps between governance language and real-world AI architectures. Discover how this disconnect affects digital identity, accountability, and interoperability, and why unclear definitions create governance risk. Learn why engineers, standards bodies, and policymakers are struggling to align, and why fixing AI language is essential to building enforceable, trustworthy identity and governance frameworks.",
+     "https://sphericalcowconsulting.com/2026/01/20/the-ai-system-that-never-was/",
+     "Industry blog (Independent)",
+     "Published 20 Jan 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — When Browsers Start Acting for You: AI Browsers and the Definition of a Web User Agent",
+     "Heather Flanagan explores how AI browsers are reshaping the definition of a web user agent, challenging long-standing web architecture principles around user control, consent, and interaction. As AI-driven features evolve from assistance to autonomous action, the browser’s traditional intermediary role begins to shift in subtle but important ways. She examines key questions around delegation, accountability, and intent, including how browsers acting on behalf of users blur the line between human interaction and automation. This discussion highlights why emerging AI capabilities in web browsers demand early attention from digital identity, security, and standards communities.",
+     "https://sphericalcowconsulting.com/2026/03/24/when-browsers-start-acting-for-you/",
+     "Industry blog (Independent)",
+     "Published 24 Mar 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. First of the AI-browser pair. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — AI Browsers and the Web User Agent: What Might Need to Change?",
+     "Heather Flanagan explores how AI-enabled browsers challenge the traditional definition of web user agents and what this means for digital identity, web architecture, and standards. As browsers evolve from passive tools to active agents, long-standing assumptions about user representation and control are being tested. This episode examines the implications for user safety, automation, and accountability across the web ecosystem. It highlights emerging questions around transparency, permissions, and governance, offering insight into how standards bodies and developers may need to adapt to ensure browsers continue to prioritize and protect user interests.",
+     "https://sphericalcowconsulting.com/2026/03/31/ai-browsers-and-the-web-user-agent/",
+     "Industry blog (Independent)",
+     "Published 31 Mar 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Second of a two-part AI-browser pair. Relevant to WebBotAuth: if an AI browser is the user agent, the question of what a 'web user agent' even denotes becomes an identity question. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — When AI Agents Start Shopping: The Emerging Architecture of Agentic Commerce",
+     "Heather Flanagan explores how AI agents are moving from browsing the web to buying on behalf of users, and what that shift means for online payments, identity, and digital trust. The episode examines mandates, delegated authority, liability, and the browser’s evolving role in agentic commerce. It also considers why identity standards, consent, and audit evidence matter as AI shopping becomes more common.",
+     "https://sphericalcowconsulting.com/2026/04/07/when-ai-agents-start-shopping/",
+     "Industry blog (Independent)",
+     "Published 7 Apr 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Agentic commerce architecture — the analyst-side counterpart to the Skyfire KYA/KYAPay and Hopley x402 draft clusters the corpus tracks. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — What the AI Vendor Landscape Reveals About Fragmented Identity Systems",
+     "Heather explores how the AI vendor landscape reveals deeper challenges in fragmented identity systems and enterprise security architecture. By examining how tools function across identity, signals, policy, and enforcement layers, this episode reframes AI not as a feature but as part of a broader decision-making ecosystem. Understand why distributed decision systems create complexity, how probabilistic AI outputs impact governance, and what questions matter when evaluating identity and security tools. This episode highlights the risks of poor integration, the limits of automation, and the importance of designing systems that produce explainable, consistent access decisions.",
+     "https://sphericalcowconsulting.com/2026/04/28/ai-vendors-and-fragmented-identity-systems/",
+     "Industry blog (Independent)",
+     "Published 28 Apr 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Identity Systems Don’t Make Decisions",
+     "Heather examines why identity systems do not actually make decisions on their own, and how enterprise security outcomes emerge from fragmented, distributed processes. By unpacking how identity, risk, and policy tools interact, this episode reframes modern identity architecture as a complex decision-making environment. Explore how deterministic systems, integration gaps, and inconsistent data interpretation affect access control decisions. This episode highlights why AI and automation increase risk without clear governance, and why organizations must better define decision logic, accountability, and system interactions to ensure consistent, explainable identity and security outcomes.",
+     "https://sphericalcowconsulting.com/2026/05/05/identity-systems-dont-make-decisions/",
+     "Industry blog (Independent)",
+     "Published 5 May 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — The Discovery Problem Is Bigger Than Search",
+     "Heather explores why discovery is a much broader challenge than search, especially in digital identity, information management, and emerging AI ecosystems. Drawing on recent discussions and research, this episode examines how people find, evaluate, and trust information scattered across accounts, platforms, credentials, and services. Learn how information overload, filtering, governance, and AI-powered tools shape modern discovery experiences. This episode highlights the difference between finding information and understanding what is relevant, trustworthy, and accessible, while exploring why discovery has become a critical architecture, trust, and user experience challenge.",
+     "https://sphericalcowconsulting.com/2026/06/02/the-discovery-problem/",
+     "Industry blog (Independent)",
+     "Published 2 Jun 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Identity Discovery Is More Than Finding the Login Button",
+     "“In the first post in this series, I framed discovery as a broader systems problem.” The challenge is not simply that search engines need to be better. Search is useful for public, indexed information, but discovery reaches much further than that. It is about how people and systems determine what exists, where it lives, whether Continue Reading",
+     "https://sphericalcowconsulting.com/2026/06/09/identity-discovery/",
+     "Industry blog (Independent)",
+     "Published 9 Jun 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Second of the discovery series. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — When Discovery Starts Taking Action",
+     "Discover how discovery is evolving from simply finding information to enabling automated action across AI agents, digital identity systems, and distributed services. This episode explores why capability discovery, metadata, and governance have become essential as software increasingly discovers, selects, and invokes resources on our behalf. Learn how service discovery, Model Context Protocol (MCP), authorization, and trust frameworks shape secure automation. Heather explains why discovery is no longer just a technical lookup, but a critical part of identity, policy, and decision-making in modern digital ecosystems.",
+     "https://sphericalcowconsulting.com/2026/06/23/when-discovery-starts-taking-action/",
+     "Industry blog (Independent)",
+     "Published 23 Jun 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Third of the discovery series, and the most on-point: discovery shifting from finding information to enabling automated action. That transition is precisely what makes agent discovery an authorization problem rather than a lookup problem. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
+
+    ("Flanagan — Choosing a Discovery Mechanism Is the Hard Part",
+     "Heather examines why choosing the right discovery mechanism is one of the most challenging aspects of digital identity architecture. This episode explores how DNS, well-known URIs, registries, and catalogs each solve different discovery problems, and why understanding trust, authority, and governance must come before selecting infrastructure. Discover how discovery mechanisms shape privacy, delegation, authorization, and system behavior. Heather explains why successful digital identity design depends on asking the right architectural questions first, ensuring discovery supports the correct level of trust, governance, and secure action across modern distributed systems.",
+     "https://sphericalcowconsulting.com/2026/06/30/choosing-a-discovery-mechanism-is-the-hard-part/",
+     "Industry blog (Independent)",
+     "Published 30 Jun 2026 on Spherical Cow Consulting (sphericalcowconsulting.com). Heather Flanagan — independent consultant, exceptionally well connected across the identity industry; tracked as a bellwether source. Fourth of a four-part 2026 discovery series. Directly relevant to the corpus's discovery-and-transport cluster — she weighs DNS, well-known URIs, registries and catalogs as alternatives, which is the same design space DAWN, the mcp:// URI drafts and the Zhao A2A DNS-SD/WebFinger pair are each picking a corner of. Added 26 Aug 2026 in the first backfill of this source; she is a **filtered** source, not take-in-full — roughly a fifth of her archive is in scope."),
 ]
 make_sheet("Industry & Implementations", COLORS['Industry'], industry_rows)
 

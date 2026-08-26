@@ -11,9 +11,9 @@ dated through Aug 2026 (last full sweep: 26 Aug 2026).
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **437 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **473 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **468 nodes, 659 edges**,
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **504 nodes, 660 edges**,
   in sync with the workbook as of 26 Aug 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
@@ -64,7 +64,7 @@ Both still exist from the original session if needed.
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
 | Academic Papers            | 12    | arXiv + IEEE.                                          |
-| Industry & Implementations | 113   | Vendor blogs, reference impls, full Control Plane blog.|
+| Industry & Implementations | 149   | Vendor blogs, reference impls, full Control Plane blog.|
 
 Row schema:
 
@@ -148,6 +148,19 @@ Still useful as a mental model when placing new drafts:
   Acronym near-collision with `draft-sharif-attp` — different designs:
   discrete L0–L4 trust levels there, continuous 0.0–1.0 trust scoring here.
 
+- **Heather Flanagan** (Spherical Cow Consulting; added 26 Aug 2026). Not a spec
+  author here — an unusually well-connected industry observer, tracked as a
+  bellwether. **36 of her 159 archive posts** are in the corpus; the rest is
+  deliberately out of scope (standards process, geopolitics, wallets, conference
+  craft). Threads worth watching: the four-part 2026 **discovery** series, which
+  weighs DNS vs well-known URIs vs registries vs catalogs — the same design space
+  DAWN, the `mcp://` URI drafts and the Zhao A2A DNS-SD/WebFinger pair each pick a
+  corner of; a **non-human-identity arc running back to Apr 2024**, well before the
+  agent draft wave; and "Authorization – the Next Big Thing" (Jun 2023), the oldest
+  entry in the corpus from any blog source. She was already an indirect input once:
+  commit `6cf83f7` added 89 lines of sources she pointed to, but none of her own
+  writing until now.
+
 - **Morrison** (added 26 Aug 2026). A self-referential **six-draft family** built
   on a `~handle` identity primitive defined in its own `[MCPDNS]` draft, with an
   entity-class taxonomy of Sovereign / Bot / Instrument: `consent-settlement`,
@@ -163,6 +176,30 @@ Still useful as a mental model when placing new drafts:
   `sharif-mcps-secure-mcp` (added 26 Aug 2026), and the SUPERSEDED
   `sharif-payment-trust`. Crossed the threshold from single draft to a body of
   work — treat as a primary author on the next sweep.
+
+## Sweep sources
+
+The recurring places to check on every sweep. Each carries its own curation rule —
+**take-in-full** sources are primary bodies of work; **filtered** sources are
+tracked for the subset that touches delegated authorization.
+
+| Source | Fetch | Rule |
+| ------ | ----- | ---- |
+| IETF Datatracker | tastypie API via `curl` (never WebFetch); `name__contains=<kw>` + `time__gte=` to discover, `name__in=` batches of ~25 to refresh | Filtered — see the curation bar below |
+| Karl McGuinness — Control Plane (`notes.karlmcguinness.com`) | `/index.xml` RSS **union** hrefs scraped from `/mission-handbook/` and `/mission-handbook/read/` — the handbook chapters are not in the feed | **Take in full** |
+| Mission-Bound family (`github.com/mcguinness/mission-bound-authorization`) | `family-manifest.json` at repo root is the source of truth | **Take in full** |
+| **Heather Flanagan — Spherical Cow Consulting** (`sphericalcowconsulting.com`) | `/feed/` returns the **complete archive** in one request — 159 posts back to 2019, no pagination needed. (`/index.xml` 404s; it is WordPress, not Hugo.) Strip the trailing `The post … appeared first on Spherical Cow Consulting.` boilerplate from every `description`. | **Filtered** — 36 of 159 tracked as of 26 Aug 2026 |
+
+**On Heather Flanagan specifically.** She is exceptionally well connected across
+the identity industry and worth following as a bellwether, but most of her output
+is deliberately broader than this corpus: standards process, governance,
+geopolitics, wallets, conference craft, freelancing. Track the delegated-authz and
+agent slice, not the whole blog — roughly a fifth to a quarter of posts qualify.
+Her weekly Tuesday cadence means a sweep should expect ~4 new posts a month, of
+which typically one is in scope. Note she was *already* an input to this corpus
+once, indirectly: commit `6cf83f7` (15 Jul 2026, "Incorporated findings from
+Heather Flanagan") added 89 lines of sources she had pointed to — but none of her
+own writing was tracked until now.
 
 ## How to add a new source
 
@@ -251,7 +288,7 @@ Still worth periodic checking: whether any of the 33 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
 has been so far. Re-check with the family-manifest slugs.
 
-**Graph — REBUILT 26 Aug 2026.** Now 468 nodes / 659 edges, in sync with the
+**Graph — REBUILT 26 Aug 2026.** Now 504 nodes / 660 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
 analysis, preserved), 373 `composes` from the Mission-Bound family manifest,
