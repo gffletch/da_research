@@ -5,16 +5,16 @@ work on how authority delegates from humans to AI agents. Maintained as a living
 research artifact; updated additively as new drafts and blog posts appear.
 
 Maintainer is an IAM/delegated-authz expert. Date context: current entries
-dated through Aug 2026 (last full sweep: 26 Aug 2026).
+dated through Sep 2026 (last full sweep: 4 Sep 2026).
 
 ## Files
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **572 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **609 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **602 nodes, 702 edges**,
-  in sync with the workbook as of 26 Aug 2026. **Generated, not hand-edited** —
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **639 nodes, 928 edges**,
+  in sync with the workbook as of 4 Sep 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
   `curated` survives a rebuild, so hand-written analysis is safe but derived
@@ -59,8 +59,8 @@ Both still exist from the original session if needed.
 | -------------------------- | ----- | ------------------------------------------------------ |
 | Index                      | cover | Auto-summed; TOTAL row moves when tabs are added       |
 | Published RFCs             | 5     | Stable primitives, plus RFC 10017 for WG completeness. |
-| Active IETF Drafts         | 355   | **★ Where the action is.** WG + individual drafts.     |
-| Mission-Bound (Pre-pub)    | 33    | McGuinness GitHub-only family. Venue split, not topic. |
+| Active IETF Drafts         | 380   | **★ Where the action is.** WG + individual drafts.     |
+| Mission-Bound (Pre-pub)    | 45    | McGuinness GitHub-only family. Venue split, not topic. |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
 | Academic Papers            | 12    | arXiv + IEEE.                                          |
@@ -99,20 +99,32 @@ Still useful as a mental model when placing new drafts:
     mission, mission-bound-minimum-profile, mission-bound-runtime-enforcement-profile,
     resource-token-resp, rfc9728bis, token-xchg-target-svc-disco,
     token-exchange-cnf (Jul 2026), id-continuation-assertion (Aug 2026)
-  - `draft-mcguinness-oauth-actor-profile` — the Actor Profile itself, added
-    26 Aug 2026. It had been cited throughout this file as the anchor draft while
-    never actually being tracked.
-  - **The 34-draft Mission-Bound Authorization family** at
-    `github.com/mcguinness/mission-bound-authorization` — 33 are GitHub-only
+  - `draft-mcguinness-oauth-actor-profile` — the Actor Profile itself, the anchor
+    draft cited throughout this file. **Corrected 4 Sep 2026:** the 26 Aug sweep
+    recorded this as "the most consequential single omission" its cross-check
+    found, but it had been tracked all along under a URL pointing at the -00 HTML
+    rendering (`.../doc/html/draft-mcguinness-oauth-actor-profile-00`), which the
+    slug diff never matched. The 26 Aug addition created a **silent duplicate**;
+    the two rows were merged 4 Sep 2026 onto the canonical Datatracker URL.
+  - **The 46-draft Mission-Bound Authorization family** at
+    `github.com/mcguinness/mission-bound-authorization` (was 34 on 26 Aug 2026;
+    grew by 12 in nine days) — 45 are GitHub-only
     (marked "IETF (Pre-publication — GitHub)" in standards-org) and **now live
     in their own `Mission-Bound (Pre-pub)` tab** (split out 26 Aug 2026); only
     `draft-mcguinness-oauth-mission` is also on Datatracker, and that one
     deliberately stays in the Active IETF Drafts tab. The repo ships a
-    machine-readable `family-manifest.json` (group, maturity, adoption_rung,
-    deps per draft) — **use it as the source of truth** for this family rather
-    than re-deriving structure. Groups: architecture, core, approval-time,
+    machine-readable `family-manifest.json` — **use it as the source of truth**
+    for this family rather than re-deriving structure. **Its schema changed
+    between 26 Aug and 4 Sep 2026:** the per-draft fields are now `role`
+    (core / adapter-binding / companion / guide), `spec_maturity` and
+    `maintenance`, replacing the old `maturity` and `adoption_rung`; the top
+    level also gained `verbs`, `maintenance_classes` and `reference_stacks`.
+    Groups are now **ten**, with `core` gone: architecture, approval-time,
     lifecycle, runtime-enforcement, bindings-substrate, agent-runtime,
     sub-agents, cross-domain-projection, proof-portability, security-model.
+    The manifest also carries a `known_non_family_refs` note warning that
+    `oauth-id-continuation-assertion` is adjacent, not family — do not add a
+    phantom manifest entry for it.
   - **1 OIDF profile** in OpenID Foundation tab: AuthZEN Access Request &
     Approval Profile (ARAP) — adopted as WG draft May 2026, Draft 1 published
     3 Jun 2026
@@ -175,10 +187,13 @@ Still useful as a mental model when placing new drafts:
   **owner-less agent** as a first-class economic principal, and its three-tier
   actor taxonomy restates the actor-chain question in a non-OAuth substrate.
 
-- **Sharif**. Now **four** drafts: `sharif-attp`, `sharif-agent-audit-trail`,
-  `sharif-mcps-secure-mcp` (added 26 Aug 2026), and the SUPERSEDED
-  `sharif-payment-trust`. Crossed the threshold from single draft to a body of
-  work — treat as a primary author on the next sweep.
+- **Sharif**. A primary body of work as of 26 Aug 2026 — **14 drafts**, all
+  tracked. `sharif-agent-trust-enforcement` (-00, 27 Aug 2026) was added on
+  4 Sep 2026, the first addition made under the take-in-full rule for this
+  author, and it was found by **author-prefix enumeration, not keyword search**.
+  Note the acronym near-collision between `sharif-attp` (discrete L0–L4 trust
+  levels) and Lewis's `atp-core` (continuous 0.0–1.0 scoring); the new
+  enforcement draft continues the L0–L4 design into a Kubernetes admission path.
 
 ## Sweep sources
 
@@ -266,7 +281,7 @@ Standard workflow (Claude Code + git):
 - **Industry & Implementations:** 5 reference implementations lead (rows 1–5),
   then the McGuinness Mission-Bound blog series (rows 7–10, publication order:
   MVP first as the substrate post), then blogs and analyst articles.
-- **Mission-Bound (Pre-pub):** the 33 GitHub-only family drafts, in the order
+- **Mission-Bound (Pre-pub):** the 45 GitHub-only family drafts, in the order
   the Aug 2026 sweep generated them from `family-manifest.json`. This tab is a
   **venue** split, not a topic one — the test for belonging here is "lives only
   in the author's repo", not "is about missions". If one of these gets filed on
@@ -319,15 +334,18 @@ slugs than originally watched: `domain-authorized-issuer`, `id-assertion-framewo
 Two further drafts appeared and were added: `token-exchange-cnf` (-00, 19 Jul 2026)
 and `id-continuation-assertion` (-00, 3 Aug 2026).
 
-Still worth periodic checking: whether any of the 33 GitHub-only Mission-Bound
+Still worth periodic checking: whether any of the 45 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
-has been so far. Re-check with the family-manifest slugs.
+has been so far — re-verified 4 Sep 2026 against all 46 manifest slugs. Re-check
+with the family-manifest slugs.
 
-**Graph — REBUILT 26 Aug 2026.** Now 602 nodes / 702 edges, in sync with the
+**Graph — REBUILT 4 Sep 2026.** Now 639 nodes / 928 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
-analysis, preserved), 373 `composes` from the Mission-Bound family manifest,
-155 auto-derived `references` from bibliography text.
+analysis, preserved), 587 `composes` from the Mission-Bound family manifest,
+225 auto-derived `references` from bibliography text. The 30 curated substrate
+nodes are unchanged, and the one long-standing id collision is now resolved
+(see the duplicate-row correction in the 4 Sep sweep notes).
 
 Notes for future graph work:
 
@@ -342,7 +360,14 @@ Notes for future graph work:
   curated overlay's ability to match them. Both were needed for the
   `Mission-Bound (Pre-pub)` tab on 26 Aug 2026.
 - `MISSION_FAMILY` in `build_graph.py` mirrors the upstream `family-manifest.json`
-  (snapshot 11 Aug 2026). Re-sync it if the family changes shape.
+  (**re-synced 4 Sep 2026: 46 drafts**). Re-sync it if the family changes shape —
+  it drove `composes` edges from 373 to 587 this time. **The upstream schema
+  changed:** `maturity` and `adoption_rung` were replaced by `role`,
+  `spec_maturity` and `maintenance`. The tuple in `build_graph.py` keeps its
+  4-slot shape, so `maturity` now carries `spec_maturity` and `adoption_rung`
+  now carries `role`. The 33 pre-4-Sep workbook rows still narrate the old
+  vocabulary; the 12 new ones use the new one. Don't "fix" the mismatch by
+  rewriting history — it records when upstream changed.
 - The HTML shell's filter pills, `TYPE_COLOR`/`CAT_COLOR`, and `nodeRadius` maps
   are hand-maintained. **If you add a new node type or category, add a matching
   filter pill** — `applyFilters()` hides any node whose type has no checked pill,
@@ -351,6 +376,90 @@ Notes for future graph work:
 **Fixed 11 Aug 2026:** the two duplicate Industry rows from commit `612bb30`
 (Defakto IETF 122, Rock Lambros RockCyber) were removed, keeping the richer
 narration of each pair.
+
+**4 Sep 2026 sweep — 572 → 609 sources (nine-day window since 26 Aug):**
+
+- **The Mission-Bound family grew 34 → 46 drafts upstream in nine days** (+12
+  rows in the Mission-Bound tab, now 45). All 33 previously-tracked slugs are
+  still in the manifest — clean growth, no upstream renames. The most
+  structurally significant addition is **`draft-mcguinness-mission-gnap`**, an
+  adapter-binding for GNAP: with the existing OAuth and AAuth bindings, the
+  family now presents as a **substrate-neutral kernel with three bindings**
+  rather than an OAuth extension. Note the AAuth binding means Karl's family now
+  composes against Hardt's `aauth`, the draft this file tags as the OUTLIER with
+  zero OAuth dependencies — the outlier has an inbound composer.
+- **Still only `draft-mcguinness-oauth-mission` is filed on Datatracker**,
+  re-verified against all 46 manifest slugs. The standing watch item is unmoved.
+- **First WG-level Web Bot Auth document: `draft-ietf-webbotauth-httpsig-protocol`
+  (-00, 1 Sep 2026).** Datatracker records **no `replaces` relation** to the
+  individual `draft-meunier-webbotauth-httpsig-protocol` despite the identical
+  title, so both are tracked. Web Bot Auth is now the second chartered WG (with
+  OAuth) producing agent-identity mechanisms directly in scope here.
+- **A duplicate-detection failure, mirror image of the 26 Aug one.** Merging the
+  two `actor-profile` rows (see the McGuinness entry above) resolved the graph's
+  one long-standing id collision. 26 Aug's lesson was "don't match topic keywords
+  against draft *names*"; this one is **diff on normalised draft slugs, not on
+  URLs** — a rev-suffixed or `/doc/html/` link hides a row that is already there.
+- **A new prolific-author tier, and a deliberate decision not to take it in
+  full.** Several authors are now filing at high volume: `das-` (23 drafts, 11 in
+  this nine-day window), `reilly-` (29), `nandakumar-` (26), `stone-` (14),
+  `dogru-` (5), `cowles-` (4), `jovancevic-` (4). The take-in-full rule was
+  **not** applied to any of them. The clearest case is `das-`: a single
+  "execution finality" argument replayed across ICS/OT actuation, LEO satellite
+  RF, 6G handles, child-safety rendering and banking — volume, not a body of
+  agent-authorization work. 3 of 23 are tracked (including
+  `das-agentic-tool-binding`, which `hamr-oauth-agent-delegation` references
+  normatively). **The take-in-full rule is for authors whose whole output is
+  agent authority (McGuinness, Schrock, Morrison, Sharif), not for anyone with
+  many drafts.** Revisit if an agent-facing subset develops independently.
+- **Two competing attenuated-delegation chain profiles arrived in the same week**
+  and are the sweep's most on-charter additions: `asor-wimse-agent-delegation-chain`
+  (token profile — RAR in RFC 9068 JWTs, hop-linked, offline-verifiable) and
+  `hamr-oauth-agent-delegation` (HTTP header field carrying the chain). Both make
+  the same critique: RFC 8693's nested `act` claim is informational only and
+  cannot enforce attenuation past depth two. Compare McGuinness's
+  `oauth-mission-attenuation`, which solves the same AS-in-the-hot-path problem
+  inside the Mission-Bound family. `hamr` **SUPERSEDES `hassan-oauth-agent-delegation`**
+  (confirmed `replaces` relation; identical title and abstract, only `hamr` tracked).
+- **A third accountability axis is appearing: redress.** The corpus already had
+  evidence (what was authorized), receipts (that it was exercised) and outcome
+  binding (what followed). `pinto-agent-authz-contestability` adds *where an
+  affected party can contest it*, and `laxsharma-pact` adds liability and
+  escrowed settlement, joining `singh-psi-agent`. Worth watching whether the
+  Schrock evidence stack takes up the contestability binding.
+- **A matched discovery/authorization pair:** `pioli-agent-discovery` (ARDP,
+  registry corner) and `barney-caam`, which specifies the Post-Discovery
+  Authorization Handshake explicitly composing with it. Discovery additions this
+  sweep now cover three corners of the space Flanagan's 2026 series maps —
+  DNS (`nemethi-dawn-aid`), registry (ARDP), and origin-as-authority
+  (`zzn-dvs`). **New COLLISION:** "AID" is claimed both by `nemethi-dawn-aid`
+  (Agent Identity and Discovery) and by `watts-ai-identity-conformance` ("AID-1"),
+  added the same day for an unrelated conformance model.
+- **Expiry churn is still fast.** Seven of the 26 new drafts were **already
+  expired when added** — several with expiry dates equal to their publication
+  date. All tagged and kept per the standing rule. Newly expired among tracked
+  drafts: **`mcguinness-oauth-rfc9728bis`** (28 Aug — the first McGuinness draft
+  to expire), `ni-a2a-ai-agent-security-requirements` and
+  `ni-wimse-ai-agent-identity` (both 1 Sep).
+- **Author-prefix enumeration confirmed the take-in-full families are complete**
+  (mcguinness, sato-soos, morrison, ruvalcaba, kavian, hopley, vauban: zero gaps).
+  Every apparent absence under `schrock`, `hardt` and `skyfire` was checked
+  individually and is **deliberate**: `skyfire-kyapayprofile`,
+  `schrock-ep-enforcement-point` and `schrock-authorization-evidence-challenge`
+  are all marked Replaced by drafts already tracked. The 26 Aug claim that
+  remaining absences were deliberate **holds**.
+- **Watch items checked, all unmoved:** no Complex Delegation milestone (OAuth WG
+  still has exactly three active milestones — SD-JWT VC, now **overdue** at
+  31 Jul 2026, plus OAuth 2.1 and Transaction Tokens, both 31 Dec 2026);
+  `identity-chaining` and `rfc7523bis` still in the RFC Editor queue with no RFC
+  number; `rar-metadata-remediation` still -00. **No Vauban supersession** — no
+  `replaces` relations exist, so all six components stay tracked, though
+  `x402-consolidated` picked up the state "No Longer In Independent Submission
+  Stream" on 3 Sep, which is worth watching.
+- **Flanagan: one new post, ruled out of scope.** "Standards Transparency: Public
+  Isn't the Same as Understandable" (1 Sep 2026) is a standards-process post,
+  which her filter rule excludes. Karl's blog: **no new posts** — the RSS feed's
+  newest item is still 10 Aug 2026, and the corpus's 79 entries remain complete.
 
 **26 Aug 2026 sweep — findings that change the corpus's shape:**
 
