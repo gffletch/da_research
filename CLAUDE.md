@@ -5,22 +5,27 @@ work on how authority delegates from humans to AI agents. Maintained as a living
 research artifact; updated additively as new drafts and blog posts appear.
 
 Maintainer is an IAM/delegated-authz expert. Date context: current entries
-dated through Sep 2026 (last full sweep: 4 Sep 2026).
+dated through Sep 2026 (last full sweep: 29 Sep 2026).
 
 ## Files
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **609 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **695 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **639 nodes, 928 edges**,
-  in sync with the workbook as of 4 Sep 2026. **Generated, not hand-edited** —
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **725 nodes, 952 edges**,
+  in sync with the workbook as of 29 Sep 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
   `curated` survives a rebuild, so hand-written analysis is safe but derived
   content is regenerated each time.
 - `agent_authz_graph.html` — interactive D3 force-directed viz of the JSON,
   D3 inlined for offline use (~391KB).
+
+**⚠ Use `./.venv/bin/python`, not bare `python`.** The commands below are written
+as `python build.py` etc., but the system interpreter has no `openpyxl` — every
+build/validate/graph script dies with `ModuleNotFoundError`. The project `.venv`
+at the repo root has it.
 
 **Build scripts:**
 
@@ -59,8 +64,8 @@ Both still exist from the original session if needed.
 | -------------------------- | ----- | ------------------------------------------------------ |
 | Index                      | cover | Auto-summed; TOTAL row moves when tabs are added       |
 | Published RFCs             | 5     | Stable primitives, plus RFC 10017 for WG completeness. |
-| Active IETF Drafts         | 380   | **★ Where the action is.** WG + individual drafts.     |
-| Mission-Bound (Pre-pub)    | 45    | McGuinness GitHub-only family. Venue split, not topic. |
+| Active IETF Drafts         | 465   | **★ Where the action is.** WG + individual drafts.     |
+| Mission-Bound (Pre-pub)    | 46    | McGuinness GitHub-only family. Venue split, not topic. |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
 | Academic Papers            | 12    | arXiv + IEEE.                                          |
@@ -93,12 +98,15 @@ Still useful as a mental model when placing new drafts:
 
 - **Karl McGuinness** (Independent, former Okta SVP & Chief Product Architect).
   Most concentrated single-author body of work in the corpus — currently:
-  - **18 individual I-Ds** on Datatracker, incl. actor-profile, actor-proofs,
-    ai-agent-instance, client-instance-assertion, deferred-code-processing,
-    domain-authorized-issuer, id-assertion-framework, insufficient-claims,
-    mission, mission-bound-minimum-profile, mission-bound-runtime-enforcement-profile,
-    resource-token-resp, rfc9728bis, token-xchg-target-svc-disco,
-    token-exchange-cnf (Jul 2026), id-continuation-assertion (Aug 2026)
+  - **15 live individual I-Ds** on Datatracker (13 Active + 2 Expired; a 16th,
+    `client-instance-assertion`, is Replaced). Verified by author-prefix
+    enumeration 29 Sep 2026 — **the previously-recorded "18" was wrong.** They are:
+    actor-profile, actor-proofs, actor-receipts, ai-agent-instance,
+    client-attesters (new 28 Sep 2026), client-instance-id (re-slug of
+    client-instance-assertion, 28 Sep 2026), domain-authorized-issuer,
+    id-assertion-framework, id-continuation-assertion, insufficient-claims,
+    mission, resource-token-resp (expired), rfc9728bis (expired),
+    token-exchange-cnf, token-xchg-target-svc-disco.
   - `draft-mcguinness-oauth-actor-profile` — the Actor Profile itself, the anchor
     draft cited throughout this file. **Corrected 4 Sep 2026:** the 26 Aug sweep
     recorded this as "the most consequential single omission" its cross-check
@@ -106,9 +114,10 @@ Still useful as a mental model when placing new drafts:
     rendering (`.../doc/html/draft-mcguinness-oauth-actor-profile-00`), which the
     slug diff never matched. The 26 Aug addition created a **silent duplicate**;
     the two rows were merged 4 Sep 2026 onto the canonical Datatracker URL.
-  - **The 46-draft Mission-Bound Authorization family** at
-    `github.com/mcguinness/mission-bound-authorization` (was 34 on 26 Aug 2026;
-    grew by 12 in nine days) — 45 are GitHub-only
+  - **The 47-draft Mission-Bound Authorization family** at
+    `github.com/mcguinness/mission-bound-authorization` (34 on 26 Aug 2026,
+    46 on 4 Sep, 47 on 29 Sep — **growth has slowed sharply**, +1 in
+    twenty-five days against +12 in the preceding nine) — 46 are GitHub-only
     (marked "IETF (Pre-publication — GitHub)" in standards-org) and **now live
     in their own `Mission-Bound (Pre-pub)` tab** (split out 26 Aug 2026); only
     `draft-mcguinness-oauth-mission` is also on Datatracker, and that one
@@ -124,7 +133,10 @@ Still useful as a mental model when placing new drafts:
     sub-agents, cross-domain-projection, proof-portability, security-model.
     The manifest also carries a `known_non_family_refs` note warning that
     `oauth-id-continuation-assertion` is adjacent, not family — do not add a
-    phantom manifest entry for it.
+    phantom manifest entry for it. **Re-checked 29 Sep 2026: schema unchanged
+    since 4 Sep, no renames, one addition** (`mission-control-plane`, lifecycle /
+    companion, and the first family member marked `lab-best-effort` — the
+    weakest maintenance class in the manifest's vocabulary).
   - **1 OIDF profile** in OpenID Foundation tab: AuthZEN Access Request &
     Approval Profile (ARAP) — adopted as WG draft May 2026, Draft 1 published
     3 Jun 2026
@@ -154,10 +166,20 @@ Still useful as a mental model when placing new drafts:
   draft's composition graph.
 
 - **Dick Hardt**. `draft-hardt-oauth-aauth-protocol` (slug gained the `oauth`
-  infix at -09; now at -10, 6 Aug 2026) is the principled OUTLIER —
+  infix at -09; now at **-11, 29 Sep 2026**) is the principled OUTLIER —
   zero OAuth dependencies; argues PoP-by-default, resource-signed challenges,
   and AS-to-AS federation are architectural changes, not extensions. Flag
   any new draft that echoes those design choices.
+  - **The OUTLIER is now a six-document family (29 Sep 2026).** Hardt filed
+    `aauth-r3` (rich resource requests — vocabulary-based authorization, RAR's
+    problem solved without RAR), `aauth-budgets` (a spending ceiling as a token
+    claim, "structurally parallel to scope") and `aauth-events` all on
+    28 Sep 2026, joining the already-tracked `aauth-bootstrap` and
+    `aauth-headers`. **Update the OUTLIER tag's meaning, not the tag:** AAuth
+    still depends on nothing, but it now has both an inbound composer
+    (McGuinness's `mission-aauth` binding, noted 4 Sep 2026) and its own
+    extension ecosystem. "Depends on nothing" no longer implies "nothing
+    depends on it".
 
 - **Larry Lewis**. `agent-trust-protocol/atp-core` (Industry tab, row 5).
   Acronym near-collision with `draft-sharif-attp` — different designs:
@@ -194,6 +216,42 @@ Still useful as a mental model when placing new drafts:
   Note the acronym near-collision between `sharif-attp` (discrete L0–L4 trust
   levels) and Lewis's `atp-core` (continuous 0.0–1.0 scoring); the new
   enforcement draft continues the L0–L4 design into a Kubernetes admission path.
+  Re-verified complete 29 Sep 2026 — still 14, no gaps.
+
+- **Schrock** (person 163567, EMILIA Protocol, Inc.). Take-in-full.
+  **Correction made 29 Sep 2026:** the 26 Aug sweep recorded
+  `ferro-schrock-memory-projection-record` as a name-substring false positive —
+  "a different author" — and dropped it alongside the genuine `enghardt` case.
+  Datatracker's author records show Schrock as co-author, so it is family and
+  was missing for two sweeps. It is now tracked. **Lesson: settle an
+  is-this-the-same-author question from the `documentauthor` endpoint's person
+  id, never from the slug.** The other five `schrock` absences are all Replaced
+  drafts whose successors are tracked — re-verified 29 Sep 2026.
+
+- **Tom Sato** (person 162704, MyAuberge K.K.). Take-in-full, tracked as the
+  `sato-soos-*` family. **He now also files under a bare `sato-` prefix** —
+  `sato-agent-accountability-refarch` (-01, 21 Sep 2026) was invisible to
+  author-prefix enumeration on `sato-soos` and was found only by checking
+  author person ids. **Enumerate on the surname, not the family prefix.**
+
+- **Watts** (person 165940, Independent Researcher). **Not yet take-in-full —
+  a candidate for next sweep.** Went from one tracked draft
+  (`watts-ai-identity-conformance`, added 4 Sep 2026) to four in three weeks:
+  authority-transition receipts, evidence-boundary receipts and OAuth
+  revocation closure were all added 29 Sep 2026. The subject is coherent —
+  every one is about what evidence survives an authority state change — which
+  is the test the rule actually applies. `watts-scientific-admissibility-evidence`
+  was dropped as research provenance; if the next sweep finds the agent-facing
+  subset still growing, promote the author.
+
+- **Drake** (person 160218, 1id.com). **A new four-draft agent-identity family,
+  taken together, added 29 Sep 2026** — problem statement, DNS/RDAP resolution,
+  multi-stakeholder governance, and an EPP mapping, all filed 25 Sep 2026 around
+  an Agent Identity Registry System (AIRS) and an `aid` URN. Notable for two
+  reasons: it is the only work here that treats **physical robots** as the same
+  identity problem as software agents, and it is the only one that specifies the
+  *governance authority* rather than leaving the operator question open. Note
+  the `aid` URN adds to the AID name tangle — see COLLISION.
 
 ## Sweep sources
 
@@ -207,7 +265,7 @@ tracked for the subset that touches delegated authorization.
 | Karl McGuinness — Control Plane (`notes.karlmcguinness.com`) | `/index.xml` RSS **union** hrefs scraped from `/mission-handbook/` and `/mission-handbook/read/` — the handbook chapters are not in the feed | **Take in full** |
 | Mission-Bound family (`github.com/mcguinness/mission-bound-authorization`) | `family-manifest.json` at repo root is the source of truth | **Take in full** |
 | **Heather Flanagan — standards-tracker** (`github.com/hlflanagan/standards-tracker`) | Daily CSV+MD at `reports/YYYY-MM-DD-ietf-identity-ai-watch.csv`, raw from `raw.githubusercontent.com`. CC0. Runs 14:00 UTC daily via GitHub Actions. | **Cross-check, do not ingest.** Use it to find what our own sweeps missed |
-| **Heather Flanagan — Spherical Cow Consulting** (`sphericalcowconsulting.com`) | `/feed/` returns the **complete archive** in one request — 159 posts back to 2019, no pagination needed. (`/index.xml` 404s; it is WordPress, not Hugo.) Strip the trailing `The post … appeared first on Spherical Cow Consulting.` boilerplate from every `description`. | **Filtered** — 36 of 159 tracked as of 26 Aug 2026 |
+| **Heather Flanagan — Spherical Cow Consulting** (`sphericalcowconsulting.com`) | `/feed/` returns the **complete archive** in one request — 163 posts back to 2019, no pagination needed. (`/index.xml` 404s; it is WordPress, not Hugo.) Strip the trailing `The post … appeared first on Spherical Cow Consulting.` boilerplate from every `description`. | **Filtered** — 36 of 163 tracked as of 29 Sep 2026 |
 
 **On the standards-tracker (added 26 Aug 2026).** Heather's bot watches recent
 IETF I-Ds and W3C specs and classifies them for identity/authz/AI relevance. Her
@@ -240,6 +298,32 @@ that way. Two rules follow:
    strictly better recall; treat her report as the discovery baseline and our
    keyword sweep as the delta on top.
 
+**⚠ Correction to rule 2, made 29 Sep 2026 — neither source is a superset.**
+The 26 Aug framing said the standards-tracker has "strictly better recall" and
+our keyword sweep is only "the delta on top". That is wrong in both directions,
+and this sweep measured it. Of the 20 in-scope drafts the keyword sweep found
+that the tracker's candidate buckets did not, **19 were absent from the tracker
+entirely** — not classified and ignored, simply never seen. Two structural
+reasons, both permanent:
+
+- **The tracker only begins on 8 Jul 2026.** It watches *recent* I-Ds, so a
+  draft filed earlier and never revised is invisible to it forever. Six drafts
+  added this sweep were filed in **March 2026** and expired in September without
+  ever appearing in a report: `gudlab-agentid-protocol`,
+  `kiliram-agent-trust-auth-framework`, `liu-agent-operation-authorization`,
+  `nandakumar-agent-sd-jwt`, `nemethi-aid-agent-identity-discovery`,
+  `yakung-oauth-agent-attestation`.
+- **Its classifier has its own recall gaps** on current drafts —
+  `jacobs-web4-delegated-authority` was seen and bucketed `ignored_after_review`
+  with score 0, despite being signed, bounded, revocable authority mandates for
+  agents.
+
+**So run all three and union them: author-prefix enumeration, the tracker, and
+the keyword sweep.** Each catches what the others structurally cannot. And when
+a draft matters, settle authorship from the `documentauthor` endpoint's person
+id — the `sato-` / `sato-soos-` case this sweep found shows a take-in-full
+author can change their own slug prefix and vanish from prefix enumeration.
+
 **On Heather Flanagan specifically.** She is exceptionally well connected across
 the identity industry and worth following as a bellwether, but most of her output
 is deliberately broader than this corpus: standards process, governance,
@@ -271,18 +355,21 @@ Standard workflow (Claude Code + git):
 ## Placement rules within tabs
 
 - **Active IETF Drafts:** loose grouping by author cluster, then by submission
-  date. Do NOT rely on absolute row numbers — the tab is 242 rows and they
+  date. Do NOT rely on absolute row numbers — the tab is 465 rows and they
   shift with every sweep; locate clusters by draft-name search instead. The
   early McGuinness cluster still sits near `draft-mw-oauth-actor-chain`, which
-  is kept adjacent because it directly responds to his Actor Profile. The
-  Aug 2026 sweep appended two labelled blocks at the end of the tab:
-  the Mission-Bound Authorization family, then the general Datatracker sweep.
-  New McGuinness drafts go with the relevant block.
+  is kept adjacent because it directly responds to his Actor Profile. Each
+  sweep appends labelled blocks at the end of the tab, so the tail is now in
+  sweep order: the Aug 2026 Mission-Bound and general blocks, then 4 Sep, then
+  the two 29 Sep blocks (take-in-full families + WG adoptions, then the general
+  Datatracker sweep, alphabetical within the block). New drafts from a tracked
+  author go with the relevant block, not next to their cluster.
 - **Industry & Implementations:** 5 reference implementations lead (rows 1–5),
   then the McGuinness Mission-Bound blog series (rows 7–10, publication order:
   MVP first as the substrate post), then blogs and analyst articles.
-- **Mission-Bound (Pre-pub):** the 45 GitHub-only family drafts, in the order
-  the Aug 2026 sweep generated them from `family-manifest.json`. This tab is a
+- **Mission-Bound (Pre-pub):** the 46 GitHub-only family drafts, in the order
+  the Aug 2026 sweep generated them from `family-manifest.json`, with later
+  sweeps' additions appended. This tab is a
   **venue** split, not a topic one — the test for belonging here is "lives only
   in the author's repo", not "is about missions". If one of these gets filed on
   Datatracker, move that row to Active IETF Drafts and update its standards-org,
@@ -305,11 +392,20 @@ Standard workflow (Claude Code + git):
 - **HUB** — composes 5+ other drafts. Currently: `kuehlewind-audit-architecture`.
 - **OUTLIER** — deliberately depends on nothing else in the corpus.
   Currently: `hardt-oauth-aauth-protocol` (note the `oauth` infix added at -09).
-- **COLLISION** — name conflict with another draft. Currently **four** "AIP"
-  drafts: singla, prakash, aip-agent-identity-protocol, and
-  `fane-opena2a-aip` (-02, 6 Aug 2026). Note its companion `fane-opena2a-aap`
-  also collides acronym-wise with the unrelated `draft-aap-oauth-profile`
-  (Agent Authorization Profile) added in the Aug 2026 sweep.
+- **COLLISION** — name conflict with another draft. Two live tangles:
+  - **"AIP" — now six.** singla, prakash, aip-agent-identity-protocol,
+    `fane-opena2a-aip` (-02, 6 Aug 2026), and as of 29 Sep 2026 the
+    Sogomonian pair `aiip-core` and `aiip-aiid` (AI Internet Protocol —
+    one extra `i`, which will not save anyone reading quickly). Note
+    `fane-opena2a-aap` also collides acronym-wise with the unrelated
+    `draft-aap-oauth-profile` (Agent Authorization Profile).
+  - **"AID" — now three, two of them by the same author.**
+    `nemethi-dawn-aid` (Agent Identity and Discovery, the DAWN one),
+    `nemethi-aid-agent-identity-discovery` (the *same author's* earlier
+    DNS-first `_agent.<domain>` TXT-record protocol, filed 16 Mar 2026,
+    added 29 Sep 2026), and `watts-ai-identity-conformance`'s unrelated
+    "AID-1". Drake's AIRS `aid` URN (added 29 Sep 2026) is a fourth use of
+    the letters, in a different namespace. **Always name the full slug.**
 - **SUPERSEDED** — replaced by a re-slug. `sharif-payment-trust` (replaced by
   `sharif-attp`), plus the six pairs resolved 26 Aug 2026. **Two shapes, two
   treatments** — check which one you have before editing:
@@ -325,6 +421,21 @@ Standard workflow (Claude Code + git):
     and `somoza-atn-agent-trust-negotiation` — four rows that had been sitting
     in the corpus as silent duplicates of drafts already tracked under their
     post-rename slugs.
+  - **Three more resolved 29 Sep 2026.** Renamed in place (successor not
+    tracked): `fletcher-transaction-token-chaining-profile` →
+    `fletcher-oauth-txn-token-chaining-profile` (the maintainer's own draft; the
+    slug gained an `oauth-` infix and shortened `transaction` to `txn`, and the
+    revision counter restarted at -00), and
+    `mcguinness-oauth-client-instance-assertion` →
+    `mcguinness-oauth-client-instance-id`. Deleted as a duplicate (successor
+    already tracked): `meunier-webbotauth-httpsig-protocol`, now Replaced by
+    `ietf-webbotauth-httpsig-protocol`.
+  - **⚠ A `replaces` relation that does not exist yet is not a negative result.**
+    On 4 Sep 2026 this file recorded that Datatracker held **no** `replaces`
+    relation between the individual and WG Web Bot Auth drafts despite identical
+    titles, and kept both rows on that basis. The relation exists now. **Re-test
+    the relation on every sweep for any freshly-adopted WG draft** — the filing
+    lags the adoption.
 
 ## Pending watch list
 
@@ -334,18 +445,18 @@ slugs than originally watched: `domain-authorized-issuer`, `id-assertion-framewo
 Two further drafts appeared and were added: `token-exchange-cnf` (-00, 19 Jul 2026)
 and `id-continuation-assertion` (-00, 3 Aug 2026).
 
-Still worth periodic checking: whether any of the 45 GitHub-only Mission-Bound
+Still worth periodic checking: whether any of the 46 GitHub-only Mission-Bound
 family drafts get filed on Datatracker. Only `draft-mcguinness-oauth-mission`
-has been so far — re-verified 4 Sep 2026 against all 46 manifest slugs. Re-check
+has been so far — re-verified 29 Sep 2026 against all 47 manifest slugs. Re-check
 with the family-manifest slugs.
 
-**Graph — REBUILT 4 Sep 2026.** Now 639 nodes / 928 edges, in sync with the
+**Graph — REBUILT 29 Sep 2026.** Now 725 nodes / 952 edges, in sync with the
 workbook. `build_graph.py` derives it; adding a source no longer requires
 touching that file. Edge provenance: 116 curated (the original hand-written
-analysis, preserved), 587 `composes` from the Mission-Bound family manifest,
-225 auto-derived `references` from bibliography text. The 30 curated substrate
-nodes are unchanged, and the one long-standing id collision is now resolved
-(see the duplicate-row correction in the 4 Sep sweep notes).
+analysis, preserved and unchanged), 598 `composes` from the Mission-Bound family
+manifest, 238 auto-derived `references` from bibliography text. Curated substrate
+holds at 30 nodes and id collisions at 0; the curated overlay now applies to 43
+nodes (was 42 — see the node-fork note below). Rebuild verified idempotent.
 
 Notes for future graph work:
 
@@ -360,8 +471,10 @@ Notes for future graph work:
   curated overlay's ability to match them. Both were needed for the
   `Mission-Bound (Pre-pub)` tab on 26 Aug 2026.
 - `MISSION_FAMILY` in `build_graph.py` mirrors the upstream `family-manifest.json`
-  (**re-synced 4 Sep 2026: 46 drafts**). Re-sync it if the family changes shape —
-  it drove `composes` edges from 373 to 587 this time. **The upstream schema
+  (**re-synced 29 Sep 2026: 47 drafts**, taking `composes` edges 587 → 598; the
+  4 Sep re-sync was 46 drafts and took them 373 → 587). Re-sync it every sweep —
+  regenerating the whole dict from the manifest is safer than patching it.
+  **The upstream schema
   changed:** `maturity` and `adoption_rung` were replaced by `role`,
   `spec_maturity` and `maintenance`. The tuple in `build_graph.py` keeps its
   4-slot shape, so `maturity` now carries `spec_maturity` and `adoption_rung`
@@ -371,11 +484,124 @@ Notes for future graph work:
 - The HTML shell's filter pills, `TYPE_COLOR`/`CAT_COLOR`, and `nodeRadius` maps
   are hand-maintained. **If you add a new node type or category, add a matching
   filter pill** — `applyFilters()` hides any node whose type has no checked pill,
-  so a missing pill silently makes nodes invisible.
+  so a missing pill silently makes nodes invisible. (No change needed 29 Sep
+  2026: the 86 additions produced no new type or category.)
+- **The retitle-forks-a-node footgun fired again on 29 Sep 2026, exactly as
+  predicted, and the substrate count is what caught it.** Renaming the
+  `client-instance-assertion` row to `client-instance-id` left the old id alive
+  as an orphaned curated substrate node — the same document twice — and the only
+  visible symptom was substrate moving 30 → 31. The fix is the documented one:
+  **before rebuilding**, retarget the stale node's curated edges onto the new id,
+  port its curated `long_description` across (set `origin: "curated"` on the
+  survivor, or the analysis is lost on the next rebuild), drop any self-loop the
+  merge creates, and delete the stale node from the JSON. Note the two *other*
+  renames in the same sweep caused no fork, because no curated edges hung off
+  them — so a clean substrate count does not mean no rows were retitled.
+  **Always diff node / edge / substrate counts against the previous build and
+  explain any delta before committing.**
 
 **Fixed 11 Aug 2026:** the two duplicate Industry rows from commit `612bb30`
 (Defakto IETF 122, Rock Lambros RockCyber) were removed, keeping the richer
 narration of each pair.
+
+**29 Sep 2026 sweep — 609 → 695 sources (twenty-five-day window since 4 Sep):**
+
+- **The largest single sweep so far (+86 net), and the first where the maturity
+  events matter more than the count.** Two WG adoptions landed in the corpus's
+  own subject: **`draft-ietf-oauth-deferred-token-response`** (-00, 16 Sep,
+  `replaces draft-gerber-oauth-deferred-token-response`, which was already
+  tracked) and **`draft-ietf-wimse-aims`** (-00, 15 Sep, `replaces
+  draft-klrc-aiagent-auth`, also already tracked). Both individual drafts had
+  been in the corpus for a full cycle before adoption, which is the first
+  evidence that this bibliography's individual-draft tail is a leading
+  indicator of WG work rather than just noise around it.
+- **But still no Complex Delegation milestone.** `charter-ietf-oauth` is
+  unchanged at rev 06 and the OAuth WG's three active milestones are still
+  SD-JWT VC (**overdue since 31 Jul 2026**), OAuth 2.1 and Transaction Tokens
+  (both 31 Dec 2026). The deferred-token-response adoption happened under the
+  existing work program. **The standing watch item is unmoved:** a Complex
+  Delegation milestone is still the signal to look for.
+- **WIMSE is now the third chartered WG producing in-scope mechanisms**, with
+  OAuth and Web Bot Auth. Note the downstream effect already visible:
+  `gilda-wimse-agent-audit-record` profiles the seven minimum audit fields AIMS
+  defines, twelve days after AIMS was adopted.
+- **The OUTLIER doubled.** Hardt filed `aauth-r3`, `aauth-budgets` and
+  `aauth-events` on 28 Sep 2026, taking AAuth from three documents to six, and
+  revved the protocol to -11. See the Hardt entry above — the tag stays, its
+  meaning narrows.
+- **Take-in-full families were incomplete again, in two new ways.** Both were
+  found by checking Datatracker's `documentauthor` person ids, not slugs:
+  `ferro-schrock-memory-projection-record` was wrongly dismissed on 26 Aug as a
+  different author (it is Schrock), and `sato-agent-accountability-refarch` is
+  the `sato-soos` author filing under a shorter prefix. See the Schrock and Sato
+  entries above.
+- **The standards-tracker is not a discovery superset** — 19 of the 20 in-scope
+  drafts our keyword sweep found were absent from it entirely, six of them filed
+  in March 2026, before the tracker's 8 Jul 2026 start. This retires the 26 Aug
+  claim that it has "strictly better recall". See the correction under Sweep
+  sources; it changes the method, not just this sweep's numbers.
+- **A new prolific-author tier, handled the same way as the `das-` case.**
+  Take-in-full was **not** applied to any of them; drafts were picked on merit:
+  `wang-` JEP family 4 of ~10 (the Delegation event verb, action mandates,
+  receipts and the profile model; the cognition, evolution and time drafts
+  dropped), `stone-` 6 of 14 (commerce, dispute resolution, escrow and the trust
+  passport; the two SwarmScore reputation drafts and AIVS dropped), `cowles-`
+  3 of 4 (AOCL, VOLT, WARD; the bare message envelope AEE dropped),
+  `jovancevic-` 2 of 4. The `das-` family stays at 3 of ~40 — **and note it now
+  files under non-`das-` slugs too** (`draft-agentic-ai-tool-execution-finality`
+  is a DAS document), so prefix exclusion alone will not hold it out.
+- **The discovery/registry corner is the most contested area in the corpus.**
+  Five entrants arrived in one window — Drake's AIRS (DNS/RDAP + EPP + a
+  governance authority), `sankarshan-agent-registry-protocol`,
+  `tanase-ain-authoritative-resolution`, `vandemeent-ains-discovery` and two
+  more DAWN framework drafts (`zhang-`, `yao-`) — joining `pioli-agent-discovery`
+  and the `mcp://`/DAWN work. All four corners of Flanagan's 2026 discovery
+  series (DNS, well-known URIs, registries, catalogs) now have multiple
+  competing drafts.
+- **The verifier side finally has a draft.** `jackson-wimse-evaluation` (-02,
+  29 Sep) states what a verifier must do with a delegation chain, on the
+  observation that two verifiers can check the same chain, both report success,
+  and enforce different policy. Every chain draft the corpus tracks specifies
+  the conveying side only. Read it against `asor-wimse-agent-delegation-chain`,
+  `hamr-oauth-agent-delegation` and `mcguinness-oauth-mission-attenuation`.
+- **The accountability axes keep multiplying.** Redress gained a mechanism
+  (`pinto-cbap-1` binds contestation terms *before* execution) and dispute
+  resolution arrived as a state machine (`stone-adrp`). New this sweep:
+  **revocation closure** (`watts-oauth-agent-revocation-closure` — invalidating
+  a credential does not close every path from revoked authority to effect) and
+  **evidence adequacy** (`watts-agent-evidence-boundary`,
+  `sergeev-claim-boundaries`, `wadkins-agentproto-action-determinability`).
+  `sergeev-claim-boundaries` is the useful corrective: this corpus now holds
+  more receipt formats than things they attest.
+- **Budget arrived twice, independently** — `hardt-aauth-budgets` (28 Sep) and
+  `effortel-pulse` (17 Sep). Spend ceilings are becoming a delegation
+  constraint rather than an application concern.
+- **Expiry churn continues, with a twist.** Six of the 86 additions were already
+  expired when added, but unlike the 4 Sep pattern these were not
+  filed-and-expired-fast — all six were filed in **March 2026** and expired in
+  September, having sat untracked the whole time. Newly expired among
+  previously-tracked drafts: `aip-agent-identity-protocol`,
+  `serra-mcp-discovery-uri`. All tagged and kept per the standing rule.
+- **Karl's blog: no new posts.** The RSS feed's newest item is still 10 Aug 2026
+  and the handbook is unchanged; the corpus's 79 entries remain complete, and a
+  **full link-liveness pass found all 79 live** (note: the site now 308-redirects
+  every URL to a trailing slash — `urllib` does not follow 308, so use
+  `curl -L` or the check reports every link dead).
+- **Flanagan: four new posts, all out of scope.** Standards transparency
+  (1 Sep), identity conferences (8 Sep), and a two-part verifier/credential
+  acceptance arc (15 and 22 Sep). The last two are the closest call — they are
+  about who accepts a credential and on what basis — but they sit in the
+  wallets/VC slice her filter rule excludes, not delegated authority or agents.
+  Worth noting she is running a *verifier-side* arc at the same moment the IETF
+  tail produced its first verifier-side delegation draft; if she turns it toward
+  agent authority, that is the post to track. Archive is now 163 posts, 36
+  tracked.
+- **Other watch items checked, all unmoved:** `identity-chaining` and
+  `rfc7523bis` still in the RFC Editor queue with no RFC number;
+  `rar-metadata-remediation` still -00; no Vauban supersession (no `replaces`
+  relations, all six components still tracked); an audit of all tracked
+  Datatracker drafts confirms **RFC 10017 is still the only one to have reached
+  RFC status**.
 
 **4 Sep 2026 sweep — 572 → 609 sources (nine-day window since 26 Aug):**
 
