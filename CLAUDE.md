@@ -424,6 +424,18 @@ Standard workflow (Claude Code + git):
     URI scheme is registered by both `kanojia-creduent-agent-uri` and
     `narvaneni-agent-uri`; and there are now three canonical action identifiers
     (Schrock's CAID, `thallapelly-oasnt-caid`, `etcheverry-action-ref`).
+  - **"Intent Token" — three, an exact-name collision** (tagged 28 Oct 2026, on
+    all three rows). `williams-intent-token` (-02; a human-declared authorization
+    envelope bound to one action before it executes — note the draft asserts a
+    patent priority date), `haberkamp-ipp` (-01; the Intent Provenance Protocol's
+    token travels with every action through an agent chain), and
+    `chen-oauth-agent-intent-token` (-00, 19 Oct 2026; an OAuth credential carrying
+    user intent so its translation into grants can be checked). Untagged until
+    28 Oct, although the first two had been tracked since Jun/Jul — **when adding
+    a draft, search existing titles *and summaries* for its headline artifact
+    name, not just its acronym.** Adjacent but differently named:
+    `jiang-oauth-intent-admission`, `sato-soos-idp`, `janbjer-div`, and the
+    Mission-Bound family's Mission Intent.
 - **SUPERSEDED** — replaced by a re-slug. `sharif-payment-trust` (replaced by
   `sharif-attp`), plus the six pairs resolved 26 Aug 2026. **Two shapes, two
   treatments** — check which one you have before editing:
