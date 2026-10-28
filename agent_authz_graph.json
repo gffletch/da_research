@@ -688,7 +688,7 @@
       ],
       "status": "active",
       "date": "2026-05-18",
-      "degree": 16
+      "degree": 17
     },
     {
       "id": "draft-birkholz-verifiable-agent-conversations",
@@ -1478,16 +1478,16 @@
     {
       "id": "draft-nelson-agent-delegation-receipts",
       "type": "individual-draft",
-      "name": "draft-nelson-agent-delegation-receipts — Delegation Receipt Protocol for AI Agent Authorization",
-      "summary": "Specifies the Delegation Receipt Protocol (DRP) where users sign Authorization Objects (containing scope boundaries, time constraints, instruction hashes, and model state commitments) that are published to an append-only log before the agent runtime gains control. Removes operators as trusted intermediaries by making the user's private key the sole signing authority.",
-      "long_description": "Specifies the Delegation Receipt Protocol (DRP) where users sign Authorization Objects (containing scope boundaries, time constraints, instruction hashes, and model state commitments) that are published to an append-only log before the agent runtime gains control. Removes operators as trusted intermediaries by making the user's private key the sole signing authority. Revision -10, 13 Jun 2026; author: Ryan Nelson (Authproof). At version 10, the most iterated individual draft in the pre-action authorization space. The commitment-before-execution architecture — sign before the agent runs, not after — is distinctive and directly addresses the prompt-injection attack surface. **Updated 28 Oct 2026:** now **-15 (22 Oct 2026)**. On 10 Oct the author asked the OAuth chairs whether the draft fits the charter and what adoption would require, candidly noting a single reference implementation. On the WIMSE list Jeff Lombardo (Amazon) pushed back on its premise that natural-language instructions are the primary authorization artifact, arguing the AS consent event already is a cryptographically attributable authorization.",
+      "name": "draft-nelson-agent-delegation-receipts — Agent Delegation Receipts",
+      "summary": "Defines the Agent Delegation Receipt: a signed record of what a human principal authorized an AI agent to do, for how long, and under what instructions — carrying a scope, hard boundaries, a validity window and a hash of the operator's stated instructions, all signed by the authorizing key. Two signature profiles: JWS (RFC 7515) over JCS-canonicalized JSON (RFC 8785) as the primary wire format, and COSE_Sign1 (RFC 9052) for constrained environments. Specifies scope attenuation for multi-agent delegation chains, with delegatee holder binding on sub-receipts (a parent names the delegatee's public key); a revocation registry with cascade semantics; closed authorization fields with `metadata` as the sole extension point; fail-closed one-time-use receipts; normative custody requirements for the authorizing key; and a sketch of an OAuth authorization_details binding so an access token can reference its receipt. States explicitly what receipts can and cannot prove. Frames the receipt as Execution Layer Evidence for a Grant Layer Authority: it proves a specific execution fell within the terms the authorizing key signed.",
+      "long_description": "Defines the Agent Delegation Receipt: a signed record of what a human principal authorized an AI agent to do, for how long, and under what instructions — carrying a scope, hard boundaries, a validity window and a hash of the operator's stated instructions, all signed by the authorizing key. Two signature profiles: JWS (RFC 7515) over JCS-canonicalized JSON (RFC 8785) as the primary wire format, and COSE_Sign1 (RFC 9052) for constrained environments. Specifies scope attenuation for multi-agent delegation chains, with delegatee holder binding on sub-receipts (a parent names the delegatee's public key); a revocation registry with cascade semantics; closed authorization fields with `metadata` as the sole extension point; fail-closed one-time-use receipts; normative custody requirements for the authorizing key; and a sketch of an OAuth authorization_details binding so an access token can reference its receipt. States explicitly what receipts can and cannot prove. Frames the receipt as Execution Layer Evidence for a Grant Layer Authority: it proves a specific execution fell within the terms the authorizing key signed. Revision -10, 13 Jun 2026; author: Ryan Nelson (Authproof). At version 10, the most iterated individual draft in the pre-action authorization space. The commitment-before-execution architecture — sign before the agent runs, not after — is distinctive and directly addresses the prompt-injection attack surface. **Updated 28 Oct 2026:** now **-15 (22 Oct 2026)**. On 10 Oct the author asked the OAuth chairs whether the draft fits the charter and what adoption would require, candidly noting a single reference implementation. On the WIMSE list Jeff Lombardo (Amazon) pushed back on its premise that natural-language instructions are the primary authorization artifact, arguing the AS consent event already is a cryptographically attributable authorization. **Retitled and re-summarized 28 Oct 2026** from the -15 abstract — the row had still carried the -10 title (\"Delegation Receipt Protocol for AI Agent Authorization\", DRP) and its summary (user-signed Authorization Objects with model-state commitments, published to an append-only log), which -11 onward replaced with standard JWS/COSE profiles. Revision trail: -11 standard signature profiles; -12 closed authorization fields, resolving an unknown-fields question raised on the OAuth list; -13 independent-implementation feedback (orchestratorSignature key pinning, issuance computation order) — so there is now at least one implementer beyond the reference implementation; -14 content-profile pointer for verifying what the agent produced; -15 adopts the grant/execution vocabulary of draft-chen-oauth-agent-authz-use-cases, adds the delegateeKey holder binding (a wire-format break: -14-era verifiers reject it, deliberately fail-closed) and deprecates orchestratorSignature. **Belongs in the audit comparison:** as execution-layer evidence it is the same class of artifact as draft-gilda-audit-agent-audit-record and draft-bradleyb-audit-decision-records, and a candidate input to the composition in draft-kuehlewind-audit-architecture — none of which yet cites it, and the AUDIT BoF request for IETF 127 (bofreq-kuhlewind-audit-agent-use-of-delegation-and-interaction-traceability) does not name it either.",
       "category": "audit",
       "tab": "Active IETF Drafts",
       "standards_org": "IETF (individual)",
       "url": "https://datatracker.ietf.org/doc/draft-nelson-agent-delegation-receipts/",
       "revision": "-10",
       "origin": "workbook",
-      "degree": 3
+      "degree": 8
     },
     {
       "id": "draft-williams-intent-token",
@@ -2103,7 +2103,7 @@
       "url": "https://datatracker.ietf.org/doc/draft-chen-oauth-agent-authz-use-cases/",
       "revision": "-03",
       "origin": "workbook",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "draft-agnihotri-oauth-agent-impl-status",
@@ -5152,7 +5152,7 @@
       "url": "https://datatracker.ietf.org/doc/draft-bradleyb-audit-decision-records/",
       "revision": "-00",
       "origin": "workbook",
-      "degree": 0
+      "degree": 1
     },
     {
       "id": "draft-msebenzi-evidence-action",
@@ -6048,7 +6048,7 @@
       "url": "https://datatracker.ietf.org/doc/draft-gilda-audit-agent-audit-record/",
       "revision": "-02",
       "origin": "workbook",
-      "degree": 0
+      "degree": 1
     },
     {
       "id": "draft-gudlab-agentid-protocol",
@@ -11375,7 +11375,7 @@
       "in_workbook": false,
       "category": "cross-cutting",
       "origin": "curated",
-      "degree": 15
+      "degree": 16
     },
     {
       "id": "rfc-9068",
@@ -17720,6 +17720,41 @@
     {
       "source": "draft-rosomakho-oauth-txn-challenge",
       "target": "rfc-9396",
+      "type": "references",
+      "origin": "derived",
+      "label": "Cites RFC in annotation"
+    },
+    {
+      "source": "draft-nelson-agent-delegation-receipts",
+      "target": "draft-chen-oauth-agent-authz-use-cases",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-nelson-agent-delegation-receipts",
+      "target": "draft-bradleyb-audit-decision-records",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-nelson-agent-delegation-receipts",
+      "target": "draft-gilda-audit-agent-audit-record",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-nelson-agent-delegation-receipts",
+      "target": "draft-kuehlewind-audit-architecture",
+      "type": "references",
+      "origin": "derived",
+      "label": "Named in corpus annotation"
+    },
+    {
+      "source": "draft-nelson-agent-delegation-receipts",
+      "target": "rfc-8785",
       "type": "references",
       "origin": "derived",
       "label": "Cites RFC in annotation"
