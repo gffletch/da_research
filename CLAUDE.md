@@ -5,16 +5,16 @@ work on how authority delegates from humans to AI agents. Maintained as a living
 research artifact; updated additively as new drafts and blog posts appear.
 
 Maintainer is an IAM/delegated-authz expert. Date context: current entries
-dated through early Nov 2026 (last full sweep: 28 Oct 2026; OAuth list check:
-2 Nov 2026).
+dated through early Nov 2026 (last full sweep: 28 Oct 2026; OAuth + WIMSE list
+check: 2 Nov 2026).
 
 ## Files
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **798 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **802 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **828 nodes, 1058 edges**,
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **832 nodes, 1061 edges**,
   in sync with the workbook as of 2 Nov 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
@@ -65,7 +65,7 @@ Both still exist from the original session if needed.
 | -------------------------- | ----- | ------------------------------------------------------ |
 | Index                      | cover | Auto-summed; TOTAL row moves when tabs are added       |
 | Published RFCs             | 5     | Stable primitives, plus RFC 10017 for WG completeness. |
-| Active IETF Drafts         | 550   | **★ Where the action is.** WG + individual drafts.     |
+| Active IETF Drafts         | 554   | **★ Where the action is.** WG + individual drafts.     |
 | Mission-Bound (Pre-pub)    | 50    | McGuinness GitHub-only family. Venue split, not topic. |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
@@ -377,7 +377,7 @@ Standard workflow (Claude Code + git):
 ## Placement rules within tabs
 
 - **Active IETF Drafts:** loose grouping by author cluster, then by submission
-  date. Do NOT rely on absolute row numbers — the tab is 550 rows and they
+  date. Do NOT rely on absolute row numbers — the tab is 554 rows and they
   shift with every sweep; locate clusters by draft-name search instead. The
   early McGuinness cluster still sits near `draft-mw-oauth-actor-chain`, which
   is kept adjacent because it directly responds to his Actor Profile. Each
@@ -386,8 +386,8 @@ Standard workflow (Claude Code + git):
   the two 29 Sep blocks (take-in-full families + WG adoptions, then the general
   Datatracker sweep, alphabetical within the block), then the two 28 Oct blocks
   (governance events + take-in-full families + Watts picks, then the general sweep
-  plus OAuth/WIMSE list pass, alphabetical), then the small 2 Nov OAuth list-check
-  block (alphabetical). New drafts from a tracked
+  plus OAuth/WIMSE list pass, alphabetical), then the two small 2 Nov list-check
+  blocks, OAuth then WIMSE (each alphabetical). New drafts from a tracked
   author go with the relevant block, not next to their cluster.
 - **Industry & Implementations:** 5 reference implementations lead (rows 1–5),
   then the McGuinness Mission-Bound blog series (rows 7–10, publication order:
@@ -489,7 +489,9 @@ Standard workflow (Claude Code + git):
   - **Two more renamed in place 2 Nov 2026** (successors untracked, no curated
     graph content on either, so no node fork): `gco-oauth-delegate-sd-jwt` →
     `ietf-oauth-delegate-sd-jwt` (the WG -00, 30 Oct — the adoption watch item
-    firing) and `nandakumar-agent-sd-jwt` → `nandakumar-agent-sd-card`.
+    firing) and `nandakumar-agent-sd-jwt` → `nandakumar-agent-sd-card`. Plus one
+    from the WIMSE pass the same day: `hood-agtp-api` → `hood-agtp-methods`
+    (derived edges only, so no fork).
   - **⚠ A `replaces` relation that does not exist yet is not a negative result.**
     On 4 Sep 2026 this file recorded that Datatracker held **no** `replaces`
     relation between the individual and WG Web Bot Auth drafts despite identical
@@ -542,6 +544,21 @@ and move any newly filed row out of the Mission-Bound tab.
   token-response parameter. An adoption call would be the first for a McGuinness
   individual draft.
 - **WIMSE Expression of Interest on `carleton-workload-authz-grant`** (7 Oct interim).
+  Re-checked 2 Nov 2026: replies uniformly positive, **no chair conclusion yet**; the
+  draft went to -02 the same day and now scopes itself to workloads acting on their
+  own behalf (Anthropic, OpenAI, Okta, Defakto, Ping authors).
+- **WIMSE maturity events** (new 2 Nov 2026). `ietf-wimse-workload-identity-practices`
+  is in **IETF Last Call to 13 Nov 2026** (Informational) and
+  `ietf-wimse-http-signature` has **publication requested** (28 Oct, Proposed
+  Standard) — the first WIMSE documents to leave the WG. Check IESG outcomes.
+- **WPT vs access tokens** (new 2 Nov 2026). `ietf-wimse-wpt-02` forbids presenting a
+  WPT and an access token in one request; Cisco and AWS objected, Campbell defended it.
+  The resolution decides whether a WIMSE-authenticated agent can carry a delegated
+  OAuth token on the same call — watch s2s-protocol issue #284.
+- **Principal standing — one freshness boundary** (new 2 Nov 2026).
+  `jackson-wimse-evaluation-05` treats an input at exactly its max age as expired;
+  `gilda-audit-agent-audit-record-03` and the AIMS-thread vectors treat it as fresh.
+  Watch which way it settles across the three.
 - **`draft-dyer-delegation-token`** — referenced on the OAuth list (user-minted daily
   grants with an authority ladder) but **not on Datatracker** (re-checked 2 Nov 2026).
   Do not add a placeholder.
@@ -549,10 +566,11 @@ and move any newly filed row out of the Mission-Bound tab.
   1 Nov list post, is a GitHub prototype repo for early DTR experiments that he
   calls "not publication-track". It is noted on the DTR row; do not watch for it.
 
-**Graph — REBUILT 2 Nov 2026.** Now 828 nodes / 1058 edges, in sync with the
+**Graph — REBUILT 2 Nov 2026.** Now 832 nodes / 1061 edges, in sync with the
 workbook (28 Oct: 823 / 1049, then 1054 after the two same-day follow-up commits;
-29 Sep: 725 / 952). The 2 Nov delta is +7 / −2 nodes (five additions, two
-in-place renames) and +4 derived `references` edges; substrate 30, collisions 0. `build_graph.py` derives it; adding a source no
+29 Sep: 725 / 952). The OAuth pass took it to 828 / 1058 (+7 / −2 nodes from five
+additions and two in-place renames, +4 derived edges); the WIMSE pass to 832 / 1061
+(+5 / −1 nodes, +5 / −2 derived edges). Substrate 30, collisions 0 throughout. `build_graph.py` derives it; adding a source no
 longer requires touching that file. Edge provenance: 116 curated (the original
 hand-written analysis, preserved and unchanged), 688 `composes` from the
 Mission-Bound family manifest (598 on 29 Sep — 5 new drafts plus references grown
@@ -604,6 +622,27 @@ Notes for future graph work:
   them — so a clean substrate count does not mean no rows were retitled.
   **Always diff node / edge / substrate counts against the previous build and
   explain any delta before committing.**
+
+**2 Nov 2026 WIMSE list check — 798 → 802 sources (WIMSE list, 28 Oct–2 Nov):**
+
+Same method, second list (279 messages since 29 Sep, ~65 since the sweep). **Added:**
+`reddy-wimse-oauth-dialog-binding` (agent dialogs bound to WIMSE + Transaction Tokens
++ identity chaining), `le-agent-passport` (build-bound agent identity + narrow-only
+receipts), `durga-agenttrust-trace-verification`, and `zambo-aer1-audit-data-model` —
+the first draft aimed directly at the AUDIT BoF's charter. **Renamed:** `hood-agtp-api`
+→ `hood-agtp-methods`. **Dropped:** `durga-wimse-ctx-isolation` (prompt-injection
+taint, not authority), `thaha-scitt-agent-execution-evidence` (SCITT rule), the
+expired `ietf-wimse-s2s-protocol` (split into creds/WPT/HTTP-sig, all tracked), and
+the untracked AGTP companions. **The bigger finding was staleness, not discovery:**
+22 stale tracked rows were refreshed, and several were further behind than the list
+traffic suggested — `zambo-aer1` from -03 to -26, `wpt` from -01 to an Aug -02 the
+row never recorded, `http-signature` and `workload-identity-practices` both two
+revisions and one IESG state behind. Five rows that were not discussed at all
+(`bu-`, both `wei-aic-`, `seymour-`, `tanase-`) were also stale. **Sweep state audits have
+checked expiry and RFC status, but not the revision each row records.** Next full
+sweep: compare Datatracker's current rev against the highest rev each row mentions,
+across *every* tracked draft, not only the ones the sweep touches — and re-diff the
+abstract wherever the gap is more than one revision.
 
 **2 Nov 2026 OAuth list check — 793 → 798 sources (OAuth list, 28 Oct–2 Nov):**
 
