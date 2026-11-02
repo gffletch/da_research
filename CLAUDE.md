@@ -5,16 +5,17 @@ work on how authority delegates from humans to AI agents. Maintained as a living
 research artifact; updated additively as new drafts and blog posts appear.
 
 Maintainer is an IAM/delegated-authz expert. Date context: current entries
-dated through Oct 2026 (last full sweep: 28 Oct 2026).
+dated through early Nov 2026 (last full sweep: 28 Oct 2026; OAuth list check:
+2 Nov 2026).
 
 ## Files
 
 **Canonical (the source of truth — update these):**
 
-- `delegated_authorization_research.xlsx` — the bibliography. **793 sources**
+- `delegated_authorization_research.xlsx` — the bibliography. **798 sources**
   across 8 tabs (Index + 7 content tabs).
-- `agent_authz_graph.json` — RAG-ready knowledge graph: **823 nodes, 1049 edges**,
-  in sync with the workbook as of 28 Oct 2026. **Generated, not hand-edited** —
+- `agent_authz_graph.json` — RAG-ready knowledge graph: **828 nodes, 1058 edges**,
+  in sync with the workbook as of 2 Nov 2026. **Generated, not hand-edited** —
   `build_graph.py` derives it from the workbook. Every node and edge carries an
   `origin` field (`curated` / `mission-manifest` / `workbook` / `derived`); only
   `curated` survives a rebuild, so hand-written analysis is safe but derived
@@ -64,12 +65,12 @@ Both still exist from the original session if needed.
 | -------------------------- | ----- | ------------------------------------------------------ |
 | Index                      | cover | Auto-summed; TOTAL row moves when tabs are added       |
 | Published RFCs             | 5     | Stable primitives, plus RFC 10017 for WG completeness. |
-| Active IETF Drafts         | 546   | **★ Where the action is.** WG + individual drafts.     |
+| Active IETF Drafts         | 550   | **★ Where the action is.** WG + individual drafts.     |
 | Mission-Bound (Pre-pub)    | 50    | McGuinness GitHub-only family. Venue split, not topic. |
 | OpenID Foundation          | 11    | Final + draft OIDF specs.                              |
 | Other Standards & Govt     | 7     | Kantara, W3C, NIST, EU AI Act, NSA MCP CSI.            |
 | Academic Papers            | 12    | arXiv + IEEE.                                          |
-| Industry & Implementations | 162   | Vendor blogs, reference impls, full Control Plane blog.|
+| Industry & Implementations | 163   | Vendor blogs, reference impls, full Control Plane blog.|
 
 Row schema:
 
@@ -98,9 +99,12 @@ Still useful as a mental model when placing new drafts:
 
 - **Karl McGuinness** (Independent, former Okta SVP & Chief Product Architect).
   Most concentrated single-author body of work in the corpus — currently:
-  - **20 active Datatracker drafts** as author, **zero expired** — verified by
+  - **21 active Datatracker drafts** as author, **zero expired** — verified by
     **person-id enumeration** (person 141623) on 28 Oct 2026, superseding the
-    29 Sep prefix count of 15. 16 carry the `mcguinness-` prefix; **4 are
+    29 Sep prefix count of 15, and re-run 2 Nov 2026, which found
+    `mcguinness-oauth-client-ip-ranges` (-00, 28 Oct, with Xiaoyi Zhang;
+    peripheral client-network metadata, taken under the take-in-full rule and
+    contested on the list on arrival). 17 carry the `mcguinness-` prefix; **4 are
     co-authored under other slugs and are invisible to prefix enumeration**:
     `mora-oauth-entity-profiles`, `liu-mcguinness-oauth-bounded-work` (both found
     28 Oct), `rosomakho-oauth-txn-challenge` and the WG's ID-JAG. 2 more are
@@ -188,6 +192,14 @@ Still useful as a mental model when placing new drafts:
     (McGuinness's `mission-aauth` binding, noted 4 Sep 2026) and its own
     extension ecosystem. "Depends on nothing" no longer implies "nothing
     depends on it".
+  - **A second "AAuth" arrived 1 Nov 2026 — see COLLISION.**
+    `rosenberg-oauth-aauth` (Rosenberg/White) is an OAuth 2.1 grant extension —
+    the opposite design choice, revived after the OAuth interim on Hardt's draft,
+    where some participants asked for an extension rather than a new protocol.
+    Its lineage is *older* on Datatracker (`patwhite-aauth-00`, May 2025) than
+    Hardt's (`hardt-aauth-protocol-00`, Apr 2026). Hardt replied that he is at
+    -12 (not on Datatracker as of 2 Nov) and that **an AAuth WG has been proposed
+    at the OpenID Foundation** — if it charters, AAuth's venue moves to OIDF.
 
 - **Larry Lewis**. `agent-trust-protocol/atp-core` (Industry tab, row 5).
   Acronym near-collision with `draft-sharif-attp` — different designs:
@@ -365,7 +377,7 @@ Standard workflow (Claude Code + git):
 ## Placement rules within tabs
 
 - **Active IETF Drafts:** loose grouping by author cluster, then by submission
-  date. Do NOT rely on absolute row numbers — the tab is 546 rows and they
+  date. Do NOT rely on absolute row numbers — the tab is 550 rows and they
   shift with every sweep; locate clusters by draft-name search instead. The
   early McGuinness cluster still sits near `draft-mw-oauth-actor-chain`, which
   is kept adjacent because it directly responds to his Actor Profile. Each
@@ -374,7 +386,8 @@ Standard workflow (Claude Code + git):
   the two 29 Sep blocks (take-in-full families + WG adoptions, then the general
   Datatracker sweep, alphabetical within the block), then the two 28 Oct blocks
   (governance events + take-in-full families + Watts picks, then the general sweep
-  plus OAuth/WIMSE list pass, alphabetical). New drafts from a tracked
+  plus OAuth/WIMSE list pass, alphabetical), then the small 2 Nov OAuth list-check
+  block (alphabetical). New drafts from a tracked
   author go with the relevant block, not next to their cluster.
 - **Industry & Implementations:** 5 reference implementations lead (rows 1–5),
   then the McGuinness Mission-Bound blog series (rows 7–10, publication order:
@@ -419,6 +432,14 @@ Standard workflow (Claude Code + git):
     "AID-1". Drake's AIRS `aid` URN (added 29 Sep 2026) is a fourth use of
     the letters, in a different namespace, and `mozley-aidiscovery` ("AI Agent
     Discovery (AID)", added 28 Oct 2026) a fifth. **Always name the full slug.**
+  - **"AAuth" — two protocols, one name** (tagged 2 Nov 2026). Hardt's
+    `hardt-oauth-aauth-protocol` and its five-document extension family (the
+    OUTLIER: clean-sheet, zero OAuth dependencies) versus `rosenberg-oauth-aauth`
+    (an OAuth 2.1 "Agent Authorization Grant" extension, which replaces
+    `patwhite-aauth`). Both rows are tagged. Datatracker dates favour the
+    Rosenberg/White lineage (May 2025 vs Apr 2026); Hardt's community name
+    (aauth.dev, a proposed OIDF WG) favours his. The corpus records both and
+    takes no side.
   - **Smaller tangles added 28 Oct 2026:** "PACT" is `laxsharma-pact`,
     `valverde-oauth-pact` and Decagon's PACT (three unrelated designs); the `agent:`
     URI scheme is registered by both `kanojia-creduent-agent-uri` and
@@ -465,6 +486,10 @@ Standard workflow (Claude Code + git):
     left WIMSE after the chairs declined adoption and pointed it at the AUDIT BoF),
     and `stephan-ai-agent-6g` → `stephan-agentproto-6g-usecases`. The `stephan`
     node was curated, so the node-fork fix was applied before rebuilding.
+  - **Two more renamed in place 2 Nov 2026** (successors untracked, no curated
+    graph content on either, so no node fork): `gco-oauth-delegate-sd-jwt` →
+    `ietf-oauth-delegate-sd-jwt` (the WG -00, 30 Oct — the adoption watch item
+    firing) and `nandakumar-agent-sd-jwt` → `nandakumar-agent-sd-card`.
   - **⚠ A `replaces` relation that does not exist yet is not a negative result.**
     On 4 Sep 2026 this file recorded that Datatracker held **no** `replaces`
     relation between the individual and WG Web Bot Auth drafts despite identical
@@ -488,23 +513,46 @@ and move any newly filed row out of the Mission-Bound tab.
 
 **Open watch items from the 28 Oct 2026 sweep:**
 
-- **Delegated SD-JWT WG -00.** The OAuth WG adopted `gco-oauth-delegate-sd-jwt` on
-  16 Oct; the individual draft then *expired* (23 Oct) and no `draft-ietf-oauth-*`
-  successor had been posted by 28 Oct. When it appears and `replaces` the gco row,
-  that is the successor-not-yet-tracked case: **rename the gco row in place**.
+- ~~Delegated SD-JWT WG -00~~ — **RESOLVED 2 Nov 2026:** `ietf-oauth-delegate-sd-jwt-00`
+  posted 30 Oct with the `replaces` relation; gco row renamed in place.
 - **AUDIT BoF at IETF 127** (`bofreq-kuhlewind-audit-…`, approved). A WG charter would
   give every audit-record draft in the corpus a venue — check the BoF outcome.
 - **OAuth fine-grained-authorization design team** (`liu-oauth-authorization-schemas`,
   47-message call for interest). The likeliest route to a first Complex Delegation
   deliverable; watch for the design team forming or a milestone.
-- **Outcome of the 26 Oct OAuth interim on Mission-Bound Authorization** — minutes
-  were not yet posted at the sweep.
+- ~~Outcome of the 26 Oct OAuth interim on Mission-Bound Authorization~~ — **RESOLVED
+  2 Nov 2026** (minutes posted 1 Nov). Presented as a three-rule MVP — *Commit*
+  the approved authority set, *Narrow* (every derived set a subset), *Gate* (every
+  issuance checks the Mission is active) — with PAR as the request format and
+  Mission Status for revoke/suspend/resume/complete. Discussion judged Mission
+  *Shaping* (intent → authority set) the crux and probably not standards-track.
+  Next steps: "*seems like this would be a fit*", but the WG needs clearer scope
+  for what it would take on — and the minutes record that the **WG is feeling
+  fatigue around the number of proposals**. Still no milestone.
+- **AAuth naming and venue** (new 2 Nov 2026). Two protocols named AAuth (see
+  COLLISION); watch for a rename by either side and for the proposed OIDF AAuth WG.
+- **Offline attenuation-chain reconciliation before IETF 127** (new 2 Nov 2026).
+  AAT (`niyikiza-`), `asor-wimse-agent-delegation-chain` and `hulea-wimse-agent-mandate`
+  overlap with different subsumption rules, and AAT and asor differ by one hop on
+  `del_max_depth` under the same claim name. Niyikiza offered a cross-draft vector
+  comparison; `sweeney-wimse-credential-delegation-02` already adopted asor's
+  format. Watch for converged semantics or a merged draft.
+- **`mcguinness-oauth-resource-token-resp` adoption** (new 2 Nov 2026). The OAuth 2.1
+  editor proposed adopting it (oauth-v2-1 #215) so 2.1 can reference a `resource`
+  token-response parameter. An adoption call would be the first for a McGuinness
+  individual draft.
 - **WIMSE Expression of Interest on `carleton-workload-authz-grant`** (7 Oct interim).
 - **`draft-dyer-delegation-token`** — referenced on the OAuth list (user-minted daily
-  grants with an authority ladder) but **not on Datatracker**. Do not add a placeholder.
+  grants with an authority ladder) but **not on Datatracker** (re-checked 2 Nov 2026).
+  Do not add a placeholder.
+- **Not a pending draft:** `draft-mcguinness-oauth-deferred-code`, linked from Karl's
+  1 Nov list post, is a GitHub prototype repo for early DTR experiments that he
+  calls "not publication-track". It is noted on the DTR row; do not watch for it.
 
-**Graph — REBUILT 28 Oct 2026.** Now 823 nodes / 1049 edges, in sync with the
-workbook (29 Sep: 725 / 952). `build_graph.py` derives it; adding a source no
+**Graph — REBUILT 2 Nov 2026.** Now 828 nodes / 1058 edges, in sync with the
+workbook (28 Oct: 823 / 1049, then 1054 after the two same-day follow-up commits;
+29 Sep: 725 / 952). The 2 Nov delta is +7 / −2 nodes (five additions, two
+in-place renames) and +4 derived `references` edges; substrate 30, collisions 0. `build_graph.py` derives it; adding a source no
 longer requires touching that file. Edge provenance: 116 curated (the original
 hand-written analysis, preserved and unchanged), 688 `composes` from the
 Mission-Bound family manifest (598 on 29 Sep — 5 new drafts plus references grown
@@ -556,6 +604,25 @@ Notes for future graph work:
   them — so a clean substrate count does not mean no rows were retitled.
   **Always diff node / edge / substrate counts against the previous build and
   explain any delta before committing.**
+
+**2 Nov 2026 OAuth list check — 793 → 798 sources (OAuth list, 28 Oct–2 Nov):**
+
+A targeted pass, not a sweep: the OAuth list read over IMAP (275 messages since
+29 Sep, ~45 new since the 28 Oct sweep), every draft named in a post diffed against
+the corpus and checked on Datatracker. **Added:** `rosenberg-oauth-aauth`
+(COLLISION), `mcguinness-oauth-client-ip-ranges`, `davliatshin-oauth-attenuation-chains-report`
+— the first independent implementation report and formal (ProVerif) model of any
+delegation-chain draft here, with its `azatdavliatshin/aat` repo in Industry — and
+`martinez-itp-agent-mandates`. **Renamed in place:** gco → `ietf-oauth-delegate-sd-jwt`,
+`nandakumar-agent-sd-jwt` → `-sd-card`. **Refreshed:** OAuth 2.1 -17, ID-JAG -06,
+DTR -01 (now also replaces JAG-IR — the two drafts merged), SPIFFE client auth -03,
+`sweeney-wimse-credential-delegation` -02 (had sat at -00 in the row through two
+sweeps), `rosomakho-oauth-txn-challenge` -01 (found by McGuinness person-id
+re-enumeration, filed the day of the check); cross-notes on AAT, asor and
+`resource-token-resp`. **Lesson:** a row's comment can carry a rev bump while
+much older rows in the same family carry none at all — `sweeney` was discussed on
+the list for three weeks at -01 without the row moving off -00. Diff the row's
+recorded revision against Datatracker for every tracked draft a list thread names.
 
 **28 Oct 2026 sweep — 695 → 793 sources (twenty-nine-day window since 29 Sep):**
 
